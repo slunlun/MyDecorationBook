@@ -14,6 +14,7 @@
 		5EACC4DE1F72060100C4E796 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DD1F72060100C4E796 /* Assets.xcassets */; };
 		5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */; };
 		5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */; };
+		5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		5EACC4E21F72060100C4E796 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDrawerViewController.h; path = "Common Tools/UI/SWDrawerViewController.h"; sourceTree = "<group>"; };
 		5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDrawerViewController.m; path = "Common Tools/UI/SWDrawerViewController.m"; sourceTree = "<group>"; };
+		5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SWDrawerViewController.h"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.h"; sourceTree = "<group>"; };
+		5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+SWDrawerViewController.m"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 			children = (
 				5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */,
 				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
+				5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */,
+				5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			files = (
 				5EACC4D91F72060100C4E796 /* ViewController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
+				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
 			);

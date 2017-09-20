@@ -13,6 +13,7 @@
 		5EACC4DC1F72060100C4E796 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DA1F72060100C4E796 /* Main.storyboard */; };
 		5EACC4DE1F72060100C4E796 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DD1F72060100C4E796 /* Assets.xcassets */; };
 		5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */; };
+		5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		5EACC4DD1F72060100C4E796 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EACC4E01F72060100C4E796 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EACC4E21F72060100C4E796 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDrawerViewController.h; path = "Common Tools/UI/SWDrawerViewController.h"; sourceTree = "<group>"; };
+		5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDrawerViewController.m; path = "Common Tools/UI/SWDrawerViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				5EACC4E81F72067F00C4E796 /* Common Tools */,
 				5EACC4D41F72060100C4E796 /* AppDelegate.h */,
 				5EACC4D51F72060100C4E796 /* AppDelegate.m */,
 				5EACC4D71F72060100C4E796 /* ViewController.h */,
@@ -77,6 +81,23 @@
 				5EACC4D21F72060100C4E796 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EACC4E81F72067F00C4E796 /* Common Tools */ = {
+			isa = PBXGroup;
+			children = (
+				5EACC4E91F72069D00C4E796 /* UI */,
+			);
+			name = "Common Tools";
+			sourceTree = "<group>";
+		};
+		5EACC4E91F72069D00C4E796 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */,
+				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +126,7 @@
 		5EACC4C61F72060100C4E796 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SW;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Eren;
 				TargetAttributes = {
@@ -152,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EACC4D91F72060100C4E796 /* ViewController.m in Sources */,
+				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
 			);

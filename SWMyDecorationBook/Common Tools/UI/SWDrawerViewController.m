@@ -89,7 +89,16 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor blackColor];
+    [self setupGestureRecognizers];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.centerDrawerViewController beginAppearanceTransition:NO animated:animated];
+    if (self.openSide == SWDrawerSideLeft) {
+        [self.leftDrawerViewController beginAppearanceTransition:NO animated:animated];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,7 +123,7 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
     newFrame.origin.x += maximumLeftDrawerWidth;
     
     if (self.openSide == SWDrawerSideLeft) {
-        [UIView animateWithDuration:animated?timeDuration:0 animations:^{
+        [UIView animateWithDuration:animated?timeDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             // set new frame for center view
             if (self.openSide == SWDrawerSideLeft) {
                 self.centerContainerView.frame = newFrame;
@@ -296,6 +305,8 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
     return duration;
 }
 
+- (void)setupGestureRecognizers {
 
+}
 
 @end

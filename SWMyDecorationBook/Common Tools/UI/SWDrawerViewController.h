@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, SWDrawerSide){
     SWDrawerSideLeft,
 };
 
+typedef void(^SWDrawerSideDidChangedBlock)(SWDrawerSide drawSide);
 
 @interface SWDrawerViewController : UIViewController
 - (instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController;
@@ -40,4 +41,6 @@ typedef NS_ENUM(NSInteger, SWDrawerSide){
 
 @property(nonatomic, assign) CGFloat animationVelocity;
 @property(nonatomic, assign) CGFloat panVelocityXAnimationThreshold;
+
+@property(nonatomic, copy) SWDrawerSideDidChangedBlock drawerSideChangedBlock;
 @end

@@ -39,8 +39,7 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
 @interface SWDrawerViewController ()
 @property (nonatomic, strong) UIView * childControllerContainerView;
 @property(nonatomic, strong) SWDrawerCenterContainerView *centerContainerView;
-
-
+@property (nonatomic, assign, getter = isAnimatingDrawer) BOOL animatingDrawer;
 @property(nonatomic, assign) SWDrawerSide openSide;
 @end
 
@@ -107,6 +106,20 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
 }
 
 #pragma mark - Setters
+- (void)setAnimatingDrawer:(BOOL)animatingDrawer {
+    _animatingDrawer = animatingDrawer;
+    [self.view setUserInteractionEnabled:!animatingDrawer];
+}
+
+- (void)setOpenSide:(SWDrawerSide)openSide {
+    if (_openSide != openSide) {
+        _openSide = openSide;
+        if (openSide == SWDrawerSideNone) {
+            [self.leftDrawerViewController.view setHidden:YES];
+        }
+    }
+}
+
 - (void)setMaximumLeftDrawerWidth:(CGFloat)maximumLeftDrawerWidth{
     [self setMaximumLeftDrawerWidth:maximumLeftDrawerWidth animated:NO];
 }
@@ -258,7 +271,104 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
     return _childControllerContainerView;
 }
 
+#pragma makr - Open/Close method
+- (void)openDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion {
+    [self openDrawerAnimated:animated velocity:self.animationVelocity animationOperations:UIViewAnimationOptionCurveEaseInOut completion:completion];
+}
 
+- (void)openDrawerAnimated:(BOOL)animated velocity:(CGFloat)velocity animationOperations:(UIViewAnimationOptions) operations completion:(void(^)(BOOL finished))completion {
+    if (self.isAnimatingDrawer) {
+        completion(NO);
+        return;
+    }
+    
+    [self setAnimatingDrawer:animated];
+    
+    
+}
+
+- (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion {
+    [self closeDrawerAnimated:animated velocity:self.animationVelocity animationOperations:UIViewAnimationOptionCurveEaseInOut completion:completion];
+}
+
+- (void)closeDrawerAnimated:(BOOL)animated velocity:(CGFloat)velocity animationOperations:(UIViewAnimationOptions) operations completion:(void(^)(BOOL finished)) completion {
+    if (self.isAnimatingDrawer) {
+        completion(NO);
+        return;
+    }
+    
+    [self setAnimatingDrawer:animated];
+    
+    CGRect newFrame = self.childControllerContainerView.bounds;  // 这里 childControllerContainerView 不会变更frame，类似于坐标原点的作用，用于归位centerContainerView
+    CGFloat distance = CGRectGetMinX(self.centerContainerView.frame);
+    NSTimeInterval timeInterval = MAX(distance/ABS(velocity), SWDrawerMinAnimationDuration);
+    CGFloat percentVisible = 0.0f;
+    BOOL leftDrawerVisible = CGRectGetMinX(self.centerContainerView.frame) > 0;
+    SWDrawerSide visibleSide = SWDrawerSideNone;
+    if(leftDrawerVisible){
+        percentVisible = MAX(0.0, leftDrawerVisible/self.leftDrawerMaxWidth);
+        visibleSide = SWDrawerSideLeft;
+    }
+    
+    UIViewController *leftDrawerViewController = [self sideDrawerViewControllerForSide:SWDrawerSideLeft];
+    
+    [leftDrawerViewController beginAppearanceTransition:NO animated:animated];
+    
+    [UIView animateWithDuration:timeInterval
+                          delay:0.0
+                        options:operations
+                     animations:^{
+                         self.centerContainerView.frame = newFrame;
+                         [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:percentVisible]; // TODO, 这里目前没有任何实现
+        
+    } completion:^(BOOL finished) {
+        if (completion) {
+            // 1. update isAnimation state
+            [self setAnimatingDrawer:NO];
+            // 2. update self.openSide
+            [self setOpenSide:SWDrawerSideNone];
+            // 3. reset visual drawer to unanimation state
+            [self resetDrawerVisualStateForDrawerSide:visibleSide];
+            completion(finished);
+        }
+    }];
+    
+    
+}
+
+
+
+#pragma mark - Gesture call backs
+- (void)tapGetureCallBack:(UITapGestureRecognizer *)tapGesture {
+    if(self.openSide != SWDrawerSideNone &&
+       self.isAnimatingDrawer == NO){
+        [self closeDrawerAnimated:YES completion:^(BOOL finished) {
+            if (self.drawerSideChangedBlock) {
+                self.drawerSideChangedBlock(SWDrawerSideNone);
+            }
+        }];
+    }
+}
+
+- (void)panGestureCallBack:(UIPanGestureRecognizer *)panGesture {
+
+}
+
+#pragma mark - Animation helper
+-(void)updateDrawerVisualStateForDrawerSide:(SWDrawerSide)drawerSide percentVisible:(CGFloat)percentVisible{
+   
+    if(self.shouldStretchDrawer){ // 当拉动大于最大值时 是否显示弹簧动画（类似于scrollview）
+        //[self applyOvershootScaleTransformForDrawerSide:drawerSide percentVisible:percentVisible];
+    }
+}
+
+-(void)resetDrawerVisualStateForDrawerSide:(SWDrawerSide)drawerSide{
+    UIViewController * sideDrawerViewController = [self sideDrawerViewControllerForSide:drawerSide];
+    
+    [sideDrawerViewController.view.layer setAnchorPoint:CGPointMake(0.5f, 0.5f)];
+    [sideDrawerViewController.view.layer setTransform:CATransform3DIdentity];
+    [sideDrawerViewController.view setAlpha:1.0];
+}
 
 #pragma mark - Helpers
 - (UIViewController *)sideDrawerViewControllerForSide:(SWDrawerSide)drawerSide {
@@ -306,7 +416,11 @@ CGFloat const SWDrawerMinAnimationDuration = 0.15f;
 }
 
 - (void)setupGestureRecognizers {
-
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGetureCallBack:)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
+    [self.view addGestureRecognizer:panGesture];
 }
 
 @end

@@ -92,7 +92,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor grayColor];
     [self setupGestureRecognizers];
 }
 
@@ -131,7 +131,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 - (void)setMaximumLeftDrawerWidth:(CGFloat)maximumLeftDrawerWidth animated:(BOOL)animated
 {
     CGFloat oldWidth = self.maximumLeftDrawerWidth;
-    self.maximumLeftDrawerWidth = maximumLeftDrawerWidth;
+    _maximumLeftDrawerWidth = maximumLeftDrawerWidth;
     
     CGFloat distance = ABS(oldWidth - maximumLeftDrawerWidth);
     NSTimeInterval timeDuration = [self animationDurationForAnimationDistance:distance];
@@ -187,12 +187,16 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
             [self.childControllerContainerView insertSubview:leftDrawerViewController.view belowSubview:self.centerContainerView];
             [leftDrawerViewController beginAppearanceTransition:YES animated:NO];
             [leftDrawerViewController endAppearanceTransition];
+        }else{
+            [self.childControllerContainerView addSubview:leftDrawerViewController.view];
+            [self.childControllerContainerView bringSubviewToFront:leftDrawerViewController.view];
+            leftDrawerViewController.view.hidden = YES;
         }
+        
+        [_leftDrawerViewController didMoveToParentViewController:self];
+        _leftDrawerViewController.view.autoresizingMask = autoResizingMask;
+        [_leftDrawerViewController.view setFrame:leftDrawerViewController.sw_visibleDrawerFrame];
     }
-    
-    [_leftDrawerViewController didMoveToParentViewController:self];
-    _leftDrawerViewController.view.autoresizingMask = autoResizingMask;
-    [_leftDrawerViewController.view setFrame:leftDrawerViewController.sw_visibleDrawerFrame];
 }
 
 - (void)setCenterDrawerViewController:(UIViewController *)centerDrawerViewController
@@ -347,7 +351,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     BOOL leftDrawerVisible = CGRectGetMinX(self.centerContainerView.frame) > 0;
     SWDrawerSide visibleSide = SWDrawerSideNone;
     if(leftDrawerVisible){
-        percentVisible = MAX(0.0, leftDrawerVisible/self.leftDrawerMaxWidth);
+        percentVisible = MAX(0.0, leftDrawerVisible/self.maximumLeftDrawerWidth);
         visibleSide = SWDrawerSideLeft;
     }
     
@@ -414,9 +418,13 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
             
             SWDrawerSide visibleSide = SWDrawerSideNone;
             CGFloat percentVisible = 0.0;
+            NSLog(@"The offset is %lf", xOffset);
             if(xOffset > 0){ // 相对于起点，手指还在右侧 ,意味着leftDrawer 仍然可见
                 visibleSide = SWDrawerSideLeft;
                 percentVisible = xOffset/self.maximumLeftDrawerWidth;
+            }else if(xOffset < 0) { // 相对于起点，手指在左侧，已经完全关闭了leftDraswer
+           
+                return;
             }
             
             // visibleSideDrawerViewController 为可见的drawerViewController
@@ -468,12 +476,44 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 }
 
 #pragma mark - Animation helper
--(void)updateDrawerVisualStateForDrawerSide:(SWDrawerSide)drawerSide percentVisible:(CGFloat)percentVisible{
-   
-    if(self.shouldStretchDrawer){ // 当拉动大于最大值时 是否显示弹簧动画（类似于scrollview）
-        //[self applyOvershootScaleTransformForDrawerSide:drawerSide percentVisible:percentVisible];
+-(void)finishAnimationForPanGestureWithXVelocity:(CGFloat)xVelocity completion:(void(^)(BOOL finished))completion {
+    CGFloat currentOriginX = CGRectGetMinX(self.centerContainerView.frame);
+    CGFloat animationVelocity = MAX(ABS(xVelocity), self.panVelocityXAnimationThreshold * 2);
+    if (self.openSide == SWDrawerSideLeft) {
+        CGFloat midPoint = self.maximumLeftDrawerWidth / 2.0;
+        if(xVelocity < -self.panVelocityXAnimationThreshold) {
+            [self closeDrawerAnimated:YES velocity:animationVelocity animationOperations:UIViewAnimationOptionCurveEaseInOut completion:completion];
+        }else if(xVelocity > self.panVelocityXAnimationThreshold) {
+            [self openDrawer:SWDrawerSideLeft animated:YES velocity:animationVelocity animationOptions:UIViewAnimationOptionCurveEaseInOut completion:completion];
+        }else if(currentOriginX < midPoint) {
+            [self closeDrawerAnimated:YES completion:completion];
+        }else{
+            [self openDrawer:SWDrawerSideLeft animated:YES completion:completion];
+        }
     }
 }
+
+
+-(void)updateDrawerVisualStateForDrawerSide:(SWDrawerSide)drawerSide percentVisible:(CGFloat)percentVisible{
+   
+    if(self.shouldStretchDrawer){ // 当拉动大于最大值时 是否显示拉伸动画（类似于scrollview）
+        [self applyOvershootScaleTransformForDrawerSide:drawerSide percentVisible:percentVisible];
+    }
+}
+
+- (void)applyOvershootScaleTransformForDrawerSide:(SWDrawerSide)drawerSide percentVisible:(CGFloat)percentVisible{
+    
+    if (percentVisible >= 1.f) {
+        CATransform3D transform = CATransform3DIdentity;
+        UIViewController * sideDrawerViewController = [self sideDrawerViewControllerForSide:drawerSide];
+        if(drawerSide == SWDrawerSideLeft) {
+            transform = CATransform3DMakeScale(percentVisible, 1.f, 1.f);
+            transform = CATransform3DTranslate(transform, self.maximumLeftDrawerWidth*(percentVisible-1.f)/2, 0.f, 0.f);
+        }
+        sideDrawerViewController.view.layer.transform = transform;
+    }
+}
+
 
 -(CGFloat)roundedOriginXForDrawerConstriants:(CGFloat)originX{
     
@@ -580,6 +620,42 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
     [self.view addGestureRecognizer:panGesture];
+}
+
+-(void)setCenterViewController:(UIViewController *)newCenterViewController withCloseAnimation:(BOOL)closeAnimated completion:(void(^)(BOOL finished))completion {
+    if (self.openSide == SWDrawerSideNone) { //
+        closeAnimated = NO;
+    }
+    
+    BOOL forwardAppearanceMethodsToCenterViewController = ([self.centerDrawerViewController isEqual:newCenterViewController] == NO);
+    [self setCenterDrawerViewController:newCenterViewController animated:closeAnimated];
+    
+    if(closeAnimated){
+        [self updateDrawerVisualStateForDrawerSide:self.openSide percentVisible:1.0];
+        if (forwardAppearanceMethodsToCenterViewController) {
+            [self.centerDrawerViewController beginAppearanceTransition:YES animated:closeAnimated];
+        }
+        [self closeDrawerAnimated:closeAnimated completion:^(BOOL finished) {
+            if (forwardAppearanceMethodsToCenterViewController) {
+                [self.centerDrawerViewController endAppearanceTransition];
+                [self.centerDrawerViewController didMoveToParentViewController:self];
+            }
+            
+            if (completion) {
+                completion(finished);
+            }
+        }];
+    
+    }else{
+        if(completion){
+            completion(YES);
+        }
+    }
+
+}
+
+-(void)setCenterViewController:(UIViewController *)newCenterViewController withFullCloseAnimation:(BOOL)fullCloseAnimated completion:(void(^)(BOOL finished))completion {
+
 }
 
 @end

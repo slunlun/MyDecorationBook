@@ -15,6 +15,9 @@
 		5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */; };
 		5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */; };
 		5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */; };
+		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
+		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
+		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,12 @@
 		5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDrawerViewController.m; path = "Common Tools/UI/SWDrawerViewController.m"; sourceTree = "<group>"; };
 		5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SWDrawerViewController.h"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.h"; sourceTree = "<group>"; };
 		5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+SWDrawerViewController.m"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.m"; sourceTree = "<group>"; };
+		5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWYellowViewController.h; path = SWMyDecorationBook/Test/SWYellowViewController.h; sourceTree = "<group>"; };
+		5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWYellowViewController.m; path = SWMyDecorationBook/Test/SWYellowViewController.m; sourceTree = "<group>"; };
+		5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBlueViewController.h; path = SWMyDecorationBook/Test/SWBlueViewController.h; sourceTree = "<group>"; };
+		5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWBlueViewController.m; path = SWMyDecorationBook/Test/SWBlueViewController.m; sourceTree = "<group>"; };
+		5EF75C581F78AE9D007F5A9E /* SWRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRedViewController.h; path = SWMyDecorationBook/Test/SWRedViewController.h; sourceTree = "<group>"; };
+		5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRedViewController.m; path = SWMyDecorationBook/Test/SWRedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +57,7 @@
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
+				5EF75C511F78AE37007F5A9E /* Test */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
 				5EACC4CF1F72060100C4E796 /* Products */,
 			);
@@ -103,6 +113,19 @@
 				5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		5EF75C511F78AE37007F5A9E /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */,
+				5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */,
+				5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */,
+				5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */,
+				5EF75C581F78AE9D007F5A9E /* SWRedViewController.h */,
+				5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,7 +205,10 @@
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
+				5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */,
+				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
+				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +369,7 @@
 				5EACC4E71F72060100C4E796 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

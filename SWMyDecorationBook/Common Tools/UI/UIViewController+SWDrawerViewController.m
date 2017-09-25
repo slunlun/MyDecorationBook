@@ -25,7 +25,7 @@
     if ([self isEqual:self.sw_drawerViewController.leftDrawerViewController] ||
         [self.navigationController isEqual:self.sw_drawerViewController.leftDrawerViewController]){
         CGRect rect = self.sw_drawerViewController.view.bounds;
-        rect.size.width = self.sw_drawerViewController.leftDrawerMaxWidth;
+        rect.size.width = self.sw_drawerViewController.maximumLeftDrawerWidth;
         return rect;
     }
     return CGRectNull;  // 与 CGRectZero 有何区别

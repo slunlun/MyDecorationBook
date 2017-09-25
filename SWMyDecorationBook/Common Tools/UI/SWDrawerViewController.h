@@ -18,6 +18,10 @@ typedef void(^SWDrawerSideDidChangedBlock)(SWDrawerSide drawSide);
 @interface SWDrawerViewController : UIViewController
 - (instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController;
 
+-(void)setCenterViewController:(UIViewController *)centerViewController withCloseAnimation:(BOOL)closeAnimated completion:(void(^)(BOOL finished))completion;
+
+-(void)setCenterViewController:(UIViewController *)newCenterViewController withFullCloseAnimation:(BOOL)fullCloseAnimated completion:(void(^)(BOOL finished))completion;
+
 @property(nonatomic, strong) UIViewController *leftDrawerViewController;
 @property(nonatomic, strong) UIViewController *centerDrawerViewController;
 
@@ -34,8 +38,6 @@ typedef void(^SWDrawerSideDidChangedBlock)(SWDrawerSide drawSide);
 @property (nonatomic, strong) UIColor * shadowColor;
 
 @property(nonatomic, assign) BOOL shouldStretchDrawer;
-
-@property(nonatomic, assign) CGFloat leftDrawerMaxWidth;
 
 @property(nonatomic, assign) CGFloat maximumLeftDrawerWidth;
 

@@ -16,7 +16,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    SWYellowViewController *yellowVC = [[SWYellowViewController alloc] init];
+    SWRedViewController *redVC = [[SWRedViewController alloc] init];
+   
+    
+    UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
+    UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
+    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftNav];
+    _drawerVC.maximumLeftDrawerWidth = 90.0f;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window setRootViewController:_drawerVC];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

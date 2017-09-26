@@ -29,6 +29,7 @@
 		5EF75C7F1F791153007F5A9E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C711F791153007F5A9E /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		5EF75C801F791153007F5A9E /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C731F791153007F5A9E /* View+MASAdditions.m */; };
 		5EF75C811F791153007F5A9E /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C761F791153007F5A9E /* ViewController+MASAdditions.m */; };
+		5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,8 @@
 		5EF75C741F791153007F5A9E /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		5EF75C751F791153007F5A9E /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		5EF75C761F791153007F5A9E /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDragMoveTableViewController.h; path = "Common Tools/UI/SWDragMoveTableViewController.h"; sourceTree = "<group>"; };
+		5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDragMoveTableViewController.m; path = "Common Tools/UI/SWDragMoveTableViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
 				5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */,
 				5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */,
+				5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */,
+				5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				5EF75C801F791153007F5A9E /* View+MASAdditions.m in Sources */,
 				5EF75C7B1F791153007F5A9E /* MASLayoutConstraint.m in Sources */,
 				5EF75C791F791153007F5A9E /* MASConstraint.m in Sources */,
+				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,
 				5EF75C7F1F791153007F5A9E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5EF75C781F791153007F5A9E /* MASCompositeConstraint.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */,

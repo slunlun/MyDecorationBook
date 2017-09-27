@@ -47,7 +47,7 @@
     [self.view addSubview:_whiteView];
     
     _yellowView = [[UIView alloc] init];
-    _yellowView.backgroundColor = [UIColor yellowColor];
+    _yellowView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_yellowView];
     
     _purpleView = [[UIView alloc] init];

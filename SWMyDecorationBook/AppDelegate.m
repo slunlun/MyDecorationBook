@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SWDragMoveTableViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -16,13 +16,40 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    SWDragMoveTableViewCell *yellowCell = [[SWDragMoveTableViewCell alloc] init];
+    yellowCell.title = @"yellow";
+    yellowCell.backgroundColor = [UIColor yellowColor];
+    
+    SWDragMoveTableViewCell *redCell = [[SWDragMoveTableViewCell alloc] init];
+    redCell.title = @"red";
+    redCell.backgroundColor = [UIColor redColor];
+    
+    SWDragMoveTableViewCell *brownCell = [[SWDragMoveTableViewCell alloc] init];
+    brownCell.title = @"brown";
+    brownCell.backgroundColor = [UIColor brownColor];
+    
+    SWDragMoveTableViewCell *blackCell = [[SWDragMoveTableViewCell alloc] init];
+    blackCell.title = @"black";
+    blackCell.backgroundColor = [UIColor blackColor];
+    
+    SWDragMoveTableViewCell *orangeCell = [[SWDragMoveTableViewCell alloc] init];
+    orangeCell.title = @"orange";
+    orangeCell.backgroundColor = [UIColor orangeColor];
+    
+    
     SWYellowViewController *yellowVC = [[SWYellowViewController alloc] init];
     SWRedViewController *redVC = [[SWRedViewController alloc] init];
+    
+    
+    NSArray *cellArray = @[yellowCell, redCell, brownCell, blackCell, orangeCell];
+  
+    SWDragMoveTableViewController *dgMV = [[SWDragMoveTableViewController alloc] initWithTableViewCells:cellArray];
    
     
     UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
     UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
-    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftNav];
+    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:dgMV];
     _drawerVC.maximumLeftDrawerWidth = 90.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window setRootViewController:_drawerVC];

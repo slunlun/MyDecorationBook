@@ -11,9 +11,9 @@
 @interface SWDragMoveTableViewCell : UIView
 @property(nonatomic, strong) NSString *title;
 @property(nonatomic, strong) UIImage *image;
-@property(nonatomic, strong) UIColor *backgroundColor;
+//@property(nonatomic, strong) UIColor *backgroundColor;
 
-@property(nonatomic, assign, getter=isActive) BOOL active;
+@property(nonatomic, assign, getter=isEdit) BOOL edit;
 
 @end
 

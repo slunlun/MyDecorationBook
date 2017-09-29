@@ -8,6 +8,7 @@
 #import  <QuartzCore/QuartzCore.h>
 #import "SWDragMoveTableViewController.h"
 #import "Masonry.h"
+#import "UIView+UIExt.h"
 
 @interface SWDelItemView : UIView
 @end
@@ -15,13 +16,17 @@
 @implementation SWDelItemView
 
 - (void)drawRect:(CGRect)rect {
-    
+    [self cornerRadian:self.frame.size.width / 2];
+    UIBezierPath *linePath = [UIBezierPath bezierPathWithRect:CGRectMake(5, self.frame.size.height / 2 - 1.5, self.frame.size.width - 10 , 3)];
+    [[UIColor whiteColor] setFill];
+    [linePath fill];
 }
 
 @end
 
+#define DEL_VIEW_TAG 123321
 @interface SWDragMoveTableViewCell()<UIGestureRecognizerDelegate>
-
+@property (nonatomic, strong) NSArray *animationType;
 @end
 @implementation SWDragMoveTableViewCell
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
@@ -44,37 +49,55 @@
         _edit = edit;
         
         if (_edit == YES) {
-            [UIView animateWithDuration:1.8 delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                 [self setNeedsDisplay];
+            // step1. 添加删除按钮
+            UIView *delView = [[SWDelItemView alloc] init];
+            delView.backgroundColor = [UIColor redColor];
+            delView.frame = CGRectMake(self.frame.origin.x + self.frame.size.width - 5, 5, 0, 0);
+            delView.tag = DEL_VIEW_TAG;
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeDragMoveTableViewCell:)];
+            [delView addGestureRecognizer:tapGesture];
+            [self addSubview:delView];
+            [UIView animateWithDuration:0.2 delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                delView.frame = CGRectMake(self.frame.origin.x + self.frame.size.width - 25, 5, 20, 20);
             } completion:^(BOOL finished) {
-                
+                if (finished) {  // 添加抖动效果
+                    [self startDelShake];
+                }
+            }];
+        }else {
+            UIView *delView = [self viewWithTag:DEL_VIEW_TAG];
+            
+            [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                delView.frame = CGRectMake(delView.frame.origin.x + 10, delView.frame.origin.y + 10, 0, 0);
+                [self endDelShake];
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [delView removeFromSuperview];
+                }
             }];
         }
     }
 }
 
-- (void)drawRect:(CGRect)rect {
-    if (self.edit) {
-        UIBezierPath* p = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.frame.origin.x + self.frame.size.width - 25,5,20,20)];
-        [[UIColor redColor] setFill];
-        [p fill];
-        
-        UIBezierPath *pLine = [UIBezierPath bezierPathWithRect:CGRectMake(self.frame.origin.x + self.frame.size.width - 30, 5, 15, 5)];
-        [[UIColor whiteColor] setFill];
-        [pLine fill];
-        
-    }else {
-        
-    }
+#define kToRadian(A) (A/360.0 * (M_PI * 2))
+- (void)startDelShake {
+    CAKeyframeAnimation *keyframeAni = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
+    keyframeAni.duration = 0.3;
+ 
 
+    keyframeAni.values = self.animationType;
+    
+    keyframeAni.repeatCount = MAXFLOAT;
+    [self.layer addAnimation:keyframeAni forKey:@"DelShake"];
+    
 }
 
-- (void)startShake {
-
+- (void)endDelShake {
+    [self.layer removeAnimationForKey:@"DelShake"];
 }
 
-- (void)endShake {
-
+- (void)removeDragMoveTableViewCell : (UITapGestureRecognizer *)tapGesture {
+    NSLog(@"Move");
 }
 
 @end
@@ -88,6 +111,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 @property(nonatomic, assign) CGFloat preTranslateInY;
 @property(nonatomic, assign) UIView *preTargetView;
 @property(nonatomic, assign) CGRect startFrame;
+
 @end
 
 @implementation SWDragMoveTableViewController
@@ -120,7 +144,14 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 
 - (void)commonInit {
     SWDragMoveTableViewCell *preCell = nil;
+    NSArray *type1 = @[@(kToRadian(2)),@(kToRadian(0)),@(kToRadian(-2)),@(kToRadian(0)),@(kToRadian(2))];
+    NSArray *type2 = @[@(kToRadian(0)),@(kToRadian(2)),@(kToRadian(0)),@(kToRadian(-2)),@(kToRadian(0))];
+    NSArray *type3 = @[@(kToRadian(-2)),@(kToRadian(0)),@(kToRadian(2)),@(kToRadian(0)),@(kToRadian(-2))];
+    NSArray *type4 = @[@(kToRadian(0)),@(kToRadian(-2)),@(kToRadian(0)),@(kToRadian(2)),@(kToRadian(0))];
+    NSArray *animationTypes = @[type1, type2, type3, type4];
+    NSInteger animationIndex = 0;
     for (SWDragMoveTableViewCell *cell in self.tableViewCells) {
+        ++animationIndex;
         if (preCell == nil) {
             [self.contentScorllView addSubview:cell];
             [cell mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,6 +164,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
             [cell addGestureRecognizer:pan];
             
+            cell.animationType = animationTypes[animationIndex % 4];
             preCell = cell;
         }else {
             [self.contentScorllView addSubview:cell];
@@ -146,7 +178,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             [cell addGestureRecognizer:longPress];
             UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
             [cell addGestureRecognizer:pan];
-            
+            cell.animationType = animationTypes[animationIndex % 4];
             preCell = cell;
         }
     }

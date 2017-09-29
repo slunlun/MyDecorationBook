@@ -38,6 +38,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 @property(nonatomic, assign) CGPoint preTranslationPoint;
 @property(nonatomic, assign) CGFloat preTranslateInY;
 @property(nonatomic, assign) UIView *preTargetView;
+@property(nonatomic, assign) CGRect startFrame;
 @end
 
 @implementation SWDragMoveTableViewController
@@ -132,6 +133,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             [self.contentScorllView bringSubviewToFront:panGesture.view];
             self.preTargetView = panGesture.view;
             self.movedViewCells = [NSMutableArray arrayWithArray:self.tableViewCells];
+            self.startFrame = panGesture.view.frame;
         }
             break;
         case UIGestureRecognizerStateChanged:
@@ -145,14 +147,14 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             dragView.frame = CGRectMake(dragView.frame.origin.x, dragView.frame.origin.y + moveY, dragView.frame.size.width, dragView.frame.size.height);
             self.preTranslationPoint = translationPoint;
             
-            [self updateCellItemDataSource:(panGesture.view) translationInY:translateInY];
+           // [self updateCellItemDataSource:(panGesture.view) translationInY:translateInY];
             self.preTranslateInY = translateInY;
         }
             break;
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         {
-           // [self updateCellItemDataSource:(panGesture.view) translationInY:self.preTranslateInY];
+            [self updateCellItemDataSource:(panGesture.view) translationInY:self.preTranslateInY];
             [self updateLayoutDidMovedView:panGesture.view];
         }
             break;
@@ -202,9 +204,6 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
         NSInteger targetIndex = [self.movedViewCells indexOfObject:targetView];
         NSInteger movedViewIndex = [self.movedViewCells indexOfObject:movedView];
         if (targetIndex != movedViewIndex) {
-            if(movedViewIndex < targetIndex) {
-                --targetIndex;
-            }
             [self.movedViewCells removeObject:movedView];
             [self.movedViewCells insertObject:movedView atIndex:targetIndex];
             
@@ -219,37 +218,49 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
     // update layout
     SWDragMoveTableViewCell *preCell = nil;
     NSLog(@"Will arange in order %@", self.movedViewCells);
-    for (SWDragMoveTableViewCell *cell in self.movedViewCells) {
-        if (preCell == nil) {
-            [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.left.equalTo(self.contentScorllView);
-                make.width.height.equalTo(@(SWDragMoveTableViewCellHeight));
-            }];
-            
-            preCell = cell;
-        }else {
-            
-            [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(preCell.mas_bottom);
-                make.left.equalTo(preCell.mas_left);
-                make.width.height.equalTo(@(SWDragMoveTableViewCellHeight));
-            }];
-            preCell = cell;
+    if([self.movedViewCells isEqualToArray:self.tableViewCells]) {
+        [UIView animateWithDuration:0.5f delay:0.0f options:0 animations:^{
+            movedView.frame = self.startFrame;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                self.tableViewCells = [NSMutableArray arrayWithArray:self.movedViewCells];
+            }
+        }];
+
+    }else {
+        for (SWDragMoveTableViewCell *cell in self.movedViewCells) {
+            if (preCell == nil) {
+                [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.top.left.equalTo(self.contentScorllView);
+                    make.width.height.equalTo(@(SWDragMoveTableViewCellHeight));
+                }];
+                
+                preCell = cell;
+            }else {
+                
+                [cell mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(preCell.mas_bottom);
+                    make.left.equalTo(preCell.mas_left);
+                    make.width.height.equalTo(@(SWDragMoveTableViewCellHeight));
+                }];
+                preCell = cell;
+            }
         }
+        
+        [UIView animateWithDuration:0.5f delay:0.0f options:0 animations:^{
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded]; // here set layoutIfNeed to make animate change
+            
+            [self.view updateConstraints];
+            [self.view updateConstraintsIfNeeded];
+            
+        } completion:^(BOOL finished) {
+            if (finished) {
+                self.tableViewCells = [NSMutableArray arrayWithArray:self.movedViewCells];
+            }
+        }];
+
     }
-    
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded]; // here set layoutIfNeed to make animate change
-        
-        [self.view updateConstraints];
-        [self.view updateConstraintsIfNeeded];
-        
-    } completion:^(BOOL finished) {
-        if (finished) {
-            self.tableViewCells = [NSMutableArray arrayWithArray:self.movedViewCells];
-        }
-    }];
 }
 
 @end

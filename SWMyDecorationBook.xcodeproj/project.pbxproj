@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */; };
 		5EACC4D31F72060100C4E796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D21F72060100C4E796 /* main.m */; };
 		5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D51F72060100C4E796 /* AppDelegate.m */; };
 		5EACC4D91F72060100C4E796 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D81F72060100C4E796 /* ViewController.m */; };
@@ -33,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+UIExt.h"; path = "Category/UIView+UIExt.h"; sourceTree = "<group>"; };
+		5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+UIExt.m"; path = "Category/UIView+UIExt.m"; sourceTree = "<group>"; };
 		5EACC4CE1F72060100C4E796 /* SWMyDecorationBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWMyDecorationBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EACC4D21F72060100C4E796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5EACC4D41F72060100C4E796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E4A3F231F7E3C6700F052B5 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */,
+				5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +126,7 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				5E4A3F231F7E3C6700F052B5 /* Category */,
 				5EACC4E81F72067F00C4E796 /* Common Tools */,
 				5EACC4D41F72060100C4E796 /* AppDelegate.h */,
 				5EACC4D51F72060100C4E796 /* AppDelegate.m */,
@@ -294,6 +307,7 @@
 				5EF75C801F791153007F5A9E /* View+MASAdditions.m in Sources */,
 				5EF75C7B1F791153007F5A9E /* MASLayoutConstraint.m in Sources */,
 				5EF75C791F791153007F5A9E /* MASConstraint.m in Sources */,
+				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,
 				5EF75C7F1F791153007F5A9E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5EF75C781F791153007F5A9E /* MASCompositeConstraint.m in Sources */,

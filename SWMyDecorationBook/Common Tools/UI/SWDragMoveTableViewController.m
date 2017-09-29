@@ -5,11 +5,20 @@
 //  Created by Eren (Teng) Shi on 9/26/17.
 //  Copyright © 2017 Eren. All rights reserved.
 //
-
+#import  <QuartzCore/QuartzCore.h>
 #import "SWDragMoveTableViewController.h"
 #import "Masonry.h"
 
-CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
+@interface SWDelItemView : UIView
+@end
+
+@implementation SWDelItemView
+
+- (void)drawRect:(CGRect)rect {
+    
+}
+
+@end
 
 @interface SWDragMoveTableViewCell()<UIGestureRecognizerDelegate>
 
@@ -29,8 +38,48 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 - (NSString*)description {
     return self.title;
 }
+
+- (void)setEdit:(BOOL)edit {
+    if (_edit != edit) {
+        _edit = edit;
+        
+        if (_edit == YES) {
+            [UIView animateWithDuration:1.8 delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                 [self setNeedsDisplay];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+}
+
+- (void)drawRect:(CGRect)rect {
+    if (self.edit) {
+        UIBezierPath* p = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.frame.origin.x + self.frame.size.width - 25,5,20,20)];
+        [[UIColor redColor] setFill];
+        [p fill];
+        
+        UIBezierPath *pLine = [UIBezierPath bezierPathWithRect:CGRectMake(self.frame.origin.x + self.frame.size.width - 30, 5, 15, 5)];
+        [[UIColor whiteColor] setFill];
+        [pLine fill];
+        
+    }else {
+        
+    }
+
+}
+
+- (void)startShake {
+
+}
+
+- (void)endShake {
+
+}
+
 @end
 
+CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 @interface SWDragMoveTableViewController ()
 @property(nonatomic, strong) NSMutableArray *tableViewCells;
 @property(nonatomic, strong) NSMutableArray *movedViewCells;
@@ -165,10 +214,19 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
 }
 
 - (void)longPressGestureCallBack:(UILongPressGestureRecognizer *)longPressGesture {
-    for (SWDragMoveTableViewCell *cell in self.tableViewCells) {
-        cell.edit = YES;
+    switch (longPressGesture.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            for (SWDragMoveTableViewCell *cell in self.tableViewCells) {
+                cell.edit = !cell.edit;
+            }
+            NSLog(@"OK, let's move");
+
+        }
+            break;
+        default:
+            break;
     }
-    NSLog(@"OK, let's move");
 }
 
 #pragma mark - Help

@@ -224,6 +224,9 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             CGPoint translationPoint = [panGesture translationInView:self.contentScorllView];
             CGFloat translateInY = translationPoint.y - self.preTranslationPoint.y;
             
+            if (ABS(translateInY) < 1.5f ){
+                return;
+            }
             CGFloat moveY = [self dragView:dragView moveInYBytranslateY:translateInY];
             dragView.frame = CGRectMake(dragView.frame.origin.x, dragView.frame.origin.y + moveY, dragView.frame.size.width, dragView.frame.size.height);
             self.preTranslationPoint = translationPoint;
@@ -312,9 +315,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
         [UIView animateWithDuration:0.5f delay:0.0f options:0 animations:^{
             movedView.frame = self.startFrame;
         } completion:^(BOOL finished) {
-            if (finished) {
-                self.tableViewCells = [NSMutableArray arrayWithArray:self.movedViewCells];
-            }
+           
         }];
 
     }else {

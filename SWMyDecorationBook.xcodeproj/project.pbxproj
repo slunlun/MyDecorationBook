@@ -16,6 +16,10 @@
 		5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */; };
 		5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */; };
 		5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */; };
+		5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */; };
+		5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7831F7F72F600034E09 /* SWProductItem.m */; };
+		5EB9D7881F7F78AD00034E09 /* LZRelayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */; };
+		5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9D78F1F7F7FE900034E09 /* Localizable.strings */; };
 		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
 		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
 		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
@@ -50,6 +54,17 @@
 		5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDrawerViewController.m; path = "Common Tools/UI/SWDrawerViewController.m"; sourceTree = "<group>"; };
 		5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SWDrawerViewController.h"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.h"; sourceTree = "<group>"; };
 		5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+SWDrawerViewController.m"; path = "Common Tools/UI/UIViewController+SWDrawerViewController.m"; sourceTree = "<group>"; };
+		5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWProductTableViewCell.h; path = UI/SWProductTableViewCell.h; sourceTree = "<group>"; };
+		5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWProductTableViewCell.m; path = UI/SWProductTableViewCell.m; sourceTree = "<group>"; };
+		5EB9D7821F7F72F600034E09 /* SWProductItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWProductItem.h; path = Model/SWProductItem.h; sourceTree = "<group>"; };
+		5EB9D7831F7F72F600034E09 /* SWProductItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWProductItem.m; path = Model/SWProductItem.m; sourceTree = "<group>"; };
+		5EB9D7861F7F78AD00034E09 /* LZRelayoutButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZRelayoutButton.h; sourceTree = "<group>"; };
+		5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZRelayoutButton.m; sourceTree = "<group>"; };
+		5EB9D7891F7F7F4E00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		5EB9D78A1F7F7F4F00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5EB9D78E1F7F7FE900034E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5EB9D7901F7F7FED00034E09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5EB9D7911F7F7FEE00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWYellowViewController.h; path = SWMyDecorationBook/Test/SWYellowViewController.h; sourceTree = "<group>"; };
 		5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWYellowViewController.m; path = SWMyDecorationBook/Test/SWYellowViewController.m; sourceTree = "<group>"; };
 		5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBlueViewController.h; path = SWMyDecorationBook/Test/SWBlueViewController.h; sourceTree = "<group>"; };
@@ -109,6 +124,7 @@
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
+				5EB9D78F1F7F7FE900034E09 /* Localizable.strings */,
 				5EF75C511F78AE37007F5A9E /* Test */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
 				5EACC4CF1F72060100C4E796 /* Products */,
@@ -126,6 +142,9 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				5EB9D7851F7F789700034E09 /* 3rd */,
+				5EB9D7811F7F72D700034E09 /* Model */,
+				5EB9D77D1F7F43AA00034E09 /* UI */,
 				5E4A3F231F7E3C6700F052B5 /* Category */,
 				5EACC4E81F72067F00C4E796 /* Common Tools */,
 				5EACC4D41F72060100C4E796 /* AppDelegate.h */,
@@ -169,6 +188,33 @@
 				5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		5EB9D77D1F7F43AA00034E09 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */,
+				5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		5EB9D7811F7F72D700034E09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9D7821F7F72F600034E09 /* SWProductItem.h */,
+				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5EB9D7851F7F789700034E09 /* 3rd */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9D7861F7F78AD00034E09 /* LZRelayoutButton.h */,
+				5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */,
+			);
+			name = 3rd;
 			sourceTree = "<group>";
 		};
 		5EF75C511F78AE37007F5A9E /* Test */ = {
@@ -269,6 +315,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 5EACC4C51F72060100C4E796;
 			productRefGroup = 5EACC4CF1F72060100C4E796 /* Products */;
@@ -285,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */,
 				5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */,
 				5EACC4DE1F72060100C4E796 /* Assets.xcassets in Resources */,
 				5EF75C771F791153007F5A9E /* LICENSE in Resources */,
@@ -303,6 +351,7 @@
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5EF75C7E1F791153007F5A9E /* NSArray+MASAdditions.m in Sources */,
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
+				5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5EF75C801F791153007F5A9E /* View+MASAdditions.m in Sources */,
 				5EF75C7B1F791153007F5A9E /* MASLayoutConstraint.m in Sources */,
@@ -314,8 +363,10 @@
 				5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */,
 				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
+				5EB9D7881F7F78AD00034E09 /* LZRelayoutButton.m in Sources */,
 				5EF75C7A1F791153007F5A9E /* MASConstraintMaker.m in Sources */,
 				5EF75C811F791153007F5A9E /* ViewController+MASAdditions.m in Sources */,
+				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				5EF75C7D1F791153007F5A9E /* MASViewConstraint.m in Sources */,
 				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
 				5EF75C7C1F791153007F5A9E /* MASViewAttribute.m in Sources */,
@@ -329,6 +380,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5EACC4DB1F72060100C4E796 /* Base */,
+				5EB9D7891F7F7F4E00034E09 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -337,8 +389,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				5EACC4E01F72060100C4E796 /* Base */,
+				5EB9D78A1F7F7F4F00034E09 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5EB9D78F1F7F7FE900034E09 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EB9D78E1F7F7FE900034E09 /* Base */,
+				5EB9D7901F7F7FED00034E09 /* en */,
+				5EB9D7911F7F7FEE00034E09 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -348,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -397,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -440,11 +505,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5R9SGW2R35;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -452,11 +520,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5R9SGW2R35;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

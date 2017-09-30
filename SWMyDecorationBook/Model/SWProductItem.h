@@ -12,5 +12,5 @@
 @property(nonatomic, strong) NSString *productName;
 @property(nonatomic, assign) double price;
 @property(nonatomic, assign, getter=isChoosed) BOOL choosed;
-@property(nonatomic, strong) NSString *productPictures;
+@property(nonatomic, strong) NSArray *productPictures;
 @end

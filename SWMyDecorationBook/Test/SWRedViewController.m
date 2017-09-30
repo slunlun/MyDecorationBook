@@ -8,8 +8,9 @@
 
 #import "SWRedViewController.h"
 #import "Masonry.h"
+#import "SWProductTableViewCell.h"
 
-@interface SWRedViewController ()
+@interface SWRedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 
@@ -18,6 +19,7 @@
 @property(nonatomic, strong) UIView *yellowView;
 @property(nonatomic, strong) UIView *purpleView;
 @property(nonatomic, strong) UIView *blackView;
+@property(nonatomic, strong) UITableView *testTableView;
 @end
 
 @implementation SWRedViewController
@@ -39,61 +41,88 @@
 
 - (void)commitInit{
     _brownView = [[UIView alloc] init];
-    _brownView.backgroundColor = [UIColor brownColor];
-    [self.view addSubview:_brownView];
+//    _brownView.backgroundColor = [UIColor brownColor];
+//    [self.view addSubview:_brownView];
+//    
+//    _whiteView = [[UIView alloc] init];
+//    _whiteView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:_whiteView];
+//    
+//    _yellowView = [[UIView alloc] init];
+//    _yellowView.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:_yellowView];
+//    
+//    _purpleView = [[UIView alloc] init];
+//    _purpleView.backgroundColor = [UIColor purpleColor];
+//    [self.view addSubview:_purpleView];
+//    
+//    _blackView = [[UIView alloc] init];
+//    _blackView.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:_blackView];
+//    
+//    [_brownView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.equalTo(@80);
+//        make.top.equalTo(self.view).offset(80);
+//        make.left.equalTo(self.view).offset(40);
+//    }];
+//    
+//    [_whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.equalTo(@80);
+//        make.top.equalTo(_brownView.mas_bottom);
+//        make.left.equalTo(_brownView);
+//    }];
+//    
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+//    [_whiteView addGestureRecognizer:longPress];
+//    
+//    [_yellowView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.equalTo(@80);
+//        make.top.equalTo(_whiteView.mas_bottom);
+//        make.left.equalTo(_whiteView);
+//    }];
+//    
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panMoved:)];
+//    [_yellowView addGestureRecognizer:panGesture];
+//    
+//    [_purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.equalTo(@80);
+//        make.top.equalTo(_yellowView.mas_bottom);
+//        make.left.equalTo(_yellowView);
+//    }];
+//    
+//    [_blackView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.equalTo(@80);
+//        make.top.equalTo(_purpleView.mas_bottom);
+//        make.left.equalTo(_purpleView);
+//    }];
     
-    _whiteView = [[UIView alloc] init];
-    _whiteView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_whiteView];
-    
-    _yellowView = [[UIView alloc] init];
-    _yellowView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_yellowView];
-    
-    _purpleView = [[UIView alloc] init];
-    _purpleView.backgroundColor = [UIColor purpleColor];
-    [self.view addSubview:_purpleView];
-    
-    _blackView = [[UIView alloc] init];
-    _blackView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:_blackView];
-    
-    [_brownView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(@80);
-        make.top.equalTo(self.view).offset(80);
-        make.left.equalTo(self.view).offset(40);
+    _testTableView = [[UITableView alloc] init];
+    _testTableView.dataSource = self;
+    _testTableView.delegate = self;
+    [_testTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
+    [self.view addSubview:_testTableView];
+    [_testTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(self.view.mas_topMargin);
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
+    SWProductItem *productItem = [[SWProductItem alloc] init];
+    productItem.productName = @"AE-12";
+    productItem.price = indexPath.row;
+    productItem.productPictures = [NSArray new];
+    cell.productItem = productItem;
     
-    [_whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(@80);
-        make.top.equalTo(_brownView.mas_bottom);
-        make.left.equalTo(_brownView);
-    }];
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-    [_whiteView addGestureRecognizer:longPress];
-    
-    [_yellowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(@80);
-        make.top.equalTo(_whiteView.mas_bottom);
-        make.left.equalTo(_whiteView);
-    }];
-    
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panMoved:)];
-    [_yellowView addGestureRecognizer:panGesture];
-    
-    [_purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(@80);
-        make.top.equalTo(_yellowView.mas_bottom);
-        make.left.equalTo(_yellowView);
-    }];
-    
-    [_blackView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(@80);
-        make.top.equalTo(_purpleView.mas_bottom);
-        make.left.equalTo(_purpleView);
-    }];
-    
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
 }
 
 - (void)didReceiveMemoryWarning {

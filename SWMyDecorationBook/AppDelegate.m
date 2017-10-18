@@ -44,12 +44,12 @@
     
     NSArray *cellArray = @[yellowCell, redCell, brownCell, blackCell, orangeCell];
   
-    SWDragMoveTableViewController *dgMV = [[SWDragMoveTableViewController alloc] initWithTableViewCells:cellArray];
+  //  SWDragMoveTableViewController *dgMV = [[SWDragMoveTableViewController alloc] initWithTableViewCells:cellArray];
    
     
     UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
     UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
-    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:dgMV];
+    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftNav];
     _drawerVC.maximumLeftDrawerWidth = 90.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window setRootViewController:_drawerVC];

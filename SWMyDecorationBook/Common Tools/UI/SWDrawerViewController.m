@@ -8,7 +8,7 @@
 
 #import "SWDrawerViewController.h"
 #import "UIViewController+SWDrawerViewController.h"
-
+#import "Masonry.h"
 CGFloat const SWDrawerDefaultWidth = 280.0f;
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
 CGFloat const SWDrawerDefaultShadowOpacity = 0.8f;

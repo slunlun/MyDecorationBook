@@ -127,17 +127,31 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 #pragma mark - Init
 - (instancetype)initWithTableViewCells:(NSArray *)tableViewCells {
     if (self = [super init]) {
         _tableViewCells = [[NSMutableArray alloc] initWithArray:tableViewCells];
         _contentScorllView = [[UIScrollView alloc] init];
         _contentScorllView.backgroundColor = [UIColor whiteColor];
+        _contentScorllView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//      
         [self.view addSubview:_contentScorllView];
         [_contentScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.bottom.equalTo(self.view);
-            make.width.height.equalTo(self.view);
+            make.top.equalTo(self.view.mas_top).offset(40);
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.bottom.equalTo(self.view.mas_bottom);
         }];
+        
     }
     return self;
 }
@@ -151,6 +165,7 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
     NSArray *animationTypes = @[type1, type2, type3, type4];
     NSInteger animationIndex = 0;
     for (SWDragMoveTableViewCell *cell in self.tableViewCells) {
+        cell.userInteractionEnabled = NO;
         ++animationIndex;
         if (preCell == nil) {
             [self.contentScorllView addSubview:cell];
@@ -182,7 +197,8 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
             preCell = cell;
         }
     }
-    self.contentScorllView.contentSize = CGSizeMake(SWDragMoveTableViewCellHeight, SWDragMoveTableViewCellHeight * self.tableViewCells.count);
+   self.contentScorllView.contentSize = CGSizeMake(SWDragMoveTableViewCellHeight, SWDragMoveTableViewCellHeight * self.tableViewCells.count);
+   self.view.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - Getter/Setter

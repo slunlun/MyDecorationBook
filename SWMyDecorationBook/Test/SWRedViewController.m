@@ -122,7 +122,7 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return 180;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -94,7 +94,8 @@
 //
 //    UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
 //    UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
-    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:v1 leftDrawerViewController:dgMV];
+      UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
+    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:dgMV];
     _drawerVC.maximumLeftDrawerWidth = 90.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
    [self.window setRootViewController:_drawerVC];

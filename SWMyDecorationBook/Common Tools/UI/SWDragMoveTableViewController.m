@@ -29,6 +29,18 @@
 @property (nonatomic, strong) NSArray *animationType;
 @end
 @implementation SWDragMoveTableViewCell
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *retView = [super hitTest:point withEvent:event];
+    if ([retView isEqual:self]) {
+        if (self.isEdit) {
+            return retView;
+        }else {
+            return nil;
+        }
+    }
+    return retView;
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         if (self.isEdit) {
@@ -165,7 +177,6 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
     NSArray *animationTypes = @[type1, type2, type3, type4];
     NSInteger animationIndex = 0;
     for (SWDragMoveTableViewCell *cell in self.tableViewCells) {
-        cell.userInteractionEnabled = NO;
         ++animationIndex;
         if (preCell == nil) {
             [self.contentScorllView addSubview:cell];

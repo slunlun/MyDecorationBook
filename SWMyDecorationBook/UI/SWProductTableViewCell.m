@@ -7,13 +7,14 @@
 //
 
 #import "SWProductTableViewCell.h"
-#import "LZRelayoutButton.h"
+#import "SWButton.h"
+#import "SWProductCollectionViewCell.h"
 #import "Masonry.h"
 
 @interface SWProductTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, strong) UILabel *productNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
-@property(nonatomic, strong) LZRelayoutButton *selectedBtn;
+@property(nonatomic, strong) SWButton *selectedBtn;
 @property(nonatomic, strong) UICollectionView *productPicturesCollectionView;
 @property(nonatomic, strong) UIButton *delBtn;
 @property(nonatomic, strong) UIButton *editBtn;
@@ -40,8 +41,9 @@
     
     // step1. step up product info
     _productInfoView = [[UIView alloc] init];
-    _productInfoView.backgroundColor = [UIColor redColor];
+    _productInfoView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_productInfoView];
+    
     _productNameLabel = [[UILabel alloc] init];
     _productNameLabel.numberOfLines = 0;
     _productNameLabel.backgroundColor = [UIColor blueColor];
@@ -53,42 +55,46 @@
     _priceLabel.numberOfLines = 1;
     _priceLabel.textAlignment = NSTextAlignmentLeft;
     [self.productInfoView addSubview:_priceLabel];
-    
-    _selectedBtn = [[LZRelayoutButton alloc] init];
+        
+    _selectedBtn = [[SWButton alloc] initWithButtonType:SWButtonLayoutTypeImageRight];
     [_selectedBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _selectedBtn.lzType = LZRelayoutButtonTypeLeft;
-    _selectedBtn.imageSize = CGSizeMake(30.0f, 30.0f);
     [_selectedBtn setImage:[UIImage imageNamed:@"ShoppingCartGreen"] forState:UIControlStateNormal];
-    _selectedBtn.offset = 1.0f;
     [_selectedBtn setTitle:NSLocalizedString(@"CHOOSE_PRODUCT", nil) forState:UIControlStateNormal];
     [self.productInfoView addSubview:_selectedBtn];
     
     [_productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productInfoView);
+        make.top.equalTo(self.productInfoView).offset(5);
         make.left.equalTo(self.productInfoView).offset(5);
     }];
     
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productInfoView);
+        make.top.equalTo(self.productInfoView).offset(5);
         make.centerX.equalTo(self.productInfoView);
     }];
     
     [_selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productInfoView);
+        make.top.equalTo(self.productInfoView).offset(5);
         make.left.equalTo(_priceLabel.mas_right);
         make.right.equalTo(self.productInfoView);
     }];
     
     [_productInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(@20);
+        make.height.equalTo(@40);
     }];
     
     // step2. setup product picutres collection view
+    UICollectionViewFlowLayout *collectionLayout = [UICollectionViewFlowLayout new];
+    collectionLayout.minimumInteritemSpacing = 5;
+    collectionLayout.minimumLineSpacing = 0;
+    collectionLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
+    collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _productPicturesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewFlowLayout new]];
+    _productPicturesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionLayout];
+    [_productPicturesCollectionView registerClass:[SWProductCollectionViewCell class] forCellWithReuseIdentifier:@"SWProductCollectionViewCell"];
     _productPicturesCollectionView.delegate = self;
     _productPicturesCollectionView.dataSource = self;
+    _productPicturesCollectionView.backgroundColor = [UIColor yellowColor];
     
     [self.contentView addSubview:_productPicturesCollectionView];
     [_productPicturesCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,17 +158,17 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.productItem) {
-        return self.productItem.productPictures.count;
-    }
+//    if (self.productItem) {
+//        return self.productItem.productPictures.count;
+//    }
     
-    return 0;
+    return 16;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellIdentity = @"CELL_IDENTITY";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
-    
+    NSString *cellIdentity = @"SWProductCollectionViewCell";
+    SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
+    cell.model = [UIImage imageNamed:@"Scan"];
     return cell;
 }
 

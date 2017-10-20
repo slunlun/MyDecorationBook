@@ -18,7 +18,6 @@
 		5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */; };
 		5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */; };
 		5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7831F7F72F600034E09 /* SWProductItem.m */; };
-		5EB9D7881F7F78AD00034E09 /* LZRelayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */; };
 		5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9D78F1F7F7FE900034E09 /* Localizable.strings */; };
 		5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2C71F99ABBD007CAB27 /* MASCompositeConstraint.m */; };
 		5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CC1F99ABBE007CAB27 /* MASConstraint.m */; };
@@ -30,6 +29,8 @@
 		5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CB1F99ABBD007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2BE1F99ABBC007CAB27 /* View+MASAdditions.m */; };
 		5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */; };
+		5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */; };
+		5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */; };
 		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
 		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
 		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
@@ -57,8 +58,6 @@
 		5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWProductTableViewCell.m; path = UI/SWProductTableViewCell.m; sourceTree = "<group>"; };
 		5EB9D7821F7F72F600034E09 /* SWProductItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWProductItem.h; path = Model/SWProductItem.h; sourceTree = "<group>"; };
 		5EB9D7831F7F72F600034E09 /* SWProductItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWProductItem.m; path = Model/SWProductItem.m; sourceTree = "<group>"; };
-		5EB9D7861F7F78AD00034E09 /* LZRelayoutButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZRelayoutButton.h; sourceTree = "<group>"; };
-		5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZRelayoutButton.m; sourceTree = "<group>"; };
 		5EB9D7891F7F7F4E00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		5EB9D78A1F7F7F4F00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		5EB9D78E1F7F7FE900034E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -89,6 +88,10 @@
 		5EE7E2CF1F99ABBE007CAB27 /* MASViewConstraint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		5EE7E2D01F99ABBE007CAB27 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		5EE7E2D11F99ABBE007CAB27 /* Masonry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		5EE7E2DC1F99D3DC007CAB27 /* SWButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWButton.h; sourceTree = "<group>"; };
+		5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWButton.m; sourceTree = "<group>"; };
+		5EE7E2E01F99F155007CAB27 /* SWProductCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWProductCollectionViewCell.h; path = UI/SWProductCollectionViewCell.h; sourceTree = "<group>"; };
+		5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SWProductCollectionViewCell.m; path = UI/SWProductCollectionViewCell.m; sourceTree = "<group>"; };
 		5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWYellowViewController.h; path = SWMyDecorationBook/Test/SWYellowViewController.h; sourceTree = "<group>"; };
 		5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWYellowViewController.m; path = SWMyDecorationBook/Test/SWYellowViewController.m; sourceTree = "<group>"; };
 		5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBlueViewController.h; path = SWMyDecorationBook/Test/SWBlueViewController.h; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		5EACC4E91F72069D00C4E796 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5EE7E2DF1F99F0D6007CAB27 /* ProductCollectinCell */,
 				5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */,
 				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
 				5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */,
@@ -190,6 +194,8 @@
 		5EB9D77D1F7F43AA00034E09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5EE7E2DC1F99D3DC007CAB27 /* SWButton.h */,
+				5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */,
 				5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */,
 				5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */,
 			);
@@ -209,8 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				5EE7E2B81F99AAA2007CAB27 /* Masonry */,
-				5EB9D7861F7F78AD00034E09 /* LZRelayoutButton.h */,
-				5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */,
 			);
 			name = 3rd;
 			sourceTree = "<group>";
@@ -245,6 +249,15 @@
 				5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		5EE7E2DF1F99F0D6007CAB27 /* ProductCollectinCell */ = {
+			isa = PBXGroup;
+			children = (
+				5EE7E2E01F99F155007CAB27 /* SWProductCollectionViewCell.h */,
+				5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */,
+			);
+			name = ProductCollectinCell;
 			sourceTree = "<group>";
 		};
 		5EF75C511F78AE37007F5A9E /* Test */ = {
@@ -337,6 +350,7 @@
 			files = (
 				5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */,
 				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
+				5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */,
 				5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */,
 				5EE7E2D51F99ACCC007CAB27 /* MASLayoutConstraint.m in Sources */,
 				5EE7E2D61F99ACCC007CAB27 /* MASViewAttribute.m in Sources */,
@@ -355,7 +369,7 @@
 				5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */,
 				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
-				5EB9D7881F7F78AD00034E09 /* LZRelayoutButton.m in Sources */,
+				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
 			);

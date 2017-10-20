@@ -20,6 +20,16 @@
 		5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7831F7F72F600034E09 /* SWProductItem.m */; };
 		5EB9D7881F7F78AD00034E09 /* LZRelayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7871F7F78AD00034E09 /* LZRelayoutButton.m */; };
 		5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9D78F1F7F7FE900034E09 /* Localizable.strings */; };
+		5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2C71F99ABBD007CAB27 /* MASCompositeConstraint.m */; };
+		5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CC1F99ABBE007CAB27 /* MASConstraint.m */; };
+		5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CE1F99ABBE007CAB27 /* MASConstraintMaker.m */; };
+		5EE7E2D51F99ACCC007CAB27 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2C61F99ABBD007CAB27 /* MASLayoutConstraint.m */; };
+		5EE7E2D61F99ACCC007CAB27 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CA1F99ABBD007CAB27 /* MASViewAttribute.m */; };
+		5EE7E2D71F99ACCC007CAB27 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CF1F99ABBE007CAB27 /* MASViewConstraint.m */; };
+		5EE7E2D81F99ACCC007CAB27 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2C91F99ABBD007CAB27 /* NSArray+MASAdditions.m */; };
+		5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CB1F99ABBD007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2BE1F99ABBC007CAB27 /* View+MASAdditions.m */; };
+		5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */; };
 		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
 		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
 		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
@@ -325,6 +335,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */,
+				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
+				5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */,
+				5EE7E2D51F99ACCC007CAB27 /* MASLayoutConstraint.m in Sources */,
+				5EE7E2D61F99ACCC007CAB27 /* MASViewAttribute.m in Sources */,
+				5EE7E2D71F99ACCC007CAB27 /* MASViewConstraint.m in Sources */,
+				5EE7E2D81F99ACCC007CAB27 /* NSArray+MASAdditions.m in Sources */,
+				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */,
+				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
 				5EACC4D91F72060100C4E796 /* ViewController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,

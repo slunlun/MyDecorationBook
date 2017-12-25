@@ -85,12 +85,15 @@
     
     // step2. setup product picutres collection view
     UICollectionViewFlowLayout *collectionLayout = [UICollectionViewFlowLayout new];
-    collectionLayout.minimumInteritemSpacing = 5;
+    collectionLayout.minimumInteritemSpacing = 20;
     collectionLayout.minimumLineSpacing = 0;
-    collectionLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
+    
+    collectionLayout.itemSize = CGSizeMake(100, 100);
+    //collectionLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
     collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     _productPicturesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionLayout];
+    _productPicturesCollectionView.contentInset = UIEdgeInsetsMake(5, 5, 5, 5);
     [_productPicturesCollectionView registerClass:[SWProductCollectionViewCell class] forCellWithReuseIdentifier:@"SWProductCollectionViewCell"];
     _productPicturesCollectionView.delegate = self;
     _productPicturesCollectionView.dataSource = self;
@@ -99,7 +102,7 @@
     [self.contentView addSubview:_productPicturesCollectionView];
     [_productPicturesCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView);
-        make.height.equalTo(@80);
+        make.height.equalTo(@120);
         make.top.equalTo(_productInfoView.mas_bottom);
     }];
     
@@ -157,12 +160,15 @@
 }
 
 #pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    if (self.productItem) {
-//        return self.productItem.productPictures.count;
-//    }
-    
-    return 16;
+    if (section == 0) {
+        return 5;
+    }else {
+        return 1;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -172,13 +178,27 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Press %@", indexPath);
+}
+
 #pragma mark - UI CallBack
 - (void)delBtnClickCallBack:(UIButton *)button {
-
+    if([self.delegate respondsToSelector:@selector(productTableViewCell:didClickDelProduct:)]) {
+        [self.delegate productTableViewCell:self didClickDelProduct:self.productItem];
+    }
 }
 
 - (void)editBtnClickCallBack:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickEditProduct:)]) {
+        [self.delegate productTableViewCell:self didClickEditProduct:self.productItem];
+    }
+}
 
+- (void)takePhotoBtnClickCallback:(UICollectionViewCell *)collectionViewCell {
+//    if (self.delegate respondsToSelector:@selector()) {
+//        <#statements#>
+//    }
 }
 
 

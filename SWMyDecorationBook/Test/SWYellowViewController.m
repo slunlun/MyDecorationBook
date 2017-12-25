@@ -8,7 +8,7 @@
 
 #import "SWYellowViewController.h"
 #import "SWBlueViewController.h"
-#import "SWRedViewController.h"
+
 
 #import "AppDelegate.h"
 @interface SWYellowViewController ()
@@ -42,15 +42,7 @@
 //    _changeButton.frame = CGRectMake(CGRectGetMidX(_changeButton.superview.frame), CGRectGetMidY(_changeButton.superview.frame), _changeButton.frame.size.width, _changeButton.frame.size.height);
     return;
    
-    if (_index % 2) {
-        SWRedViewController *redVC = [[SWRedViewController alloc] init];
-        [appDelegate.drawerVC setCenterViewController:redVC withCloseAnimation:YES completion:nil];
-        _index ++;
-    }else{
-        SWYellowViewController *yellowVC = [[SWYellowViewController alloc] init];
-        [appDelegate.drawerVC setCenterViewController:yellowVC withCloseAnimation:YES completion:nil];
-        _index ++;
-    }
+  
 }
 
 - (void)didReceiveMemoryWarning {

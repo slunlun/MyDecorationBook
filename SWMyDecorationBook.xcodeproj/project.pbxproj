@@ -33,7 +33,7 @@
 		5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */; };
 		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
 		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
-		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
+		5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */; };
 		5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */; };
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 /* End PBXBuildFile section */
@@ -97,8 +97,8 @@
 		5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWYellowViewController.m; path = SWMyDecorationBook/Test/SWYellowViewController.m; sourceTree = "<group>"; };
 		5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBlueViewController.h; path = SWMyDecorationBook/Test/SWBlueViewController.h; sourceTree = "<group>"; };
 		5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWBlueViewController.m; path = SWMyDecorationBook/Test/SWBlueViewController.m; sourceTree = "<group>"; };
-		5EF75C581F78AE9D007F5A9E /* SWRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRedViewController.h; path = SWMyDecorationBook/Test/SWRedViewController.h; sourceTree = "<group>"; };
-		5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRedViewController.m; path = SWMyDecorationBook/Test/SWRedViewController.m; sourceTree = "<group>"; };
+		5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWShoppingItemHomePageVC.h; path = SWMyDecorationBook/Test/SWShoppingItemHomePageVC.h; sourceTree = "<group>"; };
+		5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWShoppingItemHomePageVC.m; path = SWMyDecorationBook/Test/SWShoppingItemHomePageVC.m; sourceTree = "<group>"; };
 		5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDragMoveTableViewController.h; path = "Common Tools/UI/SWDragMoveTableViewController.h"; sourceTree = "<group>"; };
 		5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDragMoveTableViewController.m; path = "Common Tools/UI/SWDragMoveTableViewController.m"; sourceTree = "<group>"; };
 		802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLeftSlideCollectionViewController.h; sourceTree = "<group>"; };
@@ -272,8 +272,8 @@
 				5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */,
 				5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */,
 				5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */,
-				5EF75C581F78AE9D007F5A9E /* SWRedViewController.h */,
-				5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */,
+				5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */,
+				5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 				TargetAttributes = {
 					5EACC4CD1F72060100C4E796 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5R9SGW2R35;
+						DevelopmentTeam = 987Y5M3S28;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -371,7 +371,7 @@
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,
-				5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */,
+				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
@@ -514,9 +514,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5R9SGW2R35;
+				DEVELOPMENT_TEAM = 987Y5M3S28;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -529,9 +529,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5R9SGW2R35;
+				DEVELOPMENT_TEAM = 987Y5M3S28;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";

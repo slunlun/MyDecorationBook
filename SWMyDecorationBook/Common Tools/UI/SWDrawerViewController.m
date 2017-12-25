@@ -38,7 +38,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 
 @end
 
-@interface SWDrawerViewController ()
+@interface SWDrawerViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView * childControllerContainerView;
 @property(nonatomic, strong) SWDrawerCenterContainerView *centerContainerView;
 @property (nonatomic, assign, getter = isAnimatingDrawer) BOOL animatingDrawer;
@@ -616,10 +616,19 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 
 - (void)setupGestureRecognizers {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGetureCallBack:)];
+    tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
     [self.view addGestureRecognizer:panGesture];
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.openSide == SWDrawerSideNone) {
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 -(void)setCenterViewController:(UIViewController *)newCenterViewController withCloseAnimation:(BOOL)closeAnimated completion:(void(^)(BOOL finished))completion {

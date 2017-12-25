@@ -20,18 +20,25 @@ static NSString *SHOP_ITEM_CELL_IDENTITY = @"SHOP_ITEM_CELL_IDENTITY";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 0.0f;
     layout.minimumInteritemSpacing = 0.0f;
-    
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     self.shoppingCategoryCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.shoppingCategoryCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.shoppingCategoryCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:SHOP_ITEM_CELL_IDENTITY];
     
     [self.view addSubview:self.shoppingCategoryCollectionView];
     [self.shoppingCategoryCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        make.left.right.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
+        }
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom).offset(-40);
+        }
     }];
     
     self.shoppingCategoryCollectionView.dataSource = self;

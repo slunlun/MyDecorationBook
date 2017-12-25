@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SWRedViewController : UIViewController
+@interface SWShoppingItemHomePageVC : UIViewController
 
 @end

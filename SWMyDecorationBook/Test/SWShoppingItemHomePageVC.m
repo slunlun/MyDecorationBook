@@ -6,105 +6,48 @@
 //  Copyright © 2017 Eren. All rights reserved.
 //
 
-#import "SWRedViewController.h"
+#import "SWShoppingItemHomePageVC.h"
 #import "Masonry.h"
 #import "SWProductTableViewCell.h"
 
-@interface SWRedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 
-@property(nonatomic, strong) UIView *brownView;
-@property(nonatomic, strong) UIView *whiteView;
-@property(nonatomic, strong) UIView *yellowView;
-@property(nonatomic, strong) UIView *purpleView;
-@property(nonatomic, strong) UIView *blackView;
-@property(nonatomic, strong) UITableView *testTableView;
+
+@property(nonatomic, strong) UITableView *shoppingItemListTableView;
 @end
 
-@implementation SWRedViewController
+@implementation SWShoppingItemHomePageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
-//    _dragMoveView = [[UIView alloc] initWithFrame:CGRectMake(40, 140, 80, 80)];
-//    [self.view addSubview:_dragMoveView];
-//    
-//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragViewPan:)];
-//    [_dragMoveView addGestureRecognizer:panGesture];
-//    _dragMoveView.backgroundColor = [UIColor brownColor];
-//    
-//    [[UIApplication sharedApplication].delegate.window addSubview:_dragMoveView];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self commitInit];
 }
 
 - (void)commitInit{
-    _brownView = [[UIView alloc] init];
-//    _brownView.backgroundColor = [UIColor brownColor];
-//    [self.view addSubview:_brownView];
-//    
-//    _whiteView = [[UIView alloc] init];
-//    _whiteView.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:_whiteView];
-//    
-//    _yellowView = [[UIView alloc] init];
-//    _yellowView.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:_yellowView];
-//    
-//    _purpleView = [[UIView alloc] init];
-//    _purpleView.backgroundColor = [UIColor purpleColor];
-//    [self.view addSubview:_purpleView];
-//    
-//    _blackView = [[UIView alloc] init];
-//    _blackView.backgroundColor = [UIColor blackColor];
-//    [self.view addSubview:_blackView];
-//    
-//    [_brownView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.height.equalTo(@80);
-//        make.top.equalTo(self.view).offset(80);
-//        make.left.equalTo(self.view).offset(40);
-//    }];
-//    
-//    [_whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.height.equalTo(@80);
-//        make.top.equalTo(_brownView.mas_bottom);
-//        make.left.equalTo(_brownView);
-//    }];
-//    
-//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-//    [_whiteView addGestureRecognizer:longPress];
-//    
-//    [_yellowView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.height.equalTo(@80);
-//        make.top.equalTo(_whiteView.mas_bottom);
-//        make.left.equalTo(_whiteView);
-//    }];
-//    
-//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panMoved:)];
-//    [_yellowView addGestureRecognizer:panGesture];
-//    
-//    [_purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.height.equalTo(@80);
-//        make.top.equalTo(_yellowView.mas_bottom);
-//        make.left.equalTo(_yellowView);
-//    }];
-//    
-//    [_blackView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.height.equalTo(@80);
-//        make.top.equalTo(_purpleView.mas_bottom);
-//        make.left.equalTo(_purpleView);
-//    }];
-    
-    _testTableView = [[UITableView alloc] init];
-    _testTableView.dataSource = self;
-    _testTableView.delegate = self;
-    [_testTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
-    [self.view addSubview:_testTableView];
-    [_testTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(self.view.mas_topMargin);
+    _shoppingItemListTableView = [[UITableView alloc] init];
+    _shoppingItemListTableView.dataSource = self;
+    _shoppingItemListTableView.delegate = self;
+    [_shoppingItemListTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
+    [self.view addSubview:_shoppingItemListTableView];
+
+    [_shoppingItemListTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
+        }
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.mas_bottomLayoutGuideTop);
+        }
     }];
+    
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -123,6 +66,10 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 180;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Press tableview %@", indexPath);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,8 +102,6 @@
             CGPoint newLocationPoint = CGPointMake(translation.x - self.preTranslation.x, translation.y - self.preTranslation.y);
             panGesture.view.frame = CGRectMake(panGesture.view.frame.origin.x, panGesture.view.frame.origin.y + newLocationPoint.y, panGesture.view.frame.size.width, panGesture.view.frame.size.height);
             self.preTranslation = translation;
-            
-            //   _dragMoveView convertRect:<#(CGRect)#> toView:<#(nullable UIView *)#>
         }
             break;
         case UIGestureRecognizerStateEnded:

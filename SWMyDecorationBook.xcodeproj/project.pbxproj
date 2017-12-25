@@ -35,6 +35,7 @@
 		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
 		5EF75C5A1F78AE9D007F5A9E /* SWRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */; };
 		5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */; };
+		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,8 @@
 		5EF75C591F78AE9D007F5A9E /* SWRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRedViewController.m; path = SWMyDecorationBook/Test/SWRedViewController.m; sourceTree = "<group>"; };
 		5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDragMoveTableViewController.h; path = "Common Tools/UI/SWDragMoveTableViewController.h"; sourceTree = "<group>"; };
 		5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDragMoveTableViewController.m; path = "Common Tools/UI/SWDragMoveTableViewController.m"; sourceTree = "<group>"; };
+		802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLeftSlideCollectionViewController.h; sourceTree = "<group>"; };
+		802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWLeftSlideCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 				5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */,
 				5EACC4E21F72060100C4E796 /* Info.plist */,
 				5EACC4D11F72060100C4E796 /* Supporting Files */,
+				802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */,
+				802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */,
 			);
 			path = SWMyDecorationBook;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
+				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

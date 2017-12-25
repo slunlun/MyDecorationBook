@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SWDragMoveTableViewController.h"
+#import "SWLeftSlideCollectionViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -95,7 +96,8 @@
 //    UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
 //    UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
-    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:dgMV];
+    SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
+    _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
     _drawerVC.maximumLeftDrawerWidth = 90.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
    [self.window setRootViewController:_drawerVC];

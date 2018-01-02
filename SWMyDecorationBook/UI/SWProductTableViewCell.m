@@ -38,7 +38,9 @@
 
 #pragma mark - UI init
 - (void) commonInit {
-    
+    self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.contentView.layer.shadowOffset = CGSizeMake(0.5, 0.5);
+    self.contentView.layer.shadowOpacity = 0.1f;
     // step1. step up product info
     _productInfoView = [[UIView alloc] init];
     _productInfoView.backgroundColor = [UIColor clearColor];

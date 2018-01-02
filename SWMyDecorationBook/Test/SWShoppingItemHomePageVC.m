@@ -27,7 +27,9 @@
 }
 
 - (void)commitInit{
+    self.automaticallyAdjustsScrollViewInsets = NO;
     _shoppingItemListTableView = [[UITableView alloc] init];
+    _shoppingItemListTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _shoppingItemListTableView.dataSource = self;
     _shoppingItemListTableView.delegate = self;
     [_shoppingItemListTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
@@ -47,6 +49,8 @@
         }
     }];
     
+    UIBarButtonItem *addShoppingItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewShoppingItem:)];
+    self.navigationItem.rightBarButtonItem = addShoppingItemBtn;
    
 }
 
@@ -65,7 +69,7 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 180;
+    return 210;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -146,14 +150,8 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)addNewShoppingItem:(UIBarButtonItem *)addItem {
+    
 }
-*/
 
 @end

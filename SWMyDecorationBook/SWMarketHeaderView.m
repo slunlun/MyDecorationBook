@@ -29,8 +29,8 @@
 - (void)commonInit {
     UIButton *marketBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
-    marketBtn.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:12.0];
-    [marketBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    marketBtn.titleLabel.font = SW_DEFAULT_MIN_FONT;
+    [marketBtn setTitleColor:[UIColor colorWithHexString:SW_BLACK_COLOR] forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     marketBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -47,8 +47,8 @@
     [self.contentView addSubview:accessorView];
     
     UILabel *defTelNumLab = [[UILabel alloc] initWithFrame:CGRectZero];
-    [defTelNumLab setFont:[UIFont fontWithName:@"AppleGothic" size:12.0]];
-    [defTelNumLab setTextColor:[UIColor colorWithHexString:@"#0000CD"]];
+    [defTelNumLab setFont:SW_DEFAULT_MIN_FONT];
+    [defTelNumLab setTextColor:SW_MAIN_COLOR];
     UITapGestureRecognizer *telNumTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defTelNumClicked:)];
     [defTelNumLab addGestureRecognizer:telNumTap];
     defTelNumLab.userInteractionEnabled = YES;

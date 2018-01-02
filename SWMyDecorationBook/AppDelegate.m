@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "SWDragMoveTableViewController.h"
 #import "SWLeftSlideCollectionViewController.h"
+#import "SWUIDef.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [UINavigationBar appearance].tintColor = SW_MAIN_COLOR;
     UIViewController *v1 = [[UIViewController alloc] init];
     v1.view.backgroundColor = [UIColor yellowColor];
     

@@ -10,14 +10,17 @@
 #import "SWButton.h"
 #import "SWProductCollectionViewCell.h"
 #import "Masonry.h"
+#import "SWUIDef.h"
+#import "HexColor.h"
 
 @interface SWProductTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, strong) UILabel *productNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
-@property(nonatomic, strong) SWButton *selectedBtn;
 @property(nonatomic, strong) UICollectionView *productPicturesCollectionView;
 @property(nonatomic, strong) UIButton *delBtn;
 @property(nonatomic, strong) UIButton *editBtn;
+@property(nonatomic, strong) UIButton *buyBtn;
+@property(nonatomic, strong) UILabel *productMarkLabel;
 
 @property(nonatomic, strong) UIView *productInfoView;
 
@@ -56,28 +59,31 @@
     _priceLabel = [[UILabel alloc] init];
     _priceLabel.numberOfLines = 1;
     _priceLabel.textAlignment = NSTextAlignmentLeft;
+    _priceLabel.font = SW_DEFAULT_MIN_FONT;
+    _priceLabel.textColor = [UIColor colorWithHexString:@"#e67e22"];
     [self.productInfoView addSubview:_priceLabel];
-        
-    _selectedBtn = [[SWButton alloc] initWithButtonType:SWButtonLayoutTypeImageRight];
-    [_selectedBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_selectedBtn setImage:[UIImage imageNamed:@"ShoppingCartGreen"] forState:UIControlStateNormal];
-    [_selectedBtn setTitle:NSLocalizedString(@"CHOOSE_PRODUCT", nil) forState:UIControlStateNormal];
-    [self.productInfoView addSubview:_selectedBtn];
+    
+    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_editBtn setImage:[UIImage imageNamed:@"Edit"] forState:UIControlStateNormal];
+    _editBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    [_editBtn addTarget:self action:@selector(editBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self.productInfoView addSubview:_editBtn];
     
     [_productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productInfoView).offset(5);
-        make.left.equalTo(self.productInfoView).offset(5);
+        make.left.equalTo(self.productInfoView).offset(SW_MARGIN);
     }];
     
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productInfoView).offset(5);
         make.centerX.equalTo(self.productInfoView);
+        make.centerY.equalTo(_productNameLabel);
     }];
     
-    [_selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productInfoView).offset(5);
-        make.left.equalTo(_priceLabel.mas_right);
-        make.right.equalTo(self.productInfoView);
+        make.rightMargin.equalTo(_productInfoView.mas_right).offset(-SW_MARGIN);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
     }];
     
     [_productInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,32 +109,43 @@
     
     [self.contentView addSubview:_productPicturesCollectionView];
     [_productPicturesCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
         make.height.equalTo(@120);
         make.top.equalTo(_productInfoView.mas_bottom);
     }];
     
+    _productMarkLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _productMarkLabel.font = SW_DEFAULT_SUPER_MIN_FONT;
+    _productMarkLabel.textColor = [UIColor colorWithHexString:@"#bdc3c7"];
+    [self.contentView addSubview:_productMarkLabel];
+    [_productMarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(20);
+        make.width.lessThanOrEqualTo(self.contentView.mas_width).multipliedBy(0.7);
+    }];
+    
     // step3. setup del/edit button
-    _delBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_delBtn setImage:[UIImage imageNamed:@"RubbishBin"] forState:UIControlStateNormal];
+    _delBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_delBtn setImage:[UIImage imageNamed:@"Del"] forState:UIControlStateNormal];
     [_delBtn addTarget:self action:@selector(delBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_delBtn];
     
-    _editBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_editBtn setImage:[UIImage imageNamed:@"EditPen"] forState:UIControlStateNormal];
-    [_editBtn addTarget:self action:@selector(editBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_editBtn];
-    
-    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
-        make.right.equalTo(self.contentView);
-        make.width.height.equalTo(@40);
-    }];
+    _buyBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_buyBtn setImage:[UIImage imageNamed:@"Buy"] forState:UIControlStateNormal];
+    [_buyBtn addTarget:self action:@selector(buyBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:_buyBtn];
     
     [_delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
-        make.right.equalTo(_editBtn.mas_left);
-        make.width.height.equalTo(@40);
+        make.right.equalTo(self.productPicturesCollectionView);
+        make.width.height.equalTo(@30);
+    }];
+    
+    [_buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
+        make.right.equalTo(_delBtn.mas_left).offset(-10);
+        make.width.height.equalTo(@30);
     }];
     
 }
@@ -146,17 +163,18 @@
     if ([_productItem isEqual:productItem]) {
         return;
     }
-    
     _productItem = productItem;
-    
     self.productNameLabel.text = productItem.productName;
-    self.priceLabel.text = [NSString stringWithFormat:@"%lf", productItem.price];
-    
-    if (productItem.isChoosed) {
-        self.selectedBtn.backgroundColor = [UIColor greenColor];
-    }else {
-        self.selectedBtn.backgroundColor = [UIColor whiteColor];
+    NSString *priceStr = nil;
+    if (fmodf(productItem.price, 1)==0) {
+        priceStr = [NSString stringWithFormat:@"￥%.0f",productItem.price];
+    } else if (fmodf(productItem.price*10, 1)==0) {
+        priceStr = [NSString stringWithFormat:@"￥%.1f",productItem.price];
+    } else {
+        priceStr = [NSString stringWithFormat:@"￥%.2f",productItem.price];
     }
+    self.priceLabel.text = priceStr;
+    self.productMarkLabel.text = productItem.productMark;
     
     [self.productPicturesCollectionView reloadData];
 }
@@ -194,6 +212,12 @@
 - (void)editBtnClickCallBack:(UIButton *)button {
     if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickEditProduct:)]) {
         [self.delegate productTableViewCell:self didClickEditProduct:self.productItem];
+    }
+}
+
+- (void)buyBtnClickCallBack:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickBuyProduct:)]) {
+        [self.delegate productTableViewCell:self didClickBuyProduct:self.productItem];
     }
 }
 

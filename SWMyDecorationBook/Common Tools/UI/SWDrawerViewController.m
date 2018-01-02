@@ -9,6 +9,8 @@
 #import "SWDrawerViewController.h"
 #import "UIViewController+SWDrawerViewController.h"
 #import "Masonry.h"
+#import "SWUIDef.h"
+#import "HexColor.h"
 CGFloat const SWDrawerDefaultWidth = 280.0f;
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
 CGFloat const SWDrawerDefaultShadowOpacity = 0.8f;
@@ -75,7 +77,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     [self setShadowOpacity:SWDrawerDefaultShadowOpacity];
     [self setShadowRadius:SWDrawerDefaultShadowRadius];
     [self setShadowOffset:CGSizeMake(0, -3)];
-    [self setShadowColor:[UIColor blackColor]];
+    [self setShadowColor:[UIColor colorWithHexString:SW_BLACK_COLOR]];
     
     // set defualt panVelocityXAnimationThreshold
     [self setPanVelocityXAnimationThreshold:SWDrawerPanVelocityXAnimationThreshold];

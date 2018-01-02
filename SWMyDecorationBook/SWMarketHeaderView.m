@@ -29,7 +29,7 @@
 - (void)commonInit {
     UIButton *marketBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
-    marketBtn.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0];
+    marketBtn.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:12.0];
     [marketBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -84,7 +84,7 @@
     _markItem = markItem;
     NSString *titleName = [NSString stringWithFormat:@" %@", markItem.marketName];
     CGSize titleSize = [titleName sizeWithAttributes:@{NSFontAttributeName:self.marketNameBtn.titleLabel.font}];
-    CGFloat fWidth = titleSize.width + 20; // 这个20 是button 图片的大小
+    CGFloat fWidth = titleSize.width + 30; // 这button 图片的大小
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     fWidth = fWidth < screenWidth * 0.5?fWidth:screenWidth * 0.5;
     NSNumber *widthNum = [NSNumber numberWithFloat:fWidth];

@@ -32,7 +32,6 @@
 
 - (void)changeButtonClicked:(UIButton *)button
 {
-     AppDelegate *appDelegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
     UIView *rootView = _changeButton;
     while (rootView.superview) {
         rootView = rootView.superview;

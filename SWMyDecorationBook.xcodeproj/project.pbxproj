@@ -19,6 +19,9 @@
 		5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */; };
 		5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9D7831F7F72F600034E09 /* SWProductItem.m */; };
 		5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9D78F1F7F7FE900034E09 /* Localizable.strings */; };
+		5EDE94E31FFB5B6400A24C21 /* SWMarketHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE94E21FFB5B6400A24C21 /* SWMarketHeaderView.m */; };
+		5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */; };
+		5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDE94E91FFB82F400A24C21 /* HexColor.m */; };
 		5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2C71F99ABBD007CAB27 /* MASCompositeConstraint.m */; };
 		5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CC1F99ABBE007CAB27 /* MASConstraint.m */; };
 		5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CE1F99ABBE007CAB27 /* MASConstraintMaker.m */; };
@@ -64,6 +67,13 @@
 		5EB9D78E1F7F7FE900034E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EB9D7901F7F7FED00034E09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EB9D7911F7F7FEE00034E09 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5EDE94E11FFB5B6400A24C21 /* SWMarketHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketHeaderView.h; sourceTree = "<group>"; };
+		5EDE94E21FFB5B6400A24C21 /* SWMarketHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketHeaderView.m; sourceTree = "<group>"; };
+		5EDE94E41FFB5E4C00A24C21 /* SWMarketItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketItem.h; sourceTree = "<group>"; };
+		5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketItem.m; sourceTree = "<group>"; };
+		5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWUIDef.h; sourceTree = "<group>"; };
+		5EDE94E81FFB82EB00A24C21 /* HexColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HexColor.h; sourceTree = "<group>"; };
+		5EDE94E91FFB82F400A24C21 /* HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColor.m; sourceTree = "<group>"; };
 		5EE7E2B91F99ABBB007CAB27 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		5EE7E2BA1F99ABBB007CAB27 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		5EE7E2BB1F99ABBB007CAB27 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
@@ -203,6 +213,9 @@
 				5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */,
 				5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */,
 				5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */,
+				5EDE94E11FFB5B6400A24C21 /* SWMarketHeaderView.h */,
+				5EDE94E21FFB5B6400A24C21 /* SWMarketHeaderView.m */,
+				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -212,6 +225,8 @@
 			children = (
 				5EB9D7821F7F72F600034E09 /* SWProductItem.h */,
 				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
+				5EDE94E41FFB5E4C00A24C21 /* SWMarketItem.h */,
+				5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -219,6 +234,8 @@
 		5EB9D7851F7F789700034E09 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				5EDE94E81FFB82EB00A24C21 /* HexColor.h */,
+				5EDE94E91FFB82F400A24C21 /* HexColor.m */,
 				5EE7E2B81F99AAA2007CAB27 /* Masonry */,
 			);
 			name = 3rd;
@@ -310,7 +327,7 @@
 				TargetAttributes = {
 					5EACC4CD1F72060100C4E796 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 987Y5M3S28;
+						DevelopmentTeam = 5R9SGW2R35;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -354,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */,
+				5EDE94E31FFB5B6400A24C21 /* SWMarketHeaderView.m in Sources */,
 				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
 				5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */,
 				5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */,
@@ -373,6 +391,8 @@
 				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
+				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,
+				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
@@ -514,7 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 987Y5M3S28;
+				DEVELOPMENT_TEAM = 5R9SGW2R35;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -529,7 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 987Y5M3S28;
+				DEVELOPMENT_TEAM = 5R9SGW2R35;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -154,8 +154,9 @@ CGFloat const SWDragMoveTableViewCellHeight = 80.0f;
         _tableViewCells = [[NSMutableArray alloc] initWithArray:tableViewCells];
         _contentScorllView = [[UIScrollView alloc] init];
         _contentScorllView.backgroundColor = [UIColor whiteColor];
-        _contentScorllView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//      
+        if (@available(iOS 11.0, *)) {
+            _contentScorllView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         [self.view addSubview:_contentScorllView];
         [_contentScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_top).offset(40);

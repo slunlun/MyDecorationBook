@@ -9,7 +9,7 @@
 #import "SWShoppingItemHomePageVC.h"
 #import "Masonry.h"
 #import "SWProductTableViewCell.h"
-
+#import "SWMarketHeaderView.h"
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
@@ -33,6 +33,7 @@
     _shoppingItemListTableView.dataSource = self;
     _shoppingItemListTableView.delegate = self;
     [_shoppingItemListTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
+    [_shoppingItemListTableView registerClass:[SWMarketHeaderView class] forHeaderFooterViewReuseIdentifier:@"MARKET_HEADER_VIEW"];
     [self.view addSubview:_shoppingItemListTableView];
 
     [_shoppingItemListTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -54,6 +55,7 @@
    
 }
 
+#pragma mark - TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -74,6 +76,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Press tableview %@", indexPath);
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
+    SWMarketItem *marketItem = [[SWMarketItem alloc] init];
+    if (section == 0) {
+        marketItem.marketName = @"红枫家具";
+        marketItem.defaultTelNum = @18745459381;
+    }else {
+        marketItem.marketName = @"红枫圣象地板抓目标点红枫圣象地板抓目标点红枫圣象地板抓目标点红枫圣象地板抓目标点";
+        marketItem.defaultTelNum = @13745639847;
+    }
+    
+    marketHeaderView.markItem = marketItem;
+    marketHeaderView.actionBlock = ^(SWMarketItem *market) {
+        NSLog(@"The maket name is %@", market.marketName);
+    };
+    return marketHeaderView;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40.0f;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */; };
+		5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */; };
+		5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */; };
+		5E86CA111FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */; };
 		5EACC4D31F72060100C4E796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D21F72060100C4E796 /* main.m */; };
 		5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D51F72060100C4E796 /* AppDelegate.m */; };
 		5EACC4D91F72060100C4E796 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D81F72060100C4E796 /* ViewController.m */; };
@@ -45,6 +48,12 @@
 /* Begin PBXFileReference section */
 		5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+UIExt.h"; path = "Category/UIView+UIExt.h"; sourceTree = "<group>"; };
 		5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+UIExt.m"; path = "Category/UIView+UIExt.m"; sourceTree = "<group>"; };
+		5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContact.h; sourceTree = "<group>"; };
+		5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContact.m; sourceTree = "<group>"; };
+		5E86CA0C1FFE04B600A8F0CC /* SWMarketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketViewController.h; sourceTree = "<group>"; };
+		5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketViewController.m; sourceTree = "<group>"; };
+		5E86CA0F1FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactSectionHeaderView.h; sourceTree = "<group>"; };
+		5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactSectionHeaderView.m; sourceTree = "<group>"; };
 		5EACC4CE1F72060100C4E796 /* SWMyDecorationBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWMyDecorationBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EACC4D21F72060100C4E796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5EACC4D41F72060100C4E796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -175,6 +184,8 @@
 				5EACC4D11F72060100C4E796 /* Supporting Files */,
 				802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */,
 				802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */,
+				5E86CA0C1FFE04B600A8F0CC /* SWMarketViewController.h */,
+				5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */,
 			);
 			path = SWMyDecorationBook;
 			sourceTree = "<group>";
@@ -221,6 +232,8 @@
 				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
 				8005420B1FFBCF9E00F343CD /* SWNewMarketTelNumCell.h */,
 				8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */,
+				5E86CA0F1FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.h */,
+				5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -232,6 +245,8 @@
 				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
 				5EDE94E41FFB5E4C00A24C21 /* SWMarketItem.h */,
 				5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */,
+				5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */,
+				5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -391,6 +406,9 @@
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
 				5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */,
+				5E86CA111FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m in Sources */,
+				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
+				5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,

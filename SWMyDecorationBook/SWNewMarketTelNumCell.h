@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SWMarketContact.h"
 @interface SWNewMarketTelNumCell : UITableViewCell
-
+@property(nonatomic, strong) SWMarketContact *marketContact;
 @end

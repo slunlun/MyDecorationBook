@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "SWProductTableViewCell.h"
 #import "SWMarketHeaderView.h"
+#import "SWMarketViewController.h"
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
@@ -50,14 +51,14 @@
         }
     }];
     
-    UIBarButtonItem *addShoppingItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewShoppingItem:)];
-    self.navigationItem.rightBarButtonItem = addShoppingItemBtn;
+    UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMarketItem:)];
+    self.navigationItem.rightBarButtonItem = addMarketItemBtn;
    
 }
 
 #pragma mark - TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,8 +179,11 @@
     }
 }
 
-- (void)addNewShoppingItem:(UIBarButtonItem *)addItem {
-    
+- (void)addNewMarketItem:(UIBarButtonItem *)addItem {
+    SWMarketViewController *vc = [SWMarketViewController new];
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 @end

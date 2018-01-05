@@ -19,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [UINavigationBar appearance].tintColor = SW_MAIN_COLOR;
+    [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
+    
     UIViewController *v1 = [[UIViewController alloc] init];
     v1.view.backgroundColor = [UIColor yellowColor];
     

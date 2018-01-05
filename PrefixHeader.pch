@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  SWMyDecorationBook
+//
+//  Created by Eren (Teng) Shi on 1/5/18.
+//  Copyright © 2018 Eren. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "SWUIDef.h"
+
+#endif /* PrefixHeader_pch */

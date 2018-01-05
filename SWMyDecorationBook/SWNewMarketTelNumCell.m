@@ -51,7 +51,7 @@
     [self.contentView addSubview:_defaultTelBtn];
     
     [self.contactNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(34);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
         make.width.equalTo(@80);

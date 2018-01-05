@@ -11,6 +11,7 @@
 		5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */; };
 		5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */; };
 		5E86CA111FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */; };
+		5E86CA151FFF59A600A8F0CC /* SWMarketNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA141FFF59A600A8F0CC /* SWMarketNameCell.m */; };
 		5EACC4D31F72060100C4E796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D21F72060100C4E796 /* main.m */; };
 		5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D51F72060100C4E796 /* AppDelegate.m */; };
 		5EACC4D91F72060100C4E796 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D81F72060100C4E796 /* ViewController.m */; };
@@ -54,6 +55,9 @@
 		5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketViewController.m; sourceTree = "<group>"; };
 		5E86CA0F1FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactSectionHeaderView.h; sourceTree = "<group>"; };
 		5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactSectionHeaderView.m; sourceTree = "<group>"; };
+		5E86CA121FFF286600A8F0CC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		5E86CA131FFF59A600A8F0CC /* SWMarketNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketNameCell.h; sourceTree = "<group>"; };
+		5E86CA141FFF59A600A8F0CC /* SWMarketNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketNameCell.m; sourceTree = "<group>"; };
 		5EACC4CE1F72060100C4E796 /* SWMyDecorationBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWMyDecorationBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EACC4D21F72060100C4E796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5EACC4D41F72060100C4E796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
+				5E86CA121FFF286600A8F0CC /* PrefixHeader.pch */,
 				5EB9D78F1F7F7FE900034E09 /* Localizable.strings */,
 				5EF75C511F78AE37007F5A9E /* Test */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
@@ -234,6 +239,8 @@
 				8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */,
 				5E86CA0F1FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.h */,
 				5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */,
+				5E86CA131FFF59A600A8F0CC /* SWMarketNameCell.h */,
+				5E86CA141FFF59A600A8F0CC /* SWMarketNameCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -421,6 +428,7 @@
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */,
 				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
+				5E86CA151FFF59A600A8F0CC /* SWMarketNameCell.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

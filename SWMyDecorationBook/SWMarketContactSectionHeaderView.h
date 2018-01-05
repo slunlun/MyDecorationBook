@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^addContactActionBlock)();
 @interface SWMarketContactSectionHeaderView : UITableViewHeaderFooterView
-
+@property(nonatomic, copy) addContactActionBlock addContactAction;
 @end

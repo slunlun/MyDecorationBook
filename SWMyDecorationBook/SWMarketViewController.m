@@ -25,6 +25,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 @property(nonatomic, assign) NSInteger numOfTels;
 @property(nonatomic, strong) SWPickerView *pickerView;
 @property(nonatomic, strong) UIView *coverView;
+@property(nonatomic, assign) BOOL isEditing;
 @end
 
 @implementation SWMarketViewController
@@ -44,6 +45,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     _marketInfoTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _numOfTels = 4;
     
+    [self registerNotification];
 }
 
 - (void)dealloc {
@@ -57,20 +59,21 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 #pragma mark - Notification
 - (void)registerNotification {
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notificaiton {
-    NSIndexPath *selIndex = [self.marketInfoTableView indexPathForSelectedRow];
-    NSLog(@"%@", selIndex);
     NSDictionary *info = notificaiton.userInfo;
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     self.marketInfoTableView.contentInset = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
+    self.isEditing = YES;
     
 }
 
 - (void)keyboardWillBeHidden:(NSNotification *)notification {
     self.marketInfoTableView.contentInset = UIEdgeInsetsZero;
+    self.isEditing = NO;
 }
 
 #pragma mark - SWPickerViewDelegate
@@ -101,6 +104,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.view endEditing:YES];
     if (indexPath.section == 2) { // select type
         SWPickerView *pickerView = [[SWPickerView alloc] init];
         [pickerView attachSWPickerViewInView:self.view];
@@ -149,8 +153,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 contact.name = @"纪勇";
                 contact.telNum = @"13748503749";
                 ((SWNewMarketTelNumCell *)cell).marketContact = contact;
-//                ((SWNewMarketTelNumCell *)cell).contactNameTextField.delegate = self;
-//                ((SWNewMarketTelNumCell *)cell).telNumTextField.delegate = self;
             }else if(indexPath.row == 2) {
                 SWMarketContact *contact = [[SWMarketContact alloc] init];
                 contact.name = @"毅力张冰";
@@ -179,6 +181,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             break;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -195,6 +198,12 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 [self.marketInfoTableView insertRowsAtIndexPaths:@[addIndex] withRowAnimation:UITableViewRowAnimationBottom];
                 ++_numOfTels;
                 [self.marketInfoTableView endUpdates];
+                if (self.isEditing) {
+                    [self.view endEditing:YES];
+                    UIEdgeInsets edge = self.marketInfoTableView.contentInset;
+                    self.marketInfoTableView.contentInset = UIEdgeInsetsMake(edge.top, edge.left, edge.bottom + 40, edge.right);
+                }
+               
             }
         };
         return headerView;
@@ -225,6 +234,9 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         return UITableViewCellEditingStyleNone;
     }
 }
+
+#pragma mark - UI Response
+
 
 
 @end

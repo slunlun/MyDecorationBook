@@ -158,14 +158,11 @@
             break;
         case UIGestureRecognizerStateChanged:
         {
-          //  panGesture f
             CGPoint translation = [panGesture translationInView:self.view];
             NSLog(@"X: %lf   Y:%lf", translation.x, translation.y);
             CGPoint newLocationPoint = CGPointMake(translation.x - self.preTranslation.x, translation.y - self.preTranslation.y);
             _dragMoveView.frame = CGRectMake(_dragMoveView.frame.origin.x + newLocationPoint.x, _dragMoveView.frame.origin.y + newLocationPoint.y, _dragMoveView.frame.size.width, _dragMoveView.frame.size.height);
             self.preTranslation = translation;
-            
-         //   _dragMoveView convertRect:<#(CGRect)#> toView:<#(nullable UIView *)#>
         }
         break;
             case UIGestureRecognizerStateEnded:
@@ -181,9 +178,7 @@
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
     SWMarketViewController *vc = [SWMarketViewController new];
-    [self presentViewController:vc animated:YES completion:^{
-        
-    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

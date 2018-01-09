@@ -9,7 +9,7 @@
 #import "SWNewMarketTelNumCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
-@interface SWNewMarketTelNumCell()
+@interface SWNewMarketTelNumCell()<UITextFieldDelegate>
 
 @property(nonatomic, strong) UIButton *defaultTelBtn;
 @end
@@ -28,12 +28,15 @@
     _contactNameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _contactNameTextField.placeholder = @"姓名";
     _contactNameTextField.font = SW_DEFAULT_MIN_FONT;
+    _contactNameTextField.delegate = self;
     [self.contentView addSubview:_contactNameTextField];
     
     _telNumTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _telNumTextField.placeholder = @"联系电话";
     _telNumTextField.font = SW_DEFAULT_MIN_FONT;
     _telNumTextField.textAlignment = NSTextAlignmentLeft;
+    _telNumTextField.delegate = self;
+    _telNumTextField.keyboardType = UIKeyboardTypePhonePad;
     [self.contentView addSubview:_telNumTextField];
     
     _defaultTelBtn = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -91,5 +94,11 @@
 - (void)defaultTelBtnClicked:(UIButton *)button {
     button.selected = !button.selected;
     self.marketContact.defaultContact = button.isSelected;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

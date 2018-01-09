@@ -11,6 +11,8 @@
 #import "SWProductTableViewCell.h"
 #import "SWMarketHeaderView.h"
 #import "SWMarketViewController.h"
+#import "TZImagePickerController.h"
+
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;

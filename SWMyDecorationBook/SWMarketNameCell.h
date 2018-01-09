@@ -10,4 +10,5 @@
 
 @interface SWMarketNameCell : UITableViewCell
 @property(nonatomic, readonly, strong) UITextField *marketNameTextField;
+@property(nonatomic, strong) UILabel *titleLab;
 @end

@@ -10,7 +10,6 @@
 #import "SWUIDef.h"
 #import "Masonry.h"
 @interface SWMarketNameCell()
-@property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, readwrite, strong) UITextField *marketNameTextField;
 @end
 @implementation SWMarketNameCell

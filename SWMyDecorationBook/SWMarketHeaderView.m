@@ -48,7 +48,7 @@
     
     UILabel *defTelNumLab = [[UILabel alloc] initWithFrame:CGRectZero];
     [defTelNumLab setFont:SW_DEFAULT_MIN_FONT];
-    [defTelNumLab setTextColor:SW_MAIN_COLOR];
+    [defTelNumLab setTextColor:SW_MAIN_BLUE_COLOR];
     UITapGestureRecognizer *telNumTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defTelNumClicked:)];
     [defTelNumLab addGestureRecognizer:telNumTap];
     defTelNumLab.userInteractionEnabled = YES;

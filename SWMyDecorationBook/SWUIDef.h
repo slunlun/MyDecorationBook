@@ -18,7 +18,7 @@
 #define SW_DEFAULT_SUPER_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:10.0]
 
 // color
-#define SW_MAIN_COLOR [UIColor colorWithHexString:@"#3498db"]
+#define SW_MAIN_BLUE_COLOR [UIColor colorWithHexString:@"#3498db"]
 #define SW_DISABLE_GRAY [UIColor colorWithHexString:@"#cccccc"]
 #define SW_WARN_RED [UIColor colorWithHexString:@"#e74c3c"]
 #define SW_TAOBAO_ORANGE [UIColor colorWithHexString:@"#e67e22"]

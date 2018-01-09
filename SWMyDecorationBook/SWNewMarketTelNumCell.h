@@ -10,4 +10,6 @@
 #import "SWMarketContact.h"
 @interface SWNewMarketTelNumCell : UITableViewCell
 @property(nonatomic, strong) SWMarketContact *marketContact;
+@property(nonatomic, strong) UITextField *contactNameTextField;
+@property(nonatomic, strong) UITextField *telNumTextField;
 @end

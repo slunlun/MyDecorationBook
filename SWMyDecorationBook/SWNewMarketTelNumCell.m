@@ -10,8 +10,7 @@
 #import "Masonry.h"
 #import "SWUIDef.h"
 @interface SWNewMarketTelNumCell()
-@property(nonatomic, strong) UITextField *contactNameTextField;
-@property(nonatomic, strong) UITextField *telNumTextField;
+
 @property(nonatomic, strong) UIButton *defaultTelBtn;
 @end
 @implementation SWNewMarketTelNumCell

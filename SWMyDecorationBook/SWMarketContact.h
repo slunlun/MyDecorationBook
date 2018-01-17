@@ -12,4 +12,5 @@
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *telNum;
 @property(nonatomic, assign, getter=isDefaultContact) BOOL defaultContact;
+@property(nonatomic, strong) NSDate *createTime;
 @end

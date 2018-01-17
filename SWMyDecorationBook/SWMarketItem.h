@@ -12,4 +12,6 @@
 @property(nonatomic, strong) NSString *marketName;
 @property(nonatomic, strong) NSArray *telNums;  // 联系方式(可多个)
 @property(nonatomic, strong) NSNumber *defaultTelNum;
+@property(nonatomic, strong) NSArray *shoppingItems;
+@property(nonatomic, strong) NSDate *createTime;
 @end

@@ -17,19 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // common tintColor
     [UINavigationBar appearance].tintColor = SW_MAIN_BLUE_COLOR;
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
     
-    UIViewController *v1 = [[UIViewController alloc] init];
-    v1.view.backgroundColor = [UIColor yellowColor];
-    
-    UIViewController *v2 = [[UIViewController alloc] init];
-    v2.view.backgroundColor = [UIColor redColor];
- 
-//
-//
-//    UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:redVC];
-//    UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:yellowVC];
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:shoppingItemHomePageVC];
     SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];

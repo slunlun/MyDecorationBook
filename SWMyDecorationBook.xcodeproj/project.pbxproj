@@ -33,6 +33,9 @@
 		5E9C2CF02004B0690052A05E /* SWShoppingItemPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C2CEF2004B0690052A05E /* SWShoppingItemPriceCell.m */; };
 		5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C2CF22004B1C80052A05E /* SWShoppingItemRemarkCell.m */; };
 		5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C2CF52004B1E10052A05E /* SWShoppingItemPhotoCell.m */; };
+		5E9C77D3200F3CE5000355D2 /* SWMarketCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C77D2200F3CE5000355D2 /* SWMarketCategory.m */; };
+		5E9C77D6200F3E8B000355D2 /* SWItemUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C77D5200F3E8B000355D2 /* SWItemUnit.m */; };
+		5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C77D8200F4037000355D2 /* SWProductPhoto.m */; };
 		5EACC4D31F72060100C4E796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D21F72060100C4E796 /* main.m */; };
 		5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D51F72060100C4E796 /* AppDelegate.m */; };
 		5EACC4DC1F72060100C4E796 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DA1F72060100C4E796 /* Main.storyboard */; };
@@ -117,6 +120,12 @@
 		5E9C2CF22004B1C80052A05E /* SWShoppingItemRemarkCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWShoppingItemRemarkCell.m; sourceTree = "<group>"; };
 		5E9C2CF42004B1E10052A05E /* SWShoppingItemPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWShoppingItemPhotoCell.h; sourceTree = "<group>"; };
 		5E9C2CF52004B1E10052A05E /* SWShoppingItemPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWShoppingItemPhotoCell.m; sourceTree = "<group>"; };
+		5E9C77D1200F3CE5000355D2 /* SWMarketCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategory.h; sourceTree = "<group>"; };
+		5E9C77D2200F3CE5000355D2 /* SWMarketCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategory.m; sourceTree = "<group>"; };
+		5E9C77D4200F3E8B000355D2 /* SWItemUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWItemUnit.h; sourceTree = "<group>"; };
+		5E9C77D5200F3E8B000355D2 /* SWItemUnit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWItemUnit.m; sourceTree = "<group>"; };
+		5E9C77D7200F4037000355D2 /* SWProductPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWProductPhoto.h; sourceTree = "<group>"; };
+		5E9C77D8200F4037000355D2 /* SWProductPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWProductPhoto.m; sourceTree = "<group>"; };
 		5EACC4CE1F72060100C4E796 /* SWMyDecorationBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWMyDecorationBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EACC4D21F72060100C4E796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5EACC4D41F72060100C4E796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -275,6 +284,10 @@
 				5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */,
 				5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */,
 				5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */,
+				5E9C77D1200F3CE5000355D2 /* SWMarketCategory.h */,
+				5E9C77D2200F3CE5000355D2 /* SWMarketCategory.m */,
+				5E9C77D4200F3E8B000355D2 /* SWItemUnit.h */,
+				5E9C77D5200F3E8B000355D2 /* SWItemUnit.m */,
 			);
 			name = Market;
 			sourceTree = "<group>";
@@ -284,6 +297,8 @@
 			children = (
 				5EB9D7821F7F72F600034E09 /* SWProductItem.h */,
 				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
+				5E9C77D7200F4037000355D2 /* SWProductPhoto.h */,
+				5E9C77D8200F4037000355D2 /* SWProductPhoto.m */,
 			);
 			name = ShoppingItem;
 			sourceTree = "<group>";
@@ -525,6 +540,7 @@
 				5EE7E2D61F99ACCC007CAB27 /* MASViewAttribute.m in Sources */,
 				5EE7E2D71F99ACCC007CAB27 /* MASViewConstraint.m in Sources */,
 				5EE7E2D81F99ACCC007CAB27 /* NSArray+MASAdditions.m in Sources */,
+				5E9C77D3200F3CE5000355D2 /* SWMarketCategory.m in Sources */,
 				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5E9C2CE92004AF310052A05E /* SWShoppingItemInfoViewController.m in Sources */,
 				5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */,
@@ -541,11 +557,13 @@
 				5E9C2CD92004AB210052A05E /* TZAssetModel.m in Sources */,
 				5E9C2CE42004AB210052A05E /* TZVideoPlayerController.m in Sources */,
 				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
+				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,
 				5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */,
 				5E9C2CDA2004AB210052A05E /* TZGifPhotoPreviewController.m in Sources */,
 				5E9C2CDC2004AB210052A05E /* TZImageManager.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
+				5E9C77D6200F3E8B000355D2 /* SWItemUnit.m in Sources */,
 				5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5E9C2CDB2004AB210052A05E /* TZImageCropManager.m in Sources */,

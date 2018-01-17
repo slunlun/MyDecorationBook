@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^ProductPhotoCellDelBlock)(void);
 
 @interface SWProductCollectionViewCell : UICollectionViewCell
 @property(nonatomic, strong) UIImageView *productImage;
 @property(nonatomic, strong) UIImage *model;
+@property(nonatomic, assign) BOOL supportEdit;
+@property(nonatomic, copy) ProductPhotoCellDelBlock actionBlock;
 @end

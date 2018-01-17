@@ -28,17 +28,18 @@
     _titleLab.font = SW_DEFAULT_FONT;
     _titleLab.textAlignment = NSTextAlignmentLeft;
     _titleLab.text = @"商家";
+    _titleLab.textColor = SW_TAOBAO_BLACK;
     [self.contentView addSubview:_titleLab];
     
     _marketNameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _marketNameTextField.font= SW_DEFAULT_MIN_FONT;
     _marketNameTextField.textAlignment = NSTextAlignmentLeft;
+    _marketNameTextField.placeholder = @"内容";
     [self.contentView addSubview:_marketNameTextField];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(34);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.width.equalTo(@30);
     }];
     
     [_marketNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {

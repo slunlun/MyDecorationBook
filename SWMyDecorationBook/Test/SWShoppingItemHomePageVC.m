@@ -12,6 +12,7 @@
 #import "SWMarketHeaderView.h"
 #import "SWMarketViewController.h"
 #import "TZImagePickerController.h"
+#import "SWShoppingItemInfoViewController.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -72,6 +73,7 @@
     productItem.productMark = @"需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西";
     cell.productItem = productItem;
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,7 +81,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Press tableview %@", indexPath);
+    SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;

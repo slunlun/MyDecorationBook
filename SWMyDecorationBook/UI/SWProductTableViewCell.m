@@ -93,9 +93,7 @@
     
     // step2. setup product picutres collection view
     UICollectionViewFlowLayout *collectionLayout = [UICollectionViewFlowLayout new];
-    collectionLayout.minimumInteritemSpacing = 20;
-    collectionLayout.minimumLineSpacing = 0;
-    
+    collectionLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 0);
     collectionLayout.itemSize = CGSizeMake(100, 100);
     //collectionLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
     collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;

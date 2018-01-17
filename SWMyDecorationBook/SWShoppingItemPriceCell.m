@@ -9,17 +9,18 @@
 #import "SWShoppingItemPriceCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWPickerView.h"
 @interface SWShoppingItemPriceCell()
 @property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, strong) UILabel *slashLab;
-@property(nonatomic, strong) UIButton *priceUnitBtn;
+@property(nonatomic, strong) UILabel *priceUnitLab;
 @property(nonatomic, strong) UITextField *priceTextField;
 @end
 
 
 @implementation SWShoppingItemPriceCell
-- (instancetype)init {
-    if (self = [super init]) {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self commonInit];
     }
     return self;
@@ -29,6 +30,7 @@
 - (void)commonInit {
     _titleLab = [[UILabel alloc] init];
     _titleLab.font = SW_DEFAULT_FONT;
+    _titleLab.textColor = SW_TAOBAO_BLACK;
     _titleLab.text = @"单价 ¥";
     [self.contentView addSubview:_titleLab];
     
@@ -43,11 +45,12 @@
     _slashLab.text = @"/";
     [self.contentView addSubview:_slashLab];
     
-    _priceUnitBtn = [[UIButton alloc] init];
-    [_priceUnitBtn setTitle:@"平" forState:UIControlStateNormal];
-    _priceUnitBtn.titleLabel.font = SW_DEFAULT_FONT;
-    [_priceUnitBtn addTarget:self action:@selector(priceUnitBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_priceUnitBtn];
+ 
+    
+    _priceUnitLab = [[UILabel alloc] init];
+    _priceUnitLab.font = SW_DEFAULT_FONT;
+    _priceUnitLab.text = @"平";
+    [self.contentView addSubview:_priceUnitLab];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
@@ -55,10 +58,10 @@
     }];
     
     [_priceTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_titleLab.mas_right);
+        make.left.equalTo(_titleLab.mas_right).offset(SW_MARGIN/2);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@120);
+        make.height.equalTo(_titleLab.mas_height);
+        make.width.equalTo(@80);
     }];
     
     [_slashLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,16 +69,15 @@
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
     }];
     
-    [_priceUnitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_slashLab.mas_right);
-        make.top.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@80);
+    [_priceUnitLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_slashLab.mas_right).offset(SW_MARGIN);
+        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
     }];
 }
 
-#pragma mark - UI Response
-- (void)priceUnitBtnClicked:(UIButton *)button {
-    
+- (void)setPriceUnitStr:(NSString *)priceUnitStr {
+    _priceUnitStr = priceUnitStr;
+    self.priceUnitLab.text = priceUnitStr;
 }
+
 @end

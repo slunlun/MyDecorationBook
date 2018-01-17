@@ -35,7 +35,6 @@
 		5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C2CF52004B1E10052A05E /* SWShoppingItemPhotoCell.m */; };
 		5EACC4D31F72060100C4E796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D21F72060100C4E796 /* main.m */; };
 		5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D51F72060100C4E796 /* AppDelegate.m */; };
-		5EACC4D91F72060100C4E796 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EACC4D81F72060100C4E796 /* ViewController.m */; };
 		5EACC4DC1F72060100C4E796 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DA1F72060100C4E796 /* Main.storyboard */; };
 		5EACC4DE1F72060100C4E796 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DD1F72060100C4E796 /* Assets.xcassets */; };
 		5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */; };
@@ -59,10 +58,7 @@
 		5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */; };
 		5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */; };
 		5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */; };
-		5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */; };
-		5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */; };
 		5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */; };
-		5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */; };
 		8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */; };
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 /* End PBXBuildFile section */
@@ -125,8 +121,6 @@
 		5EACC4D21F72060100C4E796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5EACC4D41F72060100C4E796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5EACC4D51F72060100C4E796 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5EACC4D71F72060100C4E796 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5EACC4D81F72060100C4E796 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5EACC4DB1F72060100C4E796 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EACC4DD1F72060100C4E796 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EACC4E01F72060100C4E796 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -180,14 +174,8 @@
 		5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWButton.m; sourceTree = "<group>"; };
 		5EE7E2E01F99F155007CAB27 /* SWProductCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWProductCollectionViewCell.h; path = UI/SWProductCollectionViewCell.h; sourceTree = "<group>"; };
 		5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SWProductCollectionViewCell.m; path = UI/SWProductCollectionViewCell.m; sourceTree = "<group>"; };
-		5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWYellowViewController.h; path = SWMyDecorationBook/Test/SWYellowViewController.h; sourceTree = "<group>"; };
-		5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWYellowViewController.m; path = SWMyDecorationBook/Test/SWYellowViewController.m; sourceTree = "<group>"; };
-		5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWBlueViewController.h; path = SWMyDecorationBook/Test/SWBlueViewController.h; sourceTree = "<group>"; };
-		5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWBlueViewController.m; path = SWMyDecorationBook/Test/SWBlueViewController.m; sourceTree = "<group>"; };
-		5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWShoppingItemHomePageVC.h; path = SWMyDecorationBook/Test/SWShoppingItemHomePageVC.h; sourceTree = "<group>"; };
-		5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWShoppingItemHomePageVC.m; path = SWMyDecorationBook/Test/SWShoppingItemHomePageVC.m; sourceTree = "<group>"; };
-		5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDragMoveTableViewController.h; path = "Common Tools/UI/SWDragMoveTableViewController.h"; sourceTree = "<group>"; };
-		5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDragMoveTableViewController.m; path = "Common Tools/UI/SWDragMoveTableViewController.m"; sourceTree = "<group>"; };
+		5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWShoppingItemHomePageVC.h; sourceTree = "<group>"; };
+		5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWShoppingItemHomePageVC.m; sourceTree = "<group>"; };
 		8005420B1FFBCF9E00F343CD /* SWNewMarketTelNumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNewMarketTelNumCell.h; sourceTree = "<group>"; };
 		8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNewMarketTelNumCell.m; sourceTree = "<group>"; };
 		802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLeftSlideCollectionViewController.h; sourceTree = "<group>"; };
@@ -280,12 +268,68 @@
 			name = ShoppingItemInfoVC;
 			sourceTree = "<group>";
 		};
+		5E9C77CB200F3086000355D2 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				5EDE94E41FFB5E4C00A24C21 /* SWMarketItem.h */,
+				5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */,
+				5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */,
+				5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */,
+			);
+			name = Market;
+			sourceTree = "<group>";
+		};
+		5E9C77CC200F3094000355D2 /* ShoppingItem */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9D7821F7F72F600034E09 /* SWProductItem.h */,
+				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
+			);
+			name = ShoppingItem;
+			sourceTree = "<group>";
+		};
+		5E9C77CD200F30AC000355D2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */,
+				5EE7E2E01F99F155007CAB27 /* SWProductCollectionViewCell.h */,
+				5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */,
+				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
+				5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */,
+				5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		5E9C77CE200F30F6000355D2 /* MarketListHomePage */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */,
+				5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */,
+			);
+			name = MarketListHomePage;
+			sourceTree = "<group>";
+		};
+		5E9C77CF200F313E000355D2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */,
+				802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */,
+				5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */,
+				5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */,
+				5E86CA0C1FFE04B600A8F0CC /* SWMarketViewController.h */,
+				5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */,
+				5E9C2CE72004AF310052A05E /* SWShoppingItemInfoViewController.h */,
+				5E9C2CE82004AF310052A05E /* SWShoppingItemInfoViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
 				5E86CA121FFF286600A8F0CC /* PrefixHeader.pch */,
 				5EB9D78F1F7F7FE900034E09 /* Localizable.strings */,
-				5EF75C511F78AE37007F5A9E /* Test */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
 				5EACC4CF1F72060100C4E796 /* Products */,
 			);
@@ -302,27 +346,20 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				5E9C2CB520030B540052A05E /* SWDef.h */,
+				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
+				5E9C77CF200F313E000355D2 /* ViewController */,
 				5EB9D7851F7F789700034E09 /* 3rd */,
 				5EB9D7811F7F72D700034E09 /* Model */,
 				5EB9D77D1F7F43AA00034E09 /* UI */,
 				5E4A3F231F7E3C6700F052B5 /* Category */,
-				5EACC4E81F72067F00C4E796 /* Common Tools */,
 				5EACC4D41F72060100C4E796 /* AppDelegate.h */,
 				5EACC4D51F72060100C4E796 /* AppDelegate.m */,
-				5EACC4D71F72060100C4E796 /* ViewController.h */,
-				5EACC4D81F72060100C4E796 /* ViewController.m */,
 				5EACC4DA1F72060100C4E796 /* Main.storyboard */,
 				5EACC4DD1F72060100C4E796 /* Assets.xcassets */,
 				5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */,
 				5EACC4E21F72060100C4E796 /* Info.plist */,
 				5EACC4D11F72060100C4E796 /* Supporting Files */,
-				802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */,
-				802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */,
-				5E86CA0C1FFE04B600A8F0CC /* SWMarketViewController.h */,
-				5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */,
-				5E9C2CB520030B540052A05E /* SWDef.h */,
-				5E9C2CE72004AF310052A05E /* SWShoppingItemInfoViewController.h */,
-				5E9C2CE82004AF310052A05E /* SWShoppingItemInfoViewController.m */,
 			);
 			path = SWMyDecorationBook;
 			sourceTree = "<group>";
@@ -335,38 +372,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5EACC4E81F72067F00C4E796 /* Common Tools */ = {
-			isa = PBXGroup;
-			children = (
-				5EACC4E91F72069D00C4E796 /* UI */,
-			);
-			name = "Common Tools";
-			sourceTree = "<group>";
-		};
-		5EACC4E91F72069D00C4E796 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				5EE7E2DF1F99F0D6007CAB27 /* ProductCollectinCell */,
-				5EACC4EA1F7206E500C4E796 /* SWDrawerViewController.h */,
-				5EACC4EB1F7206E500C4E796 /* SWDrawerViewController.m */,
-				5EACC4ED1F723B5400C4E796 /* UIViewController+SWDrawerViewController.h */,
-				5EACC4EE1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m */,
-				5EF75C851F7A4D16007F5A9E /* SWDragMoveTableViewController.h */,
-				5EF75C861F7A4D16007F5A9E /* SWDragMoveTableViewController.m */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
 		5EB9D77D1F7F43AA00034E09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5E9C77CE200F30F6000355D2 /* MarketListHomePage */,
+				5E9C77CD200F30AC000355D2 /* Common */,
 				5E9C2CEA2004AF690052A05E /* ShoppingItemInfoVC */,
 				5E9C2CE62004AD470052A05E /* MarketInfoVC */,
 				5EE7E2DC1F99D3DC007CAB27 /* SWButton.h */,
 				5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */,
-				5EB9D77E1F7F44C100034E09 /* SWProductTableViewCell.h */,
-				5EB9D77F1F7F44C100034E09 /* SWProductTableViewCell.m */,
-				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
 				5E9C2CB620034F6C0052A05E /* SWPickerView.h */,
 				5E9C2CB720034F6C0052A05E /* SWPickerView.m */,
 			);
@@ -376,12 +390,8 @@
 		5EB9D7811F7F72D700034E09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5EB9D7821F7F72F600034E09 /* SWProductItem.h */,
-				5EB9D7831F7F72F600034E09 /* SWProductItem.m */,
-				5EDE94E41FFB5E4C00A24C21 /* SWMarketItem.h */,
-				5EDE94E51FFB5E4C00A24C21 /* SWMarketItem.m */,
-				5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */,
-				5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */,
+				5E9C77CC200F3094000355D2 /* ShoppingItem */,
+				5E9C77CB200F3086000355D2 /* Market */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -427,28 +437,6 @@
 				5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
-			sourceTree = "<group>";
-		};
-		5EE7E2DF1F99F0D6007CAB27 /* ProductCollectinCell */ = {
-			isa = PBXGroup;
-			children = (
-				5EE7E2E01F99F155007CAB27 /* SWProductCollectionViewCell.h */,
-				5EE7E2E11F99F155007CAB27 /* SWProductCollectionViewCell.m */,
-			);
-			name = ProductCollectinCell;
-			sourceTree = "<group>";
-		};
-		5EF75C511F78AE37007F5A9E /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				5EF75C521F78AE77007F5A9E /* SWYellowViewController.h */,
-				5EF75C531F78AE77007F5A9E /* SWYellowViewController.m */,
-				5EF75C551F78AE87007F5A9E /* SWBlueViewController.h */,
-				5EF75C561F78AE87007F5A9E /* SWBlueViewController.m */,
-				5EF75C581F78AE9D007F5A9E /* SWShoppingItemHomePageVC.h */,
-				5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */,
-			);
-			name = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -543,7 +531,6 @@
 				5E9C2CE12004AB210052A05E /* TZPhotoPreviewCell.m in Sources */,
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
 				5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */,
-				5EACC4D91F72060100C4E796 /* ViewController.m in Sources */,
 				5E9C2CD82004AB210052A05E /* TZAssetCell.m in Sources */,
 				5E9C2CDE2004AB210052A05E /* TZImagePickerController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
@@ -560,11 +547,9 @@
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */,
-				5EF75C871F7A4D16007F5A9E /* SWDragMoveTableViewController.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5E9C2CDB2004AB210052A05E /* TZImageCropManager.m in Sources */,
 				5E9C2CD72004AB210052A05E /* NSBundle+TZImagePicker.m in Sources */,
-				5EF75C541F78AE77007F5A9E /* SWYellowViewController.m in Sources */,
 				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,
 				5E9C2CE32004AB210052A05E /* TZProgressView.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
@@ -572,7 +557,6 @@
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */,
-				5EF75C571F78AE87007F5A9E /* SWBlueViewController.m in Sources */,
 				5E86CA151FFF59A600A8F0CC /* SWMarketNameCell.m in Sources */,
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,

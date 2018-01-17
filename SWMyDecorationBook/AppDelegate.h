@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "SWShoppingItemHomePageVC.h"
-#import "SWYellowViewController.h"
-#import "SWBlueViewController.h"
 #import "SWDrawerViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

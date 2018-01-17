@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "SWDragMoveTableViewController.h"
 #import "SWLeftSlideCollectionViewController.h"
 #import "SWUIDef.h"
 @interface AppDelegate ()

@@ -23,7 +23,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 @interface SWMarketViewController () <UITableViewDelegate, UITableViewDataSource, SWPickerViewDelegate>
 @property(nonatomic, strong) UITableView *marketInfoTableView;
-@property(nonatomic, assign) NSInteger numOfTels;
 @property(nonatomic, strong) SWPickerView *pickerView;
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, assign) BOOL isEditing;
@@ -32,6 +31,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 // JUST for test
 @property(nonatomic, strong) NSArray *itemUnitArray;
+@property(nonatomic, strong) NSMutableArray *testMarketTelNumArray;
 @end
 
 @implementation SWMarketViewController
@@ -49,9 +49,19 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [_marketInfoTableView registerClass:[SWMarketContactSectionHeaderView class]
      forHeaderFooterViewReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
     [_marketInfoTableView registerClass:[SWMarketNameCell class] forCellReuseIdentifier:MARKET_NAME_CELL_IDENTIFIER];
+    [_marketInfoTableView setEditing:YES animated:NO];
     [self.view addSubview:_marketInfoTableView];
     
-    _numOfTels = 4;
+    
+    
+    SWMarketContact *contact1 = [[SWMarketContact alloc] init];
+    contact1.name = @"纪勇";
+    contact1.telNum = @"13748503749";
+    
+    SWMarketContact *contact2 = [[SWMarketContact alloc] init];
+    contact2.name = @"百里守约";
+    contact2.telNum = @"13748503749";
+    _testMarketTelNumArray = [NSMutableArray arrayWithObjects:contact1, contact2, nil];
     
     [self registerNotification];
     [self commonInit];
@@ -109,6 +119,13 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     }];
     [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+#pragma mark - SETTER/GETTER
+- (void)setMarketItem:(SWMarketItem *)marketItem {
+    _marketItem = marketItem;
+}
+
+
 #pragma mark - Notification
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -181,7 +198,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             return 1;
             break;
         case 1:
-            return _numOfTels;
+            return _testMarketTelNumArray.count;
             break;
         case 2:
             return 1;
@@ -204,18 +221,17 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         case 1:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:TEL_CELL_IDENTIFIER];
-            if (indexPath.row == 0) {
-                SWMarketContact *contact = [[SWMarketContact alloc] init];
-                contact.name = @"纪勇";
-                contact.telNum = @"13748503749";
-                ((SWNewMarketTelNumCell *)cell).marketContact = contact;
-            }else if(indexPath.row == 2) {
-                SWMarketContact *contact = [[SWMarketContact alloc] init];
-                contact.name = @"毅力张冰";
-                contact.telNum = @"13345456349";
-                contact.defaultContact = YES;
-                ((SWNewMarketTelNumCell *)cell).marketContact = contact;
-            }
+            SWMarketContact *contact = _testMarketTelNumArray[indexPath.row];
+            ((SWNewMarketTelNumCell *)cell).marketContact = contact;
+            WeakObj(self);
+            ((SWNewMarketTelNumCell *)cell).defaultContactSetBlock = ^(SWMarketContact *contact) {
+                for (SWMarketContact *contact in _testMarketTelNumArray) {
+                    contact.defaultContact = NO;
+                }
+                ((SWMarketContact *)_testMarketTelNumArray[indexPath.row]).defaultContact = YES;
+                StrongObj(self);
+                [self.marketInfoTableView reloadData];
+            };
             [cell setEditing:YES];
         }
             break;
@@ -252,7 +268,10 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 NSIndexPath *addIndex = [NSIndexPath indexPathForRow:numOfRows inSection:section];
                 [self.marketInfoTableView beginUpdates];
                 [self.marketInfoTableView insertRowsAtIndexPaths:@[addIndex] withRowAnimation:UITableViewRowAnimationBottom];
-                ++_numOfTels;
+                // Add a new contact in testArray
+                SWMarketContact *newContact = [[SWMarketContact alloc] init];
+                [_testMarketTelNumArray addObject:newContact];
+                
                 [self.marketInfoTableView endUpdates];
                 if (self.isEditing) {
                     [self.view endEditing:YES];
@@ -293,7 +312,10 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)button {
-    
+    [self.view endEditing:YES];
+    if (self.updateBlock) {
+        self.updateBlock(self.marketItem);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

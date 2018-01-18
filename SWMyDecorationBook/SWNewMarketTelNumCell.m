@@ -74,6 +74,7 @@
     }];
 }
 
+
 #pragma mark - SETTER/GETTER
 - (void)setMarketContact:(SWMarketContact *)marketContact {
     _marketContact = marketContact;
@@ -92,13 +93,26 @@
 
 #pragma mark - UI Response
 - (void)defaultTelBtnClicked:(UIButton *)button {
-    button.selected = !button.selected;
-    self.marketContact.defaultContact = button.isSelected;
+    if(button.isSelected == NO) {
+        button.selected = YES;
+        self.marketContact.defaultContact = button.isSelected;
+        if (self.defaultContactSetBlock) {
+            self.defaultContactSetBlock(self.marketContact);
+        }
+    }
 }
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isEqual:self.contactNameTextField]) {
+        self.marketContact.name = textField.text;
+    }else {
+        self.marketContact.telNum = textField.text;
+    }
 }
 @end

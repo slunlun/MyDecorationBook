@@ -382,9 +382,6 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     
     
 }
-
-
-
 #pragma mark - Gesture call backs
 - (void)tapGetureCallBack:(UITapGestureRecognizer *)tapGesture {
     if(self.openSide != SWDrawerSideNone &&

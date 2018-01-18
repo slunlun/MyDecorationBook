@@ -9,7 +9,7 @@
 #import "SWMarketNameCell.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
-@interface SWMarketNameCell()
+@interface SWMarketNameCell()<UITextFieldDelegate>
 @property(nonatomic, readwrite, strong) UITextField *marketNameTextField;
 @end
 @implementation SWMarketNameCell
@@ -34,6 +34,7 @@
     _marketNameTextField.font= SW_DEFAULT_MIN_FONT;
     _marketNameTextField.textAlignment = NSTextAlignmentLeft;
     _marketNameTextField.placeholder = @"内容";
+    _marketNameTextField.delegate = self;
     [self.contentView addSubview:_marketNameTextField];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,5 +48,11 @@
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
     }];
+}
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (self.finishBlock) {
+        self.finishBlock(textField.text);
+    }
 }
 @end

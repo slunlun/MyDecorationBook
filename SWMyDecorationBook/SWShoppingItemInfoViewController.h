@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWProductItem.h"
 
+typedef void(^shoppingItemUpdateBlock)(SWProductItem *shoppingItem);
 @interface SWShoppingItemInfoViewController : UIViewController
-
+@property(nonatomic, strong) SWProductItem *shoppingItem;
 @end

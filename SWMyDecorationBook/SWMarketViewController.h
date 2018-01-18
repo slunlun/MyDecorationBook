@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWMarketItem.h"
+typedef void(^marketInfoUpdateBlock)(SWMarketItem *marketItem);
 
 @interface SWMarketViewController : UIViewController
-
+@property(nonatomic, strong) SWMarketItem *marketItem;
+@property(nonatomic, copy) marketInfoUpdateBlock updateBlock;
 @end

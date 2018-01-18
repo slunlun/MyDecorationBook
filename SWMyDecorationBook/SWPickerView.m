@@ -57,7 +57,7 @@
             self.frame = CGRectMake(0, parentView.frame.size.height - SW_PICKER_VIEW_HEIGHT, screenFrame.size.width, SW_PICKER_VIEW_HEIGHT);
         } completion:^(BOOL finished) {
             if (finished) {
-               
+                _curSelRow = 0;
             }
         }];
     }

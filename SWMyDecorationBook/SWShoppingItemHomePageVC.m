@@ -31,6 +31,7 @@
 }
 
 - (void)commitInit{
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     _shoppingItemListTableView = [[UITableView alloc] init];
     _shoppingItemListTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -69,7 +70,7 @@
     SWProductItem *productItem = [[SWProductItem alloc] init];
     productItem.productName = @"AE-12";
     productItem.price = 124.3;
-    productItem.productPictures = [NSArray new];
+    productItem.productPhotos = [NSArray new];
     productItem.productMark = @"需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西";
     cell.productItem = productItem;
     

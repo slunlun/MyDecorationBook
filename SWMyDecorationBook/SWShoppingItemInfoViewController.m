@@ -51,9 +51,10 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - Common init
 - (void)commonInit {
+    self.view.backgroundColor = SW_TAOBAO_BLACK;
     [_shoppingItemTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-80);
+        make.bottom.equalTo(self.view).offset(-90);
     }];
     
     _okBtn = [[UIButton alloc] init];

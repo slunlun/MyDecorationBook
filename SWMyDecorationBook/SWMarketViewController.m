@@ -14,6 +14,7 @@
 #import "SWUIDef.h"
 #import "SWDef.h"
 #import "SWPickerView.h"
+#import "Masonry.h"
 
 static NSString *TEL_CELL_IDENTIFIER = @"TEL_CELL_IDENTIFIER";
 static NSString *MARKET_CONTACT_HEADER_VIEW_IDENTIFIER = @"MARKET_CONTACT_HEADER_VIEW_IDENTIFIER";
@@ -26,12 +27,19 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 @property(nonatomic, strong) SWPickerView *pickerView;
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, assign) BOOL isEditing;
+@property(nonatomic, strong) UIButton *okBtn;
+@property(nonatomic, strong) UIButton *cancelBtn;
+
+// JUST for test
+@property(nonatomic, strong) NSArray *itemUnitArray;
 @end
 
 @implementation SWMarketViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _itemUnitArray = @[@"瓷砖", @"油漆", @"五金"];
+    
     _marketInfoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _marketInfoTableView.delegate = self;
     _marketInfoTableView.dataSource = self;
@@ -42,10 +50,11 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
      forHeaderFooterViewReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
     [_marketInfoTableView registerClass:[SWMarketNameCell class] forCellReuseIdentifier:MARKET_NAME_CELL_IDENTIFIER];
     [self.view addSubview:_marketInfoTableView];
-    _marketInfoTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    
     _numOfTels = 4;
     
     [self registerNotification];
+    [self commonInit];
 }
 
 - (void)dealloc {
@@ -56,7 +65,50 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+#pragma mark - Common init
+- (void)commonInit {
+    self.view.backgroundColor = SW_TAOBAO_BLACK;
+    [_marketInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-90);
+    }];
+    
+    _okBtn = [[UIButton alloc] init];
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_okBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [_okBtn setBackgroundColor:SW_RMC_GREEN];
+    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
+    _okBtn.clipsToBounds = YES;
+    [self.view addSubview:_okBtn];
+    
+    _cancelBtn = [[UIButton alloc] init];
+    _cancelBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [_cancelBtn setBackgroundColor:SW_WARN_RED];
+    _cancelBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
+    _cancelBtn.clipsToBounds = YES;
+    [self.view addSubview:_cancelBtn];
+    
+    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.view.mas_left).offset(SW_MARGIN);
+        make.topMargin.equalTo(_marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(self.view.mas_bottom).offset(-SW_MARGIN * 2);
+        make.rightMargin.equalTo(self.view.mas_centerX).offset(-SW_MARGIN);
+    }];
+    
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.rightMargin.equalTo(self.view.mas_right).offset(-SW_MARGIN);
+        make.topMargin.equalTo(_marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(self.view.mas_bottom).offset(-SW_MARGIN * 2);
+        make.leftMargin.equalTo(self.view.mas_centerX).offset(SW_MARGIN);
+    }];
+    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
 #pragma mark - Notification
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -78,10 +130,10 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 #pragma mark - SWPickerViewDelegate
 - (NSInteger)SWPickerView:(SWPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 3;
+    return self.itemUnitArray.count;
 }
 - (NSString *)SWPickerView:(SWPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return @[@"瓷砖", @"油漆", @"五金"][row];
+    return self.itemUnitArray[row];
 }
 
 - (NSInteger)numberOfComponentsInSWPickerView:(SWPickerView *)pickerView {
@@ -89,14 +141,17 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 }
 
 - (void)SWPickerView:(SWPickerView *)pickerView didClickOKForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
+    NSString *itemUnit = self.itemUnitArray[row];
+    UITableViewCell *cell = [self.marketInfoTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    cell.detailTextLabel.text = itemUnit;
 }
+
 - (void)cancelSelectInSWPickerView:(SWPickerView *)pickerView {
     
 }
 
 - (nullable NSAttributedString *)SWPickerView:(SWPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSString *title = @[@"瓷砖", @"油漆", @"五金"][row];
+    NSString *title = self.itemUnitArray[row];
     NSMutableAttributedString *AttributedString = [[NSMutableAttributedString alloc]initWithString:title];
     [AttributedString addAttributes:@{NSFontAttributeName:SW_DEFAULT_SUPER_MIN_FONT, NSForegroundColorAttributeName:SW_TAOBAO_BLACK} range:NSMakeRange(0, [AttributedString  length])];
     return AttributedString;
@@ -143,6 +198,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         case 0:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:MARKET_NAME_CELL_IDENTIFIER];
+            ((SWMarketNameCell *)cell).titleLab.text = @"商家";
         }
             break;
         case 1:
@@ -236,7 +292,13 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 }
 
 #pragma mark - UI Response
+- (void)okBtnClicked:(UIButton *)button {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
-
+- (void)cancelBtnClicked:(UIButton *)button {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

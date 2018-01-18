@@ -27,7 +27,6 @@
     _titleLab = [[UILabel alloc] initWithFrame:CGRectZero];
     _titleLab.font = SW_DEFAULT_FONT;
     _titleLab.textAlignment = NSTextAlignmentLeft;
-    _titleLab.text = @"商家";
     _titleLab.textColor = SW_TAOBAO_BLACK;
     [self.contentView addSubview:_titleLab];
     

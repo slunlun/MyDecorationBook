@@ -32,12 +32,13 @@
     [self.contentView addSubview:_titleLab];
     
     _addContactBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _addContactBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_addContactBtn setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
     [_addContactBtn addTarget:self action:@selector(addContactBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_addContactBtn];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(34);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
     }];

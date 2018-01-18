@@ -34,6 +34,13 @@
 		5E17561A20109E8F009F100B /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1755F820109E8F009F100B /* MagicalRecord+Setup.m */; };
 		5E17561B20109E8F009F100B /* MagicalRecord+ShorthandMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1755FA20109E8F009F100B /* MagicalRecord+ShorthandMethods.m */; };
 		5E17561C20109E8F009F100B /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1755FD20109E8F009F100B /* MagicalRecordInternal.m */; };
+		5E17562020109FD0009F100B /* SWDecortionBookModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E17561E20109FD0009F100B /* SWDecortionBookModel.xcdatamodeld */; };
+		5E1756242010A13C009F100B /* SWProductPhotoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756232010A13C009F100B /* SWProductPhotoStorage.m */; };
+		5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756262010A1A0009F100B /* SWProductItemStorage.m */; };
+		5E17562A2010A1AE009F100B /* SWMarketStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756292010A1AE009F100B /* SWMarketStorage.m */; };
+		5E17562D2010A1EA009F100B /* SWDecorationAccountBookStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */; };
+		5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */; };
+		5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756322010A216009F100B /* SWPriceUnitStorage.m */; };
 		5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */; };
 		5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */; };
 		5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */; };
@@ -153,6 +160,19 @@
 		5E1755FF20109E8F009F100B /* MagicalRecordShorthandMethodAliases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthandMethodAliases.h; sourceTree = "<group>"; };
 		5E17560020109E8F009F100B /* MagicalRecordXcode7CompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordXcode7CompatibilityMacros.h; sourceTree = "<group>"; };
 		5E17560120109E8F009F100B /* MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
+		5E17561F20109FD0009F100B /* SWDecortionBookModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SWDecortionBookModel.xcdatamodel; sourceTree = "<group>"; };
+		5E1756222010A13C009F100B /* SWProductPhotoStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWProductPhotoStorage.h; sourceTree = "<group>"; };
+		5E1756232010A13C009F100B /* SWProductPhotoStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWProductPhotoStorage.m; sourceTree = "<group>"; };
+		5E1756252010A1A0009F100B /* SWProductItemStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWProductItemStorage.h; sourceTree = "<group>"; };
+		5E1756262010A1A0009F100B /* SWProductItemStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWProductItemStorage.m; sourceTree = "<group>"; };
+		5E1756282010A1AE009F100B /* SWMarketStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketStorage.h; sourceTree = "<group>"; };
+		5E1756292010A1AE009F100B /* SWMarketStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketStorage.m; sourceTree = "<group>"; };
+		5E17562B2010A1EA009F100B /* SWDecorationAccountBookStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWDecorationAccountBookStorage.h; sourceTree = "<group>"; };
+		5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDecorationAccountBookStorage.m; sourceTree = "<group>"; };
+		5E17562E2010A1FD009F100B /* SWMarketContactStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactStorage.h; sourceTree = "<group>"; };
+		5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactStorage.m; sourceTree = "<group>"; };
+		5E1756312010A216009F100B /* SWPriceUnitStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPriceUnitStorage.h; sourceTree = "<group>"; };
+		5E1756322010A216009F100B /* SWPriceUnitStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWPriceUnitStorage.m; sourceTree = "<group>"; };
 		5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+UIExt.h"; path = "Category/UIView+UIExt.h"; sourceTree = "<group>"; };
 		5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+UIExt.m"; path = "Category/UIView+UIExt.m"; sourceTree = "<group>"; };
 		5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContact.h; sourceTree = "<group>"; };
@@ -394,6 +414,34 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		5E17561D20109F8C009F100B /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				5E1756212010A11C009F100B /* Storage */,
+				5E17561E20109FD0009F100B /* SWDecortionBookModel.xcdatamodeld */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
+		5E1756212010A11C009F100B /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				5E1756222010A13C009F100B /* SWProductPhotoStorage.h */,
+				5E1756232010A13C009F100B /* SWProductPhotoStorage.m */,
+				5E1756252010A1A0009F100B /* SWProductItemStorage.h */,
+				5E1756262010A1A0009F100B /* SWProductItemStorage.m */,
+				5E1756282010A1AE009F100B /* SWMarketStorage.h */,
+				5E1756292010A1AE009F100B /* SWMarketStorage.m */,
+				5E17562B2010A1EA009F100B /* SWDecorationAccountBookStorage.h */,
+				5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */,
+				5E17562E2010A1FD009F100B /* SWMarketContactStorage.h */,
+				5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */,
+				5E1756312010A216009F100B /* SWPriceUnitStorage.h */,
+				5E1756322010A216009F100B /* SWPriceUnitStorage.m */,
+			);
+			name = Storage;
+			sourceTree = "<group>";
+		};
 		5E4A3F231F7E3C6700F052B5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +601,7 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				5E17561D20109F8C009F100B /* DB */,
 				5E9C2CB520030B540052A05E /* SWDef.h */,
 				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
 				5E9C77CF200F313E000355D2 /* ViewController */,
@@ -724,6 +773,7 @@
 			files = (
 				5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */,
 				5EDE94E31FFB5B6400A24C21 /* SWMarketHeaderView.m in Sources */,
+				5E17562020109FD0009F100B /* SWDecortionBookModel.xcdatamodeld in Sources */,
 				5E17560D20109E8F009F100B /* NSManagedObject+MagicalRequests.m in Sources */,
 				5E9C2CDF2004AB210052A05E /* TZLocationManager.m in Sources */,
 				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
@@ -748,6 +798,7 @@
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
 				5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */,
 				5E17560220109E8F009F100B /* MagicalImportFunctions.m in Sources */,
+				5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */,
 				5E9C2CD82004AB210052A05E /* TZAssetCell.m in Sources */,
 				5E9C2CDE2004AB210052A05E /* TZImagePickerController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
@@ -761,8 +812,10 @@
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
 				5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */,
 				5E86CA111FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m in Sources */,
+				5E17562D2010A1EA009F100B /* SWDecorationAccountBookStorage.m in Sources */,
 				5E9C2CD92004AB210052A05E /* TZAssetModel.m in Sources */,
 				5E17561720109E8F009F100B /* MagicalRecord+ErrorHandling.m in Sources */,
+				5E1756242010A13C009F100B /* SWProductPhotoStorage.m in Sources */,
 				5E9C2CE42004AB210052A05E /* TZVideoPlayerController.m in Sources */,
 				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
 				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,
@@ -787,6 +840,7 @@
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5E17560820109E8F009F100B /* NSString+MagicalDataImport.m in Sources */,
 				5E17561520109E8F009F100B /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				5E17562A2010A1AE009F100B /* SWMarketStorage.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				5E17560520109E8F009F100B /* NSNumber+MagicalDataImport.m in Sources */,
 				5E17560F20109E8F009F100B /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -794,6 +848,8 @@
 				8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */,
 				5E86CA151FFF59A600A8F0CC /* SWMarketNameCell.m in Sources */,
 				5E17561B20109E8F009F100B /* MagicalRecord+ShorthandMethods.m in Sources */,
+				5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */,
+				5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */,
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 				5E17561320109E8F009F100B /* NSManagedObjectModel+MagicalRecord.m in Sources */,
@@ -986,6 +1042,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5E17561E20109FD0009F100B /* SWDecortionBookModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5E17561F20109FD0009F100B /* SWDecortionBookModel.xcdatamodel */,
+			);
+			currentVersion = 5E17561F20109FD0009F100B /* SWDecortionBookModel.xcdatamodel */;
+			path = SWDecortionBookModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5EACC4C61F72060100C4E796 /* Project object */;
 }

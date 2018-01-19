@@ -13,6 +13,7 @@
 #import "SWMarketViewController.h"
 #import "TZImagePickerController.h"
 #import "SWShoppingItemInfoViewController.h"
+#import "SWDef.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -28,6 +29,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self commitInit];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_DISAPPEAR_NOTIFICATION object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_APPEAR_NOTIFICATION object:nil];
 }
 
 - (void)commitInit{

@@ -10,6 +10,7 @@
 #import "UIViewController+SWDrawerViewController.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWDef.h"
 #import "HexColor.h"
 CGFloat const SWDrawerDefaultWidth = 280.0f;
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
@@ -45,7 +46,8 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 @property(nonatomic, strong) SWDrawerCenterContainerView *centerContainerView;
 @property (nonatomic, assign, getter = isAnimatingDrawer) BOOL animatingDrawer;
 @property(nonatomic, assign) SWDrawerSide openSide;
-
+@property(nonatomic, strong) UIPanGestureRecognizer *panGesture;
+@property(nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, assign) CGRect startingPanRect;
 @end
 
@@ -95,6 +97,8 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homePageAppear:) name:SW_HOME_PAGE_APPEAR_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homePageDisappear:) name:SW_HOME_PAGE_DISAPPEAR_NOTIFICATION object:nil];
     [self setupGestureRecognizers];
 }
 
@@ -106,9 +110,17 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Setters
@@ -614,12 +626,12 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 }
 
 - (void)setupGestureRecognizers {
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGetureCallBack:)];
-    tapGesture.delegate = self;
-    [self.view addGestureRecognizer:tapGesture];
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGetureCallBack:)];
+    _tapGesture.delegate = self;
+    [self.view addGestureRecognizer:_tapGesture];
     
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
-    [self.view addGestureRecognizer:panGesture];
+    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCallBack:)];
+    [self.view addGestureRecognizer:_panGesture];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
@@ -664,6 +676,16 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 
 -(void)setCenterViewController:(UIViewController *)newCenterViewController withFullCloseAnimation:(BOOL)fullCloseAnimated completion:(void(^)(BOOL finished))completion {
 
+}
+
+#pragma mark - Notification response
+- (void)homePageDisappear:(NSNotification *)notification {
+    [self.view removeGestureRecognizer:self.panGesture];
+    [self.view removeGestureRecognizer:self.tapGesture];
+}
+
+- (void)homePageAppear:(NSNotification *)notification {
+    [self setupGestureRecognizers];
 }
 
 @end

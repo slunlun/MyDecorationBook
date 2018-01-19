@@ -42,6 +42,7 @@
 		5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */; };
 		5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756322010A216009F100B /* SWPriceUnitStorage.m */; };
 		5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */; };
+		5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6A9F1F2011E152009B2038 /* CoreData.framework */; };
 		5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */; };
 		5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */; };
 		5E86CA111FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E86CA101FFE26FA00A8F0CC /* SWMarketContactSectionHeaderView.m */; };
@@ -175,6 +176,7 @@
 		5E1756322010A216009F100B /* SWPriceUnitStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWPriceUnitStorage.m; sourceTree = "<group>"; };
 		5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+UIExt.h"; path = "Category/UIView+UIExt.h"; sourceTree = "<group>"; };
 		5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+UIExt.m"; path = "Category/UIView+UIExt.m"; sourceTree = "<group>"; };
+		5E6A9F1F2011E152009B2038 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5E86CA091FFE00EF00A8F0CC /* SWMarketContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContact.h; sourceTree = "<group>"; };
 		5E86CA0A1FFE00EF00A8F0CC /* SWMarketContact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContact.m; sourceTree = "<group>"; };
 		5E86CA0C1FFE04B600A8F0CC /* SWMarketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketViewController.h; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +454,14 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		5E6A9F1E2011E151009B2038 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E6A9F1F2011E152009B2038 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5E9C2CB92004AB210052A05E /* TZImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +598,7 @@
 				5EB9D78F1F7F7FE900034E09 /* Localizable.strings */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
 				5EACC4CF1F72060100C4E796 /* Products */,
+				5E6A9F1E2011E151009B2038 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -728,6 +740,7 @@
 				TargetAttributes = {
 					5EACC4CD1F72060100C4E796 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 987Y5M3S28;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -994,7 +1007,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 987Y5M3S28;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1010,7 +1023,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 987Y5M3S28;
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -13,4 +13,8 @@
 #define WeakObj(obj) __weak typeof(obj) obj##Weak = obj;
 #define StrongObj(obj) __strong typeof(obj) obj = obj##Weak;
 
+
+// Notification
+#define SW_HOME_PAGE_DISAPPEAR_NOTIFICATION @"SW_HOME_PAGE_DISAPPEAR_NOTIFICATION"
+#define SW_HOME_PAGE_APPEAR_NOTIFICATION @"SW_HOME_PAGE_APPEAR_NOTIFICATION"
 #endif /* SWDef_h */

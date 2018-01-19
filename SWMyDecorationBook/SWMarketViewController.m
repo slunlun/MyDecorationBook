@@ -38,6 +38,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     _itemUnitArray = @[@"瓷砖", @"油漆", @"五金"];
     
     _marketInfoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -49,7 +50,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [_marketInfoTableView registerClass:[SWMarketContactSectionHeaderView class]
      forHeaderFooterViewReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
     [_marketInfoTableView registerClass:[SWMarketNameCell class] forCellReuseIdentifier:MARKET_NAME_CELL_IDENTIFIER];
-    [_marketInfoTableView setEditing:YES animated:NO];
     [self.view addSubview:_marketInfoTableView];
     
     
@@ -79,8 +79,13 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 - (void)commonInit {
     self.view.backgroundColor = SW_TAOBAO_BLACK;
     [_marketInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-90);
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
+        }
     }];
     
     _okBtn = [[UIButton alloc] init];
@@ -211,6 +216,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
+    [cell setEditing:NO];
     switch (indexPath.section) {
         case 0:
         {

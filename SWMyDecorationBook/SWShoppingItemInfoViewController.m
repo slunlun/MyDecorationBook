@@ -53,8 +53,13 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 - (void)commonInit {
     self.view.backgroundColor = SW_TAOBAO_BLACK;
     [_shoppingItemTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
+        make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-90);
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
+        }
     }];
     
     _okBtn = [[UIButton alloc] init];

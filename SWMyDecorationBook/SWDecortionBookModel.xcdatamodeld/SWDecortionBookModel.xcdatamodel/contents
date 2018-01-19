@@ -7,6 +7,7 @@
     </entity>
     <entity name="SWShop" representedClassName="SWShop" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="itemIndex" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="shopCategory" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingCategory" inverseName="shops" inverseEntity="SWShoppingCategory" syncable="YES"/>
         <relationship name="shopContacts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShopContact" inverseName="shop" inverseEntity="SWShopContact" syncable="YES"/>
@@ -27,6 +28,7 @@
     </entity>
     <entity name="SWShoppingItem" representedClassName="SWShoppingItem" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="itemIndex" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,11 +44,11 @@
     </entity>
     <elements>
         <element name="SWDecorationAccountBook" positionX="-74" positionY="63" width="128" height="45"/>
-        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="118"/>
+        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
         <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="118"/>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="103"/>
-        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="148"/>
+        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="163"/>
         <element name="SWShoppingPhoto" positionX="-495" positionY="-315" width="128" height="103"/>
     </elements>
 </model>

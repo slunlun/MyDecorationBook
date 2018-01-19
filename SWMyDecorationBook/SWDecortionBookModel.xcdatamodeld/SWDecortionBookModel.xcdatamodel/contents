@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="SWDecorationAccountBook" representedClassName="SWDecorationAccountBook" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWMarket" representedClassName="SWMarket" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWMarketContacts" representedClassName="SWMarketContacts" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWPriceUnit" representedClassName="SWPriceUnit" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWProductCategory" representedClassName="SWProductCategory" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWProductItems" representedClassName="SWProductItems" syncable="YES" codeGenerationType="class"/>
-    <entity name="SWProductPhotos" representedClassName="SWProductPhotos" syncable="YES" codeGenerationType="class"/>
+    <entity name="SWPriceUnit" representedClassName="SWPriceUnit" syncable="YES" codeGenerationType="class">
+        <attribute name="unit" attributeType="String" syncable="YES"/>
+        <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="SWShoppingItem" inverseName="itemUnit" inverseEntity="SWShoppingItem" syncable="YES"/>
+    </entity>
+    <entity name="SWShop" representedClassName="SWShop" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="shopCategory" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingCategory" inverseName="shops" inverseEntity="SWShoppingCategory" syncable="YES"/>
+        <relationship name="shopContacts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShopContact" inverseName="shop" inverseEntity="SWShopContact" syncable="YES"/>
+        <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingItem" inverseName="shop" inverseEntity="SWShoppingItem" syncable="YES"/>
+    </entity>
+    <entity name="SWShopContact" representedClassName="SWShopContact" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isDefaultContact" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="telNum" attributeType="String" syncable="YES"/>
+        <relationship name="shop" maxCount="1" deletionRule="Nullify" destinationEntity="SWShop" inverseName="shopContacts" inverseEntity="SWShop" syncable="YES"/>
+    </entity>
+    <entity name="SWShoppingCategory" representedClassName="SWShoppingCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="arrangeIndex" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="shops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShop" inverseName="shopCategory" inverseEntity="SWShop" syncable="YES"/>
+    </entity>
+    <entity name="SWShoppingItem" representedClassName="SWShoppingItem" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemPhotos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingPhoto" inverseName="shopItem" inverseEntity="SWShoppingPhoto" syncable="YES"/>
+        <relationship name="itemUnit" maxCount="1" deletionRule="Nullify" destinationEntity="SWPriceUnit" inverseName="shopItems" inverseEntity="SWPriceUnit" syncable="YES"/>
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShop" inverseName="shopItems" inverseEntity="SWShop" syncable="YES"/>
+    </entity>
+    <entity name="SWShoppingPhoto" representedClassName="SWShoppingPhoto" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="shopItem" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="itemPhotos" inverseEntity="SWShoppingItem" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="SWDecorationAccountBook" positionX="-18" positionY="27" width="128" height="45"/>
-        <element name="SWMarket" positionX="18" positionY="63" width="128" height="45"/>
-        <element name="SWMarketContacts" positionX="0" positionY="45" width="128" height="45"/>
-        <element name="SWPriceUnit" positionX="-36" positionY="9" width="128" height="45"/>
-        <element name="SWProductCategory" positionX="-63" positionY="-18" width="128" height="45"/>
-        <element name="SWProductItems" positionX="-54" positionY="-9" width="128" height="45"/>
-        <element name="SWProductPhotos" positionX="36" positionY="81" width="128" height="45"/>
+        <element name="SWDecorationAccountBook" positionX="-74" positionY="63" width="128" height="45"/>
+        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="118"/>
+        <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="118"/>
+        <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
+        <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="103"/>
+        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="148"/>
+        <element name="SWShoppingPhoto" positionX="-495" positionY="-315" width="128" height="103"/>
     </elements>
 </model>

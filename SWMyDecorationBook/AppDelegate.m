@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "SWLeftSlideCollectionViewController.h"
 #import "SWUIDef.h"
+#import "MagicalRecord.h"
+
 @interface AppDelegate ()
 
 @end
@@ -21,13 +23,21 @@
     [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
     
+    // setup MagicRecord
+    NSURL* storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DB"];
+    storeURL = [storeURL URLByAppendingPathComponent:@"myDecorationBook.sqlite"];
+    NSLog(@"storeURL is %@", storeURL);
+    //[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:storeURL];
+    
+    // root view
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:shoppingItemHomePageVC];
     SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
     _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
     _drawerVC.maximumLeftDrawerWidth = 90.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-   [self.window setRootViewController:_drawerVC];
+    [self.window setRootViewController:_drawerVC];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -56,7 +66,12 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
+}
+
+- (NSURL*) applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 

@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SWMarketContact.h"
 
 @interface SWMarketContactStorage : NSObject
++ (void)insertMarketContact:(SWMarketContact *)contact;
++ (void)removeMarketContact:(SWMarketContact *)contact;
++ (void)updateMarketContact:(SWMarketContact *)contact;
 
 @end

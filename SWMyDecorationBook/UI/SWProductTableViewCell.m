@@ -172,7 +172,7 @@
         priceStr = [NSString stringWithFormat:@"￥%.2f",productItem.price];
     }
     self.priceLabel.text = priceStr;
-    self.productMarkLabel.text = productItem.productMark;
+    self.productMarkLabel.text = productItem.productRemark;
     
     [self.productPicturesCollectionView reloadData];
 }

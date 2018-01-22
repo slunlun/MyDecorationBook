@@ -9,5 +9,10 @@
 #import "SWItemUnit.h"
 
 @implementation SWItemUnit
-
+- (instancetype)initWithMO:(SWPriceUnit *)priceUnit {
+    if (self = [super init]) {
+        _unitTitle = priceUnit.unit;
+    }
+    return self;
+}
 @end

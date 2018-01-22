@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SWProductItem.h"
 @interface SWProductItemStorage : NSObject
-
++ (void)insertProductItem:(SWProductItem *)productItem;
++ (void)removeProductItem:(SWProductItem *)productItem;
++ (void)updateProductItem:(SWProductItem *)productItem;
 @end

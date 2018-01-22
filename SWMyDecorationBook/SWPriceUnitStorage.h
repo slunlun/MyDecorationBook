@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface SWPriceUnitStorage : NSObject
-
++ (void)insertPriceUnit:(NSString *)priceUnit;
++ (void)removePriceUnit:(NSString *)priceUnit;
 @end

@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SWShopContact+CoreDataClass.h"
 
 @interface SWMarketContact : NSObject
+- (instancetype)initWithMO:(SWShopContact *)contact;
+@property(nonatomic, strong) NSString *itemID;
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *telNum;
 @property(nonatomic, assign, getter=isDefaultContact) BOOL defaultContact;

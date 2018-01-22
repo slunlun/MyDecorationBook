@@ -9,5 +9,18 @@
 #import "SWMarketContact.h"
 
 @implementation SWMarketContact
-
+//@property(nonatomic, strong) NSString *name;
+//@property(nonatomic, strong) NSString *telNum;
+//@property(nonatomic, assign, getter=isDefaultContact) BOOL defaultContact;
+//@property(nonatomic, strong) NSDate *createTime;
+- (instancetype)initWithMO:(SWShopContact *)contact {
+    if (self = [super init]) {
+        _name = contact.name;
+        _telNum = contact.telNum;
+        _defaultContact = contact.isDefaultContact;
+        _createTime = contact.createTime;
+        _itemID = contact.itemIndex;
+    }
+    return self;
+}
 @end

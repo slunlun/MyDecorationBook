@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SWProductItem.h"
 
 @interface SWProductPhotoStorage : NSObject
-
++ (void)insertPhotos:(NSArray *)photos toShoppingProduct:(SWProductItem *)product;
 @end

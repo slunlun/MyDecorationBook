@@ -7,16 +7,16 @@
     </entity>
     <entity name="SWShop" representedClassName="SWShop" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="itemIndex" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="shopCategory" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingCategory" inverseName="shops" inverseEntity="SWShoppingCategory" syncable="YES"/>
+        <relationship name="shopCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingCategory" inverseName="shops" inverseEntity="SWShoppingCategory" syncable="YES"/>
         <relationship name="shopContacts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShopContact" inverseName="shop" inverseEntity="SWShopContact" syncable="YES"/>
         <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingItem" inverseName="shop" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
     <entity name="SWShopContact" representedClassName="SWShopContact" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isDefaultContact" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="itemIndex" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="telNum" attributeType="String" syncable="YES"/>
         <relationship name="shop" maxCount="1" deletionRule="Nullify" destinationEntity="SWShop" inverseName="shopContacts" inverseEntity="SWShop" syncable="YES"/>
@@ -30,7 +30,7 @@
     <entity name="SWShoppingItem" representedClassName="SWShoppingItem" syncable="YES" codeGenerationType="class">
         <attribute name="choosed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="itemIndex" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,7 +47,7 @@
     <elements>
         <element name="SWDecorationAccountBook" positionX="-74" positionY="63" width="128" height="45"/>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
-        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
+        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="135"/>
         <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="135"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="103"/>
         <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="180"/>

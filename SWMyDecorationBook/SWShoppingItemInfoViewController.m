@@ -23,6 +23,9 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 @property(nonatomic, strong) UITableView *shoppingItemTableView;
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIButton *cancelBtn;
+
+
+
 @end
 
 @implementation SWShoppingItemInfoViewController
@@ -44,9 +47,21 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.shoppingItem == nil) {
+        self.shoppingItem = [[SWProductItem alloc] init];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - Set/Get
+- (void)setShoppingItem:(SWProductItem *)shoppingItem {
+    _shoppingItem = shoppingItem;
+    [self.shoppingItemTableView reloadData];
 }
 
 #pragma mark - Common init
@@ -95,6 +110,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     }];
 }
 
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
@@ -107,6 +123,9 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
         case 0:{
             cell = [tableView dequeueReusableCellWithIdentifier:NAME_CELL_IDENTIFY];
             ((SWMarketNameCell *)cell).titleLab.text = @"商品名称";
+            if (self.shoppingItem.productName) {
+                ((SWMarketNameCell *)cell).marketNameTextField.text = self.shoppingItem.productName;
+            }
         }
             break;
         case 1:{

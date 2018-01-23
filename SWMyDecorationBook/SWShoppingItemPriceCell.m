@@ -11,10 +11,10 @@
 #import "SWUIDef.h"
 #import "SWPickerView.h"
 @interface SWShoppingItemPriceCell()
-@property(nonatomic, strong) UILabel *titleLab;
+
 @property(nonatomic, strong) UILabel *slashLab;
-@property(nonatomic, strong) UILabel *priceUnitLab;
-@property(nonatomic, strong) UITextField *priceTextField;
+
+@property(nonatomic, strong) UILabel *titleLab;
 @end
 
 

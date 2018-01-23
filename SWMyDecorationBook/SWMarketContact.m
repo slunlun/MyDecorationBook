@@ -19,7 +19,7 @@
         _telNum = contact.telNum;
         _defaultContact = contact.isDefaultContact;
         _createTime = contact.createTime;
-        _itemID = contact.itemIndex;
+        _itemID = contact.itemID;
     }
     return self;
 }

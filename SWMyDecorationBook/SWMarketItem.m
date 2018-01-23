@@ -14,6 +14,14 @@
 
 @implementation SWMarketItem
 #pragma mark - Init
+- (instancetype)init {
+    if (self = [super init]) {
+        _itemID = [[NSUUID UUID] UUIDString];
+        _createTime = [NSDate date];
+    }
+    return self;
+}
+
 - (instancetype)initWithMO:(SWShop *)MO {
     if (self = [super init]) {
         //        @property(nonatomic, strong) NSString *marketName;
@@ -25,7 +33,7 @@
         
         // 商铺基本信息
         self.marketName = MO.name;
-        self.itemID = MO.itemIndex;
+        self.itemID = MO.itemID;
         self.createTime = MO.createTime;
         
         // 商铺分类
@@ -40,6 +48,9 @@
         for (SWShopContact *shopContact in shopContacts) {
             SWMarketContact *marketContact = [[SWMarketContact alloc] initWithMO:shopContact];
             [self.telNums addObject:marketContact];
+            if (marketContact.isDefaultContact) {
+                self.defaultTelNum = marketContact.telNum;
+            }
         }
         
         // 商铺商品

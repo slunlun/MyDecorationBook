@@ -11,5 +11,5 @@ typedef void(^nameInputFinishBlock)(NSString *inputName);
 @interface SWMarketNameCell : UITableViewCell
 @property(nonatomic, readonly, strong) UITextField *marketNameTextField;
 @property(nonatomic, strong) UILabel *titleLab;
-@property(nonatomic, assign) nameInputFinishBlock finishBlock;
+@property(nonatomic, copy) nameInputFinishBlock finishBlock;
 @end

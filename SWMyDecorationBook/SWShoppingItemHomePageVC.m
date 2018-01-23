@@ -14,13 +14,14 @@
 #import "TZImagePickerController.h"
 #import "SWShoppingItemInfoViewController.h"
 #import "SWDef.h"
+#import "SWUIDef.h"
+#import "SWMarketStorage.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
-
-
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
+@property(nonatomic, strong) NSArray *marketItems;
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -39,6 +40,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_APPEAR_NOTIFICATION object:nil];
+    [self updateData];
+    [self.shoppingItemListTableView reloadData];
 }
 
 - (void)commitInit{
@@ -70,13 +73,29 @@
     self.navigationItem.rightBarButtonItem = addMarketItemBtn;
    
 }
+#pragma mark - Data source
+- (void)updateData {
+    self.marketItems = [SWMarketStorage allMarketInCategory:nil];
+}
+
 
 #pragma mark - TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return ((SWMarketItem *)self.marketItems[section]).shoppingItems.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NORMAL_CELL"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NORMAL_CELL"];
+           
+        }
+        cell.textLabel.text = @"添加商品";
+        cell.textLabel.textColor = SW_DISABLE_GRAY;
+        cell.imageView.image = [UIImage imageNamed:@"BigAdd"];
+        return cell;
+    }
     SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
     SWProductItem *productItem = [[SWProductItem alloc] init];
     productItem.productName = @"AE-12";
@@ -89,28 +108,29 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 210;
+    if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
+        return 100;
+    }else {
+        return 210;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] init];
+    if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem, do nothing
+        
+    }else {
+        vc.shoppingItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.marketItems.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
-    SWMarketItem *marketItem = [[SWMarketItem alloc] init];
-    if (section == 0) {
-        marketItem.marketName = @"红枫家具";
-        marketItem.defaultTelNum = @18745459381;
-    }else {
-        marketItem.marketName = @"红枫圣象地板抓目标点红枫圣象地板抓目标点红枫圣象地板抓目标点红枫圣象地板抓目标点";
-        marketItem.defaultTelNum = @13745639847;
-    }
-    
+    SWMarketItem *marketItem = self.marketItems[section];
     marketHeaderView.markItem = marketItem;
     marketHeaderView.actionBlock = ^(SWMarketItem *market) {
         NSLog(@"The maket name is %@", market.marketName);

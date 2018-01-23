@@ -93,7 +93,7 @@
     [self.marketNameBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(widthNum);
     }];
-    NSString *defTelText = [NSString stringWithFormat:@"联系: %@", [markItem.defaultTelNum stringValue]];
+    NSString *defTelText = [NSString stringWithFormat:@"联系: %@", markItem.defaultTelNum];
     self.telNumLabel.text = defTelText;
 }
 
@@ -106,7 +106,7 @@
 }
 
 - (void)defTelNumClicked:(UITapGestureRecognizer *)tapGesture {
-    NSString *telNum = [NSString stringWithFormat:@"tel://%@", self.markItem.defaultTelNum.stringValue];
+    NSString *telNum = [NSString stringWithFormat:@"tel://%@", self.markItem.defaultTelNum];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
         NSLog(@"为你打call");
     }];

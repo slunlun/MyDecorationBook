@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWItemUnit.h"
 @class SWShoppingItemPriceCell;
 typedef void(^priceUnitActionBlock)(SWShoppingItemPriceCell *cell);
 
 @interface SWShoppingItemPriceCell : UITableViewCell
+@property(nonatomic, strong) UILabel *priceUnitLab;
 @property(nonatomic, copy) priceUnitActionBlock priceUnitActionBlock;
 @property(nonatomic, strong) NSString *priceUnitStr;
+@property(nonatomic, strong) UITextField *priceTextField;
 @end

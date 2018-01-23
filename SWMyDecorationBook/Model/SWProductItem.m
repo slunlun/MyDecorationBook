@@ -7,6 +7,7 @@
 //
 
 #import "SWProductItem.h"
+#import "SWDef.h"
 
 @implementation SWProductItem
 //@property(nonatomic, strong) NSString *itemID;
@@ -18,10 +19,21 @@
 //@property(nonatomic, strong) SWItemUnit *itemUnit;
 //@property(nonatomic, strong) NSDate *createTime;
 #pragma mark - Init
+- (instancetype)init {
+    if (self = [super init]) {
+        _itemID = [[NSUUID UUID] UUIDString];
+        _price = 0.0f;
+        _createTime = [NSDate date];
+        SWItemUnit *itemUnit = [[SWItemUnit alloc] init];
+        itemUnit.unitTitle = SW_DEFAULT_UNIT;
+        _itemUnit = itemUnit;
+    }
+    return self;
+}
 - (instancetype)initWithMO:(SWShoppingItem *)shoppingItem {
     if (self = [super init]) {
         // 基本信息
-        _itemID = shoppingItem.itemIndex;
+        _itemID = shoppingItem.itemID;
         _productName = shoppingItem.name;
         _productRemark = shoppingItem.remark;
         _price = shoppingItem.price;

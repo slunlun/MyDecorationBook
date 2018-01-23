@@ -13,6 +13,7 @@
 #import "SWMarketNameCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWShoppingItem+CoreDataClass.h"
 
 static NSString *PHOTO_CELL_IDENTIFY = @"PHOTO_CELL_IDENTIFY";
 static NSString *PRICE_CELL_IDENTIFY = @"PRICE_CELL_IDENTIFY";
@@ -71,7 +72,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-90);
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         } else {
             make.top.equalTo(self.mas_topLayoutGuideBottom);
         }
@@ -84,6 +85,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     [_okBtn setBackgroundColor:SW_RMC_GREEN];
     _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _okBtn.clipsToBounds = YES;
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_okBtn];
     
     _cancelBtn = [[UIButton alloc] init];
@@ -93,6 +95,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     [_cancelBtn setBackgroundColor:SW_WARN_RED];
     _cancelBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _cancelBtn.clipsToBounds = YES;
+    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_cancelBtn];
     
     [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,15 +137,24 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             ((SWShoppingItemPriceCell *)cell).priceUnitActionBlock = ^(SWShoppingItemPriceCell *cell) {
                 NSLog(@"TODO");
             };
+            if (self.shoppingItem.price != -1.0f) {
+                ((SWShoppingItemPriceCell *)cell).priceTextField.text = [NSString stringWithFormat:@"%.2f", self.shoppingItem.price];
+            }
         }
             break;
         case 2: {
             cell = [tableView dequeueReusableCellWithIdentifier:REMARK_CELL_IDENTIFY];
+            if (self.shoppingItem.productRemark != nil && ![self.shoppingItem.productRemark isEqualToString:@""]) {
+                ((SWShoppingItemRemarkCell *)cell).remarkTextView.text = self.shoppingItem.productRemark;
+            }
             
         }
             break;
         case 3: {
             cell = [tableView dequeueReusableCellWithIdentifier:PHOTO_CELL_IDENTIFY];
+            if (self.shoppingItem.productPhotos) {
+                ((SWShoppingItemPhotoCell *)cell).photos = [NSMutableArray arrayWithArray:self.shoppingItem.productPhotos];
+            }
         }
             break;
         default:
@@ -163,6 +175,15 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
         return 120;
     }
     return 40;
+}
+
+#pragma mark - UI Response
+- (void)okBtnClicked:(UIButton *)btn {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)cancleBtnClicked:(UIButton *)btn {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

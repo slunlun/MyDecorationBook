@@ -22,7 +22,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         _itemID = [[NSUUID UUID] UUIDString];
-        _price = 0.0f;
+        _price = -1.0f;
         _createTime = [NSDate date];
         SWItemUnit *itemUnit = [[SWItemUnit alloc] init];
         itemUnit.unitTitle = SW_DEFAULT_UNIT;

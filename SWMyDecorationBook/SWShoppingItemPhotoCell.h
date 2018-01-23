@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SWShoppingItemPhotoCell : UITableViewCell
-
+@property(nonatomic, strong) NSMutableArray *photos;
 @end

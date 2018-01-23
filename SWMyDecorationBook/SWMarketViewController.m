@@ -87,7 +87,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-90);
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         } else {
             make.top.equalTo(self.mas_topLayoutGuideBottom);
         }

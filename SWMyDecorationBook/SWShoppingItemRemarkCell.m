@@ -14,7 +14,6 @@
 #define PLACE_HOLD_TEXT @"备注可选，最多32个字"
 @interface SWShoppingItemRemarkCell()<UITextViewDelegate>
 @property(nonatomic, strong) UILabel *remarkTitleLab;
-@property(nonatomic, strong) UITextView *remarkTextView;
 @property(nonatomic, strong) UILabel *countLimitLab;
 @property(nonatomic, assign) BOOL firstEdit;
 @end

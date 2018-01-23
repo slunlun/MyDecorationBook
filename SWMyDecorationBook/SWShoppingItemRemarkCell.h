@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SWShoppingItemRemarkCell : UITableViewCell
-
+@property(nonatomic, strong) UITextView *remarkTextView;
 @end

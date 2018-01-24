@@ -12,7 +12,7 @@
 #import "SWProductItem.h"
 
 @interface SWProductPhoto : NSObject
-@property(nonatomic, strong) NSString *photoTitle;
+- (instancetype)initWithProductItem:(SWProductItem *)ownerProduct image:(UIImage *)photo;
 @property(nonatomic, strong) UIImage *photo;
 @property(nonatomic, strong) NSDate *createTime;
 @property(nonatomic, strong) SWProductItem *ownerProductItem;

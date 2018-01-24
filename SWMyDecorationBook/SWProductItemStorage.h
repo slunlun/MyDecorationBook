@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "SWProductItem.h"
+#import "SWMarketItem.h"
+
 @interface SWProductItemStorage : NSObject
-+ (void)insertProductItem:(SWProductItem *)productItem;
++ (void)insertProductItem:(SWProductItem *)productItem toMarket:(SWMarketItem *)market;
 + (void)removeProductItem:(SWProductItem *)productItem;
 + (void)updateProductItem:(SWProductItem *)productItem;
 @end

@@ -16,4 +16,5 @@
 @property(nonatomic, strong) UIImage *photo;
 @property(nonatomic, strong) NSDate *createTime;
 @property(nonatomic, strong) SWProductItem *ownerProductItem;
+@property(nonatomic, strong) NSString *itemID;
 @end

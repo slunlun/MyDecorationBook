@@ -13,5 +13,4 @@
 @interface SWProductItemStorage : NSObject
 + (void)insertProductItem:(SWProductItem *)productItem toMarket:(SWMarketItem *)market;
 + (void)removeProductItem:(SWProductItem *)productItem;
-+ (void)updateProductItem:(SWProductItem *)productItem;
 @end

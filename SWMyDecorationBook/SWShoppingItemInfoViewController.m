@@ -13,7 +13,10 @@
 #import "SWMarketNameCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWDef.h"
 #import "SWShoppingItem+CoreDataClass.h"
+#import "SWProductPhoto.h"
+#import "TZImagePickerController.h"
 
 static NSString *PHOTO_CELL_IDENTIFY = @"PHOTO_CELL_IDENTIFY";
 static NSString *PRICE_CELL_IDENTIFY = @"PRICE_CELL_IDENTIFY";
@@ -155,6 +158,20 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             if (self.shoppingItem.productPhotos) {
                 ((SWShoppingItemPhotoCell *)cell).photos = [NSMutableArray arrayWithArray:self.shoppingItem.productPhotos];
             }
+            WeakObj(self);
+            ((SWShoppingItemPhotoCell *)cell).photoCellClicked = ^(NSIndexPath *indexPath) {
+                if (indexPath) {
+                    StrongObj(self);
+                    if (self) {
+                        if (indexPath.section == 1) { // 添加照片
+                            [self scanNewPhoto];
+                        }else {
+                            [self glaceShopItemPhoto:indexPath.row];
+                        }
+                    }
+                    
+                }
+            };
         }
             break;
         default:
@@ -184,6 +201,22 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 - (void)cancleBtnClicked:(UIButton *)btn {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)scanNewPhoto {
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:nil];
+    WeakObj(self);
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        StrongObj(self);
+        for (UIImage *photo in photos) {
+            SWPro
+        }
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (void)glaceShopItemPhoto:(NSInteger)beginIndex {
+    
 }
 
 @end

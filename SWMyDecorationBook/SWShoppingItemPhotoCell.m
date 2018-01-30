@@ -48,11 +48,28 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
         make.top.equalTo(self.contentView);
     }];
 }
+#pragma mark - Setter/Getter
+- (NSMutableArray *)photos {
+    if (_photos == nil) {
+        _photos = [[NSMutableArray alloc] init];
+    }
+    return _photos;
+}
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.photoCellClicked) {
+        self.photoCellClicked(indexPath);
+    }
+}
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    if (section == 1) {
+        return 1;
+    }else {
+        return self.photos.count;
+    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -65,7 +82,14 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
     cell.actionBlock = ^() {
         [collectionView deleteItemsAtIndexPaths:@[indexPath]];
     };
+    if (indexPath.section == 1) {
+        cell.model = [UIImage imageNamed:@"Scan"];
+    }else{
+        cell.model = self.photos[indexPath.row];
+    }
     return cell;
 }
+
+#pragma mark - UICo
 
 @end

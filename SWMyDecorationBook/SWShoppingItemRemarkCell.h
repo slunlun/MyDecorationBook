@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SWProductItem.h"
+typedef void(^shoppingItemRemarkChangeActon)(NSString *remark);
 @interface SWShoppingItemRemarkCell : UITableViewCell
-@property(nonatomic, strong) UITextView *remarkTextView;
 @property(nonatomic, strong) SWProductItem *productItem;
+@property(nonatomic, copy) shoppingItemRemarkChangeActon shoppingItemRemarkChange;
 @end

@@ -17,7 +17,7 @@
 @property(nonatomic, strong) NSString *productRemark;
 @property(nonatomic, assign) float price;
 @property(nonatomic, assign, getter=isChoosed) BOOL choosed;
-@property(nonatomic, strong) NSArray *productPhotos;
+@property(nonatomic, strong) NSMutableArray *productPhotos;
 @property(nonatomic, strong) SWItemUnit *itemUnit;
 @property(nonatomic, strong) NSDate *createTime;
 @end

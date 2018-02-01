@@ -120,7 +120,7 @@
     if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem, do nothing
         
     }else {
-        vc.shoppingItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
+        vc.shoppingItem =  ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
     }
     [self.navigationController pushViewController:vc animated:YES];
 }

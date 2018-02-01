@@ -10,6 +10,7 @@
 #import "SWProductCollectionViewCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWDef.h"
 
 static NSString *cellIdentify = @"SWProductCollectionViewCell";
 @interface SWShoppingItemPhotoCell()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -19,6 +20,7 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
 @implementation SWShoppingItemPhotoCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        _photos = [[NSMutableArray alloc] init];
         [self commonInit];
     }
     return self;
@@ -49,17 +51,23 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
     }];
 }
 #pragma mark - Setter/Getter
-- (NSMutableArray *)photos {
-    if (_photos == nil) {
-        _photos = [[NSMutableArray alloc] init];
-    }
-    return _photos;
+
+- (void)setPhotos:(NSMutableArray *)photos {
+    _photos = photos;
+    [self.shoppingItemPhotoCollectionView reloadData];
 }
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.photoCellClicked) {
-        self.photoCellClicked(indexPath);
+    if (indexPath.section == 0) {
+        if (self.photoCellClicked) {
+            self.photoCellClicked(indexPath.row);
+        }
+    }else {
+        if (self.takeNewPhoto) {
+            self.takeNewPhoto();
+        }
     }
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -78,9 +86,19 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SWProductCollectionViewCell *cell = (SWProductCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentify forIndexPath:indexPath];
-    cell.supportEdit = YES;
+    if (indexPath.section == 0) {
+        cell.supportEdit = YES;
+    }else {
+        cell.supportEdit = NO;
+    }
+    
+    WeakObj(self);
     cell.actionBlock = ^() {
-        [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        StrongObj(self);
+        if (self.delPhoto) {
+            self.delPhoto(indexPath.row);
+        }
+        
     };
     if (indexPath.section == 1) {
         cell.model = [UIImage imageNamed:@"Scan"];

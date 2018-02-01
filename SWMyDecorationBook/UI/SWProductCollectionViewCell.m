@@ -8,6 +8,10 @@
 
 #import "SWProductCollectionViewCell.h"
 #import "Masonry.h"
+#import "SWUIDef.h"
+@interface SWProductCollectionViewCell()
+@property(nonatomic, strong) UIButton *delBtn;
+@end
 
 @implementation SWProductCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -22,11 +26,28 @@
     self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _productImage = [[UIImageView alloc] init];
     _productImage.userInteractionEnabled = NO;
-    _productImage.contentMode = UIViewContentModeScaleAspectFit;
+    //_productImage.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_productImage];
     [_productImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
+    
+    _delBtn = [[UIButton alloc] init];
+    [self.contentView addSubview:_delBtn];
+    [_delBtn setImage:[UIImage imageNamed:@"DelCross"] forState:UIControlStateNormal];
+    _delBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _delBtn.backgroundColor = SW_WARN_RED;
+    _delBtn.alpha = 0.6;
+    _delBtn.clipsToBounds = YES;
+    _delBtn.layer.cornerRadius = 7.5;
+    [_delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.width.equalTo(@15);
+        make.centerX.equalTo(_productImage.mas_right).offset(-11);
+        make.centerY.equalTo(_productImage.mas_top).offset(10);
+    }];
+    _delBtn.hidden = YES;
+    
 }
 
 #pragma mark - Set/Get/Init
@@ -34,4 +55,23 @@
     _model = model;
     self.productImage.image = _model;
 }
+
+- (void)setSupportEdit:(BOOL)supportEdit {
+    _supportEdit = supportEdit;
+    if (supportEdit) {
+        [self setUpDelBtn];
+    }
+}
+
+- (void)setUpDelBtn {
+    self.delBtn.hidden = NO;
+}
+
+#pragma -mark UI response
+- (void)delBtnClicked:(UIButton *)btn {
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
+}
+
 @end

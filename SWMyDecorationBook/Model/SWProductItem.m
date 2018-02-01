@@ -8,7 +8,7 @@
 
 #import "SWProductItem.h"
 #import "SWDef.h"
-
+#import "SWProductPhoto.h"
 @implementation SWProductItem
 //@property(nonatomic, strong) NSString *itemID;
 //@property(nonatomic, strong) NSString *productName;
@@ -26,6 +26,7 @@
         _createTime = [NSDate date];
         SWItemUnit *itemUnit = [[SWItemUnit alloc] init];
         itemUnit.unitTitle = SW_DEFAULT_UNIT;
+        _productPhotos = [[NSMutableArray alloc] init];
         _itemUnit = itemUnit;
     }
     return self;
@@ -41,7 +42,12 @@
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
         NSArray *sortDescriptors = @[sortDescriptor];
         NSArray *shopPhotos = [shoppingItem.itemPhotos sortedArrayUsingDescriptors:sortDescriptors];
-        _productPhotos = shopPhotos;
+        _productPhotos = [[NSMutableArray alloc] init];
+        for (SWShoppingPhoto * shopPhoto in shopPhotos) {
+            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithMO:shopPhoto];
+            [_productPhotos addObject:productPhoto];
+        }
+      
         _createTime = shoppingItem.createTime;
         
         // 设置货品单位
@@ -49,4 +55,6 @@
     }
     return self;
 }
+
+
 @end

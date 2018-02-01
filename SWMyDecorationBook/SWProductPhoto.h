@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-#import "SWProductItem.h"
+#import "SWShoppingPhoto+CoreDataClass.h"
 
 @interface SWProductPhoto : NSObject
-- (instancetype)initWithProductItem:(SWProductItem *)ownerProduct image:(UIImage *)photo;
+- (instancetype)initWithImage:(UIImage *)photo;
+- (instancetype)initWithMO:(SWShoppingPhoto *)shoppingPhoto;
 @property(nonatomic, strong) UIImage *photo;
 @property(nonatomic, strong) NSDate *createTime;
-@property(nonatomic, strong) SWProductItem *ownerProductItem;
 @property(nonatomic, strong) NSString *itemID;
 @end

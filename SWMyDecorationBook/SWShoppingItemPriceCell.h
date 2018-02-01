@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SWItemUnit.h"
 #import "SWProductItem.h"
-
+typedef void(^priceChangeAction)(NSString *price);
 @interface SWShoppingItemPriceCell : UITableViewCell
-@property(nonatomic, strong) UILabel *priceUnitLab;
-@property(nonatomic, strong) NSString *priceUnitStr;
-@property(nonatomic, strong) UITextField *priceTextField;
 @property(nonatomic, strong) SWProductItem *productItem;
+@property(nonatomic, copy) priceChangeAction priceChangeBlock;
 @end

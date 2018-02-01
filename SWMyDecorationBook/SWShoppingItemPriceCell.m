@@ -11,9 +11,10 @@
 #import "SWUIDef.h"
 #import "SWPickerView.h"
 @interface SWShoppingItemPriceCell()<UITextFieldDelegate>
-
+@property(nonatomic, strong) UILabel *priceUnitLab;
+@property(nonatomic, strong) NSString *priceUnitStr;
+@property(nonatomic, strong) UITextField *priceTextField;
 @property(nonatomic, strong) UILabel *slashLab;
-
 @property(nonatomic, strong) UILabel *titleLab;
 @end
 
@@ -92,7 +93,9 @@
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.productItem.price = textField.text.floatValue;
+    if (self.priceChangeBlock) {
+        self.priceChangeBlock(textField.text);
+    }
 }
 
 

@@ -15,6 +15,7 @@
 @interface SWShoppingItemRemarkCell()<UITextViewDelegate>
 @property(nonatomic, strong) UILabel *remarkTitleLab;
 @property(nonatomic, strong) UILabel *countLimitLab;
+@property(nonatomic, strong) UITextView *remarkTextView;
 @property(nonatomic, assign) BOOL firstEdit;
 @end
 
@@ -94,7 +95,9 @@
         _remarkTextView.textColor = SW_DISABLE_GRAY;
         _firstEdit = YES;
     }else {
-        self.productItem.productRemark = _remarkTextView.text;
+        if(self.shoppingItemRemarkChange) {
+            self.shoppingItemRemarkChange(textView.text);
+        }
     }
 }
 

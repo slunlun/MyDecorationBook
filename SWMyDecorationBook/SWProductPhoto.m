@@ -9,12 +9,20 @@
 #import "SWProductPhoto.h"
 
 @implementation SWProductPhoto
-- (instancetype)initWithProductItem:(SWProductItem *)ownerProduct image:(UIImage *)photo {
+- (instancetype)initWithImage:(UIImage *)photo {
     if (self = [super init]) {
         _itemID = [[NSUUID UUID] UUIDString];
         _photo = photo;
         _createTime = [NSDate date];
-        _ownerProductItem = ownerProduct;
+    }
+    return self;
+}
+
+- (instancetype)initWithMO:(SWShoppingPhoto *)shoppingPhoto {
+    if (self = [super init]) {
+        _itemID = shoppingPhoto.itemID;
+        _photo = [UIImage imageWithData:shoppingPhoto.image];
+        _createTime = shoppingPhoto.createTime;
     }
     return self;
 }

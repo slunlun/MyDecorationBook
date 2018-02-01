@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^photoCellClickedBlock)(NSIndexPath *indexPath);
+typedef void(^photoCellClickedBlock)(NSInteger index);
+typedef void(^takeNewPhotoCellClickedAction)();
+typedef void(^delPhotoAction)(NSInteger index);
 @interface SWShoppingItemPhotoCell : UITableViewCell
 @property(nonatomic, strong) NSMutableArray *photos;
 @property(nonatomic, copy)photoCellClickedBlock photoCellClicked;
+@property(nonatomic, copy)takeNewPhotoCellClickedAction takeNewPhoto;
+@property(nonatomic, copy)delPhotoAction delPhoto;
 @end

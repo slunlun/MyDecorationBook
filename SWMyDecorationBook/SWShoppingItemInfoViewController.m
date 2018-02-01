@@ -47,6 +47,9 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     [self.view addSubview:_shoppingItemTableView];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    // 默认初始化当前的shoppingItem
+    _shoppingItem = [[SWProductItem alloc] init];
     [self commonInit];
     
 }
@@ -151,32 +154,50 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             cell = [tableView dequeueReusableCellWithIdentifier:PRICE_CELL_IDENTIFY];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             ((SWShoppingItemPriceCell *)cell).productItem = self.shoppingItem;
+            ((SWShoppingItemPriceCell *)cell).priceChangeBlock = ^(NSString *price) {
+                StrongObj(self);
+                self.shoppingItem.price = price.floatValue;
+            };
         }
             break;
         case 2: {
             cell = [tableView dequeueReusableCellWithIdentifier:REMARK_CELL_IDENTIFY];
             ((SWShoppingItemRemarkCell *)cell).productItem = self.shoppingItem;
+            ((SWShoppingItemRemarkCell *)cell).shoppingItemRemarkChange = ^(NSString *remark) {
+                StrongObj(self);
+                self.shoppingItem.productRemark = remark;
+            };
         }
             break;
         case 3: {
             cell = [tableView dequeueReusableCellWithIdentifier:PHOTO_CELL_IDENTIFY];
             if (self.shoppingItem.productPhotos) {
-                ((SWShoppingItemPhotoCell *)cell).photos = [NSMutableArray arrayWithArray:self.shoppingItem.productPhotos];
+                NSMutableArray *photos = [[NSMutableArray alloc] init];
+                for (SWProductPhoto *productPhtot in self.shoppingItem.productPhotos) {
+                    [photos addObject:productPhtot.photo];
+                }
+                ((SWShoppingItemPhotoCell *)cell).photos = photos;
             }
-            WeakObj(self);
-            ((SWShoppingItemPhotoCell *)cell).photoCellClicked = ^(NSIndexPath *indexPath) {
-                if (indexPath) {
-                    StrongObj(self);
-                    if (self) {
-                        if (indexPath.section == 1) { // 添加照片
-                            [self scanNewPhoto];
-                        }else {
-                            [self glaceShopItemPhoto:indexPath.row];
-                        }
-                    }
-                    
+            ((SWShoppingItemPhotoCell *)cell).takeNewPhoto = ^{
+                StrongObj(self);
+                if (self) {
+                    [self scanNewPhoto];
                 }
             };
+            
+            ((SWShoppingItemPhotoCell *)cell).photoCellClicked = ^(NSInteger index) {
+                StrongObj(self);
+                if (self) {
+                    [self glaceShopItemPhoto:index];
+                }
+            };
+            
+            ((SWShoppingItemPhotoCell *)cell).delPhoto = ^(NSInteger index) {
+                StrongObj(self);
+                [self.shoppingItem.productPhotos removeObjectAtIndex:index];
+                [self.shoppingItemTableView reloadData];
+            };
+            
         }
             break;
         default:
@@ -201,7 +222,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)btn {
-    self.shoppingItem.productName =;
+    //self.shoppingItem.productName =;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -214,7 +235,12 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     WeakObj(self);
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         StrongObj(self);
-        [self.photosArray addObjectsFromArray:photos];
+        for (UIImage *photo in photos) {
+            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:photo];
+            [self.shoppingItem.productPhotos addObject:productPhoto];
+        }
+        
+        [self.shoppingItemTableView reloadData];
     }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }

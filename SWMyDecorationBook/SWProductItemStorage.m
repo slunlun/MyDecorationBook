@@ -23,16 +23,7 @@
         if (shopItem == nil) {
             shopItem = [SWShoppingItem MR_createEntityInContext:localContext];
         }
-//        @property (nonatomic) BOOL choosed;
-//        @property (nullable, nonatomic, copy) NSDate *createTime;
-//        @property (nullable, nonatomic, copy) NSString *itemID;
-//        @property (nullable, nonatomic, copy) NSString *name;
-//        @property (nonatomic) float price;
-//        @property (nullable, nonatomic, copy) NSString *remark;
-        
-//        @property (nullable, nonatomic, retain) NSSet<SWShoppingPhoto *> *itemPhotos;
-//        @property (nullable, nonatomic, retain) SWPriceUnit *itemUnit;
-//        @property (nullable, nonatomic, retain) SWShop *shop;
+
         // 商品基本信息
         shopItem.choosed = productItem.choosed;
         shopItem.createTime = productItem.createTime;

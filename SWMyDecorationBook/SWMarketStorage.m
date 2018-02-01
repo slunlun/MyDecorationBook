@@ -57,13 +57,16 @@
 }
 
 + (NSArray *)allMarketInCategory:(SWMarketCategory *)marketCatagroy {
-    NSArray *shops = [SWShop MR_findAll];
-    NSMutableArray *allMarket = [NSMutableArray new];
-    for (SWShop *shop in shops) {
-        
-        SWMarketItem *marketItem = [[SWMarketItem alloc] initWithMO:shop];
-        [allMarket addObject:marketItem];
-    }
+    
+    __block NSMutableArray *allMarket = [NSMutableArray new];
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSArray *shops = [SWShop MR_findAllInContext:localContext];
+        for (SWShop *shop in shops) {
+            SWMarketItem *marketItem = [[SWMarketItem alloc] initWithMO:shop];
+            [allMarket addObject:marketItem];
+        }
+    }];
+   
     return allMarket;
     
 }

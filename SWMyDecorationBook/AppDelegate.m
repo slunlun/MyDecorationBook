@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "SWLeftSlideCollectionViewController.h"
 #import "SWUIDef.h"
+#import "SWPriceUnitStorage.h"
 #import "MagicalRecord.h"
 
 @interface AppDelegate ()
@@ -29,6 +30,25 @@
     NSLog(@"storeURL is %@", storeURL);
     //[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:storeURL];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [SWPriceUnitStorage insertPriceUnit:@"块"];
+        [SWPriceUnitStorage insertPriceUnit:@"张"];
+        [SWPriceUnitStorage insertPriceUnit:@"个"];
+        [SWPriceUnitStorage insertPriceUnit:@"平"];
+        [SWPriceUnitStorage insertPriceUnit:@"米"];
+        NSLog(@"first launch");
+        
+    }else {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"everLaunched"];
+        
+        NSLog(@"second launch");
+        
+    }
+    
     
     // root view
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];

@@ -97,11 +97,7 @@
         return cell;
     }
     SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
-    SWProductItem *productItem = [[SWProductItem alloc] init];
-    productItem.productName = @"AE-12";
-    productItem.price = 124.3;
-    productItem.productPhotos = [NSArray new];
-    productItem.productRemark = @"需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西需要在12月12号的商场活动才能够获取到这个东西";
+    SWProductItem *productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
     cell.productItem = productItem;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -116,12 +112,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] init];
-    if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem, do nothing
+    SWProductItem *productItem = nil;
+    if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem,
+        productItem = [[SWProductItem alloc] init];
         
     }else {
-        vc.shoppingItem =  ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
+        productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
     }
+    
+    SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

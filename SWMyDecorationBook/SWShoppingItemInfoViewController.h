@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SWProductItem.h"
+#import "SWMarketItem.h"
 
 typedef void(^shoppingItemUpdateBlock)(SWProductItem *shoppingItem);
 @interface SWShoppingItemInfoViewController : UIViewController
+- (instancetype)initWithProductItem:(SWProductItem *)productItem inMarket:(SWMarketItem *)market;
 @property(nonatomic, strong) SWProductItem *shoppingItem;
+@property(nonatomic, strong) SWMarketItem *marketItem;
 @end

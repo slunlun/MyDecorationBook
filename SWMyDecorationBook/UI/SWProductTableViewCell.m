@@ -7,6 +7,7 @@
 //
 
 #import "SWProductTableViewCell.h"
+#import "SWProductPhoto.h"
 #import "SWButton.h"
 #import "SWProductCollectionViewCell.h"
 #import "Masonry.h"
@@ -183,21 +184,30 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
-        return 5;
+        return self.productItem.productPhotos.count;
     }else {
         return 1;
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellIdentity = @"SWProductCollectionViewCell";
-    SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
-    cell.model = [UIImage imageNamed:@"Scan"];
-    return cell;
+    if (indexPath.section == 0) {
+        NSString *cellIdentity = @"SWProductCollectionViewCell";
+        SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
+        SWProductPhoto *productPhoto = self.productItem.productPhotos[indexPath.row];
+        cell.model = productPhoto.photo;
+        return cell;
+    }else {
+        NSString *cellIdentity = @"SWProductCollectionViewCell";
+        SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
+        cell.model = [UIImage imageNamed:@"Scan"];
+        return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Press %@", indexPath);
+
 }
 
 #pragma mark - UI CallBack

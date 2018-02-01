@@ -11,4 +11,5 @@
 @interface SWPriceUnitStorage : NSObject
 + (void)insertPriceUnit:(NSString *)priceUnit;
 + (void)removePriceUnit:(NSString *)priceUnit;
++ (NSArray *)allPriceUnit;
 @end

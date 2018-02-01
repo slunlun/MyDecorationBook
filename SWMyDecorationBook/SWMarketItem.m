@@ -73,7 +73,7 @@
 }
 
 - (NSMutableArray *)shoppingItems {
-    if (_shoppingItems) {
+    if (_shoppingItems == nil) {
         _shoppingItems = [[NSMutableArray alloc] init];
     }
     return _shoppingItems;

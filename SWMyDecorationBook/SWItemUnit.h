@@ -12,5 +12,4 @@
 @interface SWItemUnit : NSObject
 - (instancetype)initWithMO:(SWPriceUnit *)priceUnit;
 @property(nonatomic, strong) NSString *unitTitle;
-@property(nonatomic, strong) NSArray *shoppingItems;
 @end

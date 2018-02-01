@@ -16,24 +16,36 @@
 #import "SWDef.h"
 #import "SWShoppingItem+CoreDataClass.h"
 #import "SWProductPhoto.h"
+#import "SWProductItemStorage.h"
 #import "TZImagePickerController.h"
+#import "SWPriceUnitStorage.h"
+#import "SWPickerView.h"
 
 static NSString *PHOTO_CELL_IDENTIFY = @"PHOTO_CELL_IDENTIFY";
 static NSString *PRICE_CELL_IDENTIFY = @"PRICE_CELL_IDENTIFY";
 static NSString *REMARK_CELL_IDENTIFY = @"REMARK_CELL_IDENTIFY";
 static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
-@interface SWShoppingItemInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface SWShoppingItemInfoViewController ()<UITableViewDelegate, UITableViewDataSource, SWPickerViewDelegate>
 @property(nonatomic, strong) UITableView *shoppingItemTableView;
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIButton *cancelBtn;
-
+@property(nonatomic, strong) NSArray *itemUnits;
 @property(nonatomic, strong) NSMutableArray *photosArray;
-
+@property(nonatomic, strong) SWItemUnit *curItemUnit;
 @end
 
 @implementation SWShoppingItemInfoViewController
 
+- (instancetype)initWithProductItem:(SWProductItem *)productItem inMarket:(SWMarketItem *)market {
+    if (self = [super init]) {
+        _shoppingItem = productItem;
+        _marketItem = market;
+        _itemUnits = [SWPriceUnitStorage allPriceUnit];
+        _curItemUnit = [_itemUnits firstObject];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -49,7 +61,10 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     self.view.backgroundColor = [UIColor whiteColor];
     
     // 默认初始化当前的shoppingItem
-    _shoppingItem = [[SWProductItem alloc] init];
+    if (_shoppingItem == nil) {
+        _shoppingItem = [[SWProductItem alloc] init];
+    }
+    self.curItemUnit = _shoppingItem.itemUnit;
     [self commonInit];
     
 }
@@ -220,9 +235,33 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     return 40;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) { //商品单价
+        SWPickerView *pickerView = [[SWPickerView alloc] init];
+        pickerView.delegate = self;
+        [pickerView attachSWPickerViewInView:self.view];
+        [pickerView showPickerView];
+    }
+}
+
+#pragma mark - SWPickerViewDelegate
+- (NSInteger)SWPickerView:(SWPickerView *_Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.itemUnits.count;
+}
+- (NSString *_Nonnull)SWPickerView:(SWPickerView *_Nonnull)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    SWItemUnit *itemUnit = self.itemUnits[row];
+    return itemUnit.unitTitle;
+}
+
+- (void)SWPickerView:(SWPickerView *_Nonnull)pickerView didClickOKForRow:(NSInteger)row forComponent:(NSInteger)component {
+    self.curItemUnit = self.itemUnits[row];
+    self.shoppingItem.itemUnit = self.curItemUnit;
+    [self.shoppingItemTableView reloadData];
+}
+
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)btn {
-    //self.shoppingItem.productName =;
+    [SWProductItemStorage insertProductItem:self.shoppingItem toMarket:self.marketItem];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

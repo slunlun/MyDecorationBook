@@ -28,7 +28,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIButton *cancelBtn;
 
-
+@property(nonatomic, strong) NSMutableArray *photosArray;
 
 @end
 
@@ -65,7 +65,15 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 #pragma mark - Set/Get
 - (void)setShoppingItem:(SWProductItem *)shoppingItem {
     _shoppingItem = shoppingItem;
+    [self.photosArray addObjectsFromArray:_shoppingItem.productPhotos];
     [self.shoppingItemTableView reloadData];
+}
+
+- (NSMutableArray *)photosArray {
+    if (_photosArray == nil) {
+        _photosArray = [[NSMutableArray alloc] init];
+    }
+    return _photosArray;
 }
 
 #pragma mark - Common init
@@ -125,6 +133,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
+    WeakObj(self);
     switch (indexPath.row) {
         case 0:{
             cell = [tableView dequeueReusableCellWithIdentifier:NAME_CELL_IDENTIFY];
@@ -132,25 +141,21 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             if (self.shoppingItem.productName) {
                 ((SWMarketNameCell *)cell).marketNameTextField.text = self.shoppingItem.productName;
             }
+            ((SWMarketNameCell *)cell).finishBlock = ^(NSString *inputName) {
+                StrongObj(self);
+                self.shoppingItem.productName = inputName;
+            };
         }
             break;
         case 1:{
             cell = [tableView dequeueReusableCellWithIdentifier:PRICE_CELL_IDENTIFY];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            ((SWShoppingItemPriceCell *)cell).priceUnitActionBlock = ^(SWShoppingItemPriceCell *cell) {
-                NSLog(@"TODO");
-            };
-            if (self.shoppingItem.price != -1.0f) {
-                ((SWShoppingItemPriceCell *)cell).priceTextField.text = [NSString stringWithFormat:@"%.2f", self.shoppingItem.price];
-            }
+            ((SWShoppingItemPriceCell *)cell).productItem = self.shoppingItem;
         }
             break;
         case 2: {
             cell = [tableView dequeueReusableCellWithIdentifier:REMARK_CELL_IDENTIFY];
-            if (self.shoppingItem.productRemark != nil && ![self.shoppingItem.productRemark isEqualToString:@""]) {
-                ((SWShoppingItemRemarkCell *)cell).remarkTextView.text = self.shoppingItem.productRemark;
-            }
-            
+            ((SWShoppingItemRemarkCell *)cell).productItem = self.shoppingItem;
         }
             break;
         case 3: {
@@ -196,6 +201,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)btn {
+    self.shoppingItem.productName =;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -208,9 +214,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     WeakObj(self);
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         StrongObj(self);
-        for (UIImage *photo in photos) {
-            SWPro
-        }
+        [self.photosArray addObjectsFromArray:photos];
     }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }

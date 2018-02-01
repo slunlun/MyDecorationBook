@@ -68,6 +68,12 @@
     }];
 }
 
+#pragma mark - Set/Get
+- (void)setProductItem:(SWProductItem *)productItem {
+    self.remarkTextView.text = productItem.productRemark;
+    _productItem = productItem;
+}
+
 #pragma mark - UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     return YES;
@@ -87,6 +93,8 @@
         _remarkTextView.text = PLACE_HOLD_TEXT;
         _remarkTextView.textColor = SW_DISABLE_GRAY;
         _firstEdit = YES;
+    }else {
+        self.productItem.productRemark = _remarkTextView.text;
     }
 }
 

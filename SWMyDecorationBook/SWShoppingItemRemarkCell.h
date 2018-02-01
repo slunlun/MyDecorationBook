@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SWProductItem.h"
 @interface SWShoppingItemRemarkCell : UITableViewCell
 @property(nonatomic, strong) UITextView *remarkTextView;
+@property(nonatomic, strong) SWProductItem *productItem;
 @end

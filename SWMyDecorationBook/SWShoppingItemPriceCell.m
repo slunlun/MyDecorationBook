@@ -10,7 +10,7 @@
 #import "Masonry.h"
 #import "SWUIDef.h"
 #import "SWPickerView.h"
-@interface SWShoppingItemPriceCell()
+@interface SWShoppingItemPriceCell()<UITextFieldDelegate>
 
 @property(nonatomic, strong) UILabel *slashLab;
 
@@ -64,6 +64,8 @@
         make.width.equalTo(@80);
     }];
     
+    _priceTextField.delegate = self;
+    
     [_slashLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_priceTextField.mas_right);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
@@ -79,5 +81,20 @@
     _priceUnitStr = priceUnitStr;
     self.priceUnitLab.text = priceUnitStr;
 }
+
+- (void)setProductItem:(SWProductItem *)productItem {
+    if (productItem) {
+        self.priceUnitLab.text = productItem.itemUnit.unitTitle;
+        self.priceTextField.text = [NSString stringWithFormat:@"%lf", productItem.price];
+        _productItem = productItem;
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.productItem.price = textField.text.floatValue;
+}
+
+
 
 @end

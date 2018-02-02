@@ -25,6 +25,9 @@
 
 @property(nonatomic, strong) UIView *productInfoView;
 
+@property(nonatomic, assign) CGRect originalFrame;
+@property(nonatomic, strong) SWProductCollectionViewCell *selectedCell;
+@property(nonatomic, strong) UIView *coverView;
 @end
 
 @implementation SWProductTableViewCell
@@ -95,12 +98,12 @@
     // step2. setup product picutres collection view
     UICollectionViewFlowLayout *collectionLayout = [UICollectionViewFlowLayout new];
     collectionLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 0);
-    collectionLayout.itemSize = CGSizeMake(100, 100);
+    collectionLayout.itemSize = CGSizeMake(120, 120);
     //collectionLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
     collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     _productPicturesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:collectionLayout];
-    _productPicturesCollectionView.contentInset = UIEdgeInsetsMake(5, 5, 5, 5);
+    _productPicturesCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [_productPicturesCollectionView registerClass:[SWProductCollectionViewCell class] forCellWithReuseIdentifier:@"SWProductCollectionViewCell"];
     _productPicturesCollectionView.delegate = self;
     _productPicturesCollectionView.dataSource = self;
@@ -206,9 +209,11 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Press %@", indexPath);
-
+    SWProductCollectionViewCell *cell = (SWProductCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    [self enlargeCell:cell];
 }
+
+
 
 #pragma mark - UI CallBack
 - (void)delBtnClickCallBack:(UIButton *)button {
@@ -235,5 +240,64 @@
 //    }
 }
 
+- (void)enlargeCell:(SWProductCollectionViewCell *)cell {
+    UIImageView *animationView = [[UIImageView alloc] initWithImage:cell.productImage.image];
+    cell.productImage.image = nil;
+    self.selectedCell = cell;
+    animationView.userInteractionEnabled = YES;
+    animationView.layer.shadowColor = [UIColor blackColor].CGColor;
+    animationView.layer.shadowOpacity = 0.6;
+    animationView.layer.shadowRadius = 10.0;
+    animationView.layer.shadowOffset = CGSizeMake(10, 10);
+    
+    UITapGestureRecognizer *tapGestrure = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restoreCell:)];
+    [animationView addGestureRecognizer:tapGestrure];
+    
+    
+    UIView *rootWindow = [[[UIApplication sharedApplication] delegate] window];
+    
+    self.coverView = [[UIView alloc] initWithFrame:rootWindow.frame];
+    self.coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [rootWindow addSubview:self.coverView];
+    
+    CGRect originalFrame = [cell.productImage convertRect:cell.productImage.frame toView:rootWindow];
+    animationView.frame = originalFrame;
+    self.originalFrame = originalFrame;
+    [rootWindow addSubview:animationView];
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        animationView.center = rootWindow.center;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.1 delay:0.1 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                animationView.frame = CGRectMake(0, 0, rootWindow.frame.size.width, rootWindow.frame.size.height);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }];
+}
+
+- (void)restoreCell:(UITapGestureRecognizer *)tapGesture {
+    UIView *rootWindow = [[[UIApplication sharedApplication] delegate] window];
+    UIImageView *animationView = (UIImageView *)tapGesture.view;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        animationView.center = rootWindow.center;
+        animationView.frame = CGRectMake(rootWindow.center.x - self.originalFrame.size.width/2, rootWindow.center.y - self.originalFrame.size.height/2, self.originalFrame.size.width, self.originalFrame.size.height);
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.1 delay:0.1 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                animationView.frame = self.originalFrame;
+            } completion:^(BOOL finished) {
+                [animationView removeFromSuperview];
+                self.selectedCell.productImage.image = animationView.image;
+                [self.coverView removeFromSuperview];
+                self.selectedCell = nil;
+                self.coverView = nil;
+            }];
+        }
+    }];
+}
 
 @end

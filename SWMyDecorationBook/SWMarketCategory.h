@@ -11,7 +11,9 @@
 #import "SWShoppingCategory+CoreDataClass.h"
 
 @interface SWMarketCategory : NSObject
+- (instancetype)initWithCategoryName:(NSString *)categoryName;
 - (instancetype)initWithMO:(SWShoppingCategory *)category;
+@property(nonatomic, strong) NSString *itemID;
 @property(nonatomic, strong) NSString *categoryName;
 @property(nonatomic, strong) UIImage *categoryImage;
 @property(nonatomic, strong) NSMutableArray *categoryItems;  // 当前分类下的商家列表

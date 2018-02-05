@@ -16,6 +16,7 @@
 #define SW_DEFAULT_CORNER_RADIOUS 5.0f
 
 // font
+#define SW_DEFAULT_FONT_LARGE [UIFont fontWithName:@"AppleGothic" size:16.0]
 #define SW_DEFAULT_FONT [UIFont fontWithName:@"AppleGothic" size:14.0]
 #define SW_DEFAULT_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:12.0]
 #define SW_DEFAULT_SUPER_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:10.0]

@@ -10,6 +10,7 @@
 #import "SWLeftSlideCollectionViewController.h"
 #import "SWUIDef.h"
 #import "SWPriceUnitStorage.h"
+#import "SWMarketCategoryStorage.h"
 #import "MagicalRecord.h"
 
 @interface AppDelegate ()
@@ -39,7 +40,17 @@
         [SWPriceUnitStorage insertPriceUnit:@"个"];
         [SWPriceUnitStorage insertPriceUnit:@"平"];
         [SWPriceUnitStorage insertPriceUnit:@"米"];
-        NSLog(@"first launch");
+        
+        SWMarketCategory *cat1 = [[SWMarketCategory alloc] initWithCategoryName:@"瓷砖"];
+        SWMarketCategory *cat2 = [[SWMarketCategory alloc] initWithCategoryName:@"柜门"];
+        SWMarketCategory *cat3 = [[SWMarketCategory alloc] initWithCategoryName:@"家具"];
+        SWMarketCategory *cat4 = [[SWMarketCategory alloc] initWithCategoryName:@"石材"];
+        SWMarketCategory *cat5 = [[SWMarketCategory alloc] initWithCategoryName:@"五金"];
+        [SWMarketCategoryStorage insertMarketCategory:cat1];
+        [SWMarketCategoryStorage insertMarketCategory:cat2];
+        [SWMarketCategoryStorage insertMarketCategory:cat3];
+        [SWMarketCategoryStorage insertMarketCategory:cat4];
+        [SWMarketCategoryStorage insertMarketCategory:cat5];
         
     }else {
         

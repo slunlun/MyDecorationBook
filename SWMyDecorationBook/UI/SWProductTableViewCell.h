@@ -14,7 +14,7 @@
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem;
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem;
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem;
-- (void)productTableViewCell:(SWProductTableViewCell *)cell didTakeImage:(UIImage *)image;
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didClickTakeProductPhoto:(SWProductItem *)productItem;
 
 @end
 

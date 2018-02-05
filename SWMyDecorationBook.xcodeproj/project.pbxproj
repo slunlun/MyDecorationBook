@@ -98,6 +98,7 @@
 		5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */; };
 		8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */; };
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
+		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -294,6 +295,8 @@
 		8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNewMarketTelNumCell.m; sourceTree = "<group>"; };
 		802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLeftSlideCollectionViewController.h; sourceTree = "<group>"; };
 		802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWLeftSlideCollectionViewController.m; sourceTree = "<group>"; };
+		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
+		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,6 +441,8 @@
 				5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */,
 				5E1756312010A216009F100B /* SWPriceUnitStorage.h */,
 				5E1756322010A216009F100B /* SWPriceUnitStorage.m */,
+				805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */,
+				805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -862,6 +867,7 @@
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 				5E17561320109E8F009F100B /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				5E17560420109E8F009F100B /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */,
 				5E9C2CE22004AB210052A05E /* TZPhotoPreviewController.m in Sources */,
 				5E9C2CE02004AB210052A05E /* TZPhotoPickerController.m in Sources */,
 			);

@@ -30,7 +30,7 @@
     UIButton *marketBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
     marketBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    marketBtn.titleLabel.font = SW_DEFAULT_MIN_FONT;
+    marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
     [marketBtn setTitleColor:[UIColor colorWithHexString:SW_BLACK_COLOR] forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     

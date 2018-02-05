@@ -40,7 +40,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
 }
 
 #pragma mark - UI init
@@ -55,8 +54,8 @@
     
     _productNameLabel = [[UILabel alloc] init];
     _productNameLabel.numberOfLines = 0;
-    _productNameLabel.backgroundColor = [UIColor blueColor];
-    
+    _productNameLabel.font = SW_DEFAULT_FONT;
+    _productNameLabel.textColor = SW_TAOBAO_ORANGE;
     _productNameLabel.textAlignment = NSTextAlignmentLeft;
     [self.productInfoView addSubview:_productNameLabel];
     
@@ -210,7 +209,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SWProductCollectionViewCell *cell = (SWProductCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    [self enlargeCell:cell];
+    if (indexPath.section == 0) {
+        [self enlargeCell:cell];
+    }else {
+        if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickTakeProductPhoto:)]) {
+            [self.delegate productTableViewCell:self didClickTakeProductPhoto:self.productItem];
+        }
+    }
 }
 
 

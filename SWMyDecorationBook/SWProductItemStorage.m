@@ -77,6 +77,56 @@
     }];
 }
 
++ (void)updateProductItem:(SWProductItem *)productItem {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemID];
+        SWShoppingItem *shopItem = [SWShoppingItem MR_findFirstWithPredicate:predicate inContext:localContext];
+        if (shopItem) {
+            // 商品基本信息
+            shopItem.choosed = productItem.choosed;
+            shopItem.createTime = productItem.createTime;
+            shopItem.itemID = productItem.itemID;
+            shopItem.name = productItem.productName;
+            shopItem.price = productItem.price;
+            shopItem.remark = productItem.productRemark;
+            
+            // 价格单位
+            predicate = [NSPredicate predicateWithFormat:@"unit==%@", productItem.itemUnit.unitTitle];
+            SWPriceUnit *priceUnit = [SWPriceUnit MR_findFirstWithPredicate:predicate inContext:localContext];
+            shopItem.itemUnit = priceUnit;
+            [priceUnit addShopItemsObject:shopItem];
+            
+            NSMutableArray *localPhotos = [[NSMutableArray alloc] initWithArray:productItem.productPhotos];
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
+            NSMutableArray *DBPhotos = [[NSMutableArray alloc] initWithArray:[shopItem.itemPhotos sortedArrayUsingDescriptors:@[sortDescriptor]]];
+            // 商品照片
+            for (SWShoppingPhoto *photo in shopItem.itemPhotos) {
+                for (SWProductPhoto *productPhoto in productItem.productPhotos) {
+                    if ([photo.itemID isEqualToString:productPhoto.itemID]) {
+                        [DBPhotos removeObject:photo];
+                        [localPhotos removeObject:productPhoto];
+                    }
+                }
+            }
+            
+            // 删除多余的照片
+            for (SWShoppingPhoto *shopPhoto in DBPhotos) {
+                [shopPhoto MR_deleteEntityInContext:localContext];
+            }
+            
+            // 添加新的照片
+            for (SWProductPhoto *productPhoto in localPhotos) {
+                SWShoppingPhoto *newPhoto = [SWShoppingPhoto MR_createEntityInContext:localContext];
+                newPhoto.itemID = productPhoto.itemID;
+                newPhoto.createTime = productPhoto.createTime;
+                newPhoto.image = UIImagePNGRepresentation(productPhoto.photo);
+                newPhoto.shopItem = shopItem;
+                [shopItem addItemPhotosObject:newPhoto];
+            }
+        }
+    }];
+}
+
 + (void)removeProductItem:(SWProductItem *)productItem {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemID];

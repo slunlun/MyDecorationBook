@@ -10,6 +10,17 @@
 #import "SWShop+CoreDataClass.h"
 #import "SWMarketItem.h"
 @implementation SWMarketCategory
+
+- (instancetype)initWithCategoryName:(NSString *)categoryName {
+    if (self = [super init]) {
+        _itemID = [[NSUUID UUID] UUIDString];
+        _categoryName = categoryName;
+        _createTime = [NSDate date];
+        _indexNum = -1;
+    }
+    return self;
+}
+
 - (instancetype)initWithMO:(SWShoppingCategory *)category {
     if (self = [super init]) {
 //        @property(nonatomic, strong) NSString *categoryName;

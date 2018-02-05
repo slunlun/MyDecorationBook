@@ -16,8 +16,10 @@
 #import "SWDef.h"
 #import "SWUIDef.h"
 #import "SWMarketStorage.h"
+#import "SWProductPhoto.h"
+#import "SWProductItemStorage.h"
 
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource>
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
@@ -99,7 +101,7 @@
     SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
     SWProductItem *productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
     cell.productItem = productItem;
-    
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -213,8 +215,52 @@
 }
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
-    SWMarketViewController *vc = [SWMarketViewController new];
+    SWMarketItem *newMarketItem = [[SWMarketItem alloc] init];
+    SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - SWProductTableViewCellDelegate
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem {
+    
+}
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem {
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SWProductItemStorage removeProductItem:productItem];
+        [self updateData];
+        [self.shoppingItemListTableView reloadData];
+        
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertView addAction:cancleAction];
+    [alertView addAction:okAction];
+    
+    [self presentViewController:alertView animated:YES completion:^{
+        
+    }];
+}
+
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
+    
+}
+
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didClickTakeProductPhoto:(SWProductItem *)productItem {
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:nil];
+    WeakObj(self);
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        StrongObj(self);
+        for (UIImage *photo in photos) {
+            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:photo];
+            [productItem.productPhotos addObject:productPhoto];
+        }
+        [SWProductItemStorage updateProductItem:productItem];
+        [self updateData];
+        [self.shoppingItemListTableView reloadData];
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 @end

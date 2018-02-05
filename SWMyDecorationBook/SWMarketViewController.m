@@ -41,6 +41,18 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 @implementation SWMarketViewController
 
+- (instancetype)initWithMarketItem:(SWMarketItem *)marketItem {
+    if(self = [super init]){
+        _marketItem = marketItem;
+    }
+    return self;
+}
+
+- (instancetype)init {
+    NSAssert(NO, @"Use (instancetype)initWithMarketItem:(SWMarketItem *)marketItem");
+    return nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -227,6 +239,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         {
             cell = [tableView dequeueReusableCellWithIdentifier:MARKET_NAME_CELL_IDENTIFIER];
             ((SWMarketNameCell *)cell).titleLab.text = @"商家";
+            ((SWMarketNameCell *)cell).marketNameTextField.text = self.marketItem.marketName;
             WeakObj(self);
             ((SWMarketNameCell *)cell).finishBlock = ^(NSString *inputName) {
                 if (inputName) {

@@ -11,6 +11,7 @@
 typedef void(^marketInfoUpdateBlock)(SWMarketItem *marketItem);
 
 @interface SWMarketViewController : UIViewController
+- (instancetype)initWithMarketItem:(SWMarketItem *)marketItem;
 @property(nonatomic, strong) SWMarketItem *marketItem;
 @property(nonatomic, copy) marketInfoUpdateBlock updateBlock;
 @end

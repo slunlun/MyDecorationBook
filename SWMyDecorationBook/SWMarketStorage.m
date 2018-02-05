@@ -33,15 +33,35 @@
 //        [shoppingCategory addShopsObject:newShop];
 //        newShop.shopCategory = shoppingCategory;
         // 商铺联系人
-        for (SWMarketContact *contact in shop.telNums) {
-            SWShopContact *newContact = [SWShopContact MR_createEntityInContext:localContext];
-            newContact.createTime = [NSDate date];
-            newContact.isDefaultContact = contact.isDefaultContact;
-            newContact.itemID = [[NSUUID UUID] UUIDString];
-            newContact.name = contact.name;
-            newContact.telNum = contact.telNum;
-            newContact.shop = newShop;
-            [newShop addShopContactsObject:newContact];
+        NSMutableArray *localContacts = [[NSMutableArray alloc] initWithArray:shop.telNums];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
+        NSMutableArray *DBContacts = [[NSMutableArray alloc] initWithArray:[newShop.shopContacts sortedArrayUsingDescriptors:@[sortDescriptor]]];
+        // 商品照片
+        for (SWShopContact *shopContact in newShop.shopContacts) {
+            for (SWMarketContact *marketContact in shop.telNums) {
+                if ([shopContact.itemID isEqualToString:marketContact.itemID]) {
+                    [DBContacts removeObject:shopContact];
+                    [localContacts removeObject:marketContact];
+                }
+            }
+        }
+        
+        // 删除多余的照片
+        for (SWShopContact *shopContact in DBContacts) {
+            [shopContact MR_deleteEntityInContext:localContext];
+        }
+        
+        // 添加新的照片
+        for (SWMarketContact *marketContact in localContacts) {
+            SWShopContact *newShopContact = [SWShopContact MR_createEntityInContext:localContext];
+            newShopContact.itemID = marketContact.itemID;
+            newShopContact.createTime = marketContact.createTime;
+            newShopContact.isDefaultContact = marketContact.isDefaultContact;
+            newShopContact.name = marketContact.name;
+            newShopContact.telNum = marketContact.telNum;
+            newShopContact.shop = newShop;
+            [newShop addShopContactsObject:newShopContact];
+            
         }
     }];
 }

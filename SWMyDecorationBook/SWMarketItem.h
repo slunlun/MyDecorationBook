@@ -10,6 +10,7 @@
 #import "SWMarketCategory.h"
 #import "SWShop+CoreDataClass.h"
 @interface SWMarketItem : NSObject
+- (instancetype)initWithMarketCategory:(SWMarketCategory *)marketCategory;
 - (instancetype)initWithMO:(SWShop *)MO;
 @property(nonatomic, strong) NSString *itemID;
 @property(nonatomic, strong) NSString *marketName;

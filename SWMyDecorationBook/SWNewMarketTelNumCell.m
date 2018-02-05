@@ -95,7 +95,6 @@
 - (void)defaultTelBtnClicked:(UIButton *)button {
     if(button.isSelected == NO) {
         button.selected = YES;
-        self.marketContact.defaultContact = button.isSelected;
         if (self.defaultContactSetBlock) {
             self.defaultContactSetBlock(self.marketContact);
         }
@@ -110,9 +109,13 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField isEqual:self.contactNameTextField]) {
-        self.marketContact.name = textField.text;
+        if(self.contactNameChangedBlock) {
+            self.contactNameChangedBlock(textField.text);
+        }
     }else {
-        self.marketContact.telNum = textField.text;
+        if (self.contactTelNumChangedBlock) {
+            self.contactTelNumChangedBlock(textField.text);
+        }
     }
 }
 @end

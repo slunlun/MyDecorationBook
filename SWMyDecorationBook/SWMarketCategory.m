@@ -23,13 +23,10 @@
 
 - (instancetype)initWithMO:(SWShoppingCategory *)category {
     if (self = [super init]) {
-//        @property(nonatomic, strong) NSString *categoryName;
-//        @property(nonatomic, strong) UIImage *categoryImage;
-//        @property(nonatomic, strong) NSArray *categoryItems;  // 当前分类下的商家列表
-//        @property(nonatomic, assign) NSInteger indexNum;    // 用户排序
         _categoryName = category.name;
         _indexNum = category.arrangeIndex;
         _createTime = category.createTime;
+        _itemID = category.itemID;
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
         NSArray *sortDescriptors = @[sortDescriptor];
         NSArray *categoryShops = [category.shops sortedArrayUsingDescriptors:sortDescriptors];
@@ -38,7 +35,6 @@
             SWMarketItem *market = [[SWMarketItem alloc] initWithMO:shop];
             [self.categoryItems addObject:market];
         }
-        
     }
     return self;
 }

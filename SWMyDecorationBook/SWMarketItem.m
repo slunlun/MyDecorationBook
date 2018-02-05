@@ -14,23 +14,23 @@
 
 @implementation SWMarketItem
 #pragma mark - Init
-- (instancetype)init {
+
+- (instancetype)initWithMarketCategory:(SWMarketCategory *)marketCategory {
     if (self = [super init]) {
         _itemID = [[NSUUID UUID] UUIDString];
         _createTime = [NSDate date];
+        _marketCategory = marketCategory;
     }
     return self;
 }
 
+- (instancetype)init {
+    NSAssert(NO, @"SWMarketItem use (instancetype)initWithMarketCategory:(SWMarketCategory *)marketCategory");
+    return nil;
+}
+
 - (instancetype)initWithMO:(SWShop *)MO {
     if (self = [super init]) {
-        //        @property(nonatomic, strong) NSString *marketName;
-        //        @property(nonatomic, strong) NSArray *telNums;  // 联系方式(可多个)
-        //        @property(nonatomic, strong) NSNumber *defaultTelNum;
-        //        @property(nonatomic, strong) NSArray *shoppingItems;
-        //        @property(nonatomic, strong) NSDate *createTime;
-        //        @property(nonatomic, strong) SWMarketCategory *marketCategory;
-        
         // 商铺基本信息
         self.marketName = MO.name;
         self.itemID = MO.itemID;

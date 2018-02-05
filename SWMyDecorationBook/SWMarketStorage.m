@@ -28,10 +28,10 @@
         newShop.itemID = [[NSUUID UUID] UUIDString];
         newShop.name = shop.marketName;
 //        // 将商铺添加到当前分类下
-//        NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"name==%@", shop.marketCategory.categoryName];
-//        SWShoppingCategory *shoppingCategory = [SWShoppingCategory MR_findFirstWithPredicate:categoryPredicate inContext:localContext];
-//        [shoppingCategory addShopsObject:newShop];
-//        newShop.shopCategory = shoppingCategory;
+        NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"itemID==%@", shop.marketCategory.itemID];
+        SWShoppingCategory *shoppingCategory = [SWShoppingCategory MR_findFirstWithPredicate:categoryPredicate inContext:localContext];
+        [shoppingCategory addShopsObject:newShop];
+        newShop.shopCategory = shoppingCategory;
         // 商铺联系人
         NSMutableArray *localContacts = [[NSMutableArray alloc] initWithArray:shop.telNums];
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];

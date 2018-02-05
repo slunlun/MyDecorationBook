@@ -46,9 +46,13 @@
 }
 
 + (NSArray<SWMarketCategory *> *)allMarketCategory {
-    __block NSArray *retArray = nil;
+    NSMutableArray *retArray = [NSMutableArray new];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        retArray = [SWShoppingCategory MR_findAllInContext:localContext];
+        NSArray *DBCategories = [SWShoppingCategory MR_findAllInContext:localContext];
+        for (SWShoppingCategory* shoppingCategory in  DBCategories) {
+            SWMarketCategory *marketCategory = [[SWMarketCategory alloc] initWithMO:shoppingCategory];
+            [retArray addObject:marketCategory];
+        }
     }];
     return retArray;
 }

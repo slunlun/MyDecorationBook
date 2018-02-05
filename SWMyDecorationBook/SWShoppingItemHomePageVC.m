@@ -18,6 +18,7 @@
 #import "SWMarketStorage.h"
 #import "SWProductPhoto.h"
 #import "SWProductItemStorage.h"
+#import "SWMarketCategoryStorage.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -133,8 +134,13 @@
     SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
     SWMarketItem *marketItem = self.marketItems[section];
     marketHeaderView.markItem = marketItem;
+    WeakObj(self);
     marketHeaderView.actionBlock = ^(SWMarketItem *market) {
-        NSLog(@"The maket name is %@", market.marketName);
+        SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:market];
+        StrongObj(self);
+        if (self) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     };
     return marketHeaderView;
 }
@@ -215,7 +221,8 @@
 }
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
-    SWMarketItem *newMarketItem = [[SWMarketItem alloc] init];
+    NSArray *marketCategories = [SWMarketCategoryStorage allMarketCategory];
+    SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:marketCategories[0]];
     SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -224,6 +231,7 @@
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem {
     
 }
+
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem {
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

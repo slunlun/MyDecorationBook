@@ -32,7 +32,7 @@
     //[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:storeURL];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+    //if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
         [SWPriceUnitStorage insertPriceUnit:@"块"];
@@ -52,13 +52,13 @@
         [SWMarketCategoryStorage insertMarketCategory:cat4];
         [SWMarketCategoryStorage insertMarketCategory:cat5];
         
-    }else {
+   // }else {
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"everLaunched"];
         
         NSLog(@"second launch");
         
-    }
+    //}
     
     
     // root view

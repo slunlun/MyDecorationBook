@@ -74,7 +74,7 @@
     
     [_productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productInfoView).offset(5);
-        make.left.equalTo(self.productInfoView).offset(SW_MARGIN);
+        make.left.equalTo(self.productInfoView).offset(SW_CELL_LEFT_MARGIN);
     }];
     
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {

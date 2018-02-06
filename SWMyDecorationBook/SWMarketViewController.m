@@ -23,7 +23,8 @@ static NSString *MARKET_CONTACT_HEADER_VIEW_IDENTIFIER = @"MARKET_CONTACT_HEADER
 static NSString *MARKET_NAME_CELL_IDENTIFIER = @"MARKET_NAME_CELL_IDENTIFIER";
 static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTIFIER";
 
-@interface SWMarketViewController () <UITableViewDelegate, UITableViewDataSource, SWPickerViewDelegate>
+
+@interface SWMarketViewController () <UITableViewDelegate, UITableViewDataSource, SWPickerViewDelegate, UIGestureRecognizerDelegate>
 @property(nonatomic, strong) UITableView *marketInfoTableView;
 @property(nonatomic, strong) SWPickerView *pickerView;
 @property(nonatomic, strong) UIView *coverView;
@@ -32,7 +33,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 @property(nonatomic, strong) UIButton *cancelBtn;
 
 @property(nonatomic, strong) NSArray *itemUnitArray;
-
 @end
 
 @implementation SWMarketViewController
@@ -60,13 +60,28 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     _marketInfoTableView.showsVerticalScrollIndicator = NO;
     _marketInfoTableView.showsHorizontalScrollIndicator = NO;
     [_marketInfoTableView registerClass:[SWNewMarketTelNumCell class] forCellReuseIdentifier:TEL_CELL_IDENTIFIER];
-    [_marketInfoTableView registerClass:[SWMarketContactSectionHeaderView class]
-     forHeaderFooterViewReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
+    [_marketInfoTableView registerClass:[UITableViewCell class]
+     forCellReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
     [_marketInfoTableView registerClass:[SWMarketNameCell class] forCellReuseIdentifier:MARKET_NAME_CELL_IDENTIFIER];
     [self.view addSubview:_marketInfoTableView];
-    
+    _marketInfoTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self registerNotification];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTaped:)];
+//    tap.delegate = self;
+//    [self.marketInfoTableView addGestureRecognizer:tap];
     [self commonInit];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (self.isEditing) {
+        return YES;
+    }else {
+       return NO;
+    }
+}
+
+- (void)viewTaped:(UITapGestureRecognizer *)tap {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 
 - (void)dealloc {
@@ -89,6 +104,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             make.top.equalTo(self.mas_topLayoutGuideBottom);
         }
     }];
+    _marketInfoTableView.sectionHeaderHeight = 10;
     
     _okBtn = [[UIButton alloc] init];
     _okBtn.titleLabel.font = SW_DEFAULT_FONT;
@@ -192,11 +208,26 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.view endEditing:YES];
+    
     if (indexPath.section == 2) { // select type
         SWPickerView *pickerView = [[SWPickerView alloc] init];
         [pickerView attachSWPickerViewInView:self.view];
         pickerView.delegate = self;
         [pickerView showPickerView];
+    }else if(indexPath.section == 1 && indexPath.row == 0) { // 添加联系人
+        NSInteger numOfRows = [self.marketInfoTableView numberOfRowsInSection:indexPath.section];
+        NSIndexPath *addIndex = [NSIndexPath indexPathForRow:numOfRows inSection:indexPath.section];
+        [self.marketInfoTableView beginUpdates];
+        [self.marketInfoTableView insertRowsAtIndexPaths:@[addIndex] withRowAnimation:UITableViewRowAnimationBottom];
+        // Add a new contact in testArray
+        SWMarketContact *newContact = [[SWMarketContact alloc] init];
+        [self.marketItem.telNums addObject:newContact];
+
+        [self.marketInfoTableView endUpdates];
+        if (self.isEditing) {
+            UIEdgeInsets edge = self.marketInfoTableView.contentInset;
+            self.marketInfoTableView.contentInset = UIEdgeInsetsMake(edge.top, edge.left, edge.bottom + 40, edge.right);
+        }
     }
 }
 
@@ -213,7 +244,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             return 1;
             break;
         case 1:
-            return self.marketItem.telNums.count;
+            return self.marketItem.telNums.count + 1;
             break;
         case 2:
             return 1;
@@ -244,31 +275,44 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             break;
         case 1:
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:TEL_CELL_IDENTIFIER];
-            SWMarketContact *contact = self.marketItem.telNums[indexPath.row];
-            ((SWNewMarketTelNumCell *)cell).marketContact = contact;
-            WeakObj(self);
-            ((SWNewMarketTelNumCell *)cell).defaultContactSetBlock = ^(SWMarketContact *contact) {
-                for (SWMarketContact *contact in self.marketItem.telNums) {
-                    contact.defaultContact = NO;
+            if (indexPath.row == 0) {
+                cell = [tableView dequeueReusableCellWithIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
+                if (cell == nil) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
                 }
-                ((SWMarketContact *)self.marketItem.telNums[indexPath.row]).defaultContact = YES;
-                StrongObj(self);
-                [self.marketInfoTableView reloadData];
-            };
-            
-            ((SWNewMarketTelNumCell *)cell).contactTelNumChangedBlock = ^(NSString *contactTelNum) {
-                StrongObj(self);
-                ((SWMarketContact *)self.marketItem.telNums[indexPath.row]).telNum = contactTelNum;
-                [self.marketInfoTableView reloadData];
-            };
-            
-            ((SWNewMarketTelNumCell *)cell).contactNameChangedBlock = ^(NSString *contactName) {
-                StrongObj(self);
-                ((SWMarketContact *)self.marketItem.telNums[indexPath.row]).name = contactName;
-                [self.marketInfoTableView reloadData];
-            };
-            [cell setEditing:YES];
+                cell.textLabel.text = @"联系电话";
+                cell.textLabel.textColor = SW_TAOBAO_BLACK;
+                cell.textLabel.font = SW_DEFAULT_FONT;
+                cell.detailTextLabel.text = self.marketItem.marketCategory.categoryName;
+                cell.detailTextLabel.font = SW_DEFAULT_MIN_FONT;
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BigAdd"]];
+            }else{
+                cell = [tableView dequeueReusableCellWithIdentifier:TEL_CELL_IDENTIFIER];
+                SWMarketContact *contact = self.marketItem.telNums[indexPath.row - 1];
+                ((SWNewMarketTelNumCell *)cell).marketContact = contact;
+                WeakObj(self);
+                ((SWNewMarketTelNumCell *)cell).defaultContactSetBlock = ^(SWMarketContact *contact) {
+                    for (SWMarketContact *contact in self.marketItem.telNums) {
+                        contact.defaultContact = NO;
+                    }
+                    ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).defaultContact = YES;
+                    StrongObj(self);
+                    [self.marketInfoTableView reloadData];
+                };
+                
+                ((SWNewMarketTelNumCell *)cell).contactTelNumChangedBlock = ^(NSString *contactTelNum) {
+                    StrongObj(self);
+                    ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).telNum = contactTelNum;
+                    [self.marketInfoTableView reloadData];
+                };
+                
+                ((SWNewMarketTelNumCell *)cell).contactNameChangedBlock = ^(NSString *contactName) {
+                    StrongObj(self);
+                    ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).name = contactName;
+                    [self.marketInfoTableView reloadData];
+                };
+                [cell setEditing:YES];
+            }
         }
             break;
         case 2:
@@ -276,13 +320,13 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             cell = [tableView dequeueReusableCellWithIdentifier:MARKET_CATEGORY_CELL_IDENTIFIER];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:MARKET_CATEGORY_CELL_IDENTIFIER];
-                cell.textLabel.text = @"分类";
-                cell.textLabel.font = SW_DEFAULT_FONT;
-                cell.detailTextLabel.text = self.marketItem.marketCategory.categoryName;
-                cell.detailTextLabel.font = SW_DEFAULT_MIN_FONT;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-               
             }
+            cell.textLabel.text = @"分类";
+            cell.textLabel.textColor = SW_TAOBAO_BLACK;
+            cell.textLabel.font = SW_DEFAULT_FONT;
+            cell.detailTextLabel.text = self.marketItem.marketCategory.categoryName;
+            cell.detailTextLabel.font = SW_DEFAULT_MIN_FONT;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
             break;
         default:
@@ -301,40 +345,8 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        WeakObj(self);
-        SWMarketContactSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
-        headerView.addContactAction = ^{
-            StrongObj(self);
-            if (self) {
-                NSInteger numOfRows = [self.marketInfoTableView numberOfRowsInSection:section];
-                NSIndexPath *addIndex = [NSIndexPath indexPathForRow:numOfRows inSection:section];
-                [self.marketInfoTableView beginUpdates];
-                [self.marketInfoTableView insertRowsAtIndexPaths:@[addIndex] withRowAnimation:UITableViewRowAnimationBottom];
-                // Add a new contact in testArray
-                SWMarketContact *newContact = [[SWMarketContact alloc] init];
-                [self.marketItem.telNums addObject:newContact];
-                
-                [self.marketInfoTableView endUpdates];
-                if (self.isEditing) {
-                    [self.view endEditing:YES];
-                    UIEdgeInsets edge = self.marketInfoTableView.contentInset;
-                    self.marketInfoTableView.contentInset = UIEdgeInsetsMake(edge.top, edge.left, edge.bottom + 40, edge.right);
-                }
-               
-            }
-        };
-        return headerView;
-    }
-    return nil;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(section == 0) {
-        return 0;
-    }
-    return 40;
+    return 10;
 }
 
 -  (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

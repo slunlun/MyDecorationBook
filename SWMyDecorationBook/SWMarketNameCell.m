@@ -38,7 +38,7 @@
     [self.contentView addSubview:_marketNameTextField];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.width.equalTo(@60);
     }];

@@ -52,7 +52,7 @@
     [self.contentView addSubview:_countLimitLab];
     
     [_remarkTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
         make.top.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
     }];
     

@@ -12,6 +12,7 @@
 #import "SWPriceUnitStorage.h"
 #import "SWMarketCategoryStorage.h"
 #import "MagicalRecord.h"
+#import "SWMarketCategoryViewController.h"
 
 @interface AppDelegate ()
 
@@ -64,9 +65,9 @@
     // root view
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:shoppingItemHomePageVC];
-    SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
+    SWMarketCategoryViewController *leftSlideVC = [[SWMarketCategoryViewController alloc] init];
     _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
-    _drawerVC.maximumLeftDrawerWidth = 90.0f;
+    _drawerVC.maximumLeftDrawerWidth = 200.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window setRootViewController:_drawerVC];
     [self.window makeKeyAndVisible];

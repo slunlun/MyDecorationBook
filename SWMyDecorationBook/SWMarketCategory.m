@@ -46,4 +46,20 @@
     }
     return _categoryItems;
 }
+
+#pragma mark - Equal
+- (NSUInteger)hash {
+    return [self.itemID hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[SWMarketCategory class]]) {
+        if ([((SWMarketCategory *)object).itemID isEqualToString:self.itemID]) {
+            return YES;
+        }else {
+            return NO;
+        }
+    }
+    return NO;
+}
 @end

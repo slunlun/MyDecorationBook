@@ -98,6 +98,7 @@
 		5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF75C591F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m */; };
 		8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */; };
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
+		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +296,8 @@
 		8005420C1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNewMarketTelNumCell.m; sourceTree = "<group>"; };
 		802C9CA21FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLeftSlideCollectionViewController.h; sourceTree = "<group>"; };
 		802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWLeftSlideCollectionViewController.m; sourceTree = "<group>"; };
+		80504150202945930003A95A /* SWMarketCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryViewController.h; sourceTree = "<group>"; };
+		80504151202945930003A95A /* SWMarketCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryViewController.m; sourceTree = "<group>"; };
 		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -587,6 +590,8 @@
 				5E86CA0D1FFE04B600A8F0CC /* SWMarketViewController.m */,
 				5E9C2CE72004AF310052A05E /* SWShoppingItemInfoViewController.h */,
 				5E9C2CE82004AF310052A05E /* SWShoppingItemInfoViewController.m */,
+				80504150202945930003A95A /* SWMarketCategoryViewController.h */,
+				80504151202945930003A95A /* SWMarketCategoryViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -806,6 +811,7 @@
 				5E9C77D3200F3CE5000355D2 /* SWMarketCategory.m in Sources */,
 				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5E9C2CE92004AF310052A05E /* SWShoppingItemInfoViewController.m in Sources */,
+				80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */,
 				5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */,
 				5E9C2CE12004AB210052A05E /* TZPhotoPreviewCell.m in Sources */,
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,

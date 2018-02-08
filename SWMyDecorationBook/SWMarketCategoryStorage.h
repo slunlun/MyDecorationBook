@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SWMarketCategory.h"
+
 @interface SWMarketCategoryStorage : NSObject
 + (void)insertMarketCategory:(SWMarketCategory *)marketCategory;
 + (void)updateMarketCategory:(SWMarketCategory *)marketCategory;

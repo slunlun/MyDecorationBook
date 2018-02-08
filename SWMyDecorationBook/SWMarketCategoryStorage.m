@@ -10,7 +10,6 @@
 #import "MagicalRecord.h"
 #import "SWShoppingCategory+CoreDataClass.h"
 
-
 @implementation SWMarketCategoryStorage
 + (void)insertMarketCategory:(SWMarketCategory *)marketCategory {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {

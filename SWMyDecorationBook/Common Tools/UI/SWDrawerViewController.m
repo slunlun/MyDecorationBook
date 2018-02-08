@@ -159,7 +159,6 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
             if (self.openSide == SWDrawerSideLeft) {
                 self.centerContainerView.frame = newFrame;
                 self.leftDrawerViewController.view.frame = self.sw_visibleDrawerFrame;
-                
             }else{
                 
             }
@@ -395,6 +394,15 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     
 }
 #pragma mark - Gesture call backs
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    CGPoint locationPoint = [gestureRecognizer locationInView:self.leftDrawerViewController.view];
+    if (CGRectContainsPoint(self.leftDrawerViewController.view.frame, locationPoint)) { // 左边的view不要影响他的任何响应
+        return NO;
+    }else {
+        return YES;
+    }
+}
+
 - (void)tapGetureCallBack:(UITapGestureRecognizer *)tapGesture {
     if(self.openSide != SWDrawerSideNone &&
        self.isAnimatingDrawer == NO){

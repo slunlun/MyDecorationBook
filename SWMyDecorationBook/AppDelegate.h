@@ -10,11 +10,12 @@
 
 #import "SWShoppingItemHomePageVC.h"
 #import "SWDrawerViewController.h"
+#import "SWMarketCategory.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) SWDrawerViewController *drawerVC;
-
+@property(strong, nonatomic) UIWindow *window;
+@property(strong, nonatomic) SWDrawerViewController *drawerVC;
+@property(strong, nonatomic) SWMarketCategory *currentMarketCategory;
 @end
 

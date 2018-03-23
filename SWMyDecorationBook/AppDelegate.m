@@ -19,8 +19,6 @@
 @end
 
 @implementation AppDelegate
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // common tintColor
     [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;
@@ -66,6 +64,7 @@
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:shoppingItemHomePageVC];
     SWMarketCategoryViewController *leftSlideVC = [[SWMarketCategoryViewController alloc] init];
+//    SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
     _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
     _drawerVC.maximumLeftDrawerWidth = 200.0f;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

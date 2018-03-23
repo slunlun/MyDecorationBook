@@ -10,12 +10,13 @@
 #import "SWMarketCategoryStorage.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
+#import "AppDelegate.h"
 
 #define SELECTED_MARK_VIEW_SPEED 100.0f
 static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 @interface SWMarketCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property(nonatomic, strong) UITableView *marketCategoryTableView;
+
 @property(nonatomic, strong) UIView *selectedMarkView;
 @property(nonatomic, strong) NSArray *categoryArray;
 @property(nonatomic, assign) NSInteger selectedMarkCategoryIndex;
@@ -43,9 +44,14 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     return _categoryArray;
 }
 
+- (void)setSelectedMarkCategoryIndex:(NSInteger)selectedMarkCategoryIndex {
+    _selectedMarkCategoryIndex = selectedMarkCategoryIndex;
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).currentMarketCategory = self.categoryArray[selectedMarkCategoryIndex];
+}
+
 #pragma mark - Common Init
 - (void)commonInit {
-    _marketCategoryTableView = [[UITableView alloc] init];
+    _marketCategoryTableView = [[UITableView alloc] initWithFrame:CGRectZero];
     _marketCategoryTableView.delegate = self;
     _marketCategoryTableView.dataSource = self;
     _marketCategoryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -54,32 +60,42 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _marketCategoryTableView.allowsSelection = YES;
     
     [self.view addSubview:_marketCategoryTableView];
-    
-    [_marketCategoryTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
         if (@available(iOS 11.0, *)) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        }else {
-            make.top.equalTo(self.mas_topLayoutGuide);
-            make.bottom.equalTo(self.mas_bottomLayoutGuide);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
         }
-        
-        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-30);
     }];
     
+    _selectedMarkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    _selectedMarkView.backgroundColor = SW_TAOBAO_ORANGE;
+    [self.marketCategoryTableView addSubview:_selectedMarkView];
+    [self.marketCategoryTableView bringSubviewToFront:_selectedMarkView];
 }
 
 #pragma mark - Update
 - (void)updateData {
     self.categoryArray = [SWMarketCategoryStorage allMarketCategory];
     [self.marketCategoryTableView reloadData];
+   // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+   // UITableViewCell *cell = [self.marketCategoryTableView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
    // self.categoryArray
-    CGRect cellFrame = [cell convertRect:cell.frame toView:tableView];
+    CGRect cellFrame = cell.frame;
+    CGRect markCellFrame = CGRectMake(cellFrame.origin.x + cellFrame.size.width - 20, cellFrame.origin.y, 20, cellFrame.size.height);
+    NSLog(@"org Cell frame is %@", NSStringFromCGRect(cell.frame));
+    NSLog(@"Cell frame is %@", NSStringFromCGRect(cellFrame));
+     NSLog(@"Mark frame is %@", NSStringFromCGRect(markCellFrame));
+    [UIView animateWithDuration:0.5 animations:^{
+        self.selectedMarkView.frame = markCellFrame;
+    }];
     
 }
 
@@ -100,8 +116,12 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     cell.textLabel.textColor = SW_DISABLE_GRAY;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    CGRect cellFrame = [cell convertRect:cell.frame toView:self.view];
     
-    
+    if (self.selectedMarkCategoryIndex == indexPath.row) {
+        CGRect cellFrame = [cell convertRect:cell.frame toView:self.view];
+        self.selectedMarkView.frame = CGRectMake(cellFrame.origin.x, cellFrame.origin.y, 20, cellFrame.size.height);
+    }
     return cell;
 }
 

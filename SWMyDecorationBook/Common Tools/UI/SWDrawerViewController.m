@@ -12,6 +12,8 @@
 #import "SWUIDef.h"
 #import "SWDef.h"
 #import "HexColor.h"
+#import "SWMarketCategoryViewController.h"
+
 CGFloat const SWDrawerDefaultWidth = 280.0f;
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
 CGFloat const SWDrawerDefaultShadowOpacity = 0.8f;
@@ -395,12 +397,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 }
 #pragma mark - Gesture call backs
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    CGPoint locationPoint = [gestureRecognizer locationInView:self.leftDrawerViewController.view];
-    if (CGRectContainsPoint(self.leftDrawerViewController.view.frame, locationPoint)) { // 左边的view不要影响他的任何响应
-        return NO;
-    }else {
-        return YES;
-    }
+    return NO;
 }
 
 - (void)tapGetureCallBack:(UITapGestureRecognizer *)tapGesture {
@@ -437,7 +434,6 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
             
             SWDrawerSide visibleSide = SWDrawerSideNone;
             CGFloat percentVisible = 0.0;
-            NSLog(@"The offset is %lf", xOffset);
             if(xOffset > 0){ // 相对于起点，手指还在右侧 ,意味着leftDrawer 仍然可见
                 visibleSide = SWDrawerSideLeft;
                 percentVisible = xOffset/self.maximumLeftDrawerWidth;

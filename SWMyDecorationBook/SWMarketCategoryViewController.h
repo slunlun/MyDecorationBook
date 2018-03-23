@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SWMarketCategoryViewController : UIViewController
-
+@property(nonatomic, strong) UITableView *marketCategoryTableView;
 @end

@@ -244,6 +244,10 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - SWPickerViewDelegate
 - (NSInteger)SWPickerView:(SWPickerView *_Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component {
     return self.itemUnits.count;

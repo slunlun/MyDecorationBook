@@ -13,13 +13,17 @@
 #import "AppDelegate.h"
 
 #define SELECTED_MARK_VIEW_SPEED 100.0f
+#define MARKET_CATEGORY_VIEW_TOP_HEIGHT 80.0f
+#define MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT 60.0f
+
 static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 @interface SWMarketCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
-
-@property(nonatomic, strong) UIView *selectedMarkView;
 @property(nonatomic, strong) NSArray *categoryArray;
 @property(nonatomic, assign) NSInteger selectedMarkCategoryIndex;
+@property(nonatomic, strong) UIButton *editBtn;
+@property(nonatomic, strong) UIButton *addBtn;
+@property(nonatomic, strong) UIButton *saveEditBtn;
 @end
 
 @implementation SWMarketCategoryViewController
@@ -51,6 +55,9 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - Common Init
 - (void)commonInit {
+    
+    self.view.backgroundColor = SW_TAOBAO_BLACK;
+    
     _marketCategoryTableView = [[UITableView alloc] initWithFrame:CGRectZero];
     _marketCategoryTableView.delegate = self;
     _marketCategoryTableView.dataSource = self;
@@ -63,17 +70,47 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(MARKET_CATEGORY_VIEW_TOP_HEIGHT);
         } else {
-            make.top.equalTo(self.mas_topLayoutGuideBottom);
+            make.top.equalTo(self.mas_topLayoutGuideBottom).offset(MARKET_CATEGORY_VIEW_TOP_HEIGHT);
         }
-        make.bottom.equalTo(self.view.mas_bottom).offset(-30);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
+    }];
+    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _editBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    _editBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
+    _editBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [_editBtn addTarget:self action:@selector(editBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_editBtn setImage:[UIImage imageNamed:@"Edit@30"] forState:UIControlStateNormal];
+    [_editBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    [_editBtn setTitleColor:SW_DISABLE_GRAY forState:UIControlStateNormal];
+    _editBtn.titleLabel.font = SW_DEFAULT_FONT;
+    _editBtn.backgroundColor = SW_TAOBAO_BLACK;
+    [self.view addSubview:_editBtn];
+    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_marketCategoryTableView.mas_bottom);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view).multipliedBy(0.5);
+        make.bottom.equalTo(self.view);
     }];
     
-    _selectedMarkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    _selectedMarkView.backgroundColor = SW_TAOBAO_ORANGE;
-    [self.marketCategoryTableView addSubview:_selectedMarkView];
-    [self.marketCategoryTableView bringSubviewToFront:_selectedMarkView];
+    _addBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _addBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
+    [_addBtn addTarget:self action:@selector(addCategoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_addBtn setImage:[UIImage imageNamed:@"Add-Cross"] forState:UIControlStateNormal];
+    [_addBtn setTitle:@"添加" forState:UIControlStateNormal];
+    [_addBtn setTitleColor:SW_DISABLE_GRAY forState:UIControlStateNormal];
+    _addBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    _addBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
+    _addBtn.titleLabel.font = SW_DEFAULT_FONT;
+    _addBtn.backgroundColor = SW_TAOBAO_BLACK;
+    [self.view addSubview:_addBtn];
+    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_marketCategoryTableView.mas_bottom);
+        make.left.equalTo(self.editBtn.mas_right);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
 }
 
 #pragma mark - Update
@@ -87,16 +124,11 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-   // self.categoryArray
     CGRect cellFrame = cell.frame;
     CGRect markCellFrame = CGRectMake(cellFrame.origin.x + cellFrame.size.width - 20, cellFrame.origin.y, 20, cellFrame.size.height);
     NSLog(@"org Cell frame is %@", NSStringFromCGRect(cell.frame));
     NSLog(@"Cell frame is %@", NSStringFromCGRect(cellFrame));
-     NSLog(@"Mark frame is %@", NSStringFromCGRect(markCellFrame));
-    [UIView animateWithDuration:0.5 animations:^{
-        self.selectedMarkView.frame = markCellFrame;
-    }];
-    
+    NSLog(@"Mark frame is %@", NSStringFromCGRect(markCellFrame));
 }
 
 #pragma mark - UITableViewDataSource
@@ -116,13 +148,20 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     cell.textLabel.textColor = SW_DISABLE_GRAY;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    CGRect cellFrame = [cell convertRect:cell.frame toView:self.view];
-    
-    if (self.selectedMarkCategoryIndex == indexPath.row) {
-        CGRect cellFrame = [cell convertRect:cell.frame toView:self.view];
-        self.selectedMarkView.frame = CGRectMake(cellFrame.origin.x, cellFrame.origin.y, 20, cellFrame.size.height);
-    }
     return cell;
+}
+
+#pragma mark - UI Response
+- (void)editBtnClicked:(UIButton *)editBtn {
+    
+}
+
+- (void)saveEditBtnClicked:(UIButton *)saveEditBtn {
+    
+}
+
+- (void)addCategoryBtnClicked:(UIButton *)addBtn {
+    
 }
 
 @end

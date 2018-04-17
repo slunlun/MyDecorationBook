@@ -11,6 +11,8 @@
 #import "SWUIDef.h"
 #import "Masonry.h"
 #import "AppDelegate.h"
+#import "SWMarketCategoryTableViewCell.h"
+#import "SWDef.h"
 
 #define SELECTED_MARK_VIEW_SPEED 100.0f
 #define MARKET_CATEGORY_VIEW_TOP_HEIGHT 80.0f
@@ -65,6 +67,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _marketCategoryTableView.backgroundColor = SW_TAOBAO_BLACK;
     _marketCategoryTableView.allowsMultipleSelection = NO;
     _marketCategoryTableView.allowsSelection = YES;
+    [_marketCategoryTableView registerClass:[SWMarketCategoryTableViewCell class] forCellReuseIdentifier:CATEGORY_CELL_IDENTIFY];
     
     [self.view addSubview:_marketCategoryTableView];
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -104,12 +107,29 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _addBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     _addBtn.titleLabel.font = SW_DEFAULT_FONT;
     _addBtn.backgroundColor = SW_TAOBAO_BLACK;
-    [self.view addSubview:_addBtn];
-    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [self.view addSubview:_addBtn];
+//    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_marketCategoryTableView.mas_bottom);
+//        make.left.equalTo(self.editBtn.mas_right);
+//        make.right.equalTo(self.view);
+//        make.bottom.equalTo(self.view);
+//    }];
+    
+    _saveEditBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_saveEditBtn addTarget:self action:@selector(saveEditBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_saveEditBtn setImage:[UIImage imageNamed:@"Check"] forState:UIControlStateNormal];
+    [_saveEditBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [_saveEditBtn setTitleColor:SW_DISABLE_GRAY forState:UIControlStateNormal];
+    _saveEditBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    _saveEditBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
+    _saveEditBtn.titleLabel.font = SW_DEFAULT_FONT;
+    _saveEditBtn.backgroundColor = SW_TAOBAO_BLACK;
+    [self.view addSubview:_saveEditBtn];
+    [_saveEditBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_marketCategoryTableView.mas_bottom);
-        make.left.equalTo(self.editBtn.mas_right);
-        make.right.equalTo(self.view);
+        make.right.equalTo(self.view.mas_left).offset(-20);
         make.bottom.equalTo(self.view);
+        make.width.equalTo(@0);
     }];
 }
 
@@ -123,12 +143,6 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    CGRect cellFrame = cell.frame;
-    CGRect markCellFrame = CGRectMake(cellFrame.origin.x + cellFrame.size.width - 20, cellFrame.origin.y, 20, cellFrame.size.height);
-    NSLog(@"org Cell frame is %@", NSStringFromCGRect(cell.frame));
-    NSLog(@"Cell frame is %@", NSStringFromCGRect(cellFrame));
-    NSLog(@"Mark frame is %@", NSStringFromCGRect(markCellFrame));
 }
 
 #pragma mark - UITableViewDataSource
@@ -137,30 +151,86 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CATEGORY_CELL_IDENTIFY];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CATEGORY_CELL_IDENTIFY];
-    }
+    SWMarketCategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CATEGORY_CELL_IDENTIFY];
     SWMarketCategory *marketCategory = self.categoryArray[indexPath.row];
-    cell.textLabel.text = marketCategory.categoryName;
-    cell.textLabel.font = SW_DEFAULT_FONT;
-    cell.backgroundColor = SW_TAOBAO_BLACK;
-    cell.textLabel.textColor = SW_DISABLE_GRAY;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.model = marketCategory;
+    WeakObj(self);
+    cell.configBtnCallback = ^(SWMarketCategory *model) {
+        StrongObj(self);
+        [self configMarketCategory:model];
+    };
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+
+#pragma mark - Update UI
+- (void)updateViewConstraints {
+    if (self.marketCategoryTableView.editing) {
+        [self.editBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.left.equalTo(self.view.mas_right);
+            make.width.equalTo(@0);
+            make.bottom.equalTo(self.view);
+        }];
+       
+        [_saveEditBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.right.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+            make.left.equalTo(self.view);
+        }];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+        
+    }else {
+        [_editBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.left.equalTo(self.view);
+            make.right.equalTo(self.view).multipliedBy(0.5);
+            make.bottom.equalTo(self.view);
+        }];
+        
+        [_saveEditBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.right.equalTo(self.view.mas_left).offset(-20);
+            make.bottom.equalTo(self.view);
+            make.width.equalTo(@0);
+        }];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
+    
+    [super updateViewConstraints];
 }
 
 #pragma mark - UI Response
 - (void)editBtnClicked:(UIButton *)editBtn {
-    
+    [self.marketCategoryTableView setEditing:YES animated:YES];
+    [self.marketCategoryTableView reloadData];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
 }
 
 - (void)saveEditBtnClicked:(UIButton *)saveEditBtn {
-    
+    [self.marketCategoryTableView setEditing:NO animated:YES];
+    [self.marketCategoryTableView reloadData];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
 }
 
 - (void)addCategoryBtnClicked:(UIButton *)addBtn {
+    [self.marketCategoryTableView setEditing:NO animated:YES];
+    [self.marketCategoryTableView reloadData];
+}
+
+- (void)configMarketCategory:(SWMarketCategory *)marketCategory {
     
 }
 

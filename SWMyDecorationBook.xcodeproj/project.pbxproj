@@ -100,6 +100,7 @@
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
+		B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -300,6 +301,8 @@
 		80504151202945930003A95A /* SWMarketCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryViewController.m; sourceTree = "<group>"; };
 		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
+		B065BE9D2085D6B400F57731 /* SWMarketCategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryTableViewCell.h; sourceTree = "<group>"; };
+		B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -592,6 +595,8 @@
 				5E9C2CE82004AF310052A05E /* SWShoppingItemInfoViewController.m */,
 				80504150202945930003A95A /* SWMarketCategoryViewController.h */,
 				80504151202945930003A95A /* SWMarketCategoryViewController.m */,
+				B065BE9D2085D6B400F57731 /* SWMarketCategoryTableViewCell.h */,
+				B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -838,6 +843,7 @@
 				5E9C2CE42004AB210052A05E /* TZVideoPlayerController.m in Sources */,
 				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
 				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,
+				B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */,
 				5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */,
 				5E17560A20109E8F009F100B /* NSManagedObject+MagicalDataImport.m in Sources */,
 				5E9C2CDA2004AB210052A05E /* TZGifPhotoPreviewController.m in Sources */,

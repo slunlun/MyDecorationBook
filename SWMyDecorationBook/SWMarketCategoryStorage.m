@@ -21,6 +21,7 @@
         shoppingCategory.arrangeIndex = marketCategory.indexNum;
         shoppingCategory.createTime = marketCategory.createTime;
         shoppingCategory.name = marketCategory.categoryName;
+        shoppingCategory.itemID = marketCategory.itemID;
     }];
 }
 

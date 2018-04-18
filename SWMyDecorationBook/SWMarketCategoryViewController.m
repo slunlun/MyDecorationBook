@@ -79,6 +79,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
         }
         make.bottom.equalTo(self.view.mas_bottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
     }];
+    
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     _editBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     _editBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
@@ -107,13 +108,13 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _addBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     _addBtn.titleLabel.font = SW_DEFAULT_FONT;
     _addBtn.backgroundColor = SW_TAOBAO_BLACK;
-//    [self.view addSubview:_addBtn];
-//    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_marketCategoryTableView.mas_bottom);
-//        make.left.equalTo(self.editBtn.mas_right);
-//        make.right.equalTo(self.view);
-//        make.bottom.equalTo(self.view);
-//    }];
+    [self.view addSubview:_addBtn];
+    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_marketCategoryTableView.mas_bottom);
+        make.left.equalTo(self.editBtn.mas_right);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
     
     _saveEditBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_saveEditBtn addTarget:self action:@selector(saveEditBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -163,7 +164,19 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    SWMarketCategory *marketCategory = self.categoryArray[indexPath.row];
+    NSString *messageString = [NSString stringWithFormat:@"确定删除%@吗?(%@下的所有商家信息将被删除)", marketCategory.categoryName, marketCategory.categoryName];
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:messageString preferredStyle:UIAlertControllerStyleAlert];//UIAlertControllerStyleAlert视图在中央
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SWMarketCategoryStorage removeMarkeetCategory:marketCategory];
+        [self updateData];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
@@ -183,6 +196,13 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
             make.bottom.equalTo(self.view);
             make.left.equalTo(self.view);
         }];
+        
+        [_addBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.left.equalTo(self.editBtn.mas_right);
+            make.width.equalTo(@0);
+            make.bottom.equalTo(self.view);
+        }];
         [UIView animateWithDuration:0.3 animations:^{
             [self.view layoutIfNeeded];
         }];
@@ -200,6 +220,13 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
             make.right.equalTo(self.view.mas_left).offset(-20);
             make.bottom.equalTo(self.view);
             make.width.equalTo(@0);
+        }];
+        
+        [_addBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_marketCategoryTableView.mas_bottom);
+            make.left.equalTo(self.editBtn.mas_right);
+            make.right.equalTo(self.view);
+            make.bottom.equalTo(self.view);
         }];
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -231,7 +258,26 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 }
 
 - (void)configMarketCategory:(SWMarketCategory *)marketCategory {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"分类名称" preferredStyle:UIAlertControllerStyleAlert];
     
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = marketCategory.categoryName;
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = alertController.textFields[0];
+        if (![textField.text isEqualToString:@""] && ![textField.text isEqualToString:marketCategory.categoryName]) {
+            marketCategory.categoryName = textField.text;
+            [SWMarketCategoryStorage updateMarketCategory:marketCategory];
+            [self updateData];
+        }
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

@@ -102,6 +102,7 @@
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 		B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */; };
 		B065BFC6208874E800F57731 /* SWOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC5208874E800F57731 /* SWOrderView.m */; };
+		B065BFCA20887CE400F57731 /* SWOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC920887CE400F57731 /* SWOrder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -306,6 +307,8 @@
 		B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryTableViewCell.m; sourceTree = "<group>"; };
 		B065BFC4208874E800F57731 /* SWOrderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderView.h; sourceTree = "<group>"; };
 		B065BFC5208874E800F57731 /* SWOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderView.m; sourceTree = "<group>"; };
+		B065BFC820887CE400F57731 /* SWOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrder.h; sourceTree = "<group>"; };
+		B065BFC920887CE400F57731 /* SWOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -673,6 +676,7 @@
 		5EB9D7811F7F72D700034E09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B065BFC720887CCC00F57731 /* ShoppingOrder */,
 				5E9C77CC200F3094000355D2 /* ShoppingItem */,
 				5E9C77CB200F3086000355D2 /* Market */,
 			);
@@ -721,6 +725,15 @@
 				5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		B065BFC720887CCC00F57731 /* ShoppingOrder */ = {
+			isa = PBXGroup;
+			children = (
+				B065BFC820887CE400F57731 /* SWOrder.h */,
+				B065BFC920887CE400F57731 /* SWOrder.m */,
+			);
+			name = ShoppingOrder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -859,6 +872,7 @@
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5E9C77D6200F3E8B000355D2 /* SWItemUnit.m in Sources */,
 				5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */,
+				B065BFCA20887CE400F57731 /* SWOrder.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5E9C2CDB2004AB210052A05E /* TZImageCropManager.m in Sources */,
 				5E9C2CD72004AB210052A05E /* NSBundle+TZImagePicker.m in Sources */,

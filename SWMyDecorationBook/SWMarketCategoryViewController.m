@@ -81,6 +81,10 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     }];
     
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _editBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
+    _editBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
+    _editBtn.layer.shadowOpacity = 1.0f;
     _editBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     _editBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     _editBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -99,6 +103,10 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     }];
     
     _addBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _addBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
+    _addBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
+    _addBtn.layer.shadowOpacity = 1.0f;
+    
     _addBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [_addBtn addTarget:self action:@selector(addCategoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_addBtn setImage:[UIImage imageNamed:@"Add-Cross"] forState:UIControlStateNormal];
@@ -117,6 +125,10 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     }];
     
     _saveEditBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _saveEditBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
+    _saveEditBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
+    _saveEditBtn.layer.shadowOpacity = 1.0f;
+    
     [_saveEditBtn addTarget:self action:@selector(saveEditBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_saveEditBtn setImage:[UIImage imageNamed:@"Check"] forState:UIControlStateNormal];
     [_saveEditBtn setTitle:@"完成" forState:UIControlStateNormal];

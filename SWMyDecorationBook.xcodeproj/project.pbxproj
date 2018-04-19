@@ -101,6 +101,7 @@
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 		B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */; };
+		B065BFC6208874E800F57731 /* SWOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC5208874E800F57731 /* SWOrderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -303,6 +304,8 @@
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
 		B065BE9D2085D6B400F57731 /* SWMarketCategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryTableViewCell.h; sourceTree = "<group>"; };
 		B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryTableViewCell.m; sourceTree = "<group>"; };
+		B065BFC4208874E800F57731 /* SWOrderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderView.h; sourceTree = "<group>"; };
+		B065BFC5208874E800F57731 /* SWOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,6 +664,8 @@
 				5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */,
 				5E9C2CB620034F6C0052A05E /* SWPickerView.h */,
 				5E9C2CB720034F6C0052A05E /* SWPickerView.m */,
+				B065BFC4208874E800F57731 /* SWOrderView.h */,
+				B065BFC5208874E800F57731 /* SWOrderView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -840,6 +845,7 @@
 				5E9C2CD92004AB210052A05E /* TZAssetModel.m in Sources */,
 				5E17561720109E8F009F100B /* MagicalRecord+ErrorHandling.m in Sources */,
 				5E1756242010A13C009F100B /* SWProductPhotoStorage.m in Sources */,
+				B065BFC6208874E800F57731 /* SWOrderView.m in Sources */,
 				5E9C2CE42004AB210052A05E /* TZVideoPlayerController.m in Sources */,
 				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
 				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,

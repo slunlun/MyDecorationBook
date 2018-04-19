@@ -237,6 +237,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) { //商品单价
+        [self.view endEditing:YES];
         SWPickerView *pickerView = [[SWPickerView alloc] init];
         pickerView.delegate = self;
         [pickerView attachSWPickerViewInView:self.view];

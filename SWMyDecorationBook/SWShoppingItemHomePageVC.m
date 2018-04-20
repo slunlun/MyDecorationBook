@@ -19,6 +19,7 @@
 #import "SWProductPhoto.h"
 #import "SWProductItemStorage.h"
 #import "SWMarketCategoryStorage.h"
+#import "SWOrderView.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -31,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = SW_TAOBAO_WHITE;
     [self commitInit];
 }
 
@@ -252,7 +253,9 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
-    
+    SWOrderView *orderView = [[SWOrderView alloc] initWithProductItem:productItem];
+    [orderView attachToView:self.view];
+    [orderView showOrderView];
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickTakeProductPhoto:(SWProductItem *)productItem {

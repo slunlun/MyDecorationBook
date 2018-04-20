@@ -58,7 +58,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     _shoppingItemTableView.delegate = self;
     [self.view addSubview:_shoppingItemTableView];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = SW_TAOBAO_WHITE;
     
     // 默认初始化当前的shoppingItem
     if (_shoppingItem == nil) {

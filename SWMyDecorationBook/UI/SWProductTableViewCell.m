@@ -153,7 +153,7 @@
 #pragma mark - Init/Setter/Getter
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = SW_TAOBAO_WHITE;
         [self commonInit];
     }
     return self;

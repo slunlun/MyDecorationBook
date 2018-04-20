@@ -7,11 +7,17 @@
 //
 
 #import "SWOrderView.h"
+#import "SWOrderCountTableViewCell.h"
+#import "Masonry.h"
+
+static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
+
 #define SW_ORDER_VIEW_HEIGHT 300
-@interface SWOrderView()
+@interface SWOrderView()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIButton *cancelBtn;
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIView *coverView;
+@property(nonatomic, strong) UITableView *orderInfoTableView;
 @end
 
 @implementation SWOrderView
@@ -45,6 +51,7 @@
 }
 
 - (void)dismissOrderView {
+    [self endEditing:YES];
     CGRect screenFrame = [UIScreen mainScreen].bounds;
     [self removeCoverView];
     [UIView animateWithDuration:0.6 animations:^{
@@ -69,8 +76,49 @@
 }
 #pragma mark - Common Init
 - (void)commonInit {
+    self.backgroundColor = [UIColor whiteColor];
+    
+    _orderInfoTableView = [[UITableView alloc] init];
+    [_orderInfoTableView registerClass:[SWOrderCountTableViewCell class] forCellReuseIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
+    _orderInfoTableView.delegate = self;
+    _orderInfoTableView.dataSource = self;
+    [self addSubview:_orderInfoTableView];
+    [_orderInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self);
+    }];
+    
+    self.coverView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.coverView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewTapped:)];
+    [self.coverView addGestureRecognizer:tapGesture];
+}
+
+
+#pragma mark - UI Response
+- (void)backgroundViewTapped:(UITapGestureRecognizer *)tapGesture {
+    [self dismissOrderView];
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
-#pragma mark - UI Response
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //if (indexPath.row == 1) {
+        return 60;
+    
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SWOrderCountTableViewCell *orderCountCell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
+    orderCountCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return orderCountCell;
+}
 @end

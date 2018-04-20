@@ -25,8 +25,11 @@
 // color
 #define SW_MAIN_BLUE_COLOR [UIColor colorWithHexString:@"#3498db"]
 #define SW_DISABLE_GRAY [UIColor colorWithHexString:@"#cccccc"]
+#define SW_DISABLIE_WHITE [UIColor colorWithHexString:@"ecf0f1"]
+#define SW_DISABLIE_THIN_WHITE [UIColor colorWithHexString:@"#F9F7F7"]
 #define SW_WARN_RED [UIColor colorWithHexString:@"#e74c3c"]
 #define SW_TAOBAO_ORANGE [UIColor colorWithHexString:@"#e67e22"]
 #define SW_TAOBAO_BLACK [UIColor colorWithHexString:@"#34495e"]
+#define SW_TAOBAO_WHITE [UIColor colorWithHexString:@"#FDFFFD"]
 #define SW_RMC_GREEN [UIColor colorWithRed:(153.0/255.0) green:(204.0/255.0) blue:(102.0/255.0) alpha:1.0]
 #endif /* Header_h */

@@ -198,11 +198,13 @@
         SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
         SWProductPhoto *productPhoto = self.productItem.productPhotos[indexPath.row];
         cell.model = productPhoto.photo;
+        cell.productImage.contentMode = UIViewContentModeScaleToFill;
         return cell;
     }else {
         NSString *cellIdentity = @"SWProductCollectionViewCell";
         SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
         cell.model = [UIImage imageNamed:@"Scan"];
+        cell.productImage.contentMode = UIViewContentModeCenter;
         return cell;
     }
 }

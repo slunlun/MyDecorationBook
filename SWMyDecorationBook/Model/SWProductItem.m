@@ -8,7 +8,7 @@
 
 #import "SWProductItem.h"
 #import "SWDef.h"
-#import "SWProductPhoto.h"
+
 @implementation SWProductItem
 //@property(nonatomic, strong) NSString *itemID;
 //@property(nonatomic, strong) NSString *productName;

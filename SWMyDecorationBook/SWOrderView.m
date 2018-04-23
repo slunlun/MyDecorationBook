@@ -9,8 +9,11 @@
 #import "SWOrderView.h"
 #import "SWOrderCountTableViewCell.h"
 #import "Masonry.h"
+#import "SWOrderProductTableViewCell.h"
+#import "SWUIDef.h"
 
 static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
+static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY";
 
 #define SW_ORDER_VIEW_HEIGHT 300
 @interface SWOrderView()<UITableViewDelegate, UITableViewDataSource>
@@ -23,6 +26,7 @@ static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
 @implementation SWOrderView
 - (instancetype)initWithProductItem:(SWProductItem *)productItem {
     if (self = [super init]) {
+        self.model = productItem;
         [self commonInit];
     }
     return self;
@@ -80,8 +84,10 @@ static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
     
     _orderInfoTableView = [[UITableView alloc] init];
     [_orderInfoTableView registerClass:[SWOrderCountTableViewCell class] forCellReuseIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
+    [_orderInfoTableView registerClass:[SWOrderProductTableViewCell class] forCellReuseIdentifier:SW_PRODUCT_INFO_CELL_IDENTITY];
     _orderInfoTableView.delegate = self;
     _orderInfoTableView.dataSource = self;
+    _orderInfoTableView.backgroundColor = SW_DISABLIE_THIN_WHITE;
     [self addSubview:_orderInfoTableView];
     [_orderInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self);
@@ -106,19 +112,28 @@ static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
+        return 150;
+    }else {
         return 60;
-    
+    }
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SWOrderCountTableViewCell *orderCountCell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
-    orderCountCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return orderCountCell;
+    UITableViewCell *cell = nil;
+    if (indexPath.row == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:SW_PRODUCT_INFO_CELL_IDENTITY];
+        [((SWOrderProductTableViewCell *)cell) setModel:self.model];
+    }else {
+        cell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
+    }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    return cell;
 }
 @end

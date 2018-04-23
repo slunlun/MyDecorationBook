@@ -102,8 +102,10 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
     };
     if (indexPath.section == 1) {
         cell.model = [UIImage imageNamed:@"Scan"];
+        cell.productImage.contentMode = UIViewContentModeCenter;
     }else{
         cell.model = self.photos[indexPath.row];
+        cell.productImage.contentMode = UIViewContentModeScaleToFill;
     }
     return cell;
 }

@@ -87,6 +87,9 @@
     if ([textField.text isEqualToString:@""]) {
         textField.text = @"0";
     }
+    if (self.delegate) {
+        [self.delegate SWAddSubView:self didUpdateCount:textField.text.integerValue];
+    }
     return YES;
 }
 
@@ -105,7 +108,10 @@
     count++;
     self.btnSub.userInteractionEnabled = YES;
     self.btnSub.backgroundColor = SW_DISABLIE_WHITE;
-    self.txtFCount.text = [NSString stringWithFormat:@"%ld",count];
+    self.txtFCount.text = [NSString stringWithFormat:@"%ld",(long)count];
+    if (self.delegate) {
+        [self.delegate SWAddSubView:self didUpdateCount:count];
+    }
 }
 
 - (void)subBtnLong:(UILongPressGestureRecognizer *)longPress {
@@ -124,6 +130,9 @@
         self.btnSub.userInteractionEnabled = NO;
         self.btnSub.backgroundColor = SW_DISABLIE_THIN_WHITE;
     }
-    self.txtFCount.text = [NSString stringWithFormat:@"%ld",count];
+    self.txtFCount.text = [NSString stringWithFormat:@"%ld",(long)count];
+    if (self.delegate) {
+        [self.delegate SWAddSubView:self didUpdateCount:count];
+    }
 }
 @end

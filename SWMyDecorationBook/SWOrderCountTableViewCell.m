@@ -10,7 +10,7 @@
 #import "SWAddSubView.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
-@interface SWOrderCountTableViewCell()
+@interface SWOrderCountTableViewCell()<SWAddSubViewDelegate>
 @property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, strong) SWAddSubView *addSubView;
 @end
@@ -40,6 +40,7 @@
     }];
     
     _addSubView = [[SWAddSubView alloc] init];
+    _addSubView.delegate = self;
     [self.contentView addSubview:_addSubView];
     [_addSubView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView.mas_right).offset(-SW_CELL_LEFT_MARGIN);
@@ -47,5 +48,12 @@
         make.height.equalTo(_titleLab.mas_height).offset(-10);
         make.width.equalTo(@90);
     }];
+}
+
+#pragma mark - SWAddSubViewDelegate
+- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(NSInteger)count {
+    if (self.orderCountUpdateBlock) {
+        self.orderCountUpdateBlock(count);
+    }
 }
 @end

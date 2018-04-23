@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "SWOrderProductTableViewCell.h"
 #import "SWUIDef.h"
+#import "SWDef.h"
 
 static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
 static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY";
@@ -21,12 +22,14 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, strong) UITableView *orderInfoTableView;
+@property(nonatomic, assign) NSInteger orderCount;
 @end
 
 @implementation SWOrderView
 - (instancetype)initWithProductItem:(SWProductItem *)productItem {
     if (self = [super init]) {
-        self.model = productItem;
+        _model = productItem;
+        _orderCount = 1;
         [self commonInit];
     }
     return self;
@@ -130,8 +133,20 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:SW_PRODUCT_INFO_CELL_IDENTITY];
         [((SWOrderProductTableViewCell *)cell) setModel:self.model];
+        [((SWOrderProductTableViewCell *)cell) updateProductOrderCount:self.orderCount];
+        
     }else {
         cell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
+        WeakObj(self);
+        ((SWOrderCountTableViewCell *)cell).orderCountUpdateBlock = ^(NSInteger orderCount) {
+            StrongObj(self);
+            if (self) {
+                if (orderCount != self.orderCount) {
+                    self.orderCount = orderCount;
+                    [self.orderInfoTableView reloadData];
+                }
+            }
+        };
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;

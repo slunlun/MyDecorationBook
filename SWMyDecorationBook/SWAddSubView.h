@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SWAddSubView;
+
+@protocol SWAddSubViewDelegate
+- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(NSInteger)count;
+@end
 
 @interface SWAddSubView : UIView
-
+@property(nonatomic, weak)id<SWAddSubViewDelegate> delegate;
 @end

@@ -32,8 +32,6 @@
 }
 #pragma mark - UI Init
 - (void)commonInit {
-    self.backgroundColor = [UIColor whiteColor];
-  
     _btnSub = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btnSub setImage:[UIImage imageNamed:@"Subtraction"] forState:UIControlStateNormal];
     [_btnSub addTarget:self action:@selector(subBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -42,12 +40,13 @@
     [self addSubview:_btnSub];
     [_btnSub mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.equalTo(self);
-        make.width.equalTo(@25);
+        make.width.equalTo(@35);
     }];
     
     _txtFCount = [[UITextField alloc] init];
+    _txtFCount.inputAccessoryView = [self addToolbar];
     _txtFCount.textAlignment = NSTextAlignmentCenter;
-    _txtFCount.keyboardType = UIKeyboardTypeNumberPad;
+    _txtFCount.keyboardType = UIKeyboardTypeDecimalPad;
     _txtFCount.text = @"1";
     _txtFCount.font = SW_DEFAULT_MIN_FONT;
     _txtFCount.backgroundColor = SW_DISABLIE_WHITE;
@@ -67,7 +66,7 @@
     [_btnAdd mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self);
         make.left.equalTo(_txtFCount.mas_right).offset(1);
-        make.width.equalTo(@25);
+        make.width.equalTo(@35);
     }];
     
     UILongPressGestureRecognizer* addLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addBtnLong:)];
@@ -77,11 +76,29 @@
     UILongPressGestureRecognizer* subLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(subBtnLong:)];
     subLongPress.minimumPressDuration=0.8;//定义按的时间
     [_btnSub addGestureRecognizer:addLongPress];
-    
-    
-
-    
 }
+
+- (UIToolbar *)addToolbar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), SW_KEYBOARD_ACCESSVIEW_HEIGHT)];
+    toolbar.tintColor = [UIColor blueColor];
+    toolbar.backgroundColor = SW_DISABLIE_THIN_WHITE;
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    UIBarButtonItem *bar = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(textFieldDone)];
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    attrs[NSFontAttributeName] = SW_DEFAULT_FONT_LARGE;
+    attrs[NSForegroundColorAttributeName] = SW_MAIN_BLUE_COLOR;
+    [bar setTitleTextAttributes:attrs forState:UIControlStateNormal];
+    
+    toolbar.items = @[space, bar];
+    return toolbar;
+}
+
+- (void)textFieldDone {
+    [self.txtFCount resignFirstResponder];
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {

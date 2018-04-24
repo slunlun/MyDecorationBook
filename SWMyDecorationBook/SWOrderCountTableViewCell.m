@@ -43,10 +43,10 @@
     _addSubView.delegate = self;
     [self.contentView addSubview:_addSubView];
     [_addSubView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-SW_CELL_LEFT_MARGIN);
+        make.right.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN + 3);
         make.height.equalTo(_titleLab.mas_height).offset(-10);
-        make.width.equalTo(@90);
+        make.width.equalTo(@110);
     }];
 }
 

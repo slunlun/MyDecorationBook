@@ -32,4 +32,7 @@
 #define SW_TAOBAO_BLACK [UIColor colorWithHexString:@"#34495e"]
 #define SW_TAOBAO_WHITE [UIColor colorWithHexString:@"#FDFFFD"]
 #define SW_RMC_GREEN [UIColor colorWithRed:(153.0/255.0) green:(204.0/255.0) blue:(102.0/255.0) alpha:1.0]
+
+// keyboard
+#define SW_KEYBOARD_ACCESSVIEW_HEIGHT 40.0f
 #endif /* Header_h */

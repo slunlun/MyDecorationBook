@@ -9,20 +9,21 @@
 #import "SWOrderView.h"
 #import "SWOrderCountTableViewCell.h"
 #import "Masonry.h"
-#import "SWOrderProductTableViewCell.h"
 #import "SWUIDef.h"
 #import "SWDef.h"
+#import "SWOrderProductInfoView.h"
 
 static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
 static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY";
 
-#define SW_ORDER_VIEW_HEIGHT 300
+#define SW_ORDER_VIEW_HEIGHT 400
 @interface SWOrderView()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIButton *cancelBtn;
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, strong) UITableView *orderInfoTableView;
 @property(nonatomic, assign) NSInteger orderCount;
+@property(nonatomic, strong) SWOrderProductInfoView *orderProductInfoView;
 @end
 
 @implementation SWOrderView
@@ -30,9 +31,14 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
     if (self = [super init]) {
         _model = productItem;
         _orderCount = 1;
+        [self registerNotification];
         [self commonInit];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)attachToView:(UIView *)parentView {
@@ -83,17 +89,44 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
 }
 #pragma mark - Common Init
 - (void)commonInit {
-    self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = 10.0f;
+    self.layer.masksToBounds = YES;
+    self.backgroundColor = SW_DISABLIE_THIN_WHITE;
+    
+    
+    
+    _orderProductInfoView = [[SWOrderProductInfoView alloc] init];
+    [self addSubview:_orderProductInfoView];
+    [_orderProductInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0.5 * SW_MARGIN);
+        make.left.equalTo(self).offset(0.5 * SW_MARGIN);
+        make.right.equalTo(self).offset(0.5 * SW_MARGIN);
+        make.height.equalTo(@120);
+    }];
+    
+    [_orderProductInfoView setModel:self.model];
+    
+    _cancelBtn = [[UIButton alloc] init];
+    _cancelBtn.imageView.contentMode = UIViewContentModeCenter;
+    [_cancelBtn setImage:[UIImage imageNamed:@"RoundCancel"] forState:UIControlStateNormal];
+    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_cancelBtn];
+    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0.2 * SW_MARGIN);
+        make.right.equalTo(self).offset(-0.2 * SW_MARGIN);
+        make.height.width.equalTo(@50);
+    }];
     
     _orderInfoTableView = [[UITableView alloc] init];
     [_orderInfoTableView registerClass:[SWOrderCountTableViewCell class] forCellReuseIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
-    [_orderInfoTableView registerClass:[SWOrderProductTableViewCell class] forCellReuseIdentifier:SW_PRODUCT_INFO_CELL_IDENTITY];
     _orderInfoTableView.delegate = self;
     _orderInfoTableView.dataSource = self;
     _orderInfoTableView.backgroundColor = SW_DISABLIE_THIN_WHITE;
     [self addSubview:_orderInfoTableView];
     [_orderInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self);
+        make.top.equalTo(_orderProductInfoView.mas_bottom);
+        make.right.left.equalTo(self);
+        make.height.equalTo(@210);
     }];
     
     self.coverView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -107,6 +140,9 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
 - (void)backgroundViewTapped:(UITapGestureRecognizer *)tapGesture {
     [self dismissOrderView];
 }
+- (void)cancelBtnClicked:(UIButton *)cancelBtn {
+    [self dismissOrderView];
+}
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,27 +151,18 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //if (indexPath.row == 1) {
-    if (indexPath.row == 0) {
-        return 150;
-    }else {
-        return 60;
-    }
+    return 60;
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
     if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:SW_PRODUCT_INFO_CELL_IDENTITY];
-        [((SWOrderProductTableViewCell *)cell) setModel:self.model];
-        [((SWOrderProductTableViewCell *)cell) updateProductOrderCount:self.orderCount];
-        
-    }else {
         cell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
         WeakObj(self);
         ((SWOrderCountTableViewCell *)cell).orderCountUpdateBlock = ^(NSInteger orderCount) {
@@ -143,12 +170,30 @@ static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY
             if (self) {
                 if (orderCount != self.orderCount) {
                     self.orderCount = orderCount;
-                    [self.orderInfoTableView reloadData];
+                    [self.orderProductInfoView updateProductOrderCount:self.orderCount];
                 }
             }
         };
+    }else {
+       
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
+}
+
+#pragma mark - Notification
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notificaiton {
+    NSDictionary *info = notificaiton.userInfo;
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    self.orderInfoTableView.contentInset = UIEdgeInsetsMake(0, 0, kbSize.height, 0);
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification {
+    self.orderInfoTableView.contentInset = UIEdgeInsetsZero;
 }
 @end

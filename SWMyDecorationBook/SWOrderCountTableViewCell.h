@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^orderCountUpdateBlock)(NSInteger orderCount);
+typedef void(^orderCountUpdateBlock)(CGFloat orderCount);
 
 @interface SWOrderCountTableViewCell : UITableViewCell
 @property(nonatomic, copy) orderCountUpdateBlock orderCountUpdateBlock;

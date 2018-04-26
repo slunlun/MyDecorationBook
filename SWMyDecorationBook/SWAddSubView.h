@@ -10,7 +10,7 @@
 @class SWAddSubView;
 
 @protocol SWAddSubViewDelegate
-- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(NSInteger)count;
+- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(CGFloat)count;
 @end
 
 @interface SWAddSubView : UIView

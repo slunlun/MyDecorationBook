@@ -27,6 +27,8 @@
 
 #pragma mark - Common Init
 - (void)commonInit {
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    
     _titleLab = [[UILabel alloc] init];
     _titleLab.textAlignment = NSTextAlignmentLeft;
     _titleLab.font = SW_DEFAULT_FONT;
@@ -51,7 +53,7 @@
 }
 
 #pragma mark - SWAddSubViewDelegate
-- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(NSInteger)count {
+- (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(CGFloat)count {
     if (self.orderCountUpdateBlock) {
         self.orderCountUpdateBlock(count);
     }

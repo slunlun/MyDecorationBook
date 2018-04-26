@@ -47,7 +47,7 @@
     _txtFCount.inputAccessoryView = [self addToolbar];
     _txtFCount.textAlignment = NSTextAlignmentCenter;
     _txtFCount.keyboardType = UIKeyboardTypeDecimalPad;
-    _txtFCount.text = @"1";
+    _txtFCount.text = @"1.00";
     _txtFCount.font = SW_DEFAULT_MIN_FONT;
     _txtFCount.backgroundColor = SW_DISABLIE_WHITE;
     _txtFCount.delegate = self;
@@ -102,16 +102,20 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {
-        textField.text = @"0";
+        textField.text = @"0.00";
+    }else {
+        CGFloat totalCount = textField.text.floatValue;
+        textField.text = [NSString stringWithFormat:@"%.2lf", totalCount];
     }
+    
     if (self.delegate) {
-        [self.delegate SWAddSubView:self didUpdateCount:textField.text.integerValue];
+        [self.delegate SWAddSubView:self didUpdateCount:textField.text.floatValue];
     }
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([textField.text isEqualToString:@"0"]) {
+    if ([textField.text isEqualToString:@"0.00"]) {
         textField.text = string;
         return NO;
     }
@@ -121,11 +125,11 @@
 
 #pragma mark - UI Response
 - (void)addBtnClicked:(UIButton *)addBtn {
-    NSInteger count = self.txtFCount.text.integerValue;
+    CGFloat count = self.txtFCount.text.floatValue;
     count++;
     self.btnSub.userInteractionEnabled = YES;
     self.btnSub.backgroundColor = SW_DISABLIE_WHITE;
-    self.txtFCount.text = [NSString stringWithFormat:@"%ld",(long)count];
+    self.txtFCount.text = [NSString stringWithFormat:@"%.2lf", count];
     if (self.delegate) {
         [self.delegate SWAddSubView:self didUpdateCount:count];
     }
@@ -140,14 +144,14 @@
 }
 
 - (void)subBtnClicked:(UIButton *)subBtn {
-    NSInteger count = self.txtFCount.text.integerValue;
+    CGFloat count = self.txtFCount.text.floatValue;
     count--;
     if (count < 0) {
         count = 0;
         self.btnSub.userInteractionEnabled = NO;
         self.btnSub.backgroundColor = SW_DISABLIE_THIN_WHITE;
     }
-    self.txtFCount.text = [NSString stringWithFormat:@"%ld",(long)count];
+    self.txtFCount.text = [NSString stringWithFormat:@"%.2lf", count];
     if (self.delegate) {
         [self.delegate SWAddSubView:self didUpdateCount:count];
     }

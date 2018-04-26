@@ -22,4 +22,5 @@
 - (void)dismissOrderView;
 
 @property(nonatomic, strong) SWProductItem *model;
+@property(nonatomic, weak) id<SWOrderViewDelegate> delegate;
 @end

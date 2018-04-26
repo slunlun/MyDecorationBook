@@ -47,10 +47,7 @@
             SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithMO:shopPhoto];
             [_productPhotos addObject:productPhoto];
         }
-      
         _createTime = shoppingItem.createTime;
-        
-        // 设置货品单位
         _itemUnit = [[SWItemUnit alloc] initWithMO:shoppingItem.itemUnit];
     }
     return self;

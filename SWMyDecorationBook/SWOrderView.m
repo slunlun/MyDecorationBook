@@ -199,8 +199,8 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
         // 产生一份新的订单
         SWOrder *newOrder = [[SWOrder alloc] init];
         newOrder.productItem = self.model;
-        newOrder.itemCount = [NSNumber numberWithFloat:self.orderCount];
-        newOrder.orderTotalPrice = [NSNumber numberWithFloat:self.txtFTotalPrice.text.floatValue];
+        newOrder.itemCount = self.orderCount;
+        newOrder.orderTotalPrice = self.txtFTotalPrice.text.floatValue;
         newOrder.orderRemark = self.orderRemark;
         
         if ([self.delegate respondsToSelector:@selector(SWOrderView:didOrderItem:)]) {

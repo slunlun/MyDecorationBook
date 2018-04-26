@@ -130,10 +130,12 @@
     _delBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [_delBtn setImage:[UIImage imageNamed:@"Del"] forState:UIControlStateNormal];
     [_delBtn addTarget:self action:@selector(delBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
+    _delBtn.imageView.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:_delBtn];
     
     _buyBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [_buyBtn setImage:[UIImage imageNamed:@"Buy"] forState:UIControlStateNormal];
+    _buyBtn.imageView.contentMode = UIViewContentModeCenter;
     [_buyBtn addTarget:self action:@selector(buyBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_buyBtn];
     

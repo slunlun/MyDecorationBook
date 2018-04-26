@@ -10,6 +10,7 @@
 #import "SWItemUnit.h"
 #import "SWShoppingItem+CoreDataClass.h"
 #import "SWProductPhoto.h"
+
 @interface SWProductItem : NSObject
 - (instancetype)initWithMO:(SWShoppingItem *)shoppingItem;
 @property(nonatomic, strong) NSString *itemID;

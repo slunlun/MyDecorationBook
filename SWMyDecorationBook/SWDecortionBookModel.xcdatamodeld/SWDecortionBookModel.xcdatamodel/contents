@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="SWDecorationAccountBook" representedClassName="SWDecorationAccountBook" syncable="YES" codeGenerationType="class"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="SWPriceUnit" representedClassName="SWPriceUnit" syncable="YES" codeGenerationType="class">
         <attribute name="unit" attributeType="String" syncable="YES"/>
         <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="SWShoppingItem" inverseName="itemUnit" inverseEntity="SWShoppingItem" syncable="YES"/>
@@ -37,7 +36,16 @@
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="itemPhotos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingPhoto" inverseName="shopItem" inverseEntity="SWShoppingPhoto" syncable="YES"/>
         <relationship name="itemUnit" maxCount="1" deletionRule="Nullify" destinationEntity="SWPriceUnit" inverseName="shopItems" inverseEntity="SWPriceUnit" syncable="YES"/>
+        <relationship name="ownnerOrder" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingItemOrder" inverseName="shopItem" inverseEntity="SWShoppingItemOrder" syncable="YES"/>
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShop" inverseName="shopItems" inverseEntity="SWShop" syncable="YES"/>
+    </entity>
+    <entity name="SWShoppingItemOrder" representedClassName="SWShoppingItemOrder" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalCount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="shopItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="ownnerOrder" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
     <entity name="SWShoppingPhoto" representedClassName="SWShoppingPhoto" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -46,12 +54,12 @@
         <relationship name="shopItem" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="itemPhotos" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SWDecorationAccountBook" positionX="-74" positionY="63" width="128" height="45"/>
+        <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="133"/>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
-        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="135"/>
+        <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
         <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="135"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="120"/>
-        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="180"/>
+        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="193"/>
         <element name="SWShoppingPhoto" positionX="-495" positionY="-315" width="128" height="105"/>
     </elements>
 </model>

@@ -7,6 +7,7 @@
 //
 
 #import "SWShoppingItemHomePageVC.h"
+#import "AppDelegate.h"
 #import "Masonry.h"
 #import "SWProductTableViewCell.h"
 #import "SWMarketHeaderView.h"
@@ -20,6 +21,7 @@
 #import "SWProductItemStorage.h"
 #import "SWMarketCategoryStorage.h"
 #import "SWOrderView.h"
+#import "SWNotebookHomeViewController.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -73,10 +75,13 @@
         }
     }];
     
+    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
+    UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Notebook"] style:UIBarButtonItemStylePlain target:self action:@selector(noteBookClicked:)];
     UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMarketItem:)];
     self.navigationItem.rightBarButtonItem = addMarketItemBtn;
-   
+    self.navigationItem.leftBarButtonItems = @[configItemBtn, notebookItemBtn];
 }
+
 #pragma mark - Data source
 - (void)updateData {
     self.marketItems = [SWMarketStorage allMarketInCategory:nil];
@@ -228,7 +233,25 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)noteBookClicked:(UIBarButtonItem *)notebookItem {
+    SWNotebookHomeViewController *notebookVC = [[SWNotebookHomeViewController alloc] init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:notebookVC];
+    [navVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC presentViewController:navVC animated:YES completion:^{
+        
+    }];
+}
+
+- (void)sysConfig:(UIBarButtonItem *)sysConfigItem {
+    
+}
+
 #pragma mark - SWProductTableViewCellDelegate
+
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didSelectImage:(UIImage *)image {
+    
+}
+
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem {
     
 }

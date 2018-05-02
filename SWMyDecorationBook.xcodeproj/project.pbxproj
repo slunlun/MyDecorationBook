@@ -100,6 +100,7 @@
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
+		B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */; };
 		B057D24E208F263800539824 /* SWOrderProductInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B057D24D208F263800539824 /* SWOrderProductInfoView.m */; };
 		B057D251209069C100539824 /* SWOrderProductInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B057D250209069C100539824 /* SWOrderProductInfoTableViewCell.m */; };
 		B057D254209078C600539824 /* SWOrderRemarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B057D253209078C600539824 /* SWOrderRemarkTableViewCell.m */; };
@@ -310,6 +311,8 @@
 		80504151202945930003A95A /* SWMarketCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryViewController.m; sourceTree = "<group>"; };
 		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
+		B01CB23B2099535000F716C4 /* SWNotebookHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNotebookHomeViewController.h; sourceTree = "<group>"; };
+		B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookHomeViewController.m; sourceTree = "<group>"; };
 		B057D24C208F263800539824 /* SWOrderProductInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderProductInfoView.h; sourceTree = "<group>"; };
 		B057D24D208F263800539824 /* SWOrderProductInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderProductInfoView.m; sourceTree = "<group>"; };
 		B057D24F209069C100539824 /* SWOrderProductInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderProductInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 				80504151202945930003A95A /* SWMarketCategoryViewController.m */,
 				B065BE9D2085D6B400F57731 /* SWMarketCategoryTableViewCell.h */,
 				B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */,
+				B01CB23B2099535000F716C4 /* SWNotebookHomeViewController.h */,
+				B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -921,6 +926,7 @@
 				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,
 				B057D257209082CB00539824 /* UITextField+OKToolBar.m in Sources */,
 				5E9C2CE32004AB210052A05E /* TZProgressView.m in Sources */,
+				B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
 				5E17561420109E8F009F100B /* NSPersistentStore+MagicalRecord.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,

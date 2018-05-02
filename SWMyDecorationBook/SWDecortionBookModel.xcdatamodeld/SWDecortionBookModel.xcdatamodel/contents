@@ -28,7 +28,6 @@
         <relationship name="shops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShop" inverseName="shopCategory" inverseEntity="SWShop" syncable="YES"/>
     </entity>
     <entity name="SWShoppingItem" representedClassName="SWShoppingItem" syncable="YES" codeGenerationType="class">
-        <attribute name="choosed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="itemID" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -36,7 +35,7 @@
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="itemPhotos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingPhoto" inverseName="shopItem" inverseEntity="SWShoppingPhoto" syncable="YES"/>
         <relationship name="itemUnit" maxCount="1" deletionRule="Nullify" destinationEntity="SWPriceUnit" inverseName="shopItems" inverseEntity="SWPriceUnit" syncable="YES"/>
-        <relationship name="ownnerOrder" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingItemOrder" inverseName="shopItem" inverseEntity="SWShoppingItemOrder" syncable="YES"/>
+        <relationship name="ownnerOrder" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SWShoppingItemOrder" inverseName="shopItem" inverseEntity="SWShoppingItemOrder" syncable="YES"/>
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShop" inverseName="shopItems" inverseEntity="SWShop" syncable="YES"/>
     </entity>
     <entity name="SWShoppingItemOrder" representedClassName="SWShoppingItemOrder" syncable="YES" codeGenerationType="class">
@@ -54,12 +53,12 @@
         <relationship name="shopItem" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="itemPhotos" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="133"/>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
         <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
         <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="135"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="120"/>
-        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="193"/>
+        <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="178"/>
+        <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="133"/>
         <element name="SWShoppingPhoto" positionX="-495" positionY="-315" width="128" height="105"/>
     </elements>
 </model>

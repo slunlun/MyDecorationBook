@@ -20,10 +20,11 @@
         newShoppingItemOrder.remark = newOrder.orderRemark;
         newShoppingItemOrder.totalCount = newOrder.itemCount;
         newShoppingItemOrder.totalPrice = newOrder.orderTotalPrice;
+        newShoppingItemOrder.itemID = newOrder.orderID;
         // 建立订单和所定商品的关系
         NSPredicate *shoppingItemPredicate = [NSPredicate predicateWithFormat:@"itemID==%@", newOrder.productItem.itemID];
         SWShoppingItem* shoppingItem = [SWShoppingItem MR_findFirstWithPredicate:shoppingItemPredicate inContext:localContext];
-        [shoppingItem addOwnnerOrderObject:newShoppingItemOrder];
+        shoppingItem.ownnerOrder = newShoppingItemOrder;
         [newShoppingItemOrder setShopItem:shoppingItem];
     }];
 }
@@ -31,6 +32,17 @@
 + (void)removeProductOrder:(SWOrder *)order {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", order.orderID];
+        [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
+    }];
+}
+
++ (void)removeProductOrderByProduct:(SWProductItem *)productItem {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemID];
+        SWShoppingItem *shoppingItem =  [SWShoppingItem MR_findFirstWithPredicate:predicate inContext:localContext];
+        predicate = [NSPredicate predicateWithFormat:@"itemID==%@", shoppingItem.ownnerOrder.itemID];
+        NSArray *all = [SWShoppingItemOrder MR_findAllInContext:localContext];
+        NSArray *allP = [SWShoppingItemOrder MR_findAllWithPredicate:predicate inContext:localContext];
         [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
     }];
 }

@@ -22,8 +22,9 @@
 #import "SWMarketCategoryStorage.h"
 #import "SWOrderView.h"
 #import "SWNotebookHomeViewController.h"
+#import "SWProductOrderStorage.h"
 
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate>
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
@@ -277,8 +278,28 @@
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
     SWOrderView *orderView = [[SWOrderView alloc] initWithProductItem:productItem];
+    orderView.delegate = self;
     [orderView attachToView:self.view];
     [orderView showOrderView];
+}
+
+- (void)productTableViewCell:(SWProductTableViewCell *)cell didUnBuyProduct:(SWProductItem *)productItem {
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定将该商品从账单中删除吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SWProductOrderStorage removeProductOrderByProduct:productItem];
+        [self updateData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SW_UNBUY_NOTIFICATION object:nil userInfo:@{SW_NOTIFICATION_PRODUCT_KEY:productItem}];
+        
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertView addAction:cancleAction];
+    [alertView addAction:okAction];
+    
+    [self presentViewController:alertView animated:YES completion:^{
+        
+    }];
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickTakeProductPhoto:(SWProductItem *)productItem {
@@ -297,4 +318,20 @@
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
+#pragma mark - SWOrderViewDelegate
+- (void)SWOrderView:(SWOrderView *)orderView didOrderItem:(SWOrder *)productOrder {
+    if(productOrder) {
+        [SWProductOrderStorage insertNewProductOrder:productOrder];
+        [self updateData];
+        [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.5];
+    }
+}
+
+- (void)postBuyProductNotification:(SWProductItem *)productItem {
+     [[NSNotificationCenter defaultCenter] postNotificationName:SW_BUY_NOTIFICATION object:nil userInfo:@{SW_NOTIFICATION_PRODUCT_KEY:productItem}];
+}
+
+- (void)SWOrderView:(SWOrderView *)orderView cancelOrderItem:(SWProductItem *)product {
+    
+}
 @end

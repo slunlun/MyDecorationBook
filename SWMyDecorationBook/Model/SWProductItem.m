@@ -38,7 +38,7 @@
         _productName = shoppingItem.name;
         _productRemark = shoppingItem.remark;
         _price = shoppingItem.price;
-        _choosed = shoppingItem.choosed;
+        _choosed = shoppingItem.ownnerOrder?YES:NO;
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
         NSArray *sortDescriptors = @[sortDescriptor];
         NSArray *shopPhotos = [shoppingItem.itemPhotos sortedArrayUsingDescriptors:sortDescriptors];
@@ -53,5 +53,19 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[SWProductItem class]]) {
+        if([((SWProductItem *)object).itemID isEqualToString:self.itemID]) {
+            return YES;
+        }else {
+            return NO;
+        }
+    }else {
+        return NO;
+    }
+}
 
+- (NSUInteger)hash {
+    return [self.itemID hash];
+}
 @end

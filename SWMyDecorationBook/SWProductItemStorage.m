@@ -25,7 +25,6 @@
         }
 
         // 商品基本信息
-        shopItem.choosed = productItem.choosed;
         shopItem.createTime = productItem.createTime;
         shopItem.itemID = productItem.itemID;
         shopItem.name = productItem.productName;
@@ -83,7 +82,6 @@
         SWShoppingItem *shopItem = [SWShoppingItem MR_findFirstWithPredicate:predicate inContext:localContext];
         if (shopItem) {
             // 商品基本信息
-            shopItem.choosed = productItem.choosed;
             shopItem.createTime = productItem.createTime;
             shopItem.itemID = productItem.itemID;
             shopItem.name = productItem.productName;

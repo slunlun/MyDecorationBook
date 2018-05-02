@@ -211,6 +211,7 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
             [self.delegate SWOrderView:self cancelOrderItem:self.model];
         }
     }
+    [self dismissOrderView];
 }
 
 #pragma mark - UITableViewDelegate

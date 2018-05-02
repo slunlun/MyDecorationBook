@@ -13,8 +13,9 @@
 #import "Masonry.h"
 #import "SWUIDef.h"
 #import "HexColor.h"
+#import "SWDef.h"
 
-@interface SWProductTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface SWProductTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource, CAAnimationDelegate>
 @property(nonatomic, strong) UILabel *productNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
 @property(nonatomic, strong) UICollectionView *productPicturesCollectionView;
@@ -157,15 +158,17 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = SW_TAOBAO_WHITE;
         [self commonInit];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buyItemNotification:) name:SW_BUY_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbuyItemNotification:) name:SW_UNBUY_NOTIFICATION object:nil];
     }
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)setProductItem:(SWProductItem *)productItem {
-    if ([_productItem isEqual:productItem]) {
-        return;
-    }
     _productItem = productItem;
     self.productNameLabel.text = productItem.productName;
     NSString *priceStr = nil;
@@ -178,7 +181,11 @@
     }
     self.priceLabel.text = priceStr;
     self.productMarkLabel.text = productItem.productRemark;
-    
+    if (productItem.isChoosed) {
+        [self.buyBtn setImage:[UIImage imageNamed:@"BuyDone"] forState:UIControlStateNormal];
+    }else{
+        [self.buyBtn setImage:[UIImage imageNamed:@"Buy"] forState:UIControlStateNormal];
+    }
     [self.productPicturesCollectionView reloadData];
 }
 
@@ -238,8 +245,14 @@
 }
 
 - (void)buyBtnClickCallBack:(UIButton *)button {
-    if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickBuyProduct:)]) {
-        [self.delegate productTableViewCell:self didClickBuyProduct:self.productItem];
+    if (self.productItem.isChoosed) {
+        if ([self.delegate respondsToSelector:@selector(productTableViewCell:didUnBuyProduct:)]) {
+            [self.delegate productTableViewCell:self didUnBuyProduct:self.productItem];
+        }
+    }else {
+        if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickBuyProduct:)]) {
+            [self.delegate productTableViewCell:self didClickBuyProduct:self.productItem];
+        }
     }
 }
 
@@ -308,5 +321,51 @@
         }
     }];
 }
+#pragma mark - CAAnimationDelegate
 
+#pragma mark - Animation
+- (void)viewRock:(UIView *)view {
+    CAAnimationGroup *animationGroup=[CAAnimationGroup animation]; // 动画组
+    animationGroup.delegate = self;
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    animation.fromValue = [NSNumber numberWithFloat:-M_PI / 4];
+    animation.toValue = [NSNumber numberWithFloat:M_PI / 4];
+    
+    animation.autoreverses = YES; //设置YES，代表动画每次重复执行的效果和上一次的相反
+    animation.duration = 0.5; //一次动画的完成时间
+
+    
+    CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation2.fromValue = @1;
+    animation2.toValue = @2;
+    animation2.duration = 1.0;
+    animation2.autoreverses = NO;
+    
+    animationGroup.animations = @[animation, animation2];
+    
+    [view.layer addAnimation:animationGroup forKey:@"rockAnimation"];
+}
+
+#pragma mark - Notification reaction
+- (void)buyItemNotification:(NSNotification *)notification {
+    SWProductItem *product = (SWProductItem *)notification.userInfo[SW_NOTIFICATION_PRODUCT_KEY];
+    if (product) {
+        if ([product isEqual:self.productItem]) {
+            self.productItem.choosed = YES;
+            [self.buyBtn setImage:[UIImage imageNamed:@"BuyDone"] forState:UIControlStateNormal];
+            [self viewRock:self.buyBtn];
+        }
+    }
+}
+
+- (void)unbuyItemNotification:(NSNotification *)notification {
+    SWProductItem *product = (SWProductItem *)notification.userInfo[SW_NOTIFICATION_PRODUCT_KEY];
+    if (product) {
+        if ([product isEqual:self.productItem]) {
+            self.productItem.choosed = NO;
+            [self.buyBtn setImage:[UIImage imageNamed:@"Buy"] forState:UIControlStateNormal];
+        }
+    }
+}
 @end

@@ -39,6 +39,21 @@
     [self addShadow:position color:color width:DEFAULT_SHADOW_WIDTH Opacity:DEFAULT_SHADOW_OPACITY];
 }
 
+#define redBubbleTag 13524
+- (void)showNotificationBubble {
+#define redBubbleSize 8.0f
+    UIView *redBubbleView = [[UIView alloc] init];
+    redBubbleView.tag = redBubbleTag;
+    redBubbleView.layer.backgroundColor = [UIColor redColor].CGColor;
+    [redBubbleView cornerRadian:redBubbleSize/2];
+    redBubbleView.frame = CGRectMake(self.frame.size.width - redBubbleSize/2 - 5, -redBubbleSize/2 + 2 , redBubbleSize, redBubbleSize);
+    [self addSubview:redBubbleView];
+}
+- (void)dismissNotificationBubble {
+    UIView *redBubbleView = [self viewWithTag:redBubbleTag];
+    [redBubbleView removeFromSuperview];
+}
+
 - (void)addShadow:(UIViewShadowPosition)position color:(UIColor *) color width:(CGFloat)width Opacity:(float) opacity
 {
     self.layer.shadowColor = color.CGColor;

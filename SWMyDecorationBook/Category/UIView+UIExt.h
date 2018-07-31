@@ -23,4 +23,8 @@ typedef NS_OPTIONS(long, UIViewShadowPosition) {
 // Note: This method can not use with set cornerRadian for cornerRadian will cut the border
 - (void)addShadow:(UIViewShadowPosition)position color:(UIColor *) color width:(CGFloat)width Opacity:(float) opacity;
 - (void)addShadow:(UIViewShadowPosition)position color:(UIColor *) color;
+
+// notification red bubble
+- (void)showNotificationBubble;
+- (void)dismissNotificationBubble;
 @end

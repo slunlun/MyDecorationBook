@@ -23,12 +23,14 @@
 #import "SWOrderView.h"
 #import "SWNotebookHomeViewController.h"
 #import "SWProductOrderStorage.h"
+#import "UIView+UIExt.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
 @property(nonatomic, strong) NSArray *marketItems;
+@property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -77,7 +79,11 @@
     }];
     
     UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
-    UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Notebook"] style:UIBarButtonItemStylePlain target:self action:@selector(noteBookClicked:)];
+    UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
+    UITapGestureRecognizer *imageTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noteBookClicked:)];
+    [noteBookImgView addGestureRecognizer:imageTaped];
+    UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithCustomView:noteBookImgView];
+    _notebookItemBtn = notebookItemBtn;
     UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMarketItem:)];
     self.navigationItem.rightBarButtonItem = addMarketItemBtn;
     self.navigationItem.leftBarButtonItems = @[configItemBtn, notebookItemBtn];
@@ -234,7 +240,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)noteBookClicked:(UIBarButtonItem *)notebookItem {
+- (void)noteBookClicked:(UITapGestureRecognizer *)tapGesture {
+    [self.notebookItemBtn.customView dismissNotificationBubble];
+    
     SWNotebookHomeViewController *notebookVC = [[SWNotebookHomeViewController alloc] init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:notebookVC];
     [navVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
@@ -322,6 +330,8 @@
 - (void)SWOrderView:(SWOrderView *)orderView didOrderItem:(SWOrder *)productOrder {
     if(productOrder) {
         [SWProductOrderStorage insertNewProductOrder:productOrder];
+        // 对于新加入的商品，需要添加小红点，表示账本已经更新
+        [self.notebookItemBtn.customView showNotificationBubble];
         [self updateData];
         [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.5];
     }

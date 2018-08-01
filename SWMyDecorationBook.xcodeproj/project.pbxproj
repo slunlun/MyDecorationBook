@@ -112,6 +112,7 @@
 		B0A73FAA2089C6BA00BCAB2F /* SWAddSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FA92089C6BA00BCAB2F /* SWAddSubView.m */; };
 		B0A73FAD2089D28A00BCAB2F /* SWOrderCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FAC2089D28A00BCAB2F /* SWOrderCountTableViewCell.m */; };
 		B0C34A552111B2C1003B253A /* SWBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A542111B2C0003B253A /* SWBarChartView.m */; };
+		B0C34A582111B584003B253A /* SWShoppingOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A572111B584003B253A /* SWShoppingOrderManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -336,6 +337,8 @@
 		B0A73FAC2089D28A00BCAB2F /* SWOrderCountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderCountTableViewCell.m; sourceTree = "<group>"; };
 		B0C34A532111B2C0003B253A /* SWBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBarChartView.h; sourceTree = "<group>"; };
 		B0C34A542111B2C0003B253A /* SWBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBarChartView.m; sourceTree = "<group>"; };
+		B0C34A562111B584003B253A /* SWShoppingOrderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWShoppingOrderManager.h; sourceTree = "<group>"; };
+		B0C34A572111B584003B253A /* SWShoppingOrderManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWShoppingOrderManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -675,6 +678,8 @@
 				5EACC4DF1F72060100C4E796 /* LaunchScreen.storyboard */,
 				5EACC4E21F72060100C4E796 /* Info.plist */,
 				5EACC4D11F72060100C4E796 /* Supporting Files */,
+				B0C34A562111B584003B253A /* SWShoppingOrderManager.h */,
+				B0C34A572111B584003B253A /* SWShoppingOrderManager.m */,
 			);
 			path = SWMyDecorationBook;
 			sourceTree = "<group>";
@@ -921,6 +926,7 @@
 				5E9C2CDC2004AB210052A05E /* TZImageManager.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				B0C34A552111B2C1003B253A /* SWBarChartView.m in Sources */,
+				B0C34A582111B584003B253A /* SWShoppingOrderManager.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5E9C77D6200F3E8B000355D2 /* SWItemUnit.m in Sources */,
 				5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */,

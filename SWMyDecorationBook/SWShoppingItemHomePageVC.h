@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SWMarketCategory.h"
 @interface SWShoppingItemHomePageVC : UIViewController
-
+- (void)updateDataForMarketCategory:(SWMarketCategory *)marketCategory;
 @end

@@ -8,20 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "SWOrder.h"
-@interface SWShoppingOrderCategoryMode : NSObject
+@interface SWShoppingOrderCategoryModle : NSObject<NSCopying>
 @property(nonatomic, strong) NSString *orderCategoryID;
 @property(nonatomic, strong) NSString *orderCategoryName;
 @property(nonatomic, assign) CGFloat totalCost;
-@property(nonatomic, assign) CGFloat orderPercent;
+@property(nonatomic, assign) CGFloat totalCostPercent;
 @end
+
 
 
 @interface SWShoppingOrderManager : NSObject
 + (instancetype)sharedInstance;
 
-- (void)bootUp; // 初始化订单信息汇总, 在调用其他方法前，请务必调用该函数
+- (NSArray *)loadData; // 初始化订单汇总信息, 在调用其他方法前，请务必调用该函数
 - (void)insertNewOrder:(SWOrder *)shoppingOrder;
 - (void)removeShoppingOrder:(SWOrder *)shoppingOrder;
-
-- (NSArray *)allOrdersInCategory;
 @end

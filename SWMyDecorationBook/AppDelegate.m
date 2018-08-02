@@ -31,15 +31,17 @@
     //[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:storeURL];
     
-    //if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        // 添加测试数据 商品的单位
         [SWPriceUnitStorage insertPriceUnit:@"块"];
         [SWPriceUnitStorage insertPriceUnit:@"张"];
         [SWPriceUnitStorage insertPriceUnit:@"个"];
         [SWPriceUnitStorage insertPriceUnit:@"平"];
         [SWPriceUnitStorage insertPriceUnit:@"米"];
-        
+    
+        // 添加测试数据 MarketCategory
         SWMarketCategory *cat1 = [[SWMarketCategory alloc] initWithCategoryName:@"瓷砖"];
         SWMarketCategory *cat2 = [[SWMarketCategory alloc] initWithCategoryName:@"柜门"];
         SWMarketCategory *cat3 = [[SWMarketCategory alloc] initWithCategoryName:@"家具"];
@@ -51,15 +53,12 @@
         [SWMarketCategoryStorage insertMarketCategory:cat4];
         [SWMarketCategoryStorage insertMarketCategory:cat5];
         
-   // }else {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"everLaunched"];
-        
+    }else {
         NSLog(@"second launch");
         
-    //}
+    }
     
-    
+    // 设置初始的抽屉界面
     // root view
     SWShoppingItemHomePageVC *shoppingItemHomePageVC = [[SWShoppingItemHomePageVC alloc] init];
       UINavigationController *centerNav = [[UINavigationController alloc] initWithRootViewController:shoppingItemHomePageVC];
@@ -67,6 +66,7 @@
 //    SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
     _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
     _drawerVC.maximumLeftDrawerWidth = 200.0f;
+    leftSlideVC.delegate = _drawerVC;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window setRootViewController:_drawerVC];
     [self.window makeKeyAndVisible];

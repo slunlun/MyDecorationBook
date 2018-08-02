@@ -382,13 +382,13 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
                          [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:percentVisible]; // TODO, 这里目前没有任何实现
         
     } completion:^(BOOL finished) {
+        // 1. update isAnimation state
+        [self setAnimatingDrawer:NO];
+        // 2. update self.openSide
+        [self setOpenSide:SWDrawerSideNone];
+        // 3. reset visual drawer to unanimation state
+        [self resetDrawerVisualStateForDrawerSide:visibleSide];
         if (completion) {
-            // 1. update isAnimation state
-            [self setAnimatingDrawer:NO];
-            // 2. update self.openSide
-            [self setOpenSide:SWDrawerSideNone];
-            // 3. reset visual drawer to unanimation state
-            [self resetDrawerVisualStateForDrawerSide:visibleSide];
             completion(finished);
         }
     }];
@@ -690,6 +690,17 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 
 - (void)homePageAppear:(NSNotification *)notification {
     [self setupGestureRecognizers];
+}
+
+#pragma mark - SWMarketCategoryViewControllerDelegate
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didClickMarketCategory:(SWMarketCategory *)marketCategory {
+    if([self.centerDrawerViewController isKindOfClass:[UINavigationController class]]) {
+        UIViewController *vc = [[((UINavigationController *)self.centerDrawerViewController) viewControllers] firstObject];
+        if ([vc isKindOfClass:[SWShoppingItemHomePageVC class]]) {
+            [((SWShoppingItemHomePageVC *)vc) updateDataForMarketCategory:marketCategory];
+        }
+    }
+    [self closeDrawerAnimated:YES completion:nil];
 }
 
 @end

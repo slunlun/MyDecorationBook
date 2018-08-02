@@ -9,9 +9,10 @@
 #import "SWNotebookHomeViewController.h"
 #import "SWShoppingItemHomePageVC.h"
 #import "AppDelegate.h"
+#import "SWShoppingOrderManager.h"
 
 @interface SWNotebookHomeViewController ()
-
+@property(nonatomic, strong) NSArray *orderInfoArray;
 @end
 
 @implementation SWNotebookHomeViewController
@@ -25,6 +26,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _orderInfoArray = [[SWShoppingOrderManager sharedInstance] loadData];
+    NSLog(@"Hi hi");
 }
 
 #pragma mark - Common init

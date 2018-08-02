@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWMarketCategory.h"
+
+@class SWMarketCategoryViewController;
+@protocol SWMarketCategoryViewControllerDelegate<NSObject>
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didClickMarketCategory:(SWMarketCategory *)marketCategory;
+@end
 
 @interface SWMarketCategoryViewController : UIViewController
 @property(nonatomic, strong) UITableView *marketCategoryTableView;
+@property(nonatomic, weak) id<SWMarketCategoryViewControllerDelegate> delegate;
 @end

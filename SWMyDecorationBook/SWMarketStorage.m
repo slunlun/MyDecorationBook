@@ -36,7 +36,7 @@
         NSMutableArray *localContacts = [[NSMutableArray alloc] initWithArray:shop.telNums];
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:YES];
         NSMutableArray *DBContacts = [[NSMutableArray alloc] initWithArray:[newShop.shopContacts sortedArrayUsingDescriptors:@[sortDescriptor]]];
-        // 商品照片
+        // 联系人
         for (SWShopContact *shopContact in newShop.shopContacts) {
             for (SWMarketContact *marketContact in shop.telNums) {
                 if ([shopContact.itemID isEqualToString:marketContact.itemID]) {
@@ -46,12 +46,12 @@
             }
         }
         
-        // 删除多余的照片
+        // 删除多余联系人
         for (SWShopContact *shopContact in DBContacts) {
             [shopContact MR_deleteEntityInContext:localContext];
         }
         
-        // 添加新的照片
+        // 添加新联系人
         for (SWMarketContact *marketContact in localContacts) {
             SWShopContact *newShopContact = [SWShopContact MR_createEntityInContext:localContext];
             newShopContact.itemID = marketContact.itemID;
@@ -80,7 +80,13 @@
     
     __block NSMutableArray *allMarket = [NSMutableArray new];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSArray *shops = [SWShop MR_findAllInContext:localContext];
+        NSArray *shops = nil;
+        if (marketCatagroy) {
+            NSPredicate *predict = [NSPredicate predicateWithFormat:@"shopCategory.itemID = %@", marketCatagroy.itemID];
+            shops = [SWShop MR_findAllWithPredicate:predict inContext:localContext];
+        }else {
+            shops = [SWShop MR_findAllInContext:localContext];
+        }
         for (SWShop *shop in shops) {
             SWMarketItem *marketItem = [[SWMarketItem alloc] initWithMO:shop];
             [allMarket addObject:marketItem];

@@ -37,8 +37,9 @@
         self.createTime = MO.createTime;
         
         // 商铺分类
-        SWMarketCategory *category = [[SWMarketCategory alloc] init];
+        SWMarketCategory *category = [[SWMarketCategory alloc] init]; // 注意这里不能调用 initWithMO，因为存在循环调用
         category.categoryName = MO.shopCategory.name;
+        category.itemID = MO.shopCategory.itemID;
         self.marketCategory = category;
         
         // 商铺联系人

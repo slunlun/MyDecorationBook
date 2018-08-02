@@ -156,6 +156,10 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SWMarketCategory *markCategory = self.categoryArray[indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didClickMarketCategory:)]) {
+        [self.delegate marketCategoryVC:self didClickMarketCategory:markCategory];
+    }
 }
 
 #pragma mark - UITableViewDataSource

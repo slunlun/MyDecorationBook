@@ -23,6 +23,7 @@
 #import "SWOrderView.h"
 #import "SWNotebookHomeViewController.h"
 #import "SWProductOrderStorage.h"
+#import "SWShoppingOrderManager.h"
 #import "UIView+UIExt.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate>
@@ -31,6 +32,7 @@
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
 @property(nonatomic, strong) NSArray *marketItems;
 @property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
+@property(nonatomic, strong) SWMarketCategory *curMarketCategory;
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -49,7 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_APPEAR_NOTIFICATION object:nil];
-    [self updateData];
+    [self updateDataForMarketCategory:self.curMarketCategory];
     [self.shoppingItemListTableView reloadData];
 }
 
@@ -90,10 +92,18 @@
 }
 
 #pragma mark - Data source
-- (void)updateData {
-    self.marketItems = [SWMarketStorage allMarketInCategory:nil];
+
+- (void)updateDataForMarketCategory:(SWMarketCategory *)marketCategory {
+    self.marketItems = [SWMarketStorage allMarketInCategory:marketCategory];
+    self.navigationItem.title = marketCategory.categoryName;
+    self.curMarketCategory = marketCategory;
 }
 
+#pragma mark - Setter/Getter
+- (void)setMarketItems:(NSArray *)marketItems {
+    _marketItems = marketItems;
+    [_shoppingItemListTableView reloadData];
+}
 
 #pragma mark - TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -233,9 +243,9 @@
     }
 }
 
+#pragma mark - Navigation Bar items
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
-    NSArray *marketCategories = [SWMarketCategoryStorage allMarketCategory];
-    SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:marketCategories[0]];
+    SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:self.curMarketCategory];
     SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -269,7 +279,7 @@
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SWProductItemStorage removeProductItem:productItem];
-        [self updateData];
+        [self updateDataForMarketCategory:self.curMarketCategory];
         [self.shoppingItemListTableView reloadData];
         
     }];
@@ -295,7 +305,7 @@
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定将该商品从账单中删除吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SWProductOrderStorage removeProductOrderByProduct:productItem];
-        [self updateData];
+        [self updateDataForMarketCategory:self.curMarketCategory];
         [[NSNotificationCenter defaultCenter] postNotificationName:SW_UNBUY_NOTIFICATION object:nil userInfo:@{SW_NOTIFICATION_PRODUCT_KEY:productItem}];
         
     }];
@@ -320,7 +330,7 @@
             [productItem.productPhotos addObject:productPhoto];
         }
         [SWProductItemStorage updateProductItem:productItem];
-        [self updateData];
+        [self updateDataForMarketCategory:self.curMarketCategory];
         [self.shoppingItemListTableView reloadData];
     }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
@@ -329,10 +339,12 @@
 #pragma mark - SWOrderViewDelegate
 - (void)SWOrderView:(SWOrderView *)orderView didOrderItem:(SWOrder *)productOrder {
     if(productOrder) {
-        [SWProductOrderStorage insertNewProductOrder:productOrder];
+        // 入账订单
+        [[SWShoppingOrderManager sharedInstance] insertNewOrder:productOrder];
         // 对于新加入的商品，需要添加小红点，表示账本已经更新
         [self.notebookItemBtn.customView showNotificationBubble];
-        [self updateData];
+        
+        [self updateDataForMarketCategory:self.curMarketCategory];
         [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.5];
     }
 }

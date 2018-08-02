@@ -14,13 +14,16 @@ typedef NS_ENUM(NSInteger, SWDrawerSide){
 };
 
 typedef void(^SWDrawerSideDidChangedBlock)(SWDrawerSide drawSide);
-
-@interface SWDrawerViewController : UIViewController
+#import "SWMarketCategoryViewController.h"
+#import "SWShoppingItemHomePageVC.h"
+@interface SWDrawerViewController : UIViewController<SWMarketCategoryViewControllerDelegate>
 - (instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController;
 
 -(void)setCenterViewController:(UIViewController *)centerViewController withCloseAnimation:(BOOL)closeAnimated completion:(void(^)(BOOL finished))completion;
 
 -(void)setCenterViewController:(UIViewController *)newCenterViewController withFullCloseAnimation:(BOOL)fullCloseAnimated completion:(void(^)(BOOL finished))completion;
+
+- (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion;
 
 @property(nonatomic, strong) UIViewController *leftDrawerViewController;
 @property(nonatomic, strong) UIViewController *centerDrawerViewController;

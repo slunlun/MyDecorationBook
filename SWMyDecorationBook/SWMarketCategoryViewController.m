@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "AppDelegate.h"
 #import "SWMarketCategoryTableViewCell.h"
+#import "HexColor.h"
 #import "SWDef.h"
 
 #define SELECTED_MARK_VIEW_SPEED 100.0f
@@ -176,6 +177,8 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
         StrongObj(self);
         [self configMarketCategory:model];
     };
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"#F56219"];
     return cell;
 }
 

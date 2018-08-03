@@ -115,6 +115,8 @@
 		B0C34A582111B584003B253A /* SWShoppingOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A572111B584003B253A /* SWShoppingOrderManager.m */; };
 		B0C34A602113FF7D003B253A /* SWSpeechBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */; };
 		B0C34A612113FF7D003B253A /* SWPieChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A5F2113FF7D003B253A /* SWPieChat.m */; };
+		B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A632114060E003B253A /* SWNotebookPieChartView.m */; };
+		B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A6621140621003B253A /* SWNotebookBarChartView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -345,6 +347,10 @@
 		B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSpeechBubble.m; sourceTree = "<group>"; };
 		B0C34A5E2113FF7D003B253A /* SWPieChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPieChat.h; sourceTree = "<group>"; };
 		B0C34A5F2113FF7D003B253A /* SWPieChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPieChat.m; sourceTree = "<group>"; };
+		B0C34A622114060E003B253A /* SWNotebookPieChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNotebookPieChartView.h; sourceTree = "<group>"; };
+		B0C34A632114060E003B253A /* SWNotebookPieChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookPieChartView.m; sourceTree = "<group>"; };
+		B0C34A6521140621003B253A /* SWNotebookBarChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNotebookBarChartView.h; sourceTree = "<group>"; };
+		B0C34A6621140621003B253A /* SWNotebookBarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookBarChartView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,6 +649,10 @@
 				B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */,
 				B01CB23B2099535000F716C4 /* SWNotebookHomeViewController.h */,
 				B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */,
+				B0C34A622114060E003B253A /* SWNotebookPieChartView.h */,
+				B0C34A632114060E003B253A /* SWNotebookPieChartView.m */,
+				B0C34A6521140621003B253A /* SWNotebookBarChartView.h */,
+				B0C34A6621140621003B253A /* SWNotebookBarChartView.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -920,6 +930,7 @@
 				5EE7E2D71F99ACCC007CAB27 /* MASViewConstraint.m in Sources */,
 				5EE7E2D81F99ACCC007CAB27 /* NSArray+MASAdditions.m in Sources */,
 				5E9C77D3200F3CE5000355D2 /* SWMarketCategory.m in Sources */,
+				B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */,
 				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				B057D24E208F263800539824 /* SWOrderProductInfoView.m in Sources */,
 				5E9C2CE92004AF310052A05E /* SWShoppingItemInfoViewController.m in Sources */,
@@ -973,6 +984,7 @@
 				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,
 				B057D257209082CB00539824 /* UITextField+OKToolBar.m in Sources */,
 				5E9C2CE32004AB210052A05E /* TZProgressView.m in Sources */,
+				B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */,
 				B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
 				5E17561420109E8F009F100B /* NSPersistentStore+MagicalRecord.m in Sources */,

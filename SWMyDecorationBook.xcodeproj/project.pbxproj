@@ -113,6 +113,8 @@
 		B0A73FAD2089D28A00BCAB2F /* SWOrderCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FAC2089D28A00BCAB2F /* SWOrderCountTableViewCell.m */; };
 		B0C34A552111B2C1003B253A /* SWBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A542111B2C0003B253A /* SWBarChartView.m */; };
 		B0C34A582111B584003B253A /* SWShoppingOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A572111B584003B253A /* SWShoppingOrderManager.m */; };
+		B0C34A602113FF7D003B253A /* SWSpeechBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */; };
+		B0C34A612113FF7D003B253A /* SWPieChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A5F2113FF7D003B253A /* SWPieChat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -339,6 +341,10 @@
 		B0C34A542111B2C0003B253A /* SWBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBarChartView.m; sourceTree = "<group>"; };
 		B0C34A562111B584003B253A /* SWShoppingOrderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWShoppingOrderManager.h; sourceTree = "<group>"; };
 		B0C34A572111B584003B253A /* SWShoppingOrderManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWShoppingOrderManager.m; sourceTree = "<group>"; };
+		B0C34A5C2113FF7C003B253A /* SWSpeechBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSpeechBubble.h; sourceTree = "<group>"; };
+		B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSpeechBubble.m; sourceTree = "<group>"; };
+		B0C34A5E2113FF7D003B253A /* SWPieChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPieChat.h; sourceTree = "<group>"; };
+		B0C34A5F2113FF7D003B253A /* SWPieChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPieChat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -695,14 +701,13 @@
 		5EB9D77D1F7F43AA00034E09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B0C34A592113FD5A003B253A /* ChartView */,
 				5E9C77CE200F30F6000355D2 /* MarketListHomePage */,
 				5E9C77CD200F30AC000355D2 /* Common */,
 				5E9C2CEA2004AF690052A05E /* ShoppingItemInfoVC */,
 				5E9C2CE62004AD470052A05E /* MarketInfoVC */,
 				5EE7E2DC1F99D3DC007CAB27 /* SWButton.h */,
 				5EE7E2DD1F99D3DC007CAB27 /* SWButton.m */,
-				B0C34A532111B2C0003B253A /* SWBarChartView.h */,
-				B0C34A542111B2C0003B253A /* SWBarChartView.m */,
 				5E9C2CB620034F6C0052A05E /* SWPickerView.h */,
 				5E9C2CB720034F6C0052A05E /* SWPickerView.m */,
 				B065BFC4208874E800F57731 /* SWOrderView.h */,
@@ -784,6 +789,35 @@
 				B065BFC920887CE400F57731 /* SWOrder.m */,
 			);
 			name = ShoppingOrder;
+			sourceTree = "<group>";
+		};
+		B0C34A592113FD5A003B253A /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				B0C34A5B2113FF6F003B253A /* PieChart */,
+				B0C34A5A2113FF5C003B253A /* BarChart */,
+			);
+			name = ChartView;
+			sourceTree = "<group>";
+		};
+		B0C34A5A2113FF5C003B253A /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				B0C34A532111B2C0003B253A /* SWBarChartView.h */,
+				B0C34A542111B2C0003B253A /* SWBarChartView.m */,
+			);
+			name = BarChart;
+			sourceTree = "<group>";
+		};
+		B0C34A5B2113FF6F003B253A /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				B0C34A5E2113FF7D003B253A /* SWPieChat.h */,
+				B0C34A5F2113FF7D003B253A /* SWPieChat.m */,
+				B0C34A5C2113FF7C003B253A /* SWSpeechBubble.h */,
+				B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */,
+			);
+			name = PieChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -879,6 +913,7 @@
 				5E17560B20109E8F009F100B /* NSManagedObject+MagicalFinders.m in Sources */,
 				5EE7E2D51F99ACCC007CAB27 /* MASLayoutConstraint.m in Sources */,
 				5E17560920109E8F009F100B /* NSManagedObject+MagicalAggregation.m in Sources */,
+				B0C34A602113FF7D003B253A /* SWSpeechBubble.m in Sources */,
 				5E9C2CB820034F6C0052A05E /* SWPickerView.m in Sources */,
 				B057D251209069C100539824 /* SWOrderProductInfoTableViewCell.m in Sources */,
 				5EE7E2D61F99ACCC007CAB27 /* MASViewAttribute.m in Sources */,
@@ -953,6 +988,7 @@
 				8005420D1FFBCF9E00F343CD /* SWNewMarketTelNumCell.m in Sources */,
 				5E86CA151FFF59A600A8F0CC /* SWMarketNameCell.m in Sources */,
 				5E17561B20109E8F009F100B /* MagicalRecord+ShorthandMethods.m in Sources */,
+				B0C34A612113FF7D003B253A /* SWPieChat.m in Sources */,
 				5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */,
 				5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */,
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,

@@ -87,10 +87,6 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     [self setPanVelocityXAnimationThreshold:SWDrawerPanVelocityXAnimationThreshold];
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
 - (instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController {
     if (self = [super init]) {
         self.leftDrawerViewController = leftDrawerViewController;

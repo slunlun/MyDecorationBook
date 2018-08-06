@@ -7,6 +7,7 @@
 //
 
 #import "SWPieChat.h"
+#import "SWUIDef.h"
 @interface SWPieChatSegment()
 @property(nonatomic, assign) CGFloat centerAngle;
 @property(nonatomic, strong) CAShapeLayer *segmentLayer;
@@ -33,18 +34,22 @@
 
 
 @implementation SWPieChat
-
-- (void)showPieChart {
+- (void)drawRect:(CGRect)rect {
     // 绘制圆环背景
     CGFloat sideLength = MIN(self.bounds.size.width, self.bounds.size.height);
     CGRect outRect = CGRectMake(5, 5, sideLength - 10, sideLength - 10);
     UIBezierPath *path = [UIBezierPath bezierPath];
     UIBezierPath *outPath = [UIBezierPath bezierPathWithOvalInRect:outRect];
     [path appendPath:outPath];
-    [[UIColor lightGrayColor] set];
+    UIColor *bkColor = SW_DISABLE_GRAY;
+    [bkColor set];
     [path fill];
-    
+}
+
+- (void)showPieChart {
     // 根据proportions填充饼图
+    CGFloat sideLength = MIN(self.bounds.size.width, self.bounds.size.height);
+    CGRect outRect = CGRectMake(5, 5, sideLength - 10, sideLength - 10);
     CGFloat startAngle = -M_PI_2;
     CGFloat totalAngel = 2 * M_PI;
     CGFloat radius = (sideLength - 25)/2;

@@ -12,11 +12,15 @@
 #import "SWShoppingOrderManager.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "SWNotebookBarChartView.h"
+#import "SWNotebookPieChartView.h"
 
 @interface SWNotebookHomeViewController ()
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
 @property(nonatomic, strong) UIView *guideBarView;
+@property(nonatomic, strong) SWNotebookPieChartView *pieChartView;
+@property(nonatomic, strong) SWNotebookBarChartView *barChartView;
 @end
 
 @implementation SWNotebookHomeViewController
@@ -35,6 +39,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _orderInfoArray = [[SWShoppingOrderManager sharedInstance] loadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_pieChartView updateSummarizingData];
 }
 
 #pragma mark - Common init
@@ -59,18 +68,6 @@
     }];
     _guideBarView = guideBarView;
     
-    UIButton *pieChartBtn = [[UIButton alloc] init];
-    [pieChartBtn addTarget:self action:@selector(pieChartBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    pieChartBtn.titleLabel.font = SW_DEFAULT_FONT;
-    [pieChartBtn setTitle:@"饼图" forState:UIControlStateNormal];
-    [pieChartBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
-    [guideBarView addSubview:pieChartBtn];
-    [pieChartBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(guideBarView);
-        make.leftMargin.equalTo(guideBarView.mas_left).offset(SW_MARGIN);
-        make.width.equalTo(@60);
-    }];
-    
     UIButton *barChartBtn = [[UIButton alloc] init];
     [barChartBtn addTarget:self action:@selector(barChartBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     barChartBtn.titleLabel.font = SW_DEFAULT_FONT;
@@ -79,10 +76,22 @@
     [guideBarView addSubview:barChartBtn];
     [barChartBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(guideBarView);
-        make.left.equalTo(pieChartBtn.mas_right);
+        make.right.equalTo(guideBarView.mas_right).offset(-SW_MARGIN);
         make.width.equalTo(@60);
     }];
-
+    
+    
+    UIButton *pieChartBtn = [[UIButton alloc] init];
+    [pieChartBtn addTarget:self action:@selector(pieChartBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    pieChartBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [pieChartBtn setTitle:@"饼图" forState:UIControlStateNormal];
+    [pieChartBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
+    [guideBarView addSubview:pieChartBtn];
+    [pieChartBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(guideBarView);
+        make.right.equalTo(barChartBtn.mas_left);
+        make.width.equalTo(@60);
+    }];
     
     UIView *focusView = [[UIView alloc] init];
     focusView.backgroundColor = SW_TAOBAO_ORANGE;
@@ -103,6 +112,25 @@
         make.height.equalTo(@2);
     }];
     _focusView = focusView;
+    
+    // 初始化饼图view和条形图view
+    _pieChartView = [[SWNotebookPieChartView alloc] init];
+    _pieChartView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_pieChartView];
+    [_pieChartView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(_guideBarView.mas_bottom);
+    }];
+    
+    _barChartView = [[SWNotebookBarChartView alloc] init];
+    _barChartView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_barChartView];
+    [_barChartView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_guideBarView.mas_bottom);
+        make.bottom.equalTo(self.view);
+        make.left.equalTo(_pieChartView.mas_right);
+        make.width.equalTo(self.view.mas_width);
+    }];
 }
 
 #pragma mark - UI Response
@@ -119,6 +147,11 @@
         make.width.equalTo(@60);
     }];
     
+    [_pieChartView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(_guideBarView.mas_bottom);
+    }];
+    
     [UIView animateWithDuration:0.3 animations:^{
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
@@ -130,6 +163,13 @@
         make.top.bottom.equalTo(self.guideBarView);
         make.left.equalTo(button.mas_left);
         make.width.equalTo(@60);
+    }];
+    
+    [_pieChartView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_guideBarView.mas_bottom);
+        make.bottom.equalTo(self.view);
+        make.right.equalTo(self.view.mas_left);
+        make.width.equalTo(self.view);
     }];
     
     [UIView animateWithDuration:0.3 animations:^{

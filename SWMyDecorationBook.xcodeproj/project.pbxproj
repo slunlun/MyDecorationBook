@@ -109,6 +109,8 @@
 		B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */; };
 		B065BFC6208874E800F57731 /* SWOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC5208874E800F57731 /* SWOrderView.m */; };
 		B065BFCA20887CE400F57731 /* SWOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC920887CE400F57731 /* SWOrder.m */; };
+		B077F73621182A4F00E15ECC /* SWBarChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B077F73521182A4F00E15ECC /* SWBarChartTableViewCell.m */; };
+		B077F73921182A8300E15ECC /* SWTotalCostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B077F73821182A8300E15ECC /* SWTotalCostTableViewCell.m */; };
 		B0A73FAA2089C6BA00BCAB2F /* SWAddSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FA92089C6BA00BCAB2F /* SWAddSubView.m */; };
 		B0A73FAD2089D28A00BCAB2F /* SWOrderCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FAC2089D28A00BCAB2F /* SWOrderCountTableViewCell.m */; };
 		B0C34A552111B2C1003B253A /* SWBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A542111B2C0003B253A /* SWBarChartView.m */; };
@@ -335,6 +337,10 @@
 		B065BFC5208874E800F57731 /* SWOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderView.m; sourceTree = "<group>"; };
 		B065BFC820887CE400F57731 /* SWOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrder.h; sourceTree = "<group>"; };
 		B065BFC920887CE400F57731 /* SWOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrder.m; sourceTree = "<group>"; };
+		B077F73421182A4F00E15ECC /* SWBarChartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWBarChartTableViewCell.h; sourceTree = "<group>"; };
+		B077F73521182A4F00E15ECC /* SWBarChartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWBarChartTableViewCell.m; sourceTree = "<group>"; };
+		B077F73721182A8300E15ECC /* SWTotalCostTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWTotalCostTableViewCell.h; sourceTree = "<group>"; };
+		B077F73821182A8300E15ECC /* SWTotalCostTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWTotalCostTableViewCell.m; sourceTree = "<group>"; };
 		B0A73FA82089C6BA00BCAB2F /* SWAddSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWAddSubView.h; sourceTree = "<group>"; };
 		B0A73FA92089C6BA00BCAB2F /* SWAddSubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWAddSubView.m; sourceTree = "<group>"; };
 		B0A73FAB2089D28A00BCAB2F /* SWOrderCountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderCountTableViewCell.h; sourceTree = "<group>"; };
@@ -815,6 +821,10 @@
 			children = (
 				B0C34A532111B2C0003B253A /* SWBarChartView.h */,
 				B0C34A542111B2C0003B253A /* SWBarChartView.m */,
+				B077F73421182A4F00E15ECC /* SWBarChartTableViewCell.h */,
+				B077F73521182A4F00E15ECC /* SWBarChartTableViewCell.m */,
+				B077F73721182A8300E15ECC /* SWTotalCostTableViewCell.h */,
+				B077F73821182A8300E15ECC /* SWTotalCostTableViewCell.m */,
 			);
 			name = BarChart;
 			sourceTree = "<group>";
@@ -931,6 +941,7 @@
 				5EE7E2D81F99ACCC007CAB27 /* NSArray+MASAdditions.m in Sources */,
 				5E9C77D3200F3CE5000355D2 /* SWMarketCategory.m in Sources */,
 				B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */,
+				B077F73621182A4F00E15ECC /* SWBarChartTableViewCell.m in Sources */,
 				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				B057D24E208F263800539824 /* SWOrderProductInfoView.m in Sources */,
 				5E9C2CE92004AF310052A05E /* SWShoppingItemInfoViewController.m in Sources */,
@@ -1004,6 +1015,7 @@
 				5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */,
 				5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */,
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,
+				B077F73921182A8300E15ECC /* SWTotalCostTableViewCell.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 				5E17561320109E8F009F100B /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				5E17560420109E8F009F100B /* NSEntityDescription+MagicalDataImport.m in Sources */,

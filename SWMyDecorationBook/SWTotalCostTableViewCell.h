@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SWTotalCostTableViewCell : UITableViewCell
-
+@property(nonatomic, strong) NSString *model;
 @end

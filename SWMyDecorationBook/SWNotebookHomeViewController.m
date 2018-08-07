@@ -175,6 +175,11 @@
     [UIView animateWithDuration:0.3 animations:^{
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            // 更新bar chart 信息
+            [_barChartView updateData];
+        }
     }];
 }
 @end

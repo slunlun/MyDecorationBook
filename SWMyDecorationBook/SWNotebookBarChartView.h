@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SWNotebookBarChartView : UIView
+- (instancetype)init;
 
+- (void)updateData;
 @end

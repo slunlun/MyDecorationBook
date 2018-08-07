@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SWBarChartView : UIView
+
 - (instancetype)initWithFillPercent:(CGFloat)percent;
 - (instancetype)initWithFrame:(CGRect)frame fillPercent:(CGFloat)percent;
+
+- (void)updateChartView:(CGFloat) percent;
 @end

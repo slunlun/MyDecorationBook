@@ -53,6 +53,7 @@ static SWShoppingOrderManager *sharedObj = nil;
 - (NSArray *)loadData {
     NSArray *allOrders = [SWProductOrderStorage allProductOrders];
     NSMutableArray *ordersInCategoryArray = [[NSMutableArray alloc] init];
+    CGFloat totalCost = 0.0f;
     for(SWOrder *order in allOrders) {
         @autoreleasepool{
             SWMarketItem *marketItem = order.marketItem;
@@ -60,6 +61,7 @@ static SWShoppingOrderManager *sharedObj = nil;
             tempMode.orderCategoryID = marketItem.marketCategory.itemID;
             tempMode.orderCategoryName = marketItem.marketCategory.categoryName;
             tempMode.totalCost = order.orderTotalPrice;
+            totalCost += order.orderTotalPrice;
             BOOL orderExisted = NO;
             for (NSDictionary *dictNode in ordersInCategoryArray) {
                 SWShoppingOrderCategoryModle *orderCategoryModle = [dictNode allKeys].firstObject;
@@ -85,6 +87,11 @@ static SWShoppingOrderManager *sharedObj = nil;
         }
     } // end for(SWOrder *order in allOrders)
     self.shoppingOrderInCategoryArray = ordersInCategoryArray;
+    // 计算每个商品种类 所占的消费比
+    for (NSDictionary *infoDict in self.shoppingOrderInCategoryArray) {
+        SWShoppingOrderCategoryModle *model = infoDict.allKeys.firstObject;
+        model.costPercent = model.totalCost / totalCost;
+    }
     return self.shoppingOrderInCategoryArray;
 }
 

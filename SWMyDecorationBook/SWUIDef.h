@@ -22,6 +22,11 @@
 #define SW_DEFAULT_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:12.0]
 #define SW_DEFAULT_SUPER_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:10.0]
 
+#define SW_DEFAULT_FONT_LARGE_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:16.0]
+#define SW_DEFAULT_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:14.0]
+#define SW_DEFAULT_MIN_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:12.0]
+#define SW_DEFAULT_SUPER_MIN_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:10.0]
+
 // color
 #define SW_MAIN_BLUE_COLOR [UIColor colorWithHexString:@"#3498db"]
 #define SW_DISABLE_GRAY [UIColor colorWithHexString:@"#cccccc"]

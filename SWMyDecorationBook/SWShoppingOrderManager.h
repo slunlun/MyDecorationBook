@@ -12,7 +12,7 @@
 @property(nonatomic, strong) NSString *orderCategoryID;
 @property(nonatomic, strong) NSString *orderCategoryName;
 @property(nonatomic, assign) CGFloat totalCost;
-@property(nonatomic, assign) CGFloat totalCostPercent;
+@property(nonatomic, assign) CGFloat costPercent;
 @end
 
 

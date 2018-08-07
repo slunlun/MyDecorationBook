@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SWShoppingOrderManager.h"
-
+#import "SWBarChartView.h"
 @interface SWBarChartTableViewCell : UITableViewCell
-- (instancetype)initWithShoppingOrderCategoryModle:(SWShoppingOrderCategoryModle *)model;
+@property(nonatomic, strong) SWBarChartView *barChartView;
+@property(nonatomic, strong) SWShoppingOrderCategoryModle *model;
 @end

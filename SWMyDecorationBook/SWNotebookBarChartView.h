@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class SWNotebookBarChartView;
+@protocol SWNotebookBarChartViewDelegate<NSObject>
+- (void)SWNotebookBarChartView:(SWNotebookBarChartView *)barCharView didSelectOrderCategory:(NSDictionary *)dict;
+@end
+
 @interface SWNotebookBarChartView : UIView
 - (instancetype)init;
-
 - (void)updateData;
+
+@property(nonatomic, weak) id<SWNotebookBarChartViewDelegate> delegate;
 @end

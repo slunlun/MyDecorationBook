@@ -142,6 +142,16 @@
 }
 #pragma mark - Public interface / Update UI
 - (void)updateProportions:(NSArray<SWPieChatSegment *>*)proportions {
+    // clean up
+    [self.layer removeAllAnimations];
+    NSArray *subLayers = [self.layer.sublayers copy];
+    for (CALayer *subLayer in subLayers) {
+        [subLayer removeFromSuperlayer];
+    }
+    subLayers = nil;
+    self.totalCount = 0.0f;
+    self.bkLayer = nil;
+    
     self.proportions = proportions;
     
     for (SWPieChatSegment *segment in proportions) {

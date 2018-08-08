@@ -41,8 +41,6 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemID];
         SWShoppingItem *shoppingItem =  [SWShoppingItem MR_findFirstWithPredicate:predicate inContext:localContext];
         predicate = [NSPredicate predicateWithFormat:@"itemID==%@", shoppingItem.ownnerOrder.itemID];
-        NSArray *all = [SWShoppingItemOrder MR_findAllInContext:localContext];
-        NSArray *allP = [SWShoppingItemOrder MR_findAllWithPredicate:predicate inContext:localContext];
         [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
     }];
 }

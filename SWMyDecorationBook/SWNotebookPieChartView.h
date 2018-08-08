@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SWNotebookPieChartView;
+@protocol SWNotebookPieChartViewDelegate<NSObject>
+- (void)SWNotebookPieChartView:(SWNotebookPieChartView *)pieCharView didSelectOrderCategory:(NSDictionary *)dict;
+@end
 
 @interface SWNotebookPieChartView : UIView
 - (void)updateSummarizingData;
+@property(nonatomic, weak) id<SWNotebookPieChartViewDelegate> delegate;
 @end

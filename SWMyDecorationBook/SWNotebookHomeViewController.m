@@ -14,8 +14,9 @@
 #import "SWUIDef.h"
 #import "SWNotebookBarChartView.h"
 #import "SWNotebookPieChartView.h"
+#import "SWOrderListinCategoryViewController.h"
 
-@interface SWNotebookHomeViewController ()
+@interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
 @property(nonatomic, strong) UIView *guideBarView;
@@ -116,6 +117,7 @@
     // 初始化饼图view和条形图view
     _pieChartView = [[SWNotebookPieChartView alloc] init];
     _pieChartView.backgroundColor = [UIColor whiteColor];
+    _pieChartView.delegate = self;
     [self.view addSubview:_pieChartView];
     [_pieChartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
@@ -124,6 +126,7 @@
     
     _barChartView = [[SWNotebookBarChartView alloc] init];
     _barChartView.backgroundColor = [UIColor whiteColor];
+    _barChartView.delegate = self;
     [self.view addSubview:_barChartView];
     [_barChartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_guideBarView.mas_bottom);
@@ -181,5 +184,20 @@
             [_barChartView updateData];
         }
     }];
+}
+
+#pragma mark - SWNotebookPieChartViewDelegate
+- (void)SWNotebookPieChartView:(SWNotebookPieChartView *)pieCharView didSelectOrderCategory:(NSDictionary *)dict {
+    SWShoppingOrderCategoryModle *orderCategory = dict.allKeys.firstObject;
+    NSArray *orderArray = [dict objectForKey:orderCategory];
+    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithOrderList:orderArray inShoppingCategory:orderCategory];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+#pragma mark - SWNotebookBarChartViewDelegate
+- (void)SWNotebookBarChartView:(SWNotebookBarChartView *)barCharView didSelectOrderCategory:(NSDictionary *)dict {
+    SWShoppingOrderCategoryModle *orderCategory = dict.allKeys.firstObject;
+    NSArray *orderArray = [dict objectForKey:orderCategory];
+    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithOrderList:orderArray inShoppingCategory:orderCategory];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

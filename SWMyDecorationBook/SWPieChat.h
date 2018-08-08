@@ -13,6 +13,7 @@
 @property(nonatomic, strong) NSString *segmentTitle;
 @property(nonatomic, assign) CGFloat segmentValue;
 @property(nonatomic, assign) CGFloat segmentRatio;
+@property(nonatomic, strong) NSDictionary *appendInfo;
 @end
 
 @class SWPieChat;

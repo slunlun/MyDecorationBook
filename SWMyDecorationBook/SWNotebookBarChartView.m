@@ -63,7 +63,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.row != 0) {
+        if ([self.delegate respondsToSelector:@selector(SWNotebookBarChartView:didSelectOrderCategory:)]) {
+            NSDictionary *infoDict = self.orderInfoArray[indexPath.row - 1];
+            [self.delegate SWNotebookBarChartView:self didSelectOrderCategory:infoDict];
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -96,10 +101,5 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 
 @end

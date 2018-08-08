@@ -19,6 +19,7 @@
 @property(nonatomic, strong) SWSpeechBubble *speechBubble;
 @property(nonatomic, strong) NSArray *summarizingData;
 @property(nonatomic, strong) NSArray *segColor;
+@property(nonatomic, strong) SWPieChatSegment *currentSegmetn;
 @end
 
 @implementation SWNotebookPieChartView
@@ -41,11 +42,11 @@
             UIColor *segColor = _segColor[colorIndex];
             ++colorIndex;
             SWPieChatSegment *seg = [[SWPieChatSegment alloc] initWithValue:modle.totalCost title:modle.orderCategoryName color:segColor];
+            seg.appendInfo = dict;
             [segArray addObject:seg];
         }
         [_pieChart updateProportions:segArray];
     }
-    
 }
 #pragma mark - Common init
 - (void)commonInit {
@@ -70,7 +71,7 @@
                   [UIColor colorWithHexString:@"#E8B08D"]
                   ];
     
-    // pic chart
+    // pie chart
     _pieChart = [[SWPieChat alloc] init];
     _pieChart.delegate = self;
     _pieChart.backgroundColor = [UIColor whiteColor];
@@ -92,6 +93,9 @@
         make.top.equalTo(self.mas_bottom).offset(100);
         make.height.equalTo(@60);
     }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(speechBubbleTapped:)];
+    [_speechBubble addGestureRecognizer:tap];
 }
 #pragma mark - SWPieChatDelegate
 - (void)pieChatDidShow:(SWPieChat *)pieChat defaultSegment:(SWPieChatSegment *)pieChatSegment {
@@ -114,6 +118,8 @@
         [self setNeedsLayout];
         [self layoutIfNeeded];
     }];
+    
+    self.currentSegmetn = pieChatSegment;
 }
 
 - (void)pieChat:(SWPieChat *)pieChat didSelectSegment:(SWPieChatSegment *)pieChatSegment {
@@ -124,5 +130,16 @@
     NSString *value = [NSString stringWithFormat:@"¥ %.2f", pieChatSegment.segmentValue];
     self.speechBubble.speechContentLab.textColor = pieChatSegment.segmentColor;
     self.speechBubble.speechContentLab.text = value;
+    
+    self.currentSegmetn = pieChatSegment;
+}
+
+#pragma mark - UI Response
+- (void)speechBubbleTapped:(UITapGestureRecognizer *)tapGesture {
+    NSDictionary *orderInfoDict = self.currentSegmetn.appendInfo;
+    if ([self.delegate respondsToSelector:@selector(SWNotebookPieChartView:didSelectOrderCategory:)]) {
+        [self.delegate SWNotebookPieChartView:self didSelectOrderCategory:orderInfoDict];
+    }
+    
 }
 @end

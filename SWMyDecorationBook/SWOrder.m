@@ -7,11 +7,12 @@
 //
 
 #import "SWOrder.h"
-
+#import "NSDate+SWDateExt.h"
 @implementation SWOrder
 - (instancetype)init {
     if (self = [super init]) {
-        _orderDate = [NSDate date];
+        
+        _orderDate = [NSDate dateYMD];
         _orderID = [[NSUUID UUID] UUIDString];
     }
     return self;

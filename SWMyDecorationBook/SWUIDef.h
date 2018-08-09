@@ -32,6 +32,7 @@
 #define SW_DISABLE_GRAY [UIColor colorWithHexString:@"#cccccc"]
 #define SW_DISABLIE_WHITE [UIColor colorWithHexString:@"ecf0f1"]
 #define SW_DISABLIE_THIN_WHITE [UIColor colorWithHexString:@"#F9F7F7"]
+#define SW_LIGHT_GRAY [UIColor colorWithHexString:@"95a5a6"];
 #define SW_WARN_RED [UIColor colorWithHexString:@"#e74c3c"]
 #define SW_TAOBAO_ORANGE [UIColor colorWithHexString:@"#e67e22"]
 #define SW_TAOBAO_BLACK [UIColor colorWithHexString:@"#34495e"]

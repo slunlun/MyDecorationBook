@@ -119,6 +119,7 @@
 		B0C34A612113FF7D003B253A /* SWPieChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A5F2113FF7D003B253A /* SWPieChat.m */; };
 		B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A632114060E003B253A /* SWNotebookPieChartView.m */; };
 		B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A6621140621003B253A /* SWNotebookBarChartView.m */; };
+		B0D5B56A211BE19300B92123 /* SWOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */; };
 		B0F64284211A839900F3F38E /* SWOrderListinCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */; };
 		B0F6428A211A896400F3F38E /* NSDate+SWDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64289211A896400F3F38E /* NSDate+SWDateExt.m */; };
 /* End PBXBuildFile section */
@@ -359,6 +360,8 @@
 		B0C34A632114060E003B253A /* SWNotebookPieChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookPieChartView.m; sourceTree = "<group>"; };
 		B0C34A6521140621003B253A /* SWNotebookBarChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNotebookBarChartView.h; sourceTree = "<group>"; };
 		B0C34A6621140621003B253A /* SWNotebookBarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookBarChartView.m; sourceTree = "<group>"; };
+		B0D5B568211BE19300B92123 /* SWOrderDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailTableViewCell.h; sourceTree = "<group>"; };
+		B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailTableViewCell.m; sourceTree = "<group>"; };
 		B0F64282211A839900F3F38E /* SWOrderListinCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderListinCategoryViewController.h; sourceTree = "<group>"; };
 		B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderListinCategoryViewController.m; sourceTree = "<group>"; };
 		B0F64288211A896400F3F38E /* NSDate+SWDateExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SWDateExt.h"; sourceTree = "<group>"; };
@@ -669,6 +672,8 @@
 				B0C34A6621140621003B253A /* SWNotebookBarChartView.m */,
 				B0F64282211A839900F3F38E /* SWOrderListinCategoryViewController.h */,
 				B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */,
+				B0D5B568211BE19300B92123 /* SWOrderDetailTableViewCell.h */,
+				B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -934,6 +939,7 @@
 				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
 				5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */,
 				5E17560720109E8F009F100B /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				B0D5B56A211BE19300B92123 /* SWOrderDetailTableViewCell.m in Sources */,
 				5E17561A20109E8F009F100B /* MagicalRecord+Setup.m in Sources */,
 				5EE7E2D41F99ACCC007CAB27 /* MASConstraintMaker.m in Sources */,
 				5E17561020109E8F009F100B /* NSManagedObjectContext+MagicalRecord.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "SWOrderListinCategoryViewController.h"
 #import "SWOrder.h"
+#import "SWOrderDetailTableViewCell.h"
+#import "SWUIDef.h"
 #import "Masonry.h"
 
 @interface SWOrderListinCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -30,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = [NSString stringWithFormat:@"%@账目", self.shoppingOrderCategory.orderCategoryName];
 }
@@ -60,7 +63,6 @@
             dict = [[NSMutableDictionary alloc] init];
             NSMutableArray *array = [NSMutableArray arrayWithObject:order];
             [dict setObject:array forKey:order.orderDate];
-            [self.orderArray addObject:dict];
         }else {
             NSDate *dictKey = (NSDate *)dict.allKeys.firstObject;
             if ([dictKey isEqual:order.orderDate]) {
@@ -74,11 +76,15 @@
             }
         }
     }
+    if (dict != nil) {
+        [self.orderArray addObject:dict];
+    }
 }
 
 #pragma mark - CommonInit
 - (void)commonInit {
     _orderListTableView = [[UITableView alloc] init];
+    [_orderListTableView registerClass:[SWOrderDetailTableViewCell class] forCellReuseIdentifier:@"ORDER_DETAIL_CELL_IDENTITY"];
     [_orderListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CELL_IDENTITY"];
     _orderListTableView.delegate = self;
     _orderListTableView.dataSource = self;
@@ -104,7 +110,28 @@
     return self.orderArray.count + 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 70;
+    }else {
+        return 60;
+    }
+}
 #pragma mark - TableViewDataSource
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"";
+    }else {
+        NSDictionary *orderInfo = self.orderArray[section - 1];
+        NSDate *key = orderInfo.allKeys.firstObject;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //设置格式：zzz表示时区
+        [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+        //NSDate转NSString
+        NSString *currentDateString = [dateFormatter stringFromDate:key];
+        return currentDateString;
+    }
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
@@ -117,15 +144,24 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL_IDENTITY" forIndexPath:indexPath];
+    UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"总花费 %lf", self.shoppingOrderCategory.totalCost];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CELL_IDENTITY" forIndexPath:indexPath];
+        cell.textLabel.text = [NSString stringWithFormat:@"总花费 %.2f", self.shoppingOrderCategory.totalCost];
+        cell.textLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = SW_DISABLIE_WHITE;
     }else {
         NSDictionary *orderInfo = self.orderArray[indexPath.section - 1];
         NSDate *key = orderInfo.allKeys.firstObject;
         NSArray *orderArray = [orderInfo objectForKey:key];
         SWOrder *order = orderArray[indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ * %lf 总价: %lf", order.productItem.productName, order.itemCount, order.orderTotalPrice];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_DETAIL_CELL_IDENTITY" forIndexPath:indexPath];
+        [((SWOrderDetailTableViewCell *)cell) updateOrderInfo:order];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if(indexPath.section != 0) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }

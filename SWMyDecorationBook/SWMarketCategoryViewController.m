@@ -33,9 +33,9 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _selectedMarkCategoryIndex = 0;
     [self commonInit];
     [self updateData];
-    _selectedMarkCategoryIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +80,9 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
         }
         make.bottom.equalTo(self.view.mas_bottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
     }];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_selectedMarkCategoryIndex inSection:0];
+    [_marketCategoryTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -157,6 +160,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedMarkCategoryIndex = indexPath.row;
     SWMarketCategory *markCategory = self.categoryArray[indexPath.row];
     if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didClickMarketCategory:)]) {
         [self.delegate marketCategoryVC:self didClickMarketCategory:markCategory];
@@ -198,6 +202,11 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_selectedMarkCategoryIndex inSection:0];
+    [_marketCategoryTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
 
 #pragma mark - Update UI
 - (void)updateViewConstraints {
@@ -274,6 +283,8 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 - (void)addCategoryBtnClicked:(UIButton *)addBtn {
     [self.marketCategoryTableView setEditing:NO animated:YES];
     [self.marketCategoryTableView reloadData];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
 }
 
 - (void)configMarketCategory:(SWMarketCategory *)marketCategory {

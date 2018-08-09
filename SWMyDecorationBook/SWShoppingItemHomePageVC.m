@@ -26,6 +26,7 @@
 #import "SWShoppingOrderManager.h"
 #import "UIView+UIExt.h"
 
+
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = SW_TAOBAO_WHITE;
     [self commitInit];
+    self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

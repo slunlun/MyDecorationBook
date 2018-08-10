@@ -57,6 +57,11 @@
     
 }
 
+- (void)setOrderRemark:(NSString *)orderRemark {
+    if (orderRemark != nil && ![orderRemark isEqualToString:@""]) {
+        _txtFRemark.text = orderRemark;
+    }
+}
 #pragma mark - UITextViewDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (self.remarkChangeBlock) {

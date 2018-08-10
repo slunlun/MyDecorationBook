@@ -102,7 +102,7 @@
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
-		B0181E7D211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E7C211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.m */; };
+		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
 		B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */; };
 		B057D24E208F263800539824 /* SWOrderProductInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B057D24D208F263800539824 /* SWOrderProductInfoView.m */; };
 		B057D251209069C100539824 /* SWOrderProductInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B057D250209069C100539824 /* SWOrderProductInfoTableViewCell.m */; };
@@ -329,8 +329,8 @@
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
 		B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderTotalPriceTableViewCell.m; sourceTree = "<group>"; };
-		B0181E7B211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderProductBasicInfoTableViewCell.h; sourceTree = "<group>"; };
-		B0181E7C211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderProductBasicInfoTableViewCell.m; sourceTree = "<group>"; };
+		B0181E81211D7219009071CC /* SWOrderInfoPhotoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderInfoPhotoTableViewCell.h; sourceTree = "<group>"; };
+		B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderInfoPhotoTableViewCell.m; sourceTree = "<group>"; };
 		B01CB23B2099535000F716C4 /* SWNotebookHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNotebookHomeViewController.h; sourceTree = "<group>"; };
 		B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookHomeViewController.m; sourceTree = "<group>"; };
 		B057D24C208F263800539824 /* SWOrderProductInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderProductInfoView.h; sourceTree = "<group>"; };
@@ -768,8 +768,8 @@
 				B057D256209082CB00539824 /* UITextField+OKToolBar.m */,
 				B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */,
 				B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */,
-				B0181E7B211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.h */,
-				B0181E7C211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.m */,
+				B0181E81211D7219009071CC /* SWOrderInfoPhotoTableViewCell.h */,
+				B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -987,7 +987,6 @@
 				5E17560220109E8F009F100B /* MagicalImportFunctions.m in Sources */,
 				5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */,
 				5E9C2CD82004AB210052A05E /* TZAssetCell.m in Sources */,
-				B0181E7D211D3B01009071CC /* SWOrderProductBasicInfoTableViewCell.m in Sources */,
 				5E9C2CDE2004AB210052A05E /* TZImagePickerController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5E17560620109E8F009F100B /* NSObject+MagicalDataImport.m in Sources */,
@@ -1052,6 +1051,7 @@
 				5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */,
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,
 				B077F73921182A8300E15ECC /* SWTotalCostTableViewCell.m in Sources */,
+				B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 				5E17561320109E8F009F100B /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				5E17560420109E8F009F100B /* NSEntityDescription+MagicalDataImport.m in Sources */,

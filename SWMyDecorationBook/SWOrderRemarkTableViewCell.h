@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 typedef void(^orderRemarkChangedBlock)(NSString *remark);
 @interface SWOrderRemarkTableViewCell : UITableViewCell
+- (void)setOrderRemark:(NSString *)orderRemark;
 @property(nonatomic, copy) orderRemarkChangedBlock remarkChangeBlock;
 @end

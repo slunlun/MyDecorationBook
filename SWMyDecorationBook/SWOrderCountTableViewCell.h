@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWOrder.h"
 typedef void(^orderCountUpdateBlock)(CGFloat orderCount);
 
 @interface SWOrderCountTableViewCell : UITableViewCell
+- (void)setOrderInfo:(SWOrder *)orderInfo;
+
 @property(nonatomic, copy) orderCountUpdateBlock orderCountUpdateBlock;
 @end

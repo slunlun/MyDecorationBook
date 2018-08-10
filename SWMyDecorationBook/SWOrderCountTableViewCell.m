@@ -13,6 +13,7 @@
 @interface SWOrderCountTableViewCell()<SWAddSubViewDelegate>
 @property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, strong) SWAddSubView *addSubView;
+@property(nonatomic, strong) SWOrder *orderInfo;
 @end
 
 @implementation SWOrderCountTableViewCell
@@ -50,6 +51,11 @@
         make.height.equalTo(_titleLab.mas_height).offset(-10);
         make.width.equalTo(@110);
     }];
+}
+
+- (void)setOrderInfo:(SWOrder *)orderInfo {
+    _orderInfo = orderInfo;
+    [self.addSubView updateCountNum:self.orderInfo.itemCount];
 }
 
 #pragma mark - SWAddSubViewDelegate

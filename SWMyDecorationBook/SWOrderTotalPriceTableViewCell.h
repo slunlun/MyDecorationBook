@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWOrder.h"
 
+typedef void(^orderTotalPriceChangedBlock)(CGFloat totalPrice);
 @interface SWOrderTotalPriceTableViewCell : UITableViewCell
-
+- (void)setOrderInfo:(SWOrder *)orderInfo;
+@property(nonatomic, copy) orderTotalPriceChangedBlock priceChangedBlock;
 @end

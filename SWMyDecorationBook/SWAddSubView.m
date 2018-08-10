@@ -99,6 +99,14 @@
     [self.txtFCount resignFirstResponder];
 }
 
+- (void)updateCountNum:(CGFloat)countNum {
+    self.txtFCount.text = [NSString stringWithFormat:@"%.2lf", countNum];
+    if (countNum > 0) {
+        self.btnSub.userInteractionEnabled = YES;
+        [self.btnSub setBackgroundColor:SW_DISABLIE_WHITE];
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {

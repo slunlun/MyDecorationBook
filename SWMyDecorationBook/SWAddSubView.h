@@ -14,5 +14,6 @@
 @end
 
 @interface SWAddSubView : UIView
+- (void)updateCountNum:(CGFloat)countNum;
 @property(nonatomic, weak)id<SWAddSubViewDelegate> delegate;
 @end

@@ -11,6 +11,7 @@
 #import "SWOrderDetailTableViewCell.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
+#import "SWOrderDetailViewController.h"
 
 @interface SWOrderListinCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) NSMutableArray<NSDictionary *> *orderArray;
@@ -116,6 +117,15 @@
     }else {
         return 60;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *orderInfoDict = self.orderArray[indexPath.section - 1];
+    NSDate *key = orderInfoDict.allKeys.firstObject;
+    NSArray *orderArray = [orderInfoDict objectForKey:key];
+    SWOrder *order = orderArray[indexPath.row];
+    SWOrderDetailViewController *vc = [[SWOrderDetailViewController alloc] initWithOrderInfo:order];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - TableViewDataSource
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

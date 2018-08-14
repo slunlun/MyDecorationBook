@@ -162,7 +162,7 @@
         segment.segmentRatio = segment.segmentValue / self.totalCount;
     }
     
-    if (self.proportions) {
+    if (self.proportions.count) {
         [self showPieChart];
     }
 }

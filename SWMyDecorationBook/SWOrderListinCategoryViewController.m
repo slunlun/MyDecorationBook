@@ -62,13 +62,16 @@
 #pragma mark - Private method
 - (void)sortOrderList:(NSArray *)orderList {
     [self.orderArray removeAllObjects];
+    self.shoppingOrderCategory.totalCost = 0.0f; // 这里要更新总花费，因为可能在order detail界面用户对单个订单总价/数量作出了修改
     NSArray *sortedOrderList = [orderList sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         SWOrder *firstObj = (SWOrder *)obj1;
         SWOrder *secondObj = (SWOrder *)obj2;
         return [firstObj.orderDate compare:secondObj.orderDate];
     }];
     NSMutableDictionary *dict = nil;
+    
     for (SWOrder *order in sortedOrderList) {
+        self.shoppingOrderCategory.totalCost += order.orderTotalPrice;
         if (dict == nil) {
             dict = [[NSMutableDictionary alloc] init];
             NSMutableArray *array = [NSMutableArray arrayWithObject:order];

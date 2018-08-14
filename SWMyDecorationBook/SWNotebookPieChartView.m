@@ -33,20 +33,22 @@
 #pragma mark - updateData
 - (void)updateSummarizingData {
     _summarizingData = [[SWShoppingOrderManager sharedInstance] loadData];
-    if (_summarizingData.count) {
-        NSMutableArray *segArray = [[NSMutableArray alloc] init];
-        NSInteger colorIndex = 0;
-        for (NSDictionary *dict in _summarizingData) {
-            SWShoppingOrderCategoryModle *modle = dict.allKeys.firstObject;
-            colorIndex = colorIndex % _segColor.count;
-            UIColor *segColor = _segColor[colorIndex];
-            ++colorIndex;
-            SWPieChatSegment *seg = [[SWPieChatSegment alloc] initWithValue:modle.totalCost title:modle.orderCategoryName color:segColor];
-            seg.appendInfo = dict;
-            [segArray addObject:seg];
-        }
-        [_pieChart updateProportions:segArray];
+    NSMutableArray *segArray = [[NSMutableArray alloc] init];
+    NSInteger colorIndex = 0;
+    for (NSDictionary *dict in _summarizingData) {
+        SWShoppingOrderCategoryModle *modle = dict.allKeys.firstObject;
+        colorIndex = colorIndex % _segColor.count;
+        UIColor *segColor = _segColor[colorIndex];
+        ++colorIndex;
+        SWPieChatSegment *seg = [[SWPieChatSegment alloc] initWithValue:modle.totalCost title:modle.orderCategoryName color:segColor];
+        seg.appendInfo = dict;
+        [segArray addObject:seg];
     }
+    [_pieChart updateProportions:segArray];
+    if (segArray.count == 0) {
+        [self.speechBubble removeFromSuperview];
+    }
+   
 }
 #pragma mark - Common init
 - (void)commonInit {

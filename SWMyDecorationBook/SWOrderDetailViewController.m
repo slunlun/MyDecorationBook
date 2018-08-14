@@ -304,6 +304,7 @@
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定删除该条目吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SWProductOrderStorage removeProductOrder:self.orderInfo];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         

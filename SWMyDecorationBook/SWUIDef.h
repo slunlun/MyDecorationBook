@@ -12,6 +12,7 @@
 #define SW_MARGIN 20.0f
 #define SW_BLACK_COLOR @"#34495e"
 #define SW_CELL_LEFT_MARGIN 25.0f
+#define SW_BOTTOM_MARGIN 80.0f
 
 // corner radious
 #define SW_DEFAULT_CORNER_RADIOUS 5.0f

@@ -12,6 +12,7 @@
 #import "SWUIDef.h"
 #import "Masonry.h"
 #import "SWOrderDetailViewController.h"
+#import "SWProductItemStorage.h"
 
 @interface SWOrderListinCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) NSMutableArray<NSDictionary *> *orderArray;
@@ -21,12 +22,12 @@
 
 @implementation SWOrderListinCategoryViewController
 
-- (instancetype)initWithOrderList:(NSArray *)orderList inShoppingCategory:(SWShoppingOrderCategoryModle *)orderCategory {
+- (instancetype)initWithShoppingCategory:(SWShoppingOrderCategoryModle *)orderCategory {
     if (self = [super init]) {
-        [self sortOrderList:orderList];
         _shoppingOrderCategory = orderCategory;
         [self commonInit];
     }
+    
     return self;
 }
 
@@ -36,6 +37,13 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = [NSString stringWithFormat:@"%@账目", self.shoppingOrderCategory.orderCategoryName];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSArray *orderList = [[SWShoppingOrderManager sharedInstance] loadOrdersInCategory:self.shoppingOrderCategory];
+    [self sortOrderList:orderList];
+    [self.orderListTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +61,7 @@
 
 #pragma mark - Private method
 - (void)sortOrderList:(NSArray *)orderList {
+    [self.orderArray removeAllObjects];
     NSArray *sortedOrderList = [orderList sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         SWOrder *firstObj = (SWOrder *)obj1;
         SWOrder *secondObj = (SWOrder *)obj2;

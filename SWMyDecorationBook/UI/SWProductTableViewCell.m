@@ -107,7 +107,7 @@
     [_productPicturesCollectionView registerClass:[SWProductCollectionViewCell class] forCellWithReuseIdentifier:@"SWProductCollectionViewCell"];
     _productPicturesCollectionView.delegate = self;
     _productPicturesCollectionView.dataSource = self;
-    _productPicturesCollectionView.backgroundColor = [UIColor yellowColor];
+    _productPicturesCollectionView.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:_productPicturesCollectionView];
     [_productPicturesCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {

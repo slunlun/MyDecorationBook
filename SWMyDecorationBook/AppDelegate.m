@@ -21,7 +21,6 @@
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // common tintColor
-    [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
 
     // setup MagicRecord

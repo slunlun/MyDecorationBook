@@ -95,6 +95,18 @@ static SWShoppingOrderManager *sharedObj = nil;
     return self.shoppingOrderInCategoryArray;
 }
 
+- (NSArray *)loadOrdersInCategory:(SWShoppingOrderCategoryModle *)categoryModel {
+    NSArray *retArray = nil;
+    NSArray *shoppingOrderInCategoryArray = [self loadData];
+    for (NSDictionary *info in shoppingOrderInCategoryArray) {
+        SWShoppingOrderCategoryModle *orderCategory = info.allKeys.firstObject;
+        if ([orderCategory isEqual:categoryModel]) {
+            retArray = info[orderCategory];
+        }
+    }
+    return retArray;
+}
+
 - (void)insertNewOrder:(SWOrder *)shoppingOrder {
     [SWProductOrderStorage insertNewProductOrder:shoppingOrder];
     [self loadData];

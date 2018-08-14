@@ -16,7 +16,7 @@
 #import "SWNotebookPieChartView.h"
 #import "SWOrderListinCategoryViewController.h"
 
-@interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate>
+@interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
 @property(nonatomic, strong) UIView *guideBarView;
@@ -44,7 +44,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_pieChartView updateSummarizingData];
+     [_pieChartView updateSummarizingData];
+    self.navigationController.delegate = self; // 在这里设置navigationController.delegate，确保第一次push到本vc时，delegate方法不被调用
 }
 
 #pragma mark - Common init
@@ -189,15 +190,19 @@
 #pragma mark - SWNotebookPieChartViewDelegate
 - (void)SWNotebookPieChartView:(SWNotebookPieChartView *)pieCharView didSelectOrderCategory:(NSDictionary *)dict {
     SWShoppingOrderCategoryModle *orderCategory = dict.allKeys.firstObject;
-    NSArray *orderArray = [dict objectForKey:orderCategory];
-    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithOrderList:orderArray inShoppingCategory:orderCategory];
+    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithShoppingCategory:orderCategory];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - SWNotebookBarChartViewDelegate
 - (void)SWNotebookBarChartView:(SWNotebookBarChartView *)barCharView didSelectOrderCategory:(NSDictionary *)dict {
     SWShoppingOrderCategoryModle *orderCategory = dict.allKeys.firstObject;
-    NSArray *orderArray = [dict objectForKey:orderCategory];
-    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithOrderList:orderArray inShoppingCategory:orderCategory];
+    SWOrderListinCategoryViewController *vc = [[SWOrderListinCategoryViewController alloc] initWithShoppingCategory:orderCategory];
     [self.navigationController pushViewController:vc animated:YES];
+}
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isEqual:self]) {
+        _barChartView.needUpdata = YES;
+    }
 }
 @end

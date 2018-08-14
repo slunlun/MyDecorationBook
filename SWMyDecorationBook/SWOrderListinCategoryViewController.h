@@ -10,5 +10,5 @@
 #import "SWShoppingOrderManager.h"
 
 @interface SWOrderListinCategoryViewController : UIViewController
-- (instancetype)initWithOrderList:(NSArray *)orderList inShoppingCategory:(SWShoppingOrderCategoryModle *)orderCategory;
+- (instancetype)initWithShoppingCategory:(SWShoppingOrderCategoryModle *)orderCategory;
 @end

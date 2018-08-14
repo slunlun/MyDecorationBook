@@ -13,6 +13,7 @@
 @interface SWOrderDetailTableViewCell()
 @property(nonatomic, strong) UILabel *marketNameLab;
 @property(nonatomic, strong) UILabel *shoppingItemNameLab;
+@property(nonatomic, strong) UILabel *shoppingItemPrice;
 @property(nonatomic, strong) UILabel *orderCountLab;
 @property(nonatomic, strong) UILabel *orderTotalPriceLab;
 @end
@@ -27,8 +28,9 @@
 
 - (void)updateOrderInfo:(SWOrder *)orderInfo {
     self.shoppingItemNameLab.text = orderInfo.productItem.productName;
-    self.orderCountLab.text = [NSString stringWithFormat:@"x %.2f%@", orderInfo.itemCount, orderInfo.productItem.itemUnit.unitTitle];
+    self.orderCountLab.text = [NSString stringWithFormat:@"x %.2f", orderInfo.itemCount];
     self.orderTotalPriceLab.text = [NSString stringWithFormat:@"%.2f", orderInfo.orderTotalPrice];
+    self.shoppingItemPrice.text = [NSString stringWithFormat:@"￥%.2f/%@", orderInfo.productItem.price, orderInfo.productItem.itemUnit.unitTitle];
     self.marketNameLab.text = orderInfo.marketItem.marketName;
 }
 
@@ -51,6 +53,16 @@
     [self.contentView addSubview:_shoppingItemNameLab];
     [_shoppingItemNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.contentView.mas_centerY).offset(10);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+    }];
+    
+    _shoppingItemPrice = [[UILabel alloc] init];
+    _shoppingItemPrice.textAlignment = NSTextAlignmentLeft;
+    _shoppingItemPrice.textColor = SW_TAOBAO_BLACK;
+    _shoppingItemPrice.font = SW_DEFAULT_MIN_FONT;
+    [self.contentView addSubview:_shoppingItemPrice];
+    [_shoppingItemPrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_shoppingItemNameLab.mas_bottom).offset(2);
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
     }];
     

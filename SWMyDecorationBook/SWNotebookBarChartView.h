@@ -14,6 +14,7 @@
 @end
 
 @interface SWNotebookBarChartView : UIView
+@property(nonatomic, assign) BOOL needUpdata;
 - (instancetype)init;
 - (void)updateData;
 

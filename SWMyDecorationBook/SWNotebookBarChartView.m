@@ -20,6 +20,7 @@
 @implementation SWNotebookBarChartView
 - (instancetype)init {
     if (self = [super init]) {
+        _needUpdata = YES;
         [self commonInit];
     }
     return self;
@@ -39,17 +40,22 @@
 }
 
 - (void)updateData {
-    if (self.orderInfoArray == nil) {
+    if (self.needUpdata) {
         self.orderInfoArray = [[SWShoppingOrderManager sharedInstance] loadData];
-        [self.barChartTableView reloadData];
+        self.needUpdata = NO;
     }
 }
 
 #pragma mark - Setter/Getter
 - (void)setOrderInfoArray:(NSArray *)orderInfoArray {
-    if (_orderInfoArray == nil) {
-        _orderInfoArray = orderInfoArray;
-        [self.barChartTableView reloadData];
+    _orderInfoArray = orderInfoArray;
+    [self.barChartTableView reloadData];
+}
+
+- (void)setNeedUpdata:(BOOL)needUpdata {
+    _needUpdata = needUpdata;
+    if (_needUpdata == YES) {
+        [self updateData];
     }
 }
 

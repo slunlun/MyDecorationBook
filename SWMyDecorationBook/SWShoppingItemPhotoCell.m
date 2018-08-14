@@ -40,7 +40,7 @@ static NSString *cellIdentify = @"SWProductCollectionViewCell";
     [_shoppingItemPhotoCollectionView registerClass:[SWProductCollectionViewCell class] forCellWithReuseIdentifier:cellIdentify];
     _shoppingItemPhotoCollectionView.delegate = self;
     _shoppingItemPhotoCollectionView.dataSource = self;
-    _shoppingItemPhotoCollectionView.backgroundColor = [UIColor yellowColor];
+    _shoppingItemPhotoCollectionView.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:_shoppingItemPhotoCollectionView];
     [_shoppingItemPhotoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {

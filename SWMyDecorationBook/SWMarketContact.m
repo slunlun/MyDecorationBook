@@ -13,6 +13,13 @@
 //@property(nonatomic, strong) NSString *telNum;
 //@property(nonatomic, assign, getter=isDefaultContact) BOOL defaultContact;
 //@property(nonatomic, strong) NSDate *createTime;
+- (instancetype)init {
+    if (self = [super init]) {
+        _createTime = [NSDate date];
+        _itemID = [[NSUUID UUID] UUIDString];
+    }
+    return self;
+}
 - (instancetype)initWithMO:(SWShopContact *)contact {
     if (self = [super init]) {
         _name = contact.name;

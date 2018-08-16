@@ -10,7 +10,9 @@
 #import "SWMarketItem.h"
 
 typedef void(^marketHeaderActionBlock)(SWMarketItem *);
+typedef void(^marketContactClickBlock)(SWMarketItem *);
 @interface SWMarketHeaderView : UITableViewHeaderFooterView
 @property(nonatomic, strong) SWMarketItem *markItem;
 @property(nonatomic, copy) marketHeaderActionBlock actionBlock;
+@property(nonatomic, copy) marketContactClickBlock marketContactClickBlock;
 @end

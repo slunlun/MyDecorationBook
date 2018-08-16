@@ -83,9 +83,9 @@
         NSArray *shops = nil;
         if (marketCatagroy) {
             NSPredicate *predict = [NSPredicate predicateWithFormat:@"shopCategory.itemID = %@", marketCatagroy.itemID];
-            shops = [SWShop MR_findAllWithPredicate:predict inContext:localContext];
+            shops = [SWShop MR_findAllSortedBy:@"createTime" ascending:NO withPredicate:predict inContext:localContext];
         }else {
-            shops = [SWShop MR_findAllInContext:localContext];
+            shops = [SWShop MR_findAllSortedBy:@"createTime" ascending:NO];
         }
         for (SWShop *shop in shops) {
             SWMarketItem *marketItem = [[SWMarketItem alloc] initWithMO:shop];

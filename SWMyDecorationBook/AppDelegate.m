@@ -20,6 +20,8 @@
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 设置UINavigationBar的背景图片
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
     // common tintColor
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
     [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;

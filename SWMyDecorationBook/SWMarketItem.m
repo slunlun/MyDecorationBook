@@ -51,6 +51,7 @@
             [self.telNums addObject:marketContact];
             if (marketContact.isDefaultContact) {
                 self.defaultTelNum = marketContact.telNum;
+                self.defaultContactName = marketContact.name;
             }
         }
         

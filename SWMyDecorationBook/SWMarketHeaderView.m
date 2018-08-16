@@ -30,7 +30,7 @@
     UIButton *marketBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
     marketBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
+    marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [marketBtn setTitleColor:[UIColor colorWithHexString:SW_BLACK_COLOR] forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -73,6 +73,8 @@
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN + 2);
         make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
     }];
+    
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"#E8E8E8"];
 }
 
 - (void)prepareForReuse {
@@ -93,7 +95,7 @@
     [self.marketNameBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(widthNum);
     }];
-    NSString *defTelText = [NSString stringWithFormat:@"联系: %@", markItem.defaultTelNum];
+    NSString *defTelText = [NSString stringWithFormat:@"联系: %@", markItem.defaultContactName];
     self.telNumLabel.text = defTelText;
 }
 
@@ -106,9 +108,8 @@
 }
 
 - (void)defTelNumClicked:(UITapGestureRecognizer *)tapGesture {
-    NSString *telNum = [NSString stringWithFormat:@"tel://%@", self.markItem.defaultTelNum];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
-        NSLog(@"为你打call");
-    }];
+    if (self.marketContactClickBlock) {
+        self.marketContactClickBlock(self.markItem);
+    }
 }
 @end

@@ -66,8 +66,8 @@
     _shoppingItemListTableView.delegate = self;
     [_shoppingItemListTableView registerClass:[SWProductTableViewCell class] forCellReuseIdentifier:@"PRODUCT_CELL"];
     [_shoppingItemListTableView registerClass:[SWMarketHeaderView class] forHeaderFooterViewReuseIdentifier:@"MARKET_HEADER_VIEW"];
+    _shoppingItemListTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_shoppingItemListTableView];
-
     [_shoppingItemListTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         if (@available(iOS 11.0, *)) {
@@ -82,7 +82,7 @@
         }
     }];
     
-    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
+//    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
     UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
     UITapGestureRecognizer *imageTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noteBookClicked:)];
     [noteBookImgView addGestureRecognizer:imageTaped];
@@ -90,7 +90,7 @@
     _notebookItemBtn = notebookItemBtn;
     UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMarketItem:)];
     self.navigationItem.rightBarButtonItem = addMarketItemBtn;
-    self.navigationItem.leftBarButtonItems = @[configItemBtn, notebookItemBtn];
+    self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
 }
 
 #pragma mark - Data source
@@ -167,6 +167,27 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     };
+    
+    marketHeaderView.marketContactClickBlock = ^(SWMarketItem *market) {
+        NSString *msg = [NSString stringWithFormat:@"要联系 %@ 吗？", market.defaultContactName];
+        UIAlertController *alertVC= [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSString *telNum = [NSString stringWithFormat:@"tel://%@", market.defaultTelNum];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
+                NSLog(@"为你打call");
+            }];
+        }];
+        
+        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertVC addAction:okAction];
+        [alertVC addAction:cancleAction];
+        
+        StrongObj(self);
+        [self presentViewController:alertVC animated:YES completion:nil];
+    };
+    
     return marketHeaderView;
 }
 

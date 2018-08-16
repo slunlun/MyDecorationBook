@@ -11,6 +11,7 @@
 typedef void(^defaultContactConfigBlock)(SWMarketContact * contact);
 typedef void(^contactNameChangedBlock)(NSString *contactName);
 typedef void(^contactTelNumChangedBlock)(NSString *contactTelNum);
+typedef void(^contactDelBlock)();
 @interface SWNewMarketTelNumCell : UITableViewCell
 @property(nonatomic, strong) SWMarketContact *marketContact;
 @property(nonatomic, strong) UITextField *contactNameTextField;
@@ -18,4 +19,5 @@ typedef void(^contactTelNumChangedBlock)(NSString *contactTelNum);
 @property(nonatomic, copy) defaultContactConfigBlock defaultContactSetBlock;
 @property(nonatomic, copy) contactNameChangedBlock contactNameChangedBlock;
 @property(nonatomic, copy) contactTelNumChangedBlock contactTelNumChangedBlock;
+@property(nonatomic, copy) contactDelBlock contactDelBlock;
 @end

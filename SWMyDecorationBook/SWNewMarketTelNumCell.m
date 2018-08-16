@@ -11,8 +11,8 @@
 #import "SWUIDef.h"
 #import "UITextField+OKToolBar.h"
 @interface SWNewMarketTelNumCell()<UITextFieldDelegate>
-
 @property(nonatomic, strong) UIButton *defaultTelBtn;
+@property(nonatomic, strong) UIButton *delBtn;
 @end
 @implementation SWNewMarketTelNumCell
 
@@ -32,6 +32,12 @@
     _contactNameTextField.font = SW_DEFAULT_FONT;
     _contactNameTextField.delegate = self;
     [self.contentView addSubview:_contactNameTextField];
+    [self.contactNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(@60);
+    }];
     
     _telNumTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     [_telNumTextField addOKToolBar];
@@ -41,39 +47,39 @@
     _telNumTextField.delegate = self;
     _telNumTextField.keyboardType = UIKeyboardTypePhonePad;
     [self.contentView addSubview:_telNumTextField];
+    [self.telNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contactNameTextField.mas_right);
+        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(@140);
+    }];
     
     _defaultTelBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [_defaultTelBtn addTarget:self action:@selector(defaultTelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_defaultTelBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
     [_defaultTelBtn setTitleColor:SW_TAOBAO_ORANGE forState:UIControlStateSelected];
     [_defaultTelBtn setTitle:@"默认" forState:UIControlStateNormal];
-    _defaultTelBtn.titleLabel.font = SW_DEFAULT_MIN_FONT;
+    _defaultTelBtn.titleLabel.font = SW_DEFAULT_FONT_BOLD;
     [_defaultTelBtn setImage:[UIImage imageNamed:@"Check-UnSel"] forState:UIControlStateNormal];
     [_defaultTelBtn setImage:[UIImage imageNamed:@"Check-Sel"] forState:UIControlStateSelected];
-    
-    _defaultTelBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-    
+    _defaultTelBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     [self.contentView addSubview:_defaultTelBtn];
-    
-    [self.contactNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@60);
-    }];
-    
-    [self.telNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contactNameTextField.mas_right).offset(SW_MARGIN);
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@140);
-    }];
-    
     [self.defaultTelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
         make.width.equalTo(@60);
+        make.left.equalTo(_telNumTextField.mas_right);
+    }];
+    
+    _delBtn = [[UIButton alloc] init];
+    [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_delBtn setImage:[UIImage imageNamed:@"Del"] forState:UIControlStateNormal];
+    [self.contentView addSubview:_delBtn];
+    [self.delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_defaultTelBtn.mas_right);
+        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
+        make.width.equalTo(@40);
+        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
     }];
 }
 
@@ -101,6 +107,12 @@
         if (self.defaultContactSetBlock) {
             self.defaultContactSetBlock(self.marketContact);
         }
+    }
+}
+
+- (void)delBtnClicked:(UIButton *)button {
+    if (self.contactDelBlock) {
+        self.contactDelBlock();
     }
 }
 

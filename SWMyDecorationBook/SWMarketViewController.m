@@ -324,6 +324,24 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                     StrongObj(self);
                     ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).name = contactName;
                 };
+                
+                ((SWNewMarketTelNumCell *)cell).contactDelBlock = ^{
+                    StrongObj(self);
+                    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除联系人?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self.marketItem.telNums removeObjectAtIndex:indexPath.row - 1];
+                        [self.marketInfoTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+                    }];
+                    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alertView addAction:cancleAction];
+                    [alertView addAction:okAction];
+                    [self presentViewController:alertView animated:YES completion:^{
+                        
+                    }];
+                };
+                
                 [cell setEditing:YES];
             }
         }
@@ -351,33 +369,8 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     return cell;
 }
 
-- (void)tableView :(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.section == 1) {
-        [self.marketItem.telNums removeObjectAtIndex:indexPath.row - 1];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-    
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
-}
-
--  (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1) {
-        return YES;
-    }
-    return NO;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1) {
-        return UITableViewCellEditingStyleDelete;
-    } else {
-        return UITableViewCellEditingStyleNone;
-    }
 }
 
 #pragma mark - UI Response

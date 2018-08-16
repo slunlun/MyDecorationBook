@@ -63,8 +63,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [_marketInfoTableView registerClass:[UITableViewCell class]
      forCellReuseIdentifier:MARKET_CONTACT_HEADER_VIEW_IDENTIFIER];
     [_marketInfoTableView registerClass:[SWMarketNameCell class] forCellReuseIdentifier:MARKET_NAME_CELL_IDENTIFIER];
-    [self.view addSubview:_marketInfoTableView];
-    _marketInfoTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    _marketInfoTableView.tableFooterView = [[UIView alloc] init];
     [self registerNotification];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTaped:)];
 //    tap.delegate = self;
@@ -94,51 +93,67 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 }
 #pragma mark - Common init
 - (void)commonInit {
-    self.view.backgroundColor = SW_TAOBAO_BLACK;
-    [_marketInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"商家信息";
+    
+    UIView *bkView = [[UIView alloc] init];
+    bkView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bkView];
+    [bkView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-90);
         if (@available(iOS 11.0, *)) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         } else {
             make.top.equalTo(self.mas_topLayoutGuideBottom);
         }
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom);
+        }
+    }];
+    
+    
+    [bkView addSubview:_marketInfoTableView];
+    [_marketInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(bkView);
+        make.bottom.equalTo(bkView.mas_bottom).offset(-90);
     }];
     _marketInfoTableView.sectionHeaderHeight = 10;
     
     _okBtn = [[UIButton alloc] init];
-    _okBtn.titleLabel.font = SW_DEFAULT_FONT;
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_okBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
     [_okBtn setBackgroundColor:SW_RMC_GREEN];
     _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _okBtn.clipsToBounds = YES;
     [self.view addSubview:_okBtn];
     
     _cancelBtn = [[UIButton alloc] init];
-    _cancelBtn.titleLabel.font = SW_DEFAULT_FONT;
+    _cancelBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [_cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
     [_cancelBtn setBackgroundColor:SW_WARN_RED];
     _cancelBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _cancelBtn.clipsToBounds = YES;
     [self.view addSubview:_cancelBtn];
     
     [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.view.mas_left).offset(SW_MARGIN);
-        make.topMargin.equalTo(_marketInfoTableView.mas_bottom).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.view.mas_bottom).offset(-SW_MARGIN * 2);
-        make.rightMargin.equalTo(self.view.mas_centerX).offset(-SW_MARGIN);
+        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
     }];
     
     [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.rightMargin.equalTo(self.view.mas_right).offset(-SW_MARGIN);
-        make.topMargin.equalTo(_marketInfoTableView.mas_bottom).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.view.mas_bottom).offset(-SW_MARGIN * 2);
-        make.leftMargin.equalTo(self.view.mas_centerX).offset(SW_MARGIN);
+        make.leftMargin.equalTo(self.okBtn.mas_right).offset(SW_MARGIN);
+        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
+        make.rightMargin.equalTo(bkView.mas_right).offset(-SW_CELL_LEFT_MARGIN);
     }];
     [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -206,15 +221,16 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 }
 
 #pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1 && indexPath.row == 0) { // 联系电话的title
+        return SW_CELL_DEFAULT_HEIGHT_MIN;
+    }else {
+        return SW_CELL_DEFAULT_HEIGHT;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.view endEditing:YES];
-    
-    if (indexPath.section == 2) { // select type
-        SWPickerView *pickerView = [[SWPickerView alloc] init];
-        [pickerView attachSWPickerViewInView:self.view];
-        pickerView.delegate = self;
-        [pickerView showPickerView];
-    }else if(indexPath.section == 1 && indexPath.row == 0) { // 添加联系人
+    if(indexPath.section == 1 && indexPath.row == 0) { // 添加联系人
         NSInteger numOfRows = [self.marketInfoTableView numberOfRowsInSection:indexPath.section];
         NSIndexPath *addIndex = [NSIndexPath indexPathForRow:numOfRows inSection:indexPath.section];
         [self.marketInfoTableView beginUpdates];
@@ -229,10 +245,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             self.marketInfoTableView.contentInset = UIEdgeInsetsMake(edge.top, edge.left, edge.bottom + 40, edge.right);
         }
     }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -262,7 +274,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     UITableViewCell *cell = nil;
     [cell setEditing:NO];
     switch (indexPath.section) {
-        case 0:
+        case 0: 
         {
             cell = [tableView dequeueReusableCellWithIdentifier:MARKET_NAME_CELL_IDENTIFIER];
             ((SWMarketNameCell *)cell).titleLab.text = @"商家";
@@ -285,7 +297,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 }
                 cell.textLabel.text = @"联系电话";
                 cell.textLabel.textColor = SW_TAOBAO_BLACK;
-                cell.textLabel.font = SW_DEFAULT_FONT;
+                cell.textLabel.font = SW_DEFAULT_FONT_BOLD;
                 cell.detailTextLabel.text = self.marketItem.marketCategory.categoryName;
                 cell.detailTextLabel.font = SW_DEFAULT_MIN_FONT;
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BigAdd"]];
@@ -306,13 +318,11 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 ((SWNewMarketTelNumCell *)cell).contactTelNumChangedBlock = ^(NSString *contactTelNum) {
                     StrongObj(self);
                     ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).telNum = contactTelNum;
-                    [self.marketInfoTableView reloadData];
                 };
                 
                 ((SWNewMarketTelNumCell *)cell).contactNameChangedBlock = ^(NSString *contactName) {
                     StrongObj(self);
                     ((SWMarketContact *)self.marketItem.telNums[indexPath.row -1]).name = contactName;
-                    [self.marketInfoTableView reloadData];
                 };
                 [cell setEditing:YES];
             }
@@ -326,10 +336,11 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             }
             cell.textLabel.text = @"分类";
             cell.textLabel.textColor = SW_TAOBAO_BLACK;
-            cell.textLabel.font = SW_DEFAULT_FONT;
+            cell.textLabel.font = SW_DEFAULT_FONT_BOLD;
             cell.detailTextLabel.text = self.marketItem.marketCategory.categoryName;
-            cell.detailTextLabel.font = SW_DEFAULT_MIN_FONT;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.detailTextLabel.font = SW_DEFAULT_FONT;
+            cell.detailTextLabel.textColor = SW_TAOBAO_BLACK;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
             break;
         default:
@@ -342,7 +353,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 
 - (void)tableView :(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete && indexPath.section == 1) {
-        [self.marketItem.telNums removeObjectAtIndex:indexPath.row];
+        [self.marketItem.telNums removeObjectAtIndex:indexPath.row - 1];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
     
@@ -372,6 +383,76 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)button {
     [self.view endEditing:YES];
+    // 先检查商家基本信息是否完整
+    
+    // 检查商家名称是否为空
+    if (self.marketItem.marketName == nil || [self.marketItem.marketName isEqualToString:@""]) {
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"请填写商家名称" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
+    // 检查联系人是否为空
+    if (self.marketItem.telNums.count == 0) {
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"请至少添加一个联系人" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
+    // 检查联系人信息是否完整
+    BOOL haveDefContact = NO;
+    for (SWMarketContact *contact in self.marketItem.telNums) {
+        if (contact.name == nil || [contact.name isEqualToString:@""]) {
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人姓名不能为空" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertView addAction:okAction];
+            [self presentViewController:alertView animated:YES completion:^{
+                
+            }];
+            return;
+        }
+        if (contact.telNum == nil || [contact.telNum isEqualToString:@""]) {
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系电话不能为空" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertView addAction:okAction];
+            [self presentViewController:alertView animated:YES completion:^{
+                
+            }];
+            return;
+        }
+        if (contact.isDefaultContact) {
+            haveDefContact = YES;
+        }
+    }
+    
+    if (!haveDefContact) {
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"请至少设置一个默认联系人" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
     [SWMarketStorage insertMarket:self.marketItem];
     [self.navigationController popViewControllerAnimated:YES];
 }

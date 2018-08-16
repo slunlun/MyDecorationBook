@@ -22,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // common tintColor
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
-
+    [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;
     // setup MagicRecord
     NSURL* storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DB"];
     storeURL = [storeURL URLByAppendingPathComponent:@"myDecorationBook.sqlite"];

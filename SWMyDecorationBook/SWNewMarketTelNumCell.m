@@ -9,6 +9,7 @@
 #import "SWNewMarketTelNumCell.h"
 #import "Masonry.h"
 #import "SWUIDef.h"
+#import "UITextField+OKToolBar.h"
 @interface SWNewMarketTelNumCell()<UITextFieldDelegate>
 
 @property(nonatomic, strong) UIButton *defaultTelBtn;
@@ -26,14 +27,16 @@
 #pragma mark - UI COMMON INIT
 - (void)commonInit {
     _contactNameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+    [_contactNameTextField addOKToolBar];
     _contactNameTextField.placeholder = @"姓名";
-    _contactNameTextField.font = SW_DEFAULT_MIN_FONT;
+    _contactNameTextField.font = SW_DEFAULT_FONT;
     _contactNameTextField.delegate = self;
     [self.contentView addSubview:_contactNameTextField];
     
     _telNumTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+    [_telNumTextField addOKToolBar];
     _telNumTextField.placeholder = @"联系电话";
-    _telNumTextField.font = SW_DEFAULT_MIN_FONT;
+    _telNumTextField.font = SW_DEFAULT_FONT;
     _telNumTextField.textAlignment = NSTextAlignmentLeft;
     _telNumTextField.delegate = self;
     _telNumTextField.keyboardType = UIKeyboardTypePhonePad;
@@ -53,17 +56,17 @@
     [self.contentView addSubview:_defaultTelBtn];
     
     [self.contactNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(34);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@80);
+        make.width.equalTo(@60);
     }];
     
     [self.telNumTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contactNameTextField.mas_right).offset(SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(@100);
+        make.width.equalTo(@140);
     }];
     
     [self.defaultTelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,6 +111,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+     [textField resignFirstResponder];
     if ([textField isEqual:self.contactNameTextField]) {
         if(self.contactNameChangedBlock) {
             self.contactNameChangedBlock(textField.text);

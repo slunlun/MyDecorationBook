@@ -9,6 +9,7 @@
 #import "SWMarketNameCell.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
+#import "UITextField+OKToolBar.h"
 @interface SWMarketNameCell()<UITextFieldDelegate>
 @property(nonatomic, readwrite, strong) UITextField *marketNameTextField;
 @end
@@ -25,21 +26,23 @@
 #pragma mark - Common init
 - (void)commonInit {
     _titleLab = [[UILabel alloc] initWithFrame:CGRectZero];
-    _titleLab.font = SW_DEFAULT_FONT;
+    _titleLab.font = SW_DEFAULT_FONT_BOLD;
     _titleLab.textAlignment = NSTextAlignmentLeft;
     _titleLab.textColor = SW_TAOBAO_BLACK;
     [self.contentView addSubview:_titleLab];
     
     _marketNameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _marketNameTextField.font= SW_DEFAULT_MIN_FONT;
+    _marketNameTextField.font= SW_DEFAULT_FONT;
     _marketNameTextField.textAlignment = NSTextAlignmentLeft;
-    _marketNameTextField.placeholder = @"内容";
+    _marketNameTextField.placeholder = @"名称";
     _marketNameTextField.delegate = self;
+    _marketNameTextField.textColor = SW_TAOBAO_BLACK;
+    [_marketNameTextField addOKToolBar];
     [self.contentView addSubview:_marketNameTextField];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
+        make.centerY.equalTo(self.contentView.mas_centerY);
         make.width.equalTo(@60);
     }];
     

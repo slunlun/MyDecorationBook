@@ -125,11 +125,11 @@
     [_saveBtn setBackgroundColor:SW_RMC_GREEN];
     _saveBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _saveBtn.clipsToBounds = YES;
-    _saveBtn.titleLabel.font = SW_DEFAULT_FONT_BOLD;
+    _saveBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [_saveBtn addTarget:self action:@selector(saveBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [bkView addSubview:_saveBtn];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.view.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
         make.topMargin.equalTo(self.orderInfoTableView.mas_bottom).offset(SW_MARGIN);
         make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
         make.width.equalTo(bkView.mas_width).multipliedBy(0.4);
@@ -138,7 +138,7 @@
     _delBtn = [[UIButton alloc] init];
     [_delBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_delBtn setTitle:@"删 除" forState:UIControlStateNormal];
-    _delBtn.titleLabel.font = SW_DEFAULT_FONT_BOLD;
+    _delBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [_delBtn setBackgroundColor:SW_WARN_RED];
     _delBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _delBtn.clipsToBounds = YES;
@@ -155,7 +155,7 @@
     [_connectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_connectBtn setTitle:@"联 系" forState:UIControlStateNormal];
     [_connectBtn setBackgroundColor:SW_MAIN_BLUE_COLOR];
-    _connectBtn.titleLabel.font = SW_DEFAULT_FONT_BOLD;
+    _connectBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     _connectBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _connectBtn.clipsToBounds = YES;
     [_connectBtn addTarget:self action:@selector(connectBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -182,21 +182,21 @@
         }
         
         if (indexPath.row == 2) { // 购买数量
-            return 70.0f;
+            return SW_CELL_DEFAULT_HEIGHT;
         }
         
         if (indexPath.row == 3) { // order 备注
-           return 70.0f;
+           return SW_CELL_DEFAULT_HEIGHT;
         }
         
         if (indexPath.row == 4) { // 合计金额
-            return 70.0f;
+            return SW_CELL_DEFAULT_HEIGHT;
         }
         
     }else { //  商家信息
         
     }
-    return 70.0f;
+    return SW_CELL_DEFAULT_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

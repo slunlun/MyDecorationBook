@@ -306,7 +306,7 @@
         [SWProductOrderStorage removeProductOrder:self.orderInfo];
         [self.navigationController popViewControllerAnimated:YES];
     }];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [alertView addAction:cancleAction];

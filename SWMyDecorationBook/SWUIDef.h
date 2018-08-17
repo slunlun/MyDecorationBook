@@ -6,6 +6,8 @@
 //  Copyright © 2018 Eren. All rights reserved.
 //
 
+// icon color #FFB67C
+
 #ifndef Header_h
 #define Header_h
 #import "HexColor.h"
@@ -20,15 +22,17 @@
 #define SW_DEFAULT_CORNER_RADIOUS 5.0f
 
 // font
-#define SW_DEFAULT_FONT_LARGE [UIFont fontWithName:@"AppleGothic" size:16.0]
-#define SW_DEFAULT_FONT [UIFont fontWithName:@"AppleGothic" size:15.0]
-#define SW_DEFAULT_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:12.0]
-#define SW_DEFAULT_SUPER_MIN_FONT [UIFont fontWithName:@"AppleGothic" size:10.0]
+#define SW_DEFAULT_FONT_SUPER_LARGE [UIFont fontWithName:@"Thonburi" size:20.0]
+#define SW_DEFAULT_FONT_LARGE [UIFont fontWithName:@"Thonburi" size:16.0]
+#define SW_DEFAULT_FONT [UIFont fontWithName:@"Thonburi" size:15.0]
+#define SW_DEFAULT_MIN_FONT [UIFont fontWithName:@"Thonburi" size:12.0]
+#define SW_DEFAULT_SUPER_MIN_FONT [UIFont fontWithName:@"Thonburi" size:10.0]
 
-#define SW_DEFAULT_FONT_LARGE_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:16.0]
-#define SW_DEFAULT_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:15.0]
-#define SW_DEFAULT_MIN_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:12.0]
-#define SW_DEFAULT_SUPER_MIN_FONT_BOLD [UIFont fontWithName:@"AppleGothic-Bold" size:10.0]
+#define SW_DEFAULT_FONT_SUPER_LARGE_BOLD [UIFont fontWithName:@"Thonburi-Bold" size:20.0]
+#define SW_DEFAULT_FONT_LARGE_BOLD [UIFont fontWithName:@"Thonburi-Bold" size:16.0]
+#define SW_DEFAULT_FONT_BOLD [UIFont fontWithName:@"Thonburi-Bold" size:15.0]
+#define SW_DEFAULT_MIN_FONT_BOLD [UIFont fontWithName:@"Thonburi-Bold" size:12.0]
+#define SW_DEFAULT_SUPER_MIN_FONT_BOLD [UIFont fontWithName:@"Thonburi-Bold" size:10.0]
 
 // color
 #define SW_MAIN_BLUE_COLOR [UIColor colorWithHexString:@"#3498db"]

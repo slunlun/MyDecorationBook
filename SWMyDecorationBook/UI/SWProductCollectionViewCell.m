@@ -38,13 +38,12 @@
     _delBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _delBtn.backgroundColor = SW_WARN_RED;
-    _delBtn.alpha = 0.6;
     _delBtn.clipsToBounds = YES;
-    _delBtn.layer.cornerRadius = 7.5;
+    _delBtn.layer.cornerRadius = 10;
     [_delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.width.equalTo(@15);
+        make.height.width.equalTo(@20);
         make.centerX.equalTo(_productImage.mas_right).offset(-11);
-        make.centerY.equalTo(_productImage.mas_top).offset(10);
+        make.centerY.equalTo(_productImage.mas_top).offset(12);
     }];
     _delBtn.hidden = YES;
     
@@ -60,6 +59,8 @@
     _supportEdit = supportEdit;
     if (supportEdit) {
         [self setUpDelBtn];
+    }else {
+        self.delBtn.hidden = YES;
     }
 }
 

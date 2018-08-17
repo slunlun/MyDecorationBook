@@ -21,10 +21,18 @@
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 设置UINavigationBar的背景图片
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
+   // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
+    
+    // 设置UINavigationBar的背景色
+  //  [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#f39c12"]];
+    // 设置UINavigationBar的字体颜色
+    [UINavigationBar appearance].titleTextAttributes = @{NSFontAttributeName:SW_DEFAULT_FONT_SUPER_LARGE};
+    // 设置UINavigationBar item颜色
+ //   [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    
     // common tintColor
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;
-    [UINavigationBar appearance].tintColor = SW_TAOBAO_BLACK;
+    
     // setup MagicRecord
     NSURL* storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DB"];
     storeURL = [storeURL URLByAppendingPathComponent:@"myDecorationBook.sqlite"];

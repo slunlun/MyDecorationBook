@@ -272,7 +272,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 1) { //商品单位
+    if (indexPath.row == 1) { // 商品单位
         [self.view endEditing:YES];
         SWPickerView *pickerView = [[SWPickerView alloc] init];
         pickerView.delegate = self;
@@ -299,6 +299,33 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - UI Response
 - (void)okBtnClicked:(UIButton *)btn {
+    // 检查商品名称否完整
+    if ([self.shoppingItem.productName isEqualToString:@""] || self.shoppingItem.productName == nil) {
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"请填写商品名称" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
+    // 检查商品价格是否完整
+    if (self.shoppingItem.price <=0.0f) {
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"请输入正确的价格" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
+    
     [SWProductItemStorage insertProductItem:self.shoppingItem toMarket:self.marketItem];
     [self.navigationController popViewControllerAnimated:YES];
 }

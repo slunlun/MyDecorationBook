@@ -88,7 +88,11 @@
     [noteBookImgView addGestureRecognizer:imageTaped];
     UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithCustomView:noteBookImgView];
     _notebookItemBtn = notebookItemBtn;
-    UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMarketItem:)];
+    
+    UIImageView *addMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddMarket"]];
+    UITapGestureRecognizer *addTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewMarketItem:)];
+    [addMarketView addGestureRecognizer:addTaped];
+    UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:addMarketView];
     self.navigationItem.rightBarButtonItem = addMarketItemBtn;
     self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
 }
@@ -295,7 +299,7 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem {
-    
+
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem {
@@ -306,7 +310,7 @@
         [self.shoppingItemListTableView reloadData];
         
     }];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [alertView addAction:cancleAction];
@@ -320,7 +324,8 @@
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
     SWOrderView *orderView = [[SWOrderView alloc] initWithProductItem:productItem];
     orderView.delegate = self;
-    [orderView attachToView:self.view];
+    UIView *mainWindow = [UIApplication sharedApplication].delegate.window;
+    [orderView attachToView:mainWindow];
     [orderView showOrderView];
 }
 
@@ -332,7 +337,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:SW_UNBUY_NOTIFICATION object:nil userInfo:@{SW_NOTIFICATION_PRODUCT_KEY:productItem}];
         
     }];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"容我三思" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [alertView addAction:cancleAction];

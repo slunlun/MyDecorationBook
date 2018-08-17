@@ -13,7 +13,7 @@
 @interface SWMarketHeaderView()
 @property(nonatomic, strong) UIButton *marketNameBtn;
 @property(nonatomic, strong) UIImageView *accessImageView;
-@property(nonatomic, strong) UILabel *telNumLabel;
+@property(nonatomic, strong) UIButton *callContactBtn;
 @end
 
 
@@ -30,12 +30,12 @@
     UIButton *marketBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
     marketBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
+    marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
     [marketBtn setTitleColor:[UIColor colorWithHexString:SW_BLACK_COLOR] forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     marketBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    marketBtn.titleEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0); // 调节button的title与他的image对齐到中心线
+    marketBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0); // 调节button的title与他的image对齐到中心线
     self.marketNameBtn = marketBtn;
     [self.contentView addSubview:marketBtn];
     [self.marketNameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,23 +58,21 @@
         make.width.equalTo(@20);
     }];
     
-    
-    UILabel *defTelNumLab = [[UILabel alloc] initWithFrame:CGRectZero];
-    [defTelNumLab setFont:SW_DEFAULT_MIN_FONT];
-    [defTelNumLab setTextColor:SW_MAIN_BLUE_COLOR];
-    UITapGestureRecognizer *telNumTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defTelNumClicked:)];
-    [defTelNumLab addGestureRecognizer:telNumTap];
-    defTelNumLab.userInteractionEnabled = YES;
-    defTelNumLab.textAlignment = NSTextAlignmentCenter;
-    self.telNumLabel = defTelNumLab;
-    [self.contentView addSubview:defTelNumLab];
-    [self.telNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _callContactBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_callContactBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
+    _callContactBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_callContactBtn setImage:[UIImage imageNamed:@"Phone"] forState:UIControlStateNormal];
+    _callContactBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    [_callContactBtn addTarget:self action:@selector(defTelNumClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:_callContactBtn];
+    [_callContactBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top);
-        make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
+        make.rightMargin.equalTo(self.contentView.mas_right).offset(-0.5 * SW_MARGIN);
         make.bottom.equalTo(self.contentView.mas_bottom);
+        make.width.equalTo(@100);
     }];
     
-    self.contentView.backgroundColor = [UIColor colorWithHexString:@"#E8E8E8"];
+    //self.contentView.backgroundColor = [UIColor colorWithHexString:@"#FFBA57"];
 }
 
 - (void)prepareForReuse {
@@ -95,19 +93,17 @@
     [self.marketNameBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(widthNum);
     }];
-    NSString *defTelText = [NSString stringWithFormat:@"联系: %@", markItem.defaultContactName];
-    self.telNumLabel.text = defTelText;
+    [self.callContactBtn setTitle:markItem.defaultContactName forState:UIControlStateNormal];
 }
 
 #pragma mark - UI response
 - (void)marketBtnClicked:(UIButton *)button {
-    NSLog(@"marketBtn clicked");
     if (self.actionBlock) {
         self.actionBlock(self.markItem);
     }
 }
 
-- (void)defTelNumClicked:(UITapGestureRecognizer *)tapGesture {
+- (void)defTelNumClicked:(UIButton *)button {
     if (self.marketContactClickBlock) {
         self.marketContactClickBlock(self.markItem);
     }

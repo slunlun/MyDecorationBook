@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "SWProductItem.h"
+#import "SWMarketItem.h"
 
 @class SWProductTableViewCell;
 @protocol SWProductTableViewCellDelegate <NSObject>

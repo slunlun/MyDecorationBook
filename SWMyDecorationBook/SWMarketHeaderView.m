@@ -38,6 +38,11 @@
     marketBtn.titleEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0); // 调节button的title与他的image对齐到中心线
     self.marketNameBtn = marketBtn;
     [self.contentView addSubview:marketBtn];
+    [self.marketNameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
+        make.top.equalTo(self.contentView.mas_top);
+        make.bottom.equalTo(self.contentView.mas_bottom);
+    }];
     
     UIImageView *accessorView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Arrow"]];
     UITapGestureRecognizer *imageViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(marketBtnClicked:)];
@@ -46,6 +51,13 @@
     accessorView.contentMode = UIViewContentModeScaleAspectFit;
     self.accessImageView = accessorView;
     [self.contentView addSubview:accessorView];
+    [self.accessImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top);
+        make.bottom.equalTo(self.contentView.mas_bottom);
+        make.left.equalTo(self.marketNameBtn.mas_right);
+        make.width.equalTo(@20);
+    }];
+    
     
     UILabel *defTelNumLab = [[UILabel alloc] initWithFrame:CGRectZero];
     [defTelNumLab setFont:SW_DEFAULT_MIN_FONT];
@@ -53,25 +65,13 @@
     UITapGestureRecognizer *telNumTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defTelNumClicked:)];
     [defTelNumLab addGestureRecognizer:telNumTap];
     defTelNumLab.userInteractionEnabled = YES;
+    defTelNumLab.textAlignment = NSTextAlignmentCenter;
     self.telNumLabel = defTelNumLab;
     [self.contentView addSubview:defTelNumLab];
-    
-    [self.marketNameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_MARGIN);
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-    }];
-    
-    [self.accessImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-        make.left.equalTo(self.marketNameBtn.mas_right);
-        make.width.equalTo(@20);
-    }];
-    
     [self.telNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN + 2);
+        make.top.equalTo(self.contentView.mas_top);
         make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
+        make.bottom.equalTo(self.contentView.mas_bottom);
     }];
     
     self.contentView.backgroundColor = [UIColor colorWithHexString:@"#E8E8E8"];

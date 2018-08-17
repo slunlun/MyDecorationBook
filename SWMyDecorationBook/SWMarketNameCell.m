@@ -48,7 +48,7 @@
     
     [_marketNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
-        make.left.equalTo(self.titleLab.mas_right).offset(SW_MARGIN);
+        make.left.equalTo(self.titleLab.mas_right).offset(SW_MARGIN * 0.5);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
     }];

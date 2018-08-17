@@ -9,6 +9,7 @@
 #import "SWShoppingItemRemarkCell.h"
 #import "SWUIDef.h"
 #import "Masonry.h"
+#import "UITextView+OKToolBar.h"
 
 #define MAX_TEXT_LENGTH 32
 #define PLACE_HOLD_TEXT @"备注可选，最多32个字"
@@ -32,16 +33,17 @@
 #pragma mark - Common init
 - (void)commonInit {
     _remarkTitleLab = [[UILabel alloc] init];
-    _remarkTitleLab.font = SW_DEFAULT_FONT;
+    _remarkTitleLab.font = SW_DEFAULT_FONT_BOLD;
     _remarkTitleLab.textColor = SW_TAOBAO_BLACK;
     _remarkTitleLab.text = @"备注";
     [self.contentView addSubview:_remarkTitleLab];
     
     _remarkTextView = [[UITextView alloc] init];
-    _remarkTextView.font = SW_DEFAULT_MIN_FONT;
+    _remarkTextView.font = SW_DEFAULT_FONT;
     _remarkTextView.delegate = self;
     _remarkTextView.text = PLACE_HOLD_TEXT;
     _remarkTextView.textColor = SW_DISABLE_GRAY;
+    [_remarkTextView addOKToolBar];
     [self.contentView addSubview:_remarkTextView];
     
     _countLimitLab = [[UILabel alloc] init];
@@ -72,6 +74,11 @@
 #pragma mark - Set/Get
 - (void)setProductItem:(SWProductItem *)productItem {
     self.remarkTextView.text = productItem.productRemark;
+    if (productItem.productRemark == nil) {
+        self.remarkTextView.text = PLACE_HOLD_TEXT;
+    }else {
+        self.remarkTextView.textColor = SW_TAOBAO_BLACK;
+    }
     _productItem = productItem;
 }
 
@@ -84,9 +91,10 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    if (_firstEdit) {
+    if (_firstEdit && _productItem.productRemark == nil) {
         _remarkTextView.textColor = SW_TAOBAO_BLACK;
         _remarkTextView.text = @"";
+        _firstEdit = NO;
     }
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {

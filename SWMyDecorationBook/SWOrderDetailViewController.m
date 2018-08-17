@@ -100,7 +100,7 @@
     [bkView addSubview:_orderInfoTableView];
     [_orderInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(bkView);
-        make.bottom.equalTo(bkView.mas_bottom).offset(-90);
+        make.bottom.equalTo(bkView.mas_bottom).offset(-75);
     }];
     [_orderInfoTableView registerClass:[SWOrderCountTableViewCell class] forCellReuseIdentifier:@"ORDER_COUNT_CELL_IDENTIFY"];
     [_orderInfoTableView registerClass:[SWOrderRemarkTableViewCell class] forCellReuseIdentifier:@"ORDER_REMARK_CELL_IDENTIFY"];

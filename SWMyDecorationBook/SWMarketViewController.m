@@ -117,7 +117,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [bkView addSubview:_marketInfoTableView];
     [_marketInfoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(bkView);
-        make.bottom.equalTo(bkView.mas_bottom).offset(-90);
+        make.bottom.equalTo(bkView.mas_bottom).offset(-75);
     }];
     _marketInfoTableView.sectionHeaderHeight = 10;
     
@@ -128,7 +128,14 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [_okBtn setBackgroundColor:SW_RMC_GREEN];
     _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _okBtn.clipsToBounds = YES;
-    [self.view addSubview:_okBtn];
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bkView addSubview:_okBtn];
+    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
+    }];
     
     _cancelBtn = [[UIButton alloc] init];
     _cancelBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
@@ -137,18 +144,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [_cancelBtn setBackgroundColor:SW_WARN_RED];
     _cancelBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
     _cancelBtn.clipsToBounds = YES;
-    [self.view addSubview:_cancelBtn];
-    
-    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
-    }];
-    
-    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+    [bkView addSubview:_cancelBtn];
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leftMargin.equalTo(self.okBtn.mas_right).offset(SW_MARGIN);
         make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);

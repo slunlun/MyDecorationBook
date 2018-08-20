@@ -22,6 +22,7 @@
 
 @interface SWProductTableViewCell : UITableViewCell
 @property(nonatomic, strong) UIButton *buyBtn;
+@property(nonatomic, strong) SWMarketItem *market;
 @property(nonatomic, strong) SWProductItem *productItem;
 @property(nonatomic, weak) id<SWProductTableViewCellDelegate> delegate;
 @end

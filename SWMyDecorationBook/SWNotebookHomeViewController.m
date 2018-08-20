@@ -51,7 +51,7 @@
 #pragma mark - Common init
 - (void)commonInit {
     // 初始化navigation bar
-    UIBarButtonItem *shoppingItemHomePage = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MarketFill"] style:UIBarButtonItemStylePlain target:self action:@selector(shoppingItemHomePageClicked:)];
+    UIBarButtonItem *shoppingItemHomePage = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MarketBig"] style:UIBarButtonItemStylePlain target:self action:@selector(shoppingItemHomePageClicked:)];
     self.navigationItem.leftBarButtonItem = shoppingItemHomePage;
     self.navigationItem.title = @"账本";
     

@@ -23,8 +23,8 @@
     // 设置UINavigationBar的背景图片
    // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
     
-    // 设置UINavigationBar的背景色
-  //  [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#f39c12"]];
+    // 设置UINavigationBar的背景色 #F9ECE5 #E6E6E6
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#EAC695"]];
     // 设置UINavigationBar的字体颜色
     [UINavigationBar appearance].titleTextAttributes = @{NSFontAttributeName:SW_DEFAULT_FONT_SUPER_LARGE, NSForegroundColorAttributeName:[UIColor colorWithHexString:@"e67e22"]};
     // 设置UINavigationBar item颜色

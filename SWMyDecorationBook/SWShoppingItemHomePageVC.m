@@ -134,6 +134,7 @@
     SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
     SWProductItem *productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
     cell.productItem = productItem;
+    cell.market = self.marketItems[indexPath.section];
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -150,13 +151,9 @@
     SWProductItem *productItem = nil;
     if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem,
         productItem = [[SWProductItem alloc] init];
-        
-    }else {
-        productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
+        SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.marketItems.count;
@@ -302,11 +299,12 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickEditProduct:(SWProductItem *)productItem {
-
+    SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:cell.market];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem {
-    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗? 该商品同样会在账本中删除!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SWProductItemStorage removeProductItem:productItem];
         [self updateDataForMarketCategory:self.curMarketCategory];

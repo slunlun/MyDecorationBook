@@ -79,18 +79,17 @@
         make.centerY.equalTo(_productNameLabel);
     }];
     
-//    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-//    _editBtn.userInteractionEnabled = NO;
-//    [_editBtn setImage:[UIImage imageNamed:@"Edit"] forState:UIControlStateNormal];
-//    _editBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-//    [_editBtn addTarget:self action:@selector(editBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.productInfoView addSubview:_editBtn];
-//    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.productInfoView).offset(8);
-//        make.rightMargin.equalTo(_productInfoView.mas_right).offset(-SW_MARGIN);
-//        make.width.equalTo(@40);
-//        make.height.equalTo(@40);
-//    }];
+    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_editBtn setImage:[UIImage imageNamed:@"Edit"] forState:UIControlStateNormal];
+    _editBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    [_editBtn addTarget:self action:@selector(editBtnClickCallBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self.productInfoView addSubview:_editBtn];
+    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.productInfoView).offset(8);
+        make.rightMargin.equalTo(_productInfoView.mas_right).offset(-SW_MARGIN);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
+    }];
     
     // step2. setup product picutres collection view
     UICollectionViewFlowLayout *collectionLayout = [UICollectionViewFlowLayout new];
@@ -132,7 +131,7 @@
     [_delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
         make.right.equalTo(self.productPicturesCollectionView);
-        make.width.height.equalTo(@30);
+        make.width.height.equalTo(@40);
     }];
     
     _buyBtn = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -143,7 +142,7 @@
     [_buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
         make.right.equalTo(_delBtn.mas_left).offset(-10);
-        make.width.height.equalTo(@30);
+        make.width.height.equalTo(@40);
     }];
 }
 #pragma mark - Init/Setter/Getter

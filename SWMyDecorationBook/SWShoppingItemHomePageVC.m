@@ -34,6 +34,8 @@
 @property(nonatomic, strong) NSArray *marketItems;
 @property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
 @property(nonatomic, strong) SWMarketCategory *curMarketCategory;
+
+@property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -43,6 +45,7 @@
     self.view.backgroundColor = SW_TAOBAO_WHITE;
     [self commitInit];
     self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
+    _orderOriginalPoint = CGPointZero;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -322,11 +325,20 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
+    // 显示订购界面
     SWOrderView *orderView = [[SWOrderView alloc] initWithProductItem:productItem];
     orderView.delegate = self;
     UIView *mainWindow = [UIApplication sharedApplication].delegate.window;
     [orderView attachToView:mainWindow];
     [orderView showOrderView];
+    // 先记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
+    _orderOriginalPoint = CGPointZero;
+    UIView *rootView = [UIApplication sharedApplication].delegate.window;
+    CGRect sourceFrame = cell.frame;
+    sourceFrame.origin.x += cell.buyBtn.frame.origin.x;
+    sourceFrame.origin.y += cell.buyBtn.frame.origin.y;
+    sourceFrame = [self.shoppingItemListTableView convertRect:sourceFrame toView:rootView];
+   _orderOriginalPoint = sourceFrame.origin;
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didUnBuyProduct:(SWProductItem *)productItem {
@@ -369,11 +381,44 @@
     if(productOrder) {
         // 入账订单
         [[SWShoppingOrderManager sharedInstance] insertNewOrder:productOrder];
-        // 对于新加入的商品，需要添加小红点，表示账本已经更新
-        [self.notebookItemBtn.customView showNotificationBubble];
+        
+        // 添加订单飘向账本动画
+        UIView *rootView = [UIApplication sharedApplication].delegate.window;
+        CGPoint destPoint = [self.notebookItemBtn.customView convertPoint:self.notebookItemBtn.customView.frame.origin toView:rootView];
+        destPoint.x -= 5;
+        destPoint.y -= 5;
+        UIImage *orderImg = nil;
+        if (productOrder.productItem.productPhotos.count) {
+            SWProductPhoto *orderPhoto = productOrder.productItem.productPhotos.firstObject;
+            orderImg = orderPhoto.photo;
+        }else {
+            orderImg = [UIImage imageNamed:@"ProductThumb"];
+        }
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:orderImg];
+        imageView.backgroundColor = SW_TAOBAO_ORANGE;
+        imageView.alpha = 0.8;
+        imageView.frame = CGRectMake(self.orderOriginalPoint.x, self.orderOriginalPoint.y, 0, 0);
+        [imageView cornerRadian:10];
+        [rootView addSubview:imageView];
+        [UIView animateWithDuration:0.2 animations:^{
+            imageView.frame = CGRectMake(self.orderOriginalPoint.x, self.orderOriginalPoint.y - 15, 15, 15);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                imageView.frame = CGRectMake(destPoint.x, destPoint.y, 15, 15);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    imageView.frame = CGRectMake(destPoint.x, destPoint.y, 0, 0);
+                } completion:^(BOOL finished) {
+                    [imageView removeFromSuperview];
+                    // 对于新加入的商品，需要添加小红点，表示账本已经更新
+                    [self.notebookItemBtn.customView showNotificationBubble];
+                }];
+            }];
+        }];
+       
         
         [self updateDataForMarketCategory:self.curMarketCategory];
-        [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.5];
+        [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.6];
     }
 }
 
@@ -382,6 +427,5 @@
 }
 
 - (void)SWOrderView:(SWOrderView *)orderView cancelOrderItem:(SWProductItem *)product {
-    
 }
 @end

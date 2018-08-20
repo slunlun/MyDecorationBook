@@ -21,7 +21,6 @@
 @property(nonatomic, strong) UICollectionView *productPicturesCollectionView;
 @property(nonatomic, strong) UIButton *delBtn;
 @property(nonatomic, strong) UIButton *editBtn;
-@property(nonatomic, strong) UIButton *buyBtn;
 @property(nonatomic, strong) UILabel *productMarkLabel;
 
 @property(nonatomic, strong) UIView *productInfoView;

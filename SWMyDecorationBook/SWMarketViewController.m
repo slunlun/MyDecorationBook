@@ -17,6 +17,8 @@
 #import "Masonry.h"
 #import "SWMarketStorage.h"
 #import "SWMarketCategoryStorage.h"
+#import "SWMarketStorage.h"
+#import "SWMarketContactViewController.h"
 
 static NSString *TEL_CELL_IDENTIFIER = @"TEL_CELL_IDENTIFIER";
 static NSString *MARKET_CONTACT_HEADER_VIEW_IDENTIFIER = @"MARKET_CONTACT_HEADER_VIEW_IDENTIFIER";
@@ -69,6 +71,18 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 //    tap.delegate = self;
 //    [self.marketInfoTableView addGestureRecognizer:tap];
     [self commonInit];
+    
+    
+    UIImageView *delMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DelBig"]];
+    UITapGestureRecognizer *delMarketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delMarketItemClicked:)];
+    [delMarketView addGestureRecognizer:delMarketTap];
+    UIBarButtonItem *delMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:delMarketView];
+    
+    UIImageView *contactView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PhoneFill"]];
+    UITapGestureRecognizer *contactMarketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contactMarketItemClicked:)];
+    [contactView addGestureRecognizer:contactMarketTap];
+    UIBarButtonItem *contactMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:contactView];
+    self.navigationItem.rightBarButtonItems = @[delMarketItemBtn, contactMarketItemBtn];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -370,6 +384,31 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 }
 
 #pragma mark - UI Response
+- (void)delMarketItemClicked:(UIBarButtonItem *)barItem {
+    NSString *msg = [NSString stringWithFormat:@"确实要删除%@吗？该商家所有的商品以及账单信息都会删除!", self.marketItem.marketName];
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SWMarketStorage removeMarket:self.marketItem];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertView addAction:cancelAction];
+    [alertView addAction:okAction];
+    [self presentViewController:alertView animated:YES completion:^{
+        
+    }];
+}
+
+- (void)contactMarketItemClicked:(UIBarButtonItem *)barItem {
+    if (self.marketItem.telNums.count > 0) {
+        SWMarketContactViewController *vc = [[SWMarketContactViewController alloc] initWithContactArray:self.marketItem.telNums];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 - (void)okBtnClicked:(UIButton *)button {
     [self.view endEditing:YES];
     // 先检查商家基本信息是否完整

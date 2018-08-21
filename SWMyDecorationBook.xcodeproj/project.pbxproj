@@ -100,6 +100,7 @@
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
+		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
 		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
@@ -326,6 +327,8 @@
 		80504151202945930003A95A /* SWMarketCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryViewController.m; sourceTree = "<group>"; };
 		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
+		B00CDEA9212AC6A200533EF6 /* SWMarketContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactViewController.h; sourceTree = "<group>"; };
+		B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactViewController.m; sourceTree = "<group>"; };
 		B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailViewController.h; sourceTree = "<group>"; };
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */,
 				B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */,
 				B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */,
+				B00CDEA9212AC6A200533EF6 /* SWMarketContactViewController.h */,
+				B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1036,6 +1041,7 @@
 				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,
 				B057D257209082CB00539824 /* UITextField+OKToolBar.m in Sources */,
 				5E9C2CE32004AB210052A05E /* TZProgressView.m in Sources */,
+				B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */,
 				B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */,
 				B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,

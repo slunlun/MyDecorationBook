@@ -16,6 +16,7 @@
 #import "SWOrderDetailTableViewCell.h"
 #import "SWProductOrderStorage.h"
 #import "SWDef.h"
+#import "SWMarketContactViewController.h"
 
 @interface SWOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *orderInfoTableView;
@@ -318,6 +319,8 @@
 }
 
 - (void)connectBtnClicked:(UIButton *)btn {
-    
+    SWMarketItem *market = self.orderInfo.marketItem;
+    SWMarketContactViewController *vc = [[SWMarketContactViewController alloc] initWithContactArray:market.telNums];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

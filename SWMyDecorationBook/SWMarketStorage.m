@@ -40,6 +40,13 @@
         for (SWShopContact *shopContact in newShop.shopContacts) {
             for (SWMarketContact *marketContact in shop.telNums) {
                 if ([shopContact.itemID isEqualToString:marketContact.itemID]) {
+                    // 更新已有联系人
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", marketContact.itemID];
+                    SWShopContact *oldContact = [SWShopContact MR_findFirstWithPredicate:predicate inContext:localContext];
+                    oldContact.name = marketContact.name;
+                    oldContact.telNum = marketContact.telNum;
+                    oldContact.isDefaultContact = marketContact.isDefaultContact;
+                    
                     [DBContacts removeObject:shopContact];
                     [localContacts removeObject:marketContact];
                 }
@@ -63,12 +70,15 @@
             [newShop addShopContactsObject:newShopContact];
             
         }
+        
     }];
 }
 
 + (void)removeMarket:(SWMarketItem *)shop {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", shop.itemID];
+        SWShop *shop = [SWShop MR_findFirstWithPredicate:predicate inContext:localContext];
+        [shop MR_deleteEntityInContext:localContext];
     }];
 }
 

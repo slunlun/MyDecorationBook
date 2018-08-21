@@ -60,7 +60,7 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
         CGRect screenFrame = [UIScreen mainScreen].bounds;
         [self showCoverView];
         [UIView animateWithDuration:0.4 animations:^{
-            self.frame = CGRectMake(0, parentView.frame.size.height - SW_ORDER_VIEW_HEIGHT + SW_MARGIN, screenFrame.size.width, SW_ORDER_VIEW_HEIGHT);
+            self.frame = CGRectMake(0, parentView.frame.size.height - SW_ORDER_VIEW_HEIGHT, screenFrame.size.width, SW_ORDER_VIEW_HEIGHT);
         } completion:^(BOOL finished) {
             if (finished) {
                
@@ -223,7 +223,7 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     if (indexPath.row == 0) {
         return 180;
     }
-    return 60;
+    return SW_CELL_DEFAULT_HEIGHT;
 }
 
 #pragma mark - UITableViewDataSource

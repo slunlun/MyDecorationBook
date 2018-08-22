@@ -7,7 +7,7 @@
 //
 
 #import "SWSpotlightView.h"
-#define VIEW_ALPHA 0.6
+#define VIEW_ALPHA 0.7
 @interface SWSpotlightView()
 @property(nonatomic, assign) CGFloat radius;
 @property(nonatomic, strong) UILabel *spolightLab;

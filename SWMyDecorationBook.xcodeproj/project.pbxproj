@@ -101,6 +101,8 @@
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
 		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
+		B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */; };
+		B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
 		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
@@ -329,6 +331,10 @@
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
 		B00CDEA9212AC6A200533EF6 /* SWMarketContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactViewController.h; sourceTree = "<group>"; };
 		B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactViewController.m; sourceTree = "<group>"; };
+		B00CDEB0212D62AE00533EF6 /* SWSpotlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSpotlightView.h; sourceTree = "<group>"; };
+		B00CDEB1212D62AE00533EF6 /* SWUserTutorialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUserTutorialManager.h; sourceTree = "<group>"; };
+		B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSpotlightView.m; sourceTree = "<group>"; };
+		B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUserTutorialManager.m; sourceTree = "<group>"; };
 		B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailViewController.h; sourceTree = "<group>"; };
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
@@ -751,6 +757,7 @@
 		5EB9D77D1F7F43AA00034E09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B00CDEAF212D624700533EF6 /* TutorialView */,
 				B0C34A592113FD5A003B253A /* ChartView */,
 				5E9C77CE200F30F6000355D2 /* MarketListHomePage */,
 				5E9C77CD200F30AC000355D2 /* Common */,
@@ -836,6 +843,17 @@
 				5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		B00CDEAF212D624700533EF6 /* TutorialView */ = {
+			isa = PBXGroup;
+			children = (
+				B00CDEB0212D62AE00533EF6 /* SWSpotlightView.h */,
+				B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */,
+				B00CDEB1212D62AE00533EF6 /* SWUserTutorialManager.h */,
+				B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */,
+			);
+			name = TutorialView;
 			sourceTree = "<group>";
 		};
 		B065BFC720887CCC00F57731 /* ShoppingOrder */ = {
@@ -1046,10 +1064,12 @@
 				B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
 				5E17561420109E8F009F100B /* NSPersistentStore+MagicalRecord.m in Sources */,
+				B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
 				5EE7E2DE1F99D3DC007CAB27 /* SWButton.m in Sources */,
 				5E17560820109E8F009F100B /* NSString+MagicalDataImport.m in Sources */,
 				5E17561520109E8F009F100B /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */,
 				5E17562A2010A1AE009F100B /* SWMarketStorage.m in Sources */,
 				5EB9D7801F7F44C100034E09 /* SWProductTableViewCell.m in Sources */,
 				5E17560520109E8F009F100B /* NSNumber+MagicalDataImport.m in Sources */,

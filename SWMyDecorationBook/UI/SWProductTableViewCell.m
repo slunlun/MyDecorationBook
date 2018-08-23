@@ -271,6 +271,8 @@
     UIView *rootWindow = [[[UIApplication sharedApplication] delegate] window];
     
     self.coverView = [[UIView alloc] initWithFrame:rootWindow.frame];
+    self.coverView.backgroundColor = [UIColor blackColor];
+    self.coverView.alpha = 0.8;
     self.coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [rootWindow addSubview:self.coverView];
     
@@ -283,6 +285,7 @@
         animationView.center = rootWindow.center;
     } completion:^(BOOL finished) {
         if (finished) {
+            animationView.contentMode = UIViewContentModeScaleAspectFit;
             [UIView animateWithDuration:0.1 delay:0.1 options:UIViewAnimationOptionLayoutSubviews animations:^{
                 animationView.frame = CGRectMake(0, 0, rootWindow.frame.size.width, rootWindow.frame.size.height);
             } completion:^(BOOL finished) {

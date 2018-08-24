@@ -25,7 +25,9 @@
 - (void)commonInit {
     self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _productImage = [[UIImageView alloc] init];
+    _productImage.contentMode = UIViewContentModeScaleAspectFit;
     _productImage.userInteractionEnabled = NO;
+    
     //_productImage.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_productImage];
     [_productImage mas_makeConstraints:^(MASConstraintMaker *make) {

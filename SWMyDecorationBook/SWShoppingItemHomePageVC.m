@@ -55,7 +55,8 @@
     UIBarButtonItem *addShopBtn = self.navigationItem.rightBarButtonItem;
     
     CGPoint p = CGPointMake(addShopBtn.customView.center.x, addShopBtn.customView.center.y + 20);
-    SWTutorialNode *node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里在当前分类下添加商家"];
+    CGPoint a =  [rootView convertPoint:p fromView:addShopBtn.customView];
+    SWTutorialNode *node2 = [[SWTutorialNode alloc] initWithPoint:a radius:80 text:@"点击这里在当前分类下添加商家"];
     p = CGPointMake(_notebookItemBtn.customView.center.x, _notebookItemBtn.customView.center.y + 20);
     SWTutorialNode *node3 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
     NSArray *nodes = @[node1, node2, node3];

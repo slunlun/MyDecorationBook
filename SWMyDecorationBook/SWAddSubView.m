@@ -55,7 +55,7 @@
     [_txtFCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self);
         make.left.equalTo(_btnSub.mas_right).offset(1);
-        make.width.equalTo(@40);
+        make.width.equalTo(@60);
     }];
     
     _btnAdd = [[UIButton alloc] init];

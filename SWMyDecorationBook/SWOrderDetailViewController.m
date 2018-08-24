@@ -250,7 +250,9 @@
                     self.orderInfoChanged = YES;
                     self.orderInfo.itemCount = orderCount;
                     self.orderInfo.orderTotalPrice = orderCount * self.orderInfo.productItem.price;
-                    [self.orderInfoTableView reloadData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.orderInfoTableView reloadData];
+                    });
                 }
             } ;
         }

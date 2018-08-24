@@ -49,7 +49,7 @@
         make.right.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN + 3);
         make.height.equalTo(_titleLab.mas_height).offset(-10);
-        make.width.equalTo(@110);
+        make.width.equalTo(@130);
     }];
 }
 

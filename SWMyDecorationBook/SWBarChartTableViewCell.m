@@ -74,10 +74,9 @@
 
     
     [_barChartView removeFromSuperview];
-    _barChartView = [[SWBarChartView alloc] initWithFrame:CGRectMake(0.5 * SW_MARGIN, 0.2 * SW_MARGIN, self.contentView.frame.size.width -  2 * SW_MARGIN, self.contentView.frame.size.height - 0.4 * SW_MARGIN)];
+    _barChartView = [[SWBarChartView alloc] initWithFrame:CGRectMake(0.5 * SW_MARGIN, 0.2 * SW_MARGIN, self.frame.size.width -  2 * SW_MARGIN, self.contentView.frame.size.height - 0.4 * SW_MARGIN)];
     [self.contentView insertSubview:_barChartView belowSubview:_categoryTitleLab];
-    [_barChartView updateChartView:_model.costPercent];
-    
+    [_barChartView updateChartView:_model.costPercent];    
 }
 
 

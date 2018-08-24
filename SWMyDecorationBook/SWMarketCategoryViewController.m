@@ -285,6 +285,44 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [self.marketCategoryTableView reloadData];
     [self.view setNeedsUpdateConstraints];
     [self.view updateConstraintsIfNeeded];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"新建分类" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"分类名称";
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = alertController.textFields[0];
+        if (![textField.text isEqualToString:@""]) {
+            NSString *categoryName = textField.text;
+            BOOL categoryExisted = NO;
+            for (SWMarketCategory *marketCategory in self.categoryArray) {
+                if ([marketCategory.categoryName isEqualToString:categoryName]) {
+                    categoryExisted = YES;
+                    break;
+                }
+            }
+            if (!categoryExisted) {
+                SWMarketCategory *newCategory = [[SWMarketCategory alloc] initWithCategoryName:categoryName];
+                [SWMarketCategoryStorage insertMarketCategory:newCategory];
+                [self updateData];
+                self.selectedMarkCategoryIndex = self.categoryArray.count - 1;
+                if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didClickMarketCategory:)]) {
+                    [self.delegate marketCategoryVC:self didClickMarketCategory:newCategory];
+                }
+                [self.view setNeedsLayout];
+                [self.view layoutIfNeeded];
+            }
+        }
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 - (void)configMarketCategory:(SWMarketCategory *)marketCategory {

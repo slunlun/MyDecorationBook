@@ -26,16 +26,16 @@
 #import "SWShoppingOrderManager.h"
 #import "UIView+UIExt.h"
 #import "SWUserTutorialManager.h"
+#import "SWEmptyMarketView.h"
 
-
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate>
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
 @property(nonatomic, strong) NSArray *marketItems;
 @property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
 @property(nonatomic, strong) SWMarketCategory *curMarketCategory;
-
+@property(nonatomic, strong) SWEmptyMarketView *emptyMarketView;
 @property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
 @end
 
@@ -94,7 +94,6 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_APPEAR_NOTIFICATION object:nil];
     [self updateDataForMarketCategory:self.curMarketCategory];
-    [self.shoppingItemListTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -147,6 +146,27 @@
     self.marketItems = [SWMarketStorage allMarketInCategory:marketCategory];
     self.navigationItem.title = marketCategory.categoryName;
     self.curMarketCategory = marketCategory;
+    if(self.marketItems.count > 0) {
+        [self.emptyMarketView removeFromSuperview];
+        self.emptyMarketView = nil;
+        [self.shoppingItemListTableView reloadData];
+    }else {
+        // 当前分类下没有商家，显示添加商家界面
+        if (self.emptyMarketView == nil) {
+            _emptyMarketView = [[SWEmptyMarketView alloc] initWithFrame:self.view.frame];
+            _emptyMarketView.delegate = self;
+            _emptyMarketView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            [self.view addSubview:_emptyMarketView];
+        }
+    }
+    
+}
+
+#pragma mark - SWEmptyMarketViewDelegate
+- (void)didClickedEmptyView {
+    SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:self.curMarketCategory];
+    SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Setter/Getter

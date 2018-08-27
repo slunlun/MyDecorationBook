@@ -141,7 +141,7 @@
     [self.contentView addSubview:_buyBtn];
     [_buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productPicturesCollectionView.mas_bottom).offset(5);
-        make.right.equalTo(_delBtn.mas_left).offset(-10);
+        make.right.equalTo(_delBtn.mas_left);
         make.width.height.equalTo(@40);
     }];
 }

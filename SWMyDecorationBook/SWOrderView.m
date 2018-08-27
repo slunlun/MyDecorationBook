@@ -167,9 +167,9 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     
     _okBtn = [[UIButton alloc] init];
     _okBtn.backgroundColor = SW_RMC_GREEN;
-    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     _okBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [_okBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
     [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_okBtn];
     [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {

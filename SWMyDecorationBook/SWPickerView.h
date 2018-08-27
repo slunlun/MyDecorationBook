@@ -24,6 +24,7 @@
 @interface SWPickerView : UIView
 @property(nonatomic, weak) id<SWPickerViewDelegate> _Nullable delegate;
 
+- (instancetype)initWithTitle:(NSString *)title;
 - (void)attachSWPickerViewInView:(UIView *_Nonnull)view;
 - (void)showPickerView;
 - (void)removePickerView;

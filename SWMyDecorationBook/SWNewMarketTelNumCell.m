@@ -73,7 +73,7 @@
     
     _delBtn = [[UIButton alloc] init];
     [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_delBtn setImage:[UIImage imageNamed:@"Del"] forState:UIControlStateNormal];
+    [_delBtn setImage:[UIImage imageNamed:@"DelContact"] forState:UIControlStateNormal];
     [self.contentView addSubview:_delBtn];
     [self.delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_defaultTelBtn.mas_right);

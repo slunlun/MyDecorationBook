@@ -31,7 +31,7 @@
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
     marketBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
-    [marketBtn setTitleColor:[UIColor colorWithHexString:SW_BLACK_COLOR] forState:UIControlStateNormal];
+    [marketBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     marketBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

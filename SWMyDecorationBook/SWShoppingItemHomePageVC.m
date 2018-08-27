@@ -257,7 +257,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40.0f;
+    return 50.0f;
 }
 
 - (void)didReceiveMemoryWarning {

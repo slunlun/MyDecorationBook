@@ -274,7 +274,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) { // 商品单位
         [self.view endEditing:YES];
-        SWPickerView *pickerView = [[SWPickerView alloc] init];
+        SWPickerView *pickerView = [[SWPickerView alloc] initWithTitle:@"商品单位"];
         pickerView.delegate = self;
         UIView *mainWindow = [UIApplication sharedApplication].delegate.window;
         [pickerView attachSWPickerViewInView:mainWindow];
@@ -284,17 +284,72 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - SWPickerViewDelegate
 - (NSInteger)SWPickerView:(SWPickerView *_Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.itemUnits.count;
+    return self.itemUnits.count + 1;
 }
 - (NSString *_Nonnull)SWPickerView:(SWPickerView *_Nonnull)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    SWItemUnit *itemUnit = self.itemUnits[row];
-    return itemUnit.unitTitle;
+    if (row < self.itemUnits.count) {
+        SWItemUnit *itemUnit = self.itemUnits[row];
+        return itemUnit.unitTitle;
+    }else {
+        return @"新建...";
+    }
+   
 }
 
 - (void)SWPickerView:(SWPickerView *_Nonnull)pickerView didClickOKForRow:(NSInteger)row forComponent:(NSInteger)component {
-    self.curItemUnit = self.itemUnits[row];
-    self.shoppingItem.itemUnit = self.curItemUnit;
-    [self.shoppingItemTableView reloadData];
+    if (row < self.itemUnits.count) {
+        self.curItemUnit = self.itemUnits[row];
+        self.shoppingItem.itemUnit = self.curItemUnit;
+        [self.shoppingItemTableView reloadData];
+    }else { // 添加新的单位
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"新建单位" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+            textField.placeholder = @"商品单位";
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UITextField *textField = alertController.textFields[0];
+            if (![textField.text isEqualToString:@""]) {
+                NSString *unitStr = textField.text;
+                BOOL unitExisted = NO;
+                SWItemUnit *selectUnit = nil;
+                for (SWItemUnit *itemUnit in self.itemUnits) {
+                    if ([itemUnit.unitTitle isEqualToString:unitStr]) {
+                        unitExisted = YES;
+                        selectUnit = itemUnit;
+                        break;
+                    }
+                }
+                if (!unitExisted) {
+                    [SWPriceUnitStorage insertPriceUnit:unitStr];
+                    _itemUnits = [SWPriceUnitStorage allPriceUnit];
+                    _curItemUnit = [_itemUnits lastObject];
+                    self.shoppingItem.itemUnit = self.curItemUnit;
+                    [self.shoppingItemTableView reloadData];
+                }else {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"商品单位已存在!" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alertController addAction:okAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    
+                    _curItemUnit = [_itemUnits lastObject];
+                    self.shoppingItem.itemUnit = self.curItemUnit;
+                    [self.shoppingItemTableView reloadData];
+                }
+            }
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+   
 }
 
 #pragma mark - UI Response

@@ -58,7 +58,6 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - Common Init
 - (void)commonInit {
-    
     self.view.backgroundColor = SW_TAOBAO_BLACK;
     
     _marketCategoryTableView = [[UITableView alloc] initWithFrame:CGRectZero];
@@ -70,15 +69,34 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _marketCategoryTableView.allowsSelection = YES;
     [_marketCategoryTableView registerClass:[SWMarketCategoryTableViewCell class] forCellReuseIdentifier:CATEGORY_CELL_IDENTIFY];
     
+#define SCREEN_WIDTH              [UIScreen mainScreen].bounds.size.width
+    
+#define SCREEN_HEIGHT             [UIScreen mainScreen].bounds.size.height
+    
+    //iPhone_X layout
+    
+#define iPhone_X                 (SCREEN_HEIGHT == 812.0)
+    
+#define Status_H                 (iPhone_X ? 44 : 20)
+    
+#define NavBar_H                  44
+    
+#define Nav_Height                (Status_H + NavBar_H)
+    
     [self.view addSubview:_marketCategoryTableView];
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(MARKET_CATEGORY_VIEW_TOP_HEIGHT);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(NavBar_H);
         } else {
-            make.top.equalTo(self.mas_topLayoutGuideBottom).offset(MARKET_CATEGORY_VIEW_TOP_HEIGHT);
+            make.top.equalTo(self.mas_topLayoutGuideBottom).offset(NavBar_H);
         }
-        make.bottom.equalTo(self.view.mas_bottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
+        
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
+        }
     }];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_selectedMarkCategoryIndex inSection:0];

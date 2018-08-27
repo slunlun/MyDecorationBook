@@ -14,13 +14,23 @@
 @property(nonatomic, strong) UIButton *cancelBtn;
 @property(nonatomic, strong) UIButton *okBtn;
 @property(nonatomic, strong) UIView *coverView;
-
+@property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, assign) NSInteger curSelRow;
 @property(nonatomic, assign) NSInteger curSelComponent;
+@property(nonatomic, strong) NSString *title;
 @end
 
 #define SW_PICKER_VIEW_HEIGHT 150
 @implementation SWPickerView
+- (instancetype)initWithTitle:(NSString *)title {
+    if (self = [super init]) {
+        _title = title;
+        _curSelRow = -1;
+        _curSelComponent = -1;
+        [self commonInit];
+    }
+    return self;
+}
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         _curSelRow = -1;
@@ -84,21 +94,6 @@
     _pickerView.dataSource = self;
     _pickerView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_pickerView];
-    
-    _cancelBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    _cancelBtn.titleLabel.font = SW_DEFAULT_FONT;
-    [_cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
-    [_cancelBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
-    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_cancelBtn];
-    
-    _okBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    _okBtn.titleLabel.font = SW_DEFAULT_FONT;
-    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
-    [_okBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
-    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_okBtn];
-    
     [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.mas_bottom);
@@ -106,13 +101,12 @@
         make.top.equalTo(self.mas_top).offset(40);
     }];
     
-    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self);
-        make.top.equalTo(self).offset(15);
-        make.width.equalTo(@60);
-        make.height.equalTo(@20);
-    }];
-    
+    _cancelBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _cancelBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
+    [_cancelBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
+    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_cancelBtn];
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self);
         make.top.equalTo(self).offset(15);
@@ -120,11 +114,35 @@
         make.height.equalTo(@20);
     }];
     
+    _okBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
+    [_okBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_okBtn];
+    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self);
+        make.top.equalTo(self).offset(15);
+        make.width.equalTo(@60);
+        make.height.equalTo(@20);
+    }];
+    
+    _titleLab.font = SW_DEFAULT_FONT_BOLD;
+    _titleLab.textAlignment = NSTextAlignmentCenter;
+    _titleLab.textColor = SW_TAOBAO_BLACK;
+    _titleLab.text = _title;
+    [self addSubview:_titleLab];
+    [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(15);
+        make.left.equalTo(_cancelBtn.mas_right);
+        make.right.equalTo(_okBtn.mas_left);
+    }];
+    
+    
     self.coverView = [[UIView alloc] initWithFrame:CGRectZero];
     self.coverView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewTapped:)];
     [self.coverView addGestureRecognizer:tapGesture];
-    
 }
 
 #pragma mark - Private

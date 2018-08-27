@@ -24,11 +24,11 @@
    // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
     
     // 设置UINavigationBar的背景色 #F9ECE5 #E6E6E6
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#EAC695"]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#1E8BE8"]];
     // 设置UINavigationBar的字体颜色
-    [UINavigationBar appearance].titleTextAttributes = @{NSFontAttributeName:SW_DEFAULT_FONT_SUPER_LARGE, NSForegroundColorAttributeName:[UIColor colorWithHexString:@"e67e22"]};
+    [UINavigationBar appearance].titleTextAttributes = @{NSFontAttributeName:SW_DEFAULT_FONT_SUPER_LARGE, NSForegroundColorAttributeName:[UIColor whiteColor]};
     // 设置UINavigationBar item颜色
-    [UINavigationBar appearance].tintColor = [UIColor colorWithHexString:@"#e67e22"];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     
     // common tintColor
     [UILabel appearance].tintColor = SW_TAOBAO_BLACK;

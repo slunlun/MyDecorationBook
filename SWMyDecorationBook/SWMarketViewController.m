@@ -73,7 +73,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     [self commonInit];
     
     
-    UIImageView *delMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DelBig"]];
+    UIImageView *delMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Del"]];
     UITapGestureRecognizer *delMarketTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delMarketItemClicked:)];
     [delMarketView addGestureRecognizer:delMarketTap];
     UIBarButtonItem *delMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:delMarketView];

@@ -104,6 +104,7 @@
 		B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */; };
 		B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */; };
 		B00CDEB8212FFFF200533EF6 /* SWEmptyMarketView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB7212FFFF200533EF6 /* SWEmptyMarketView.m */; };
+		B00CDEBB213402A200533EF6 /* SWMarketCategoryRemovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEBA213402A200533EF6 /* SWMarketCategoryRemovedView.m */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
 		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
@@ -338,6 +339,8 @@
 		B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUserTutorialManager.m; sourceTree = "<group>"; };
 		B00CDEB6212FFFF200533EF6 /* SWEmptyMarketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEmptyMarketView.h; sourceTree = "<group>"; };
 		B00CDEB7212FFFF200533EF6 /* SWEmptyMarketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEmptyMarketView.m; sourceTree = "<group>"; };
+		B00CDEB9213402A200533EF6 /* SWMarketCategoryRemovedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryRemovedView.h; sourceTree = "<group>"; };
+		B00CDEBA213402A200533EF6 /* SWMarketCategoryRemovedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryRemovedView.m; sourceTree = "<group>"; };
 		B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailViewController.h; sourceTree = "<group>"; };
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
@@ -792,6 +795,8 @@
 				B085CF6E2126AB0C00B45C4B /* UITextView+OKToolBar.m */,
 				B00CDEB6212FFFF200533EF6 /* SWEmptyMarketView.h */,
 				B00CDEB7212FFFF200533EF6 /* SWEmptyMarketView.m */,
+				B00CDEB9213402A200533EF6 /* SWMarketCategoryRemovedView.h */,
+				B00CDEBA213402A200533EF6 /* SWMarketCategoryRemovedView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1046,6 +1051,7 @@
 				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,
 				B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */,
 				5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */,
+				B00CDEBB213402A200533EF6 /* SWMarketCategoryRemovedView.m in Sources */,
 				5E17560A20109E8F009F100B /* NSManagedObject+MagicalDataImport.m in Sources */,
 				B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */,
 				5E9C2CDA2004AB210052A05E /* TZGifPhotoPreviewController.m in Sources */,

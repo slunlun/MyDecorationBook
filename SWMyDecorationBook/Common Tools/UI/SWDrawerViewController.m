@@ -703,4 +703,22 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
     [self closeDrawerAnimated:YES completion:nil];
 }
 
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didUpdateMarketCategory:(SWMarketCategory *)marketCategory {
+    if([self.centerDrawerViewController isKindOfClass:[UINavigationController class]]) {
+        UIViewController *vc = [[((UINavigationController *)self.centerDrawerViewController) viewControllers] firstObject];
+        if ([vc isKindOfClass:[SWShoppingItemHomePageVC class]]) {
+            [((SWShoppingItemHomePageVC *)vc) updateDataForMarketCategory:marketCategory];
+        }
+    }
+}
+
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didDeleteMarketCategory:(SWMarketCategory *)marketCategory {
+    if([self.centerDrawerViewController isKindOfClass:[UINavigationController class]]) {
+        UIViewController *vc = [[((UINavigationController *)self.centerDrawerViewController) viewControllers] firstObject];
+        if ([vc isKindOfClass:[SWShoppingItemHomePageVC class]]) {
+            [((SWShoppingItemHomePageVC *)vc) updateDataForMarketCategory:nil];
+        }
+    }
+}
+
 @end

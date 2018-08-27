@@ -27,6 +27,7 @@
 #import "UIView+UIExt.h"
 #import "SWUserTutorialManager.h"
 #import "SWEmptyMarketView.h"
+#import "SWMarketCategoryRemovedView.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -36,6 +37,7 @@
 @property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
 @property(nonatomic, strong) SWMarketCategory *curMarketCategory;
 @property(nonatomic, strong) SWEmptyMarketView *emptyMarketView;
+@property(nonatomic, strong) SWMarketCategoryRemovedView *marketCategoryEmptyView;
 @property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
 @end
 
@@ -47,7 +49,6 @@
     [self commitInit];
     self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
     _orderOriginalPoint = CGPointZero;
-    
     
     // 测试，添加用户引导view
     UIView *rootView = [UIApplication sharedApplication].delegate.window;
@@ -143,22 +144,34 @@
 #pragma mark - Data source
 
 - (void)updateDataForMarketCategory:(SWMarketCategory *)marketCategory {
-    self.marketItems = [SWMarketStorage allMarketInCategory:marketCategory];
-    self.navigationItem.title = marketCategory.categoryName;
-    self.curMarketCategory = marketCategory;
-    if(self.marketItems.count > 0) {
-        [self.emptyMarketView removeFromSuperview];
-        self.emptyMarketView = nil;
-        [self.shoppingItemListTableView reloadData];
-    }else {
-        // 当前分类下没有商家，显示添加商家界面
-        if (self.emptyMarketView == nil) {
-            _emptyMarketView = [[SWEmptyMarketView alloc] initWithFrame:self.view.frame];
-            _emptyMarketView.delegate = self;
-            _emptyMarketView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-            [self.view addSubview:_emptyMarketView];
+    if (marketCategory) {
+        [self.marketCategoryEmptyView removeFromSuperview];
+        
+        self.marketItems = [SWMarketStorage allMarketInCategory:marketCategory];
+        self.navigationItem.title = marketCategory.categoryName;
+        self.curMarketCategory = marketCategory;
+        if(self.marketItems.count > 0) {
+            [self.emptyMarketView removeFromSuperview];
+            self.emptyMarketView = nil;
+            [self.shoppingItemListTableView reloadData];
+        }else {
+            // 当前分类下没有商家，显示添加商家界面
+            if (self.emptyMarketView == nil) {
+                _emptyMarketView = [[SWEmptyMarketView alloc] initWithFrame:self.view.frame];
+                _emptyMarketView.delegate = self;
+                _emptyMarketView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                [self.view addSubview:_emptyMarketView];
+            }
         }
+    }else {  // 传入的marketCategory为nil，表明当前的market category已经被删除
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.title = @"";
+        _marketCategoryEmptyView = [[SWMarketCategoryRemovedView alloc] initWithFrame:self.view.frame];
+        _marketCategoryEmptyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:_marketCategoryEmptyView];
+        
     }
+    
     
 }
 

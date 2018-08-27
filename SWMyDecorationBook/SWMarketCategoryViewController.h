@@ -12,6 +12,8 @@
 @class SWMarketCategoryViewController;
 @protocol SWMarketCategoryViewControllerDelegate<NSObject>
 - (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didClickMarketCategory:(SWMarketCategory *)marketCategory;
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didUpdateMarketCategory:(SWMarketCategory *)marketCategory;
+- (void)marketCategoryVC:(SWMarketCategoryViewController *)vc didDeleteMarketCategory:(SWMarketCategory *)marketCategory;
 @end
 
 @interface SWMarketCategoryViewController : UIViewController

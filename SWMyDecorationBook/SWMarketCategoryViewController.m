@@ -214,6 +214,9 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SWMarketCategoryStorage removeMarkeetCategory:marketCategory];
         [self updateData];
+        if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didDeleteMarketCategory:)]) {
+            [self.delegate marketCategoryVC:self didUpdateMarketCategory:marketCategory];
+        }
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
@@ -294,6 +297,22 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 - (void)saveEditBtnClicked:(UIButton *)saveEditBtn {
     [self.marketCategoryTableView setEditing:NO animated:YES];
     [self.marketCategoryTableView reloadData];
+    
+    // 默认选择第一个
+    if (self.categoryArray.count) {
+        SWMarketCategory *markCategory = self.categoryArray[0];
+        self.selectedMarkCategoryIndex = 0;
+        [self.marketCategoryTableView reloadData];
+        if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didClickMarketCategory:)]) {
+            [self.delegate marketCategoryVC:self didClickMarketCategory:markCategory];
+        }
+    }else {
+        if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didClickMarketCategory:)]) {
+            [self.delegate marketCategoryVC:self didClickMarketCategory:nil];
+        }
+    }
+   
+    
     [self.view setNeedsUpdateConstraints];
     [self.view updateConstraintsIfNeeded];
 }
@@ -359,6 +378,9 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
             marketCategory.categoryName = textField.text;
             [SWMarketCategoryStorage updateMarketCategory:marketCategory];
             [self updateData];
+            if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didUpdateMarketCategory:)]) {
+                [self.delegate marketCategoryVC:self didUpdateMarketCategory:marketCategory];
+            }
         }
     }];
     [alertController addAction:cancelAction];

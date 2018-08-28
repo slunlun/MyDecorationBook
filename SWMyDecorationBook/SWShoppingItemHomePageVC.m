@@ -29,16 +29,18 @@
 #import "SWEmptyMarketView.h"
 #import "SWMarketCategoryRemovedView.h"
 
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
 @property(nonatomic, strong) NSArray *marketItems;
+@property(nonatomic, strong) NSArray *searchResults;
 @property(nonatomic, strong) UIBarButtonItem *notebookItemBtn;
 @property(nonatomic, strong) SWMarketCategory *curMarketCategory;
 @property(nonatomic, strong) SWEmptyMarketView *emptyMarketView;
 @property(nonatomic, strong) SWMarketCategoryRemovedView *marketCategoryEmptyView;
 @property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
+@property(nonatomic, strong) UISearchController *searchVC;
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -88,6 +90,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    if(self.searchVC && self.searchVC.active == YES) {
+        [self configureNavigationBar];
+        self.searchVC.active = NO;
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:SW_HOME_PAGE_DISAPPEAR_NOTIFICATION object:nil];
 }
 
@@ -126,19 +132,7 @@
         }
     }];
     
-//    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
-    UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
-    UITapGestureRecognizer *imageTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noteBookClicked:)];
-    [noteBookImgView addGestureRecognizer:imageTaped];
-    UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithCustomView:noteBookImgView];
-    _notebookItemBtn = notebookItemBtn;
-    
-    UIImageView *addMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddMarket"]];
-    UITapGestureRecognizer *addTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewMarketItem:)];
-    [addMarketView addGestureRecognizer:addTaped];
-    UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:addMarketView];
-    self.navigationItem.rightBarButtonItem = addMarketItemBtn;
-    self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+    [self configureNavigationBar];
 }
 
 #pragma mark - Data source
@@ -188,85 +182,179 @@
     [_shoppingItemListTableView reloadData];
 }
 
+#pragma mark - Table view scrollview delegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (self.searchVC) {
+        [self.searchVC.searchBar resignFirstResponder];
+    }
+}
 #pragma mark - TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((SWMarketItem *)self.marketItems[section]).shoppingItems.count + 1;
+    if (self.searchVC) {
+        return ((SWMarketItem *)self.searchResults[section]).shoppingItems.count + 1;
+    }else {
+        return ((SWMarketItem *)self.marketItems[section]).shoppingItems.count + 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NORMAL_CELL"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NORMAL_CELL"];
-           
+    if (self.searchVC) {
+        if(indexPath.row == ((SWMarketItem *)self.searchResults[indexPath.section]).shoppingItems.count) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NORMAL_CELL"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NORMAL_CELL"];
+                
+            }
+            cell.textLabel.text = @"添加商品";
+            cell.textLabel.textColor = SW_DISABLE_GRAY;
+            cell.imageView.image = [UIImage imageNamed:@"BigAdd"];
+            return cell;
         }
-        cell.textLabel.text = @"添加商品";
-        cell.textLabel.textColor = SW_DISABLE_GRAY;
-        cell.imageView.image = [UIImage imageNamed:@"BigAdd"];
+        
+        SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
+        SWProductItem *productItem = ((SWMarketItem *)self.searchResults[indexPath.section]).shoppingItems[indexPath.row];
+        cell.productItem = productItem;
+        cell.market = self.marketItems[indexPath.section];
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    }else {
+        if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NORMAL_CELL"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NORMAL_CELL"];
+                
+            }
+            cell.textLabel.text = @"添加商品";
+            cell.textLabel.textColor = SW_DISABLE_GRAY;
+            cell.imageView.image = [UIImage imageNamed:@"BigAdd"];
+            return cell;
+        }
+        SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
+        SWProductItem *productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
+        cell.productItem = productItem;
+        cell.market = self.marketItems[indexPath.section];
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    SWProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
-    SWProductItem *productItem = ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems[indexPath.row];
-    cell.productItem = productItem;
-    cell.market = self.marketItems[indexPath.section];
-    cell.delegate = self;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+   
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
-        return 100;
+    if (self.searchVC) {
+        if(indexPath.row == ((SWMarketItem *)self.searchResults[indexPath.section]).shoppingItems.count) {
+            return 100;
+        }else {
+            return 210;
+        }
     }else {
-        return 210;
+        if(indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) {
+            return 100;
+        }else {
+            return 210;
+        }
     }
+   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SWProductItem *productItem = nil;
-    if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem,
-        productItem = [[SWProductItem alloc] init];
-        SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (self.searchVC) {
+        SWProductItem *productItem = nil;
+        if (indexPath.row == ((SWMarketItem *)self.searchResults[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem,
+            productItem = [[SWProductItem alloc] init];
+            SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else {
+        SWProductItem *productItem = nil;
+        if (indexPath.row == ((SWMarketItem *)self.marketItems[indexPath.section]).shoppingItems.count) { // 点击的是最后一个，意思是add shoppingItem,
+            productItem = [[SWProductItem alloc] init];
+            SWShoppingItemInfoViewController *vc = [[SWShoppingItemInfoViewController alloc] initWithProductItem:productItem inMarket:self.marketItems[indexPath.section]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
+   
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.marketItems.count;
+    if (self.searchVC) {
+        return self.searchResults.count;
+    }else {
+        return self.marketItems.count;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
-    SWMarketItem *marketItem = self.marketItems[section];
-    marketHeaderView.markItem = marketItem;
-    WeakObj(self);
-    marketHeaderView.actionBlock = ^(SWMarketItem *market) {
-        SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:market];
-        StrongObj(self);
-        if (self) {
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    };
-    
-    marketHeaderView.marketContactClickBlock = ^(SWMarketItem *market) {
-        NSString *msg = [NSString stringWithFormat:@"要联系 %@ 吗？", market.defaultContactName];
-        UIAlertController *alertVC= [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *telNum = [NSString stringWithFormat:@"tel://%@", market.defaultTelNum];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
-                NSLog(@"为你打call");
+    if (self.searchVC) {
+        SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
+        SWMarketItem *marketItem = self.searchResults[section];
+        marketHeaderView.markItem = marketItem;
+        WeakObj(self);
+        marketHeaderView.actionBlock = ^(SWMarketItem *market) {
+            SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:market];
+            StrongObj(self);
+            if (self) {
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        };
+        
+        marketHeaderView.marketContactClickBlock = ^(SWMarketItem *market) {
+            NSString *msg = [NSString stringWithFormat:@"要联系 %@ 吗？", market.defaultContactName];
+            UIAlertController *alertVC= [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *telNum = [NSString stringWithFormat:@"tel://%@", market.defaultTelNum];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
+                    NSLog(@"为你打call");
+                }];
             }];
-        }];
-        
-        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
-        }];
-        [alertVC addAction:okAction];
-        [alertVC addAction:cancleAction];
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVC addAction:okAction];
+            [alertVC addAction:cancleAction];
+            
+            StrongObj(self);
+            [self presentViewController:alertVC animated:YES completion:nil];
+        };
         
-        StrongObj(self);
-        [self presentViewController:alertVC animated:YES completion:nil];
-    };
-    
-    return marketHeaderView;
+        return marketHeaderView;
+    }else {
+        SWMarketHeaderView *marketHeaderView = (SWMarketHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MARKET_HEADER_VIEW"];
+        SWMarketItem *marketItem = self.marketItems[section];
+        marketHeaderView.markItem = marketItem;
+        WeakObj(self);
+        marketHeaderView.actionBlock = ^(SWMarketItem *market) {
+            SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:market];
+            StrongObj(self);
+            if (self) {
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        };
+        
+        marketHeaderView.marketContactClickBlock = ^(SWMarketItem *market) {
+            NSString *msg = [NSString stringWithFormat:@"要联系 %@ 吗？", market.defaultContactName];
+            UIAlertController *alertVC= [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *telNum = [NSString stringWithFormat:@"tel://%@", market.defaultTelNum];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telNum] options:@{} completionHandler:^(BOOL success) {
+                    NSLog(@"为你打call");
+                }];
+            }];
+            
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVC addAction:okAction];
+            [alertVC addAction:cancleAction];
+            
+            StrongObj(self);
+            [self presentViewController:alertVC animated:YES completion:nil];
+        };
+        
+        return marketHeaderView;
+    }
+  
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -345,6 +433,30 @@
 }
 
 #pragma mark - Navigation Bar items
+- (void)configureNavigationBar {
+    //    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
+    UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
+    UITapGestureRecognizer *imageTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noteBookClicked:)];
+    [noteBookImgView addGestureRecognizer:imageTaped];
+    UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithCustomView:noteBookImgView];
+    _notebookItemBtn = notebookItemBtn;
+    
+    UIImageView *addMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddMarket"]];
+    UITapGestureRecognizer *addTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewMarketItem:)];
+    [addMarketView addGestureRecognizer:addTaped];
+    UIBarButtonItem *addMarketItemBtn = [[UIBarButtonItem alloc] initWithCustomView:addMarketView];
+    
+    UIImageView *searchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Search"]];
+    UITapGestureRecognizer *searchTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchItem:)];
+    [searchView addGestureRecognizer:searchTaped];
+    UIBarButtonItem *searchItemBtn = [[UIBarButtonItem alloc] initWithCustomView:searchView];
+    self.navigationItem.rightBarButtonItems = @[addMarketItemBtn, searchItemBtn];
+    self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+    
+    self.navigationItem.titleView = nil;
+    self.navigationItem.title = self.curMarketCategory.categoryName;
+}
+
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
     SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:self.curMarketCategory];
     SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
@@ -362,7 +474,90 @@
     }];
 }
 
+- (void)searchItem:(UITapGestureRecognizer *)tapGesture {
+    [self hiddenNavigatinBarItems];
+    UISearchController *searchVC = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    searchVC.delegate = self;
+    searchVC.searchResultsUpdater = self;
+    
+    searchVC.searchBar.placeholder = @"请输入商家名称";
+    [searchVC.searchBar sizeToFit];
+    searchVC.hidesNavigationBarDuringPresentation = NO;
+    searchVC.dimsBackgroundDuringPresentation = NO;
+    
+    self.navigationController.extendedLayoutIncludesOpaqueBars = NO;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.definesPresentationContext = YES;
+    
+    
+    self.searchVC = searchVC;
+    //self.navigationItem.titleView = self.searchVC.searchBar;
+    self.navigationItem.titleView = self.searchVC.searchBar;
+    
+    [self.searchVC setActive:YES];
+}
+
+- (void)onTapSearchCancelButton:(UIBarButtonItem *)cancleBtn {
+    
+    [self configureNavigationBar];
+    self.searchVC.active = NO;
+}
+
+- (void)hiddenNavigatinBarItems
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(onTapSearchCancelButton:)];
+        self.navigationItem.rightBarButtonItems = @[cancelButton];
+    }else
+    {
+        self.navigationItem.rightBarButtonItems = nil;
+    }
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.title = nil;
+}
+
 - (void)sysConfig:(UIBarButtonItem *)sysConfigItem {
+    
+}
+#pragma -mark UISearchControllerDelegate
+- (void)willPresentSearchController:(UISearchController *)searchController {
+     [self.searchVC.searchBar becomeFirstResponder];
+}
+
+- (void)willDismissSearchController:(UISearchController *)searchController
+{
+    [self configureNavigationBar];
+    [self.searchVC.searchBar removeFromSuperview];
+    self.searchVC = nil;
+     [self updateDataForMarketCategory:self.curMarketCategory];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self configureNavigationBar];
+    [self.searchVC.searchBar removeFromSuperview];
+    self.searchVC = nil;
+    [self updateDataForMarketCategory:self.curMarketCategory];
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = [searchController.searchBar text];
+    if (![searchString isEqualToString:@""]) {
+        NSArray *data;
+        NSPredicate *preicate;
+        
+        data = self.marketItems;
+        preicate = [NSPredicate predicateWithFormat:@"self.marketName contains [cd] %@", searchString];
+        
+        self.searchResults = [[NSArray alloc] initWithArray:[data filteredArrayUsingPredicate:preicate]];
+        [self.shoppingItemListTableView reloadData];
+    }else {
+        self.searchResults = [[NSArray alloc] initWithArray:self.marketItems];
+        [self.shoppingItemListTableView reloadData];
+    }
+   
     
 }
 
@@ -397,12 +592,18 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickBuyProduct:(SWProductItem *)productItem {
+    // 先把可能的搜索输入键盘收起来
+    if (self.searchVC) {
+        [self.searchVC.searchBar resignFirstResponder];
+    }
+    
     // 显示订购界面
     SWOrderView *orderView = [[SWOrderView alloc] initWithProductItem:productItem];
     orderView.delegate = self;
     UIView *mainWindow = [UIApplication sharedApplication].delegate.window;
     [orderView attachToView:mainWindow];
     [orderView showOrderView];
+    
     // 先记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
     _orderOriginalPoint = CGPointZero;
     UIView *rootView = [UIApplication sharedApplication].delegate.window;

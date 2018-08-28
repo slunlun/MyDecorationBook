@@ -288,13 +288,17 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
 #pragma mark - UI Response
 - (void)editBtnClicked:(UIButton *)editBtn {
+    self.isEditing = YES;
     [self.marketCategoryTableView setEditing:YES animated:YES];
     [self.marketCategoryTableView reloadData];
+    
     [self.view setNeedsUpdateConstraints];
     [self.view updateConstraintsIfNeeded];
 }
 
 - (void)saveEditBtnClicked:(UIButton *)saveEditBtn {
+    self.isEditing = NO;
+    
     [self.marketCategoryTableView setEditing:NO animated:YES];
     [self.marketCategoryTableView reloadData];
     

@@ -19,4 +19,5 @@
 @interface SWMarketCategoryViewController : UIViewController
 @property(nonatomic, strong) UITableView *marketCategoryTableView;
 @property(nonatomic, weak) id<SWMarketCategoryViewControllerDelegate> delegate;
+@property(nonatomic, assign) BOOL isEditing;
 @end

@@ -14,7 +14,7 @@
 #import "HexColor.h"
 #import "SWMarketCategoryViewController.h"
 
-CGFloat const SWDrawerDefaultWidth = 280.0f;
+CGFloat const SWDrawerDefaultWidth = 400.0f;   // 左侧栏的大小
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
 CGFloat const SWDrawerDefaultShadowOpacity = 0.8f;
 CGFloat const SWDrawerDefaultShadowRadius = 10.0f;
@@ -51,6 +51,7 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 @property(nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property(nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, assign) CGRect startingPanRect;
+@property(nonatomic, strong) UIView *centerViewCover;
 @end
 
 @implementation SWDrawerViewController
@@ -136,6 +137,8 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
         _openSide = openSide;
         if (openSide == SWDrawerSideNone) {
             [self.leftDrawerViewController.view setHidden:YES];
+            [self.centerViewCover removeFromSuperview];
+            self.centerViewCover = nil;
         }
     }
 }
@@ -340,6 +343,16 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
              
              [self resetDrawerVisualStateForDrawerSide:drawerSide];
              [self setAnimatingDrawer:NO];
+             // 为center vc 添加cover view
+             if (self.centerViewCover == nil) {
+                 self.centerViewCover = [[UIView alloc] initWithFrame:self.centerDrawerViewController.view.frame];
+                 self.centerViewCover.backgroundColor = [UIColor blackColor];
+                 self.centerViewCover.alpha = 0.4;
+                 [self.centerDrawerViewController.view addSubview:self.centerViewCover];
+                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerViewCoverTapped:)];
+                 [self.centerViewCover addGestureRecognizer:tap];
+             }
+             
              if(completion){
                  completion(finished);
              }
@@ -349,6 +362,8 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 
 - (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion {
     [self closeDrawerAnimated:animated velocity:self.animationVelocity animationOperations:UIViewAnimationOptionCurveEaseInOut completion:completion];
+    [self.centerViewCover removeFromSuperview];
+    self.centerViewCover = nil;
 }
 
 - (void)closeDrawerAnimated:(BOOL)animated velocity:(CGFloat)velocity animationOperations:(UIViewAnimationOptions) operations completion:(void(^)(BOOL finished)) completion {
@@ -396,11 +411,30 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
     
 }
 #pragma mark - Gesture call backs
+- (void)centerViewCoverTapped:(UITapGestureRecognizer *)tap {
+    if(((SWMarketCategoryViewController *)self.leftDrawerViewController).isEditing) {
+        return;
+    }
+    
+    if(self.openSide != SWDrawerSideNone &&
+       self.isAnimatingDrawer == NO){
+        [self closeDrawerAnimated:YES completion:^(BOOL finished) {
+            if (self.drawerSideChangedBlock) {
+                self.drawerSideChangedBlock(SWDrawerSideNone);
+            }
+        }];
+    }
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return NO;
 }
 
 - (void)tapGetureCallBack:(UITapGestureRecognizer *)tapGesture {
+    if(((SWMarketCategoryViewController *)self.leftDrawerViewController).isEditing) {
+        return;
+    }
+    
     if(self.openSide != SWDrawerSideNone &&
        self.isAnimatingDrawer == NO){
         [self closeDrawerAnimated:YES completion:^(BOOL finished) {
@@ -412,6 +446,11 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 }
 
 - (void)panGestureCallBack:(UIPanGestureRecognizer *)panGesture {
+   
+    if(((SWMarketCategoryViewController *)self.leftDrawerViewController).isEditing) {
+        return;
+    }
+    
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
         {

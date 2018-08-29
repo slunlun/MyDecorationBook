@@ -10,6 +10,8 @@
 #import "MagicalRecord.h"
 #import "SWShoppingItemOrder+CoreDataClass.h"
 #import "SWShoppingItem+CoreDataClass.h"
+#import "SWUnreadOrderMsg+CoreDataClass.h"
+#import "SWDef.h"
 
 @implementation SWProductOrderStorage
 + (void)insertNewProductOrder:(SWOrder *)newOrder {
@@ -26,6 +28,17 @@
         SWShoppingItem* shoppingItem = [SWShoppingItem MR_findFirstWithPredicate:shoppingItemPredicate inContext:localContext];
         shoppingItem.ownnerOrder = newShoppingItemOrder;
         [newShoppingItemOrder setShopItem:shoppingItem];
+        
+        // 加入一个未读Order信息到数据库
+        SWUnreadOrderMsg *unreadMsg = [SWUnreadOrderMsg MR_createEntityInContext:localContext];
+        unreadMsg.unreadOrderInfo = newShoppingItemOrder;
+        newShoppingItemOrder.unReadMsg = unreadMsg;
+        
+        // 发个消息，通知order信息有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
+        
     }];
 }
 
@@ -33,6 +46,10 @@
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", order.orderID];
         [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
+        // 发个消息，通知order信息有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
     }];
 }
 
@@ -42,6 +59,10 @@
         SWShoppingItem *shoppingItem =  [SWShoppingItem MR_findFirstWithPredicate:predicate inContext:localContext];
         predicate = [NSPredicate predicateWithFormat:@"itemID==%@", shoppingItem.ownnerOrder.itemID];
         [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
+        // 发个消息，通知order信息有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
     }];
 }
 

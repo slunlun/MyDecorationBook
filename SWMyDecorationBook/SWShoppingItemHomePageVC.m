@@ -28,6 +28,7 @@
 #import "SWUserTutorialManager.h"
 #import "SWEmptyMarketView.h"
 #import "SWMarketCategoryRemovedView.h"
+#import "SWUnreadOrderInfoStorage.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -52,6 +53,7 @@
     self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
     _orderOriginalPoint = CGPointZero;
     
+    
     // 测试，添加用户引导view
     UIView *rootView = [UIApplication sharedApplication].delegate.window;
     SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 text:@"使用侧拉菜单可以添加，编辑，删除商品分类"];
@@ -74,10 +76,10 @@
         
 #define Nav_Height                (Status_H + NavBar_H)
         
-        CGPoint p1 = CGPointMake(30, Nav_Height - 20);
-        node2 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 text:@"点击这里在当前分类下添加商家"];
-        CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, Nav_Height - 20);
-        node3 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
+        CGPoint p2 = CGPointMake(30, Nav_Height - 20);
+        node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 text:@"点击这里在当前分类下添加商家"];
+        CGPoint p3 = CGPointMake(rootView.frame.size.width - 30, Nav_Height - 20);
+        node3 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
     }else {
         node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里在当前分类下添加商家"];
         p = CGPointMake(_notebookItemBtn.customView.center.x, _notebookItemBtn.customView.center.y + 20);
@@ -86,6 +88,13 @@
    
     NSArray *nodes = @[node1, node2, node3];
     [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderInfoUpdated:) name:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -160,6 +169,7 @@
     }else {  // 传入的marketCategory为nil，表明当前的market category已经被删除
         self.navigationItem.rightBarButtonItem.enabled = NO;
         self.navigationItem.title = @"";
+        [self.marketCategoryEmptyView removeFromSuperview];
         _marketCategoryEmptyView = [[SWMarketCategoryRemovedView alloc] initWithFrame:self.view.frame];
         _marketCategoryEmptyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_marketCategoryEmptyView];
@@ -455,6 +465,13 @@
     
     self.navigationItem.titleView = nil;
     self.navigationItem.title = self.curMarketCategory.categoryName;
+    
+    NSArray *array = [SWUnreadOrderInfoStorage allUnreadOrderInfos];
+    if (array.count) {
+        [self.notebookItemBtn.customView showNotificationBubble];
+    }else {
+        [self.notebookItemBtn.customView dismissNotificationBubble];
+    }
 }
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
@@ -465,7 +482,7 @@
 
 - (void)noteBookClicked:(UITapGestureRecognizer *)tapGesture {
     [self.notebookItemBtn.customView dismissNotificationBubble];
-    
+    [SWUnreadOrderInfoStorage removeAllOrderInfos];
     SWNotebookHomeViewController *notebookVC = [[SWNotebookHomeViewController alloc] init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:notebookVC];
     [navVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
@@ -654,7 +671,6 @@
     if(productOrder) {
         // 入账订单
         [[SWShoppingOrderManager sharedInstance] insertNewOrder:productOrder];
-        
         // 添加订单飘向账本动画
         UIView *rootView = [UIApplication sharedApplication].delegate.window;
         CGPoint destPoint = [self.notebookItemBtn.customView convertPoint:self.notebookItemBtn.customView.frame.origin toView:rootView];
@@ -683,13 +699,9 @@
                     imageView.frame = CGRectMake(destPoint.x, destPoint.y, 0, 0);
                 } completion:^(BOOL finished) {
                     [imageView removeFromSuperview];
-                    // 对于新加入的商品，需要添加小红点，表示账本已经更新
-                    [self.notebookItemBtn.customView showNotificationBubble];
                 }];
             }];
         }];
-       
-        
         [self updateDataForMarketCategory:self.curMarketCategory];
         [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.6];
     }
@@ -700,5 +712,15 @@
 }
 
 - (void)SWOrderView:(SWOrderView *)orderView cancelOrderItem:(SWProductItem *)product {
+}
+
+#pragma mark - Notification
+- (void)orderInfoUpdated:(NSNotification *)notification {
+    NSArray *array = [SWUnreadOrderInfoStorage allUnreadOrderInfos];
+    if (array.count) {
+        [self.notebookItemBtn.customView showNotificationBubble];
+    }else {
+        [self.notebookItemBtn.customView dismissNotificationBubble];
+    }
 }
 @end

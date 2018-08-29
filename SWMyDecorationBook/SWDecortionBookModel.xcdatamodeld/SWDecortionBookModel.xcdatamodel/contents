@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="SWPriceUnit" representedClassName="SWPriceUnit" syncable="YES" codeGenerationType="class">
         <attribute name="unit" attributeType="String" syncable="YES"/>
         <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="SWShoppingItem" inverseName="itemUnit" inverseEntity="SWShoppingItem" syncable="YES"/>
@@ -45,6 +45,7 @@
         <attribute name="totalCount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="shopItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="ownnerOrder" inverseEntity="SWShoppingItem" syncable="YES"/>
+        <relationship name="unReadMsg" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SWUnreadOrderMsg" inverseName="unreadOrderInfo" inverseEntity="SWUnreadOrderMsg" syncable="YES"/>
     </entity>
     <entity name="SWShoppingPhoto" representedClassName="SWShoppingPhoto" syncable="YES" codeGenerationType="class">
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -52,13 +53,18 @@
         <attribute name="itemID" attributeType="String" syncable="YES"/>
         <relationship name="shopItem" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItem" inverseName="itemPhotos" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
+    <entity name="SWUnreadOrderMsg" representedClassName="SWUnreadOrderMsg" syncable="YES" codeGenerationType="class">
+        <attribute name="itemID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="unreadOrderInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SWShoppingItemOrder" inverseName="unReadMsg" inverseEntity="SWShoppingItemOrder" syncable="YES"/>
+    </entity>
     <elements>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="73"/>
         <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
         <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="135"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="120"/>
         <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="178"/>
-        <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="133"/>
+        <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="148"/>
         <element name="SWShoppingPhoto" positionX="-495" positionY="-315" width="128" height="105"/>
+        <element name="SWUnreadOrderMsg" positionX="-110" positionY="92" width="128" height="73"/>
     </elements>
 </model>

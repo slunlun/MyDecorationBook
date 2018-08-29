@@ -9,6 +9,7 @@
 #import "SWMarketCategoryStorage.h"
 #import "MagicalRecord.h"
 #import "SWShoppingCategory+CoreDataClass.h"
+#import "SWDef.h"
 
 @implementation SWMarketCategoryStorage
 + (void)insertMarketCategory:(SWMarketCategory *)marketCategory {
@@ -42,6 +43,11 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", marketCategory.itemID];
         SWShoppingCategory *shoppingCategory = [SWShoppingCategory MR_findFirstWithPredicate:predicate inContext:localContext];
         [shoppingCategory MR_deleteEntityInContext:localContext];
+        
+        // 发个消息，通知order信息可能有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
     }];
 }
 

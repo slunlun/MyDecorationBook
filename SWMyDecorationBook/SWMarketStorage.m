@@ -12,6 +12,7 @@
 #import "SWShopContact+CoreDataClass.h"
 #import "MagicalRecord.h"
 #import "SWMarketContact.h"
+#import "SWDef.h"
 
 @implementation SWMarketStorage
 + (void)insertMarket:(SWMarketItem *)shop {
@@ -79,6 +80,11 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", shop.itemID];
         SWShop *shop = [SWShop MR_findFirstWithPredicate:predicate inContext:localContext];
         [shop MR_deleteEntityInContext:localContext];
+        
+        // 发个消息，通知order信息可能有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
     }];
 }
 

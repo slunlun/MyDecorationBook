@@ -131,6 +131,7 @@
 		B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A632114060E003B253A /* SWNotebookPieChartView.m */; };
 		B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A6621140621003B253A /* SWNotebookBarChartView.m */; };
 		B0D5B56A211BE19300B92123 /* SWOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */; };
+		B0E2535C2136A97E00DE0B5F /* liblibxlsxwriter_merge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */; };
 		B0F64284211A839900F3F38E /* SWOrderListinCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */; };
 		B0F6428A211A896400F3F38E /* NSDate+SWDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64289211A896400F3F38E /* NSDate+SWDateExt.m */; };
 /* End PBXBuildFile section */
@@ -395,6 +396,32 @@
 		B0C34A6621140621003B253A /* SWNotebookBarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNotebookBarChartView.m; sourceTree = "<group>"; };
 		B0D5B568211BE19300B92123 /* SWOrderDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		B0E253422136A95600DE0B5F /* chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chart.h; sourceTree = "<group>"; };
+		B0E253432136A95600DE0B5F /* hash_table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_table.h; sourceTree = "<group>"; };
+		B0E253442136A95600DE0B5F /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		B0E253452136A95700DE0B5F /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		B0E253462136A95700DE0B5F /* app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
+		B0E253472136A95700DE0B5F /* content_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = content_types.h; sourceTree = "<group>"; };
+		B0E253482136A95700DE0B5F /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
+		B0E253492136A95700DE0B5F /* drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawing.h; sourceTree = "<group>"; };
+		B0E2534A2136A95700DE0B5F /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
+		B0E2534B2136A95700DE0B5F /* custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = custom.h; sourceTree = "<group>"; };
+		B0E2534C2136A96300DE0B5F /* theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theme.h; sourceTree = "<group>"; };
+		B0E2534D2136A96300DE0B5F /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		B0E2534E2136A96400DE0B5F /* styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = styles.h; sourceTree = "<group>"; };
+		B0E2534F2136A96400DE0B5F /* xmlwriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlwriter.h; sourceTree = "<group>"; };
+		B0E253502136A96400DE0B5F /* xlsxwriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xlsxwriter.h; sourceTree = "<group>"; };
+		B0E253512136A96400DE0B5F /* shared_strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shared_strings.h; sourceTree = "<group>"; };
+		B0E253522136A96400DE0B5F /* packager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = packager.h; sourceTree = "<group>"; };
+		B0E253532136A96500DE0B5F /* tmpfileplus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tmpfileplus.h; sourceTree = "<group>"; };
+		B0E253542136A96500DE0B5F /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		B0E253552136A96600DE0B5F /* worksheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = worksheet.h; sourceTree = "<group>"; };
+		B0E253562136A96600DE0B5F /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
+		B0E253572136A96600DE0B5F /* libxlsxwriter-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libxlsxwriter-umbrella.h"; sourceTree = "<group>"; };
+		B0E253582136A96600DE0B5F /* workbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workbook.h; sourceTree = "<group>"; };
+		B0E253592136A96700DE0B5F /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		B0E2535A2136A96700DE0B5F /* relationships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = relationships.h; sourceTree = "<group>"; };
+		B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblibxlsxwriter_merge.a; sourceTree = "<group>"; };
 		B0F64282211A839900F3F38E /* SWOrderListinCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderListinCategoryViewController.h; sourceTree = "<group>"; };
 		B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderListinCategoryViewController.m; sourceTree = "<group>"; };
 		B0F64288211A896400F3F38E /* NSDate+SWDateExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SWDateExt.h"; sourceTree = "<group>"; };
@@ -406,6 +433,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E2535C2136A97E00DE0B5F /* liblibxlsxwriter_merge.a in Frameworks */,
 				5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,6 +595,7 @@
 		5E6A9F1E2011E151009B2038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */,
 				5E6A9F1F2011E152009B2038 /* CoreData.framework */,
 			);
 			name = Frameworks;
@@ -824,6 +853,7 @@
 		5EB9D7851F7F789700034E09 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				B0E253412136A93700DE0B5F /* xlsxWriter */,
 				5E1755C120109E8F009F100B /* MagicalRecord */,
 				5E9C2CB92004AB210052A05E /* TZImagePickerController */,
 				5EDE94E81FFB82EB00A24C21 /* HexColor.h */,
@@ -916,6 +946,38 @@
 				B0C34A5D2113FF7D003B253A /* SWSpeechBubble.m */,
 			);
 			name = PieChart;
+			sourceTree = "<group>";
+		};
+		B0E253412136A93700DE0B5F /* xlsxWriter */ = {
+			isa = PBXGroup;
+			children = (
+				B0E253462136A95700DE0B5F /* app.h */,
+				B0E253422136A95600DE0B5F /* chart.h */,
+				B0E253452136A95700DE0B5F /* common.h */,
+				B0E253472136A95700DE0B5F /* content_types.h */,
+				B0E253482136A95700DE0B5F /* core.h */,
+				B0E2534B2136A95700DE0B5F /* custom.h */,
+				B0E253492136A95700DE0B5F /* drawing.h */,
+				B0E2534A2136A95700DE0B5F /* format.h */,
+				B0E253432136A95600DE0B5F /* hash_table.h */,
+				B0E253442136A95600DE0B5F /* ioapi.h */,
+				B0E253572136A96600DE0B5F /* libxlsxwriter-umbrella.h */,
+				B0E253522136A96400DE0B5F /* packager.h */,
+				B0E2534D2136A96300DE0B5F /* queue.h */,
+				B0E2535A2136A96700DE0B5F /* relationships.h */,
+				B0E253512136A96400DE0B5F /* shared_strings.h */,
+				B0E2534E2136A96400DE0B5F /* styles.h */,
+				B0E2534C2136A96300DE0B5F /* theme.h */,
+				B0E253532136A96500DE0B5F /* tmpfileplus.h */,
+				B0E253562136A96600DE0B5F /* tree.h */,
+				B0E253542136A96500DE0B5F /* utility.h */,
+				B0E253582136A96600DE0B5F /* workbook.h */,
+				B0E253552136A96600DE0B5F /* worksheet.h */,
+				B0E253502136A96400DE0B5F /* xlsxwriter.h */,
+				B0E2534F2136A96400DE0B5F /* xmlwriter.h */,
+				B0E253592136A96700DE0B5F /* zip.h */,
+			);
+			path = xlsxWriter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1255,6 +1317,10 @@
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1271,6 +1337,10 @@
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

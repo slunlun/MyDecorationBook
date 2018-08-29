@@ -29,6 +29,7 @@
 #import "SWEmptyMarketView.h"
 #import "SWMarketCategoryRemovedView.h"
 #import "SWUnreadOrderInfoStorage.h"
+#import "SWCommonUtils.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -62,23 +63,11 @@
     CGPoint p = CGPointMake(addShopBtn.customView.center.x, addShopBtn.customView.center.y + 20);
     SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil;
     if (@available(iOS 11.0, *)) { // iOS 11 由于引入了navigation bar的autolayout, 在通过center获取位置会不准, 先手动搞一下把
-#define SCREEN_WIDTH              [UIScreen mainScreen].bounds.size.width
-        
-#define SCREEN_HEIGHT             [UIScreen mainScreen].bounds.size.height
-        
-        //iPhone_X layout
-        
-#define iPhone_X                 (SCREEN_HEIGHT == 812.0)
-        
-#define Status_H                 (iPhone_X ? 44 : 20)
-        
-#define NavBar_H                  44
-        
-#define Nav_Height                (Status_H + NavBar_H)
-        
-        CGPoint p2 = CGPointMake(30, Nav_Height - 20);
+
+        CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+        CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
         node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 text:@"点击这里在当前分类下添加商家"];
-        CGPoint p3 = CGPointMake(rootView.frame.size.width - 30, Nav_Height - 20);
+        CGPoint p3 = CGPointMake(30, navHegiht - 20);
         node3 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
     }else {
         node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里在当前分类下添加商家"];
@@ -671,9 +660,18 @@
     if(productOrder) {
         // 入账订单
         [[SWShoppingOrderManager sharedInstance] insertNewOrder:productOrder];
+        
         // 添加订单飘向账本动画
         UIView *rootView = [UIApplication sharedApplication].delegate.window;
-        CGPoint destPoint = [self.notebookItemBtn.customView convertPoint:self.notebookItemBtn.customView.frame.origin toView:rootView];
+        
+        CGPoint destPoint = CGPointZero;
+        if (@available(iOS 11.0, *)) { // iOS 11 由于引入了navigation bar的autolayout, 在通过center获取位置会不准, 先手动搞一下把
+            CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+            destPoint = CGPointMake(30, navHegiht - 20);
+        }else {
+            destPoint = CGPointMake(_notebookItemBtn.customView.center.x, _notebookItemBtn.customView.center.y + 20);
+        }
+        
         destPoint.x -= 5;
         destPoint.y -= 5;
         UIImage *orderImg = nil;

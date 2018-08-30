@@ -52,7 +52,9 @@
 - (void)commonInit {
     // 初始化navigation bar
     UIBarButtonItem *shoppingItemHomePage = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MarketBig"] style:UIBarButtonItemStylePlain target:self action:@selector(shoppingItemHomePageClicked:)];
+    UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareMyOrderClicked:)];
     self.navigationItem.leftBarButtonItem = shoppingItemHomePage;
+    self.navigationItem.rightBarButtonItem = shareBtn;
     self.navigationItem.title = @"账本";
     
     // 初始化汇总视图的导航栏
@@ -144,6 +146,11 @@
     }];
 }
 
+- (void)shareMyOrderClicked:(UIBarButtonItem *)barItem {
+    [self generateSharedExcel];
+}
+
+
 - (void)pieChartBtnClicked:(UIButton *)button {
     [self.focusView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.guideBarView);
@@ -204,5 +211,11 @@
     if ([viewController isEqual:self]) {
         _barChartView.needUpdata = YES;
     }
+}
+
+#pragma mark - Generate shared excel
+- (NSURL *)generateSharedExcel {
+
+    return nil;
 }
 @end

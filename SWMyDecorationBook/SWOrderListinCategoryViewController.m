@@ -75,17 +75,17 @@
         if (dict == nil) {
             dict = [[NSMutableDictionary alloc] init];
             NSMutableArray *array = [NSMutableArray arrayWithObject:order];
-            [dict setObject:array forKey:order.orderDate];
+            [dict setObject:array forKey:order.marketItem.itemID];
         }else {
-            NSDate *dictKey = (NSDate *)dict.allKeys.firstObject;
-            if ([dictKey isEqual:order.orderDate]) {
+            NSString *dictKey = (NSString *)dict.allKeys.firstObject;
+            if ([dictKey isEqualToString:order.marketItem.itemID]) {
                 NSMutableArray *orderArray = [dict objectForKey:dictKey];
                 [orderArray addObject:order];
             }else {
                 [self.orderArray addObject:dict];
                 dict = [[NSMutableDictionary alloc] init];
                 NSMutableArray *array = [NSMutableArray arrayWithObject:order];
-                [dict setObject:array forKey:order.orderDate];
+                [dict setObject:array forKey:order.marketItem.itemID];
             }
         }
     }
@@ -145,13 +145,13 @@
         return @"";
     }else {
         NSDictionary *orderInfo = self.orderArray[section - 1];
-        NSDate *key = orderInfo.allKeys.firstObject;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //设置格式：zzz表示时区
-        [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
-        //NSDate转NSString
-        NSString *currentDateString = [dateFormatter stringFromDate:key];
-        return currentDateString;
+        NSString *key = orderInfo.allKeys.firstObject;
+        SWOrder * order = ((NSArray *)[orderInfo objectForKey:key]).firstObject;
+        if (order) {
+            return order.marketItem.marketName;
+        }else {
+            return @"";
+        }
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

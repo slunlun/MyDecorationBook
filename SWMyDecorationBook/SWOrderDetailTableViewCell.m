@@ -11,7 +11,7 @@
 #import "SWUIDef.h"
 
 @interface SWOrderDetailTableViewCell()
-@property(nonatomic, strong) UILabel *marketNameLab;
+@property(nonatomic, strong) UILabel *orderDateLab;
 @property(nonatomic, strong) UILabel *shoppingItemNameLab;
 @property(nonatomic, strong) UILabel *shoppingItemPrice;
 @property(nonatomic, strong) UILabel *orderCountLab;
@@ -31,17 +31,22 @@
     self.orderCountLab.text = [NSString stringWithFormat:@"x %.2f", orderInfo.itemCount];
     self.orderTotalPriceLab.text = [NSString stringWithFormat:@"%.2f", orderInfo.orderTotalPrice];
     self.shoppingItemPrice.text = [NSString stringWithFormat:@"￥%.2f/%@", orderInfo.productItem.price, orderInfo.productItem.itemUnit.unitTitle];
-    self.marketNameLab.text = orderInfo.marketItem.marketName;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设置格式：zzz表示时区
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    //NSDate转NSString
+    NSString *orderDateStr = [dateFormatter stringFromDate:orderInfo.orderDate];
+    self.orderDateLab.text = orderDateStr;
 }
 
 #pragma mark - CommonInit
 - (void)commonInit {
-    _marketNameLab = [[UILabel alloc] init];
-    _marketNameLab.textAlignment = NSTextAlignmentLeft;
-    _marketNameLab.textColor = SW_TAOBAO_ORANGE;
-    _marketNameLab.font = SW_DEFAULT_SUPER_MIN_FONT;
-    [self.contentView addSubview:_marketNameLab];
-    [_marketNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    _orderDateLab = [[UILabel alloc] init];
+    _orderDateLab.textAlignment = NSTextAlignmentLeft;
+    _orderDateLab.textColor = SW_TAOBAO_ORANGE;
+    _orderDateLab.font = SW_DEFAULT_SUPER_MIN_FONT;
+    [self.contentView addSubview:_orderDateLab];
+    [_orderDateLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(2);
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
     }];

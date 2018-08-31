@@ -17,8 +17,9 @@
 #import "SWOrderListinCategoryViewController.h"
 #import "xlsxwriter.h"
 #import "SWMarketContact.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate>
+@interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
 @property(nonatomic, strong) UIView *guideBarView;
@@ -149,12 +150,58 @@
 }
 
 - (void)shareMyOrderClicked:(UIBarButtonItem *)barItem {
-    NSURL *url = [self generateSharedExcel];
-    UIDocumentInteractionController *vc = [UIDocumentInteractionController
-     interactionControllerWithURL:url];
-    [vc presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"分享家装清单" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"通过邮件" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self displayMailPicker];
+    }];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"其他程序" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [self generateSharedExcel];
+        UIDocumentInteractionController *vc = [UIDocumentInteractionController
+                                               interactionControllerWithURL:url];
+        [vc presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+    }];
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"取消");
+    }];
+    
+    //把action添加到actionSheet里
+    [actionSheet addAction:action1];
+    [actionSheet addAction:action2];
+    [actionSheet addAction:action3];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
+- (void)displayMailPicker {
+    if (![MFMailComposeViewController canSendMail]) {
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"请检查邮件设置是否有默认账户" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [actionSheet addAction:action1];
+        [self presentViewController:actionSheet animated:YES completion:nil];
+        return;
+    }
+    
+    MFMailComposeViewController *wMailViewController = [[MFMailComposeViewController alloc]init];
+    wMailViewController.mailComposeDelegate = self;
+    // 设置邮件标题
+    NSString *title = [NSString stringWithFormat:@"家装清单"];
+    [wMailViewController setSubject:title];
+    // 邮件内容
+    NSString *emailBody = [NSMutableString stringWithFormat:@"powered by 家装随手记APP"];
+    [wMailViewController setMessageBody:emailBody isHTML:NO];
+    
+    // 添加附件
+    NSURL *filePath = [self generateSharedExcel];
+    NSData *excelData = [NSData dataWithContentsOfURL:filePath];
+    //关于mimeType：http://www.iana.org/assignments/media-types/index.html
+    [wMailViewController addAttachmentData:excelData mimeType: @"application/excel" fileName: @"家装清单.xlsx"];
+    [self presentViewController:wMailViewController animated:YES completion:^{
+        
+    }];
+}
 
 - (void)pieChartBtnClicked:(UIButton *)button {
     [self.focusView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -218,6 +265,31 @@
     }
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
+    //关闭邮件发送窗口
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    if(result == MFMailComposeResultFailed || error) {
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"邮件通知" message:@"邮件发送失败!" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [actionSheet addAction:action1];
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
+    
+    if (result == MFMailComposeResultSent) {
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"邮件通知" message:@"邮件已发送" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [actionSheet addAction:action1];
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
+}
+
 #pragma mark - Generate shared excel
 - (NSURL *)generateSharedExcel {
     // 文件保存的路径
@@ -227,6 +299,9 @@
     lxw_workbook  *workbook  = workbook_new([filename UTF8String]);
     // 创建sheet
     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
+    
+    // 设置列宽
+    worksheet_set_column(worksheet, 0, 5, 10, NULL);
    
     
     // excel文件title
@@ -241,7 +316,6 @@
     // 设置家装随手记的标语
     lxw_format *APPLogoFormat = workbook_add_format(workbook);
     format_set_font_size(APPLogoFormat, 15);
-    worksheet_set_column(worksheet, 0, 6, 15, NULL);
     format_set_font_color(APPLogoFormat, LXW_COLOR_BLUE);
     format_set_align(APPLogoFormat, LXW_ALIGN_RIGHT);
     NSString *APPLogoStr = @"powder by 家装随手记APP";

@@ -15,6 +15,8 @@
 #import "SWNotebookBarChartView.h"
 #import "SWNotebookPieChartView.h"
 #import "SWOrderListinCategoryViewController.h"
+#import "xlsxwriter.h"
+#import "SWMarketContact.h"
 
 @interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
@@ -147,7 +149,10 @@
 }
 
 - (void)shareMyOrderClicked:(UIBarButtonItem *)barItem {
-    [self generateSharedExcel];
+    NSURL *url = [self generateSharedExcel];
+    UIDocumentInteractionController *vc = [UIDocumentInteractionController
+     interactionControllerWithURL:url];
+    [vc presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
 }
 
 
@@ -215,7 +220,221 @@
 
 #pragma mark - Generate shared excel
 - (NSURL *)generateSharedExcel {
+    // 文件保存的路径
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filename = [documentPath stringByAppendingPathComponent:@"家装清单.xlsx"];
+    // 创建新xlsx文件
+    lxw_workbook  *workbook  = workbook_new([filename UTF8String]);
+    // 创建sheet
+    lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
+   
+    
+    // excel文件title
+    lxw_format *excelTitleFormat = workbook_add_format(workbook);
+    format_set_bold(excelTitleFormat);
+    format_set_font_size(excelTitleFormat, 28);
+    format_set_align(excelTitleFormat, LXW_ALIGN_CENTER);
+    format_set_align(excelTitleFormat, LXW_ALIGN_VERTICAL_CENTER);//垂直居中
+    NSString *excelTitleStr = @"家装清单";
+    worksheet_merge_range(worksheet, 0, 0, 0, 5, [excelTitleStr cStringUsingEncoding:NSUTF8StringEncoding], excelTitleFormat);
+    
+    // 设置家装随手记的标语
+    lxw_format *APPLogoFormat = workbook_add_format(workbook);
+    format_set_font_size(APPLogoFormat, 15);
+    worksheet_set_column(worksheet, 0, 6, 15, NULL);
+    format_set_font_color(APPLogoFormat, LXW_COLOR_BLUE);
+    format_set_align(APPLogoFormat, LXW_ALIGN_RIGHT);
+    NSString *APPLogoStr = @"powder by 家装随手记APP";
+    worksheet_merge_range(worksheet, 1, 0, 1, 5, [APPLogoStr cStringUsingEncoding:NSUTF8StringEncoding], APPLogoFormat);
+    
+    // 设置清单内容
+    // 订单总额格式
+    lxw_format *orderTotalCostFormat = workbook_add_format(workbook);
+    format_set_align(orderTotalCostFormat, LXW_ALIGN_LEFT);
+    format_set_font_color(orderTotalCostFormat, 0xe74c3c);
+    format_set_font_size(orderTotalCostFormat, 25);
+    
+    // 订单分类名称格式
+    lxw_format* orderCategoryNameFormat = workbook_add_format(workbook);
+    format_set_bg_color(orderCategoryNameFormat, 0xB5D4F5);
+    format_set_align(orderCategoryNameFormat, LXW_ALIGN_LEFT);
+    format_set_font_size(orderCategoryNameFormat, 25);
+    worksheet_set_column(worksheet, 0, 6, 25, NULL);
+    
+    // 订单分类总计格式
+    lxw_format* orderCategoryTotalPriceFormat = workbook_add_format(workbook);
+    format_set_align(orderCategoryTotalPriceFormat, LXW_ALIGN_RIGHT);
+    format_set_font_size(orderCategoryTotalPriceFormat, 25);
+    format_set_font_color(orderCategoryTotalPriceFormat, 0xe74c3c);
+    format_set_bg_color(orderCategoryTotalPriceFormat, 0xB5D4F5);
+    
+    // 商铺名称格式
+    lxw_format* marketNameFormat = workbook_add_format(workbook);
+    format_set_bg_color(marketNameFormat, 0x7FF3A1);
+    format_set_align(marketNameFormat, LXW_ALIGN_LEFT);
+    format_set_font_size(marketNameFormat, 20);
+    format_set_font_color(marketNameFormat, LXW_COLOR_GRAY);
 
-    return nil;
+    
+    // 商家总支出格式
+    lxw_format* marketTotalExpendFormat = workbook_add_format(workbook);
+    format_set_align(marketTotalExpendFormat, LXW_ALIGN_RIGHT);
+    format_set_font_size(marketTotalExpendFormat, 20);
+    format_set_bg_color(marketTotalExpendFormat, 0x7FF3A1);
+    
+    
+    // 商家联系人格式
+    lxw_format* marketContactFormat = workbook_add_format(workbook);
+    format_set_align(marketContactFormat, LXW_ALIGN_LEFT);
+    format_set_font_size(marketContactFormat, 15);
+    format_set_font_color(marketContactFormat, 0xB5D4F5);
+    
+    // 联系人
+    lxw_format* marketContactTitleFormat = workbook_add_format(workbook);
+    format_set_align(marketContactTitleFormat, LXW_ALIGN_LEFT);
+    format_set_font_size(marketContactTitleFormat, 18);
+    format_set_bold(marketContactTitleFormat);
+
+    
+    // 商铺订单明细分类格式
+    lxw_format* marketOrderDetailTitleFormat = workbook_add_format(workbook);
+    format_set_bold(marketOrderDetailTitleFormat);
+    format_set_align(marketOrderDetailTitleFormat, LXW_ALIGN_CENTER);
+    format_set_align(marketOrderDetailTitleFormat, LXW_ALIGN_VERTICAL_CENTER);//垂直居中
+    format_set_font_size(marketOrderDetailTitleFormat, 18);
+    format_set_font_color(marketOrderDetailTitleFormat, LXW_COLOR_BROWN);
+    
+    // 商铺订单明细内容格式
+    lxw_format* marketOrderDetailFormat = workbook_add_format(workbook);
+    format_set_align(marketOrderDetailFormat, LXW_ALIGN_CENTER);
+    format_set_align(marketOrderDetailFormat, LXW_ALIGN_VERTICAL_CENTER);//垂直居中
+    format_set_font_size(marketOrderDetailFormat, 15);
+    
+    // 空行
+    lxw_format* spaceLineFormat = workbook_add_format(workbook);
+    format_set_font_size(spaceLineFormat, 25);
+    
+    int rowNum = 2;
+    // 写内容
+    // ================================
+    // 总支出
+    CGFloat totalCost = 0;
+    for (NSDictionary *infoDict in self.orderInfoArray) {
+        SWShoppingOrderCategoryModle *model = infoDict.allKeys.firstObject;
+        totalCost += model.totalCost;
+    }
+    NSString * totalCostStr = [NSString stringWithFormat:@"总支出 ¥ %.2f", totalCost];
+    worksheet_merge_range(worksheet, rowNum, 0, rowNum, 5, [totalCostStr cStringUsingEncoding:NSUTF8StringEncoding], orderTotalCostFormat);
+    ++rowNum;
+    
+    
+    // 各个分类
+    for (NSDictionary *infoDict in self.orderInfoArray) {
+        // 空行
+        worksheet_merge_range(worksheet, rowNum, 0, rowNum, 5, "", spaceLineFormat);
+        ++rowNum;
+        // 分类名称
+        SWShoppingOrderCategoryModle *model = infoDict.allKeys.firstObject;
+        NSString *categoryNameStr = model.orderCategoryName;
+        worksheet_merge_range(worksheet, rowNum, 0, rowNum, 3, [categoryNameStr cStringUsingEncoding:NSUTF8StringEncoding], orderCategoryNameFormat);
+        NSString *totalCostStr =  [NSString stringWithFormat:@"¥ %.2f", model.totalCost];
+        
+        worksheet_merge_range(worksheet, rowNum, 4, rowNum, 5, [totalCostStr cStringUsingEncoding:NSUTF8StringEncoding], orderCategoryTotalPriceFormat);
+        ++rowNum;
+        
+        // 为当前分类下的订单按照商铺归类
+        NSArray *orderList = infoDict[model];
+        NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+        NSMutableDictionary *dict = nil;
+        for (SWOrder *order in orderList) {
+            if (dict == nil) {
+                dict = [[NSMutableDictionary alloc] init];
+                NSMutableArray *array = [NSMutableArray arrayWithObject:order];
+                [dict setObject:array forKey:order.marketItem.itemID];
+            }else {
+                NSString *dictKey = (NSString *)dict.allKeys.firstObject;
+                if ([dictKey isEqualToString:order.marketItem.itemID]) {
+                    NSMutableArray *orderArray = [dict objectForKey:dictKey];
+                    [orderArray addObject:order];
+                }else {
+                    [sortedArray addObject:dict];
+                    dict = [[NSMutableDictionary alloc] init];
+                    NSMutableArray *array = [NSMutableArray arrayWithObject:order];
+                    [dict setObject:array forKey:order.marketItem.itemID];
+                }
+            }
+        }
+        if (dict != nil) {
+            [sortedArray addObject:dict];
+        }
+        
+        // 归类完毕，依次显示商家订单信息
+        for (NSDictionary *orderDict in sortedArray) {
+            NSString *key = orderDict.allKeys.firstObject;
+            NSArray *marketOrderArray = orderDict[key];
+            SWOrder *firstOrder = marketOrderArray.firstObject;
+            // 商家信息
+            worksheet_merge_range(worksheet, rowNum, 0, rowNum, 3, [firstOrder.marketItem.marketName cStringUsingEncoding:NSUTF8StringEncoding], marketNameFormat);
+            int marketRowNum = rowNum;
+            rowNum++;
+            
+            // 联系人
+            worksheet_merge_range(worksheet, rowNum, 0, rowNum, 5, "联系人", marketContactTitleFormat);
+            rowNum++;
+            
+            // 商家联系方式
+            for (SWMarketContact *contact in firstOrder.marketItem.telNums) {
+                worksheet_merge_range(worksheet, rowNum, 0, rowNum, 2, [contact.name cStringUsingEncoding:NSUTF8StringEncoding], marketContactFormat);
+                worksheet_merge_range(worksheet, rowNum, 3, rowNum, 5, [contact.telNum cStringUsingEncoding:NSUTF8StringEncoding], marketContactFormat);
+                rowNum++;
+            }
+            
+            
+            // 订单明细分类
+            worksheet_write_string(worksheet, rowNum, 0, "商品", marketOrderDetailTitleFormat);
+            worksheet_write_string(worksheet, rowNum, 1, "单价", marketOrderDetailTitleFormat);
+            worksheet_write_string(worksheet, rowNum, 2, "数量", marketOrderDetailTitleFormat);
+            worksheet_write_string(worksheet, rowNum, 3, "日期", marketOrderDetailTitleFormat);
+            worksheet_write_string(worksheet, rowNum, 4, "备注", marketOrderDetailTitleFormat);
+            worksheet_write_string(worksheet, rowNum, 5, "总价", marketOrderDetailTitleFormat);
+            rowNum++;
+            
+            // 订单明细内容
+            CGFloat marketOrderTotalPrice = 0.0f; // 记录在当前商家上的总支出
+            for(SWOrder *order in marketOrderArray) {
+                marketOrderTotalPrice += order.orderTotalPrice;
+                
+                worksheet_write_string(worksheet, rowNum, 0, [order.productItem.productName cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                
+                NSString *productPriceStr = [NSString stringWithFormat:@"￥%.2f/%@", order.productItem.price, order.productItem.itemUnit.unitTitle];
+                worksheet_write_string(worksheet, rowNum, 1, [productPriceStr cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                
+                NSString *orderCountStr = [NSString stringWithFormat:@"%.2f", order.itemCount];
+                worksheet_write_string(worksheet, rowNum, 2, [orderCountStr cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                //设置格式：zzz表示时区
+                [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+                //NSDate转NSString
+                NSString *orderDateStr = [dateFormatter stringFromDate:order.orderDate];
+                worksheet_write_string(worksheet, rowNum, 3, [orderDateStr cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                
+                worksheet_write_string(worksheet, rowNum, 4, [order.orderRemark cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                
+                NSString *totalPriceStr = [NSString stringWithFormat:@"￥%.2f", order.orderTotalPrice];
+                worksheet_write_string(worksheet, rowNum, 5, [totalPriceStr cStringUsingEncoding:NSUTF8StringEncoding], marketOrderDetailFormat);
+                rowNum++;
+            }
+            
+            // 返回商家总支出行，写总支出
+            NSString *marketTotalExpend = [NSString stringWithFormat:@"￥%.2f", marketOrderTotalPrice];
+            worksheet_merge_range(worksheet, marketRowNum, 4, marketRowNum, 5, [marketTotalExpend cStringUsingEncoding:NSUTF8StringEncoding], marketTotalExpendFormat);
+        }
+        
+    }
+    // 生成excel
+    workbook_close(workbook);
+    NSURL *filePath = [NSURL fileURLWithPath:filename];
+    return filePath;
 }
 @end

@@ -82,7 +82,7 @@
 + (NSArray<SWOrder *>*)allProductOrders {
     __block NSMutableArray *allProductOrders = [[NSMutableArray alloc] init];
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSArray *allOrders = [SWShoppingItemOrder MR_findAllInContext:localContext];
+        NSArray *allOrders = [SWShoppingItemOrder MR_findAllSortedBy:@"createTime" ascending:NO inContext:localContext];
         for (SWShoppingItemOrder *shoppingOrder in allOrders) {
             SWOrder *order = [[SWOrder alloc] initWithMO:shoppingOrder];
             [allProductOrders addObject:order];

@@ -16,8 +16,8 @@
 #define __LXW_COMMON_H__
 
 #include <time.h>
-#include "third_party/queue.h"
-#include "third_party/tree.h"
+#include "queue.h"
+#include "tree.h"
 
 #ifndef TESTING
 #define STATIC static

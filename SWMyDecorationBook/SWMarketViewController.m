@@ -19,6 +19,7 @@
 #import "SWMarketCategoryStorage.h"
 #import "SWMarketStorage.h"
 #import "SWMarketContactViewController.h"
+#import <Contacts/Contacts.h>
 
 static NSString *TEL_CELL_IDENTIFIER = @"TEL_CELL_IDENTIFIER";
 static NSString *MARKET_CONTACT_HEADER_VIEW_IDENTIFIER = @"MARKET_CONTACT_HEADER_VIEW_IDENTIFIER";
@@ -483,6 +484,29 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     }
     
     [SWMarketStorage insertMarket:self.marketItem];
+    
+#pragma mark - Test
+    // 将联系人插入到通讯录
+    //初始化通讯录请求
+    CNSaveRequest * saveRequest = [[CNSaveRequest alloc]init];
+    for (SWMarketContact *contactPeople in self.marketItem.telNums) {
+        CNMutableContact * contact = [[CNMutableContact alloc]init];
+        //设置名字
+        contact.givenName = contactPeople.name.length > 1?[contactPeople.name substringWithRange:NSMakeRange(1, contactPeople.name.length - 1)]:@"";
+        //设置姓氏
+        contact.familyName = [contactPeople.name substringWithRange:NSMakeRange(0, 1)];
+        // 设置号码
+        contact.phoneNumbers = @[[CNLabeledValue labeledValueWithLabel:CNLabelPhoneNumberiPhone value:[CNPhoneNumber phoneNumberWithStringValue:contactPeople.telNum]]];
+        // 公司名称
+        contact.organizationName = self.marketItem.marketName;
+        // 添加请求
+        [saveRequest addContact:contact toContainerWithIdentifier:nil];
+    }
+    //    写入
+    CNContactStore * store = [[CNContactStore alloc]init];
+    NSError *error = nil;
+    [store executeSaveRequest:saveRequest error:&error];
+   
     [self.navigationController popViewControllerAnimated:YES];
 }
 

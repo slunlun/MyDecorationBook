@@ -30,6 +30,8 @@
 	<string>访问相册以选择照片</string>
 	<key>Privacy - Microphone Usage Description</key>
 	<string>This is my phone</string>
+	<key>NSContactsUsageDescription</key>
+	<string>访问通讯录以添加商家联系人</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

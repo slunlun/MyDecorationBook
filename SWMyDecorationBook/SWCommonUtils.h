@@ -11,4 +11,6 @@
 
 @interface SWCommonUtils : NSObject
 + (CGFloat)systemNavBarHeight;
++ (NSString *)getExtension:(NSString *)fullpath error:(NSError **)error;
++ (NSString*) getMiMeType:(NSString*)filepath;
 @end

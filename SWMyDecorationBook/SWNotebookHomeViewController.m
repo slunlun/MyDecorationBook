@@ -17,6 +17,7 @@
 #import "SWOrderListinCategoryViewController.h"
 #import "xlsxwriter.h"
 #import "SWMarketContact.h"
+#import "SWOrderSummaryViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
@@ -56,7 +57,9 @@
     // 初始化navigation bar
     UIBarButtonItem *shoppingItemHomePage = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MarketBig"] style:UIBarButtonItemStylePlain target:self action:@selector(shoppingItemHomePageClicked:)];
     UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareMyOrderClicked:)];
+//    UIBarButtonItem *orderSummayBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Details"] style:UIBarButtonItemStylePlain target:self action:@selector(orderSummayClicked:)];
     self.navigationItem.leftBarButtonItem = shoppingItemHomePage;
+    //self.navigationItem.rightBarButtonItems = @[shareBtn, orderSummayBtn];
     self.navigationItem.rightBarButtonItem = shareBtn;
     self.navigationItem.title = @"账本";
     
@@ -171,6 +174,14 @@
     [actionSheet addAction:action2];
     [actionSheet addAction:action3];
     [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)orderSummayClicked:(UIBarButtonItem *)barItem {
+    NSURL *filePath = [self generateSharedExcel];
+    if (filePath) {
+        SWOrderSummaryViewController *vc = [[SWOrderSummaryViewController alloc] initWithSummayFilePath:filePath];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)displayMailPicker {
@@ -332,13 +343,13 @@
     lxw_format* orderCategoryNameFormat = workbook_add_format(workbook);
     format_set_bg_color(orderCategoryNameFormat, 0xB5D4F5);
     format_set_align(orderCategoryNameFormat, LXW_ALIGN_LEFT);
-    format_set_font_size(orderCategoryNameFormat, 25);
+    format_set_font_size(orderCategoryNameFormat, 32);
     worksheet_set_column(worksheet, 0, 6, 25, NULL);
     
     // 订单分类总计格式
     lxw_format* orderCategoryTotalPriceFormat = workbook_add_format(workbook);
     format_set_align(orderCategoryTotalPriceFormat, LXW_ALIGN_RIGHT);
-    format_set_font_size(orderCategoryTotalPriceFormat, 25);
+    format_set_font_size(orderCategoryTotalPriceFormat, 32);
     format_set_font_color(orderCategoryTotalPriceFormat, 0xe74c3c);
     format_set_bg_color(orderCategoryTotalPriceFormat, 0xB5D4F5);
     

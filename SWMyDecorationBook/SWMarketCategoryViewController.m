@@ -115,7 +115,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _editBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     _editBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_editBtn addTarget:self action:@selector(editBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_editBtn setImage:[UIImage imageNamed:@"Edit@30"] forState:UIControlStateNormal];
+    [_editBtn setImage:[UIImage imageNamed:@"Edit"] forState:UIControlStateNormal];
     [_editBtn setTitle:@"编辑" forState:UIControlStateNormal];
     [_editBtn setTitleColor:SW_DISABLE_GRAY forState:UIControlStateNormal];
     _editBtn.titleLabel.font = SW_DEFAULT_FONT;
@@ -261,8 +261,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
        
         [_saveEditBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_marketCategoryTableView.mas_bottom);
-            make.right.equalTo(self.view);
-            make.bottom.equalTo(self.view);
+            make.left.right.equalTo(self.view);
             if (@available(iOS 11.0, *)) {
                 make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
             } else {

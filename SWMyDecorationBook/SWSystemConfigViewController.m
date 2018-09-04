@@ -178,7 +178,7 @@
         {
             SWBudgetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SWBudgetCell_Identify" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell updateBudget:[[NSUserDefaults standardUserDefaults] stringForKey:SW_BUDGET_KEY]];
+            [cell updateBudget:self.totalBudget];
             WeakObj(self);
             cell.budgetUpdate = ^(NSString *totalBudget) {
                 StrongObj(self);

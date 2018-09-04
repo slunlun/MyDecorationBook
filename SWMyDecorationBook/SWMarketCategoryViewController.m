@@ -14,6 +14,9 @@
 #import "SWMarketCategoryTableViewCell.h"
 #import "HexColor.h"
 #import "SWDef.h"
+#import "SWSystemHeaderView.h"
+#import "SWShoppingOrderManager.h"
+#import "SWSystemConfigViewController.h"
 
 #define SELECTED_MARK_VIEW_SPEED 100.0f
 #define MARKET_CATEGORY_VIEW_TOP_HEIGHT 80.0f
@@ -21,12 +24,13 @@
 
 static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 
-@interface SWMarketCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface SWMarketCategoryViewController ()<UITableViewDelegate, UITableViewDataSource, SWSystemHeaderViewDelegate, SWSystemConfigViewControllerDelegate>
 @property(nonatomic, strong) NSArray *categoryArray;
 @property(nonatomic, assign) NSInteger selectedMarkCategoryIndex;
 @property(nonatomic, strong) UIButton *editBtn;
 @property(nonatomic, strong) UIButton *addBtn;
 @property(nonatomic, strong) UIButton *saveEditBtn;
+@property(nonatomic, strong) SWSystemHeaderView *sysHeaderView;
 @end
 
 @implementation SWMarketCategoryViewController
@@ -41,6 +45,13 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSString *budget = [[NSUserDefaults standardUserDefaults] objectForKey:SW_BUDGET_KEY];
+    CGFloat totalCost = [[SWShoppingOrderManager sharedInstance] totalCost];
+    [self.sysHeaderView updateCostSummary:totalCost budget:budget.floatValue];
 }
 
 #pragma mark - Setter/Getter
@@ -59,6 +70,19 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
 #pragma mark - Common Init
 - (void)commonInit {
     self.view.backgroundColor = SW_TAOBAO_BLACK;
+    
+    _sysHeaderView = [[SWSystemHeaderView alloc] init];
+    _sysHeaderView.delegate = self;
+    [self.view addSubview:_sysHeaderView];
+    [_sysHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+        } else {
+            make.top.equalTo(self.mas_topLayoutGuideBottom);
+        }
+        make.left.right.equalTo(self.view);
+        make.height.equalTo(@100);
+    }];
     
     _marketCategoryTableView = [[UITableView alloc] initWithFrame:CGRectZero];
     _marketCategoryTableView.delegate = self;
@@ -86,12 +110,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [self.view addSubview:_marketCategoryTableView];
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(NavBar_H);
-        } else {
-            make.top.equalTo(self.mas_topLayoutGuideBottom).offset(NavBar_H);
-        }
-        
+        make.top.equalTo(_sysHeaderView.mas_bottom);
         if (@available(iOS 11.0, *)) {
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-MARKET_CATEGORY_VIEW_BOTTOM_HEIGHT);
         } else {
@@ -121,7 +140,11 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
         make.top.equalTo(_marketCategoryTableView.mas_bottom);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view).multipliedBy(0.5);
-        make.bottom.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom);
+        }
     }];
     
     _addBtn = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -143,7 +166,11 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
         make.top.equalTo(_marketCategoryTableView.mas_bottom);
         make.left.equalTo(self.editBtn.mas_right);
         make.right.equalTo(self.view);
-        make.bottom.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom);
+        }
     }];
     
     _saveEditBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -163,7 +190,11 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [_saveEditBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_marketCategoryTableView.mas_bottom);
         make.right.equalTo(self.view.mas_left).offset(-20);
-        make.bottom.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view.mas_bottom);
+        }
         make.width.equalTo(@0);
     }];
 }
@@ -236,14 +267,22 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
             make.top.equalTo(_marketCategoryTableView.mas_bottom);
             make.left.equalTo(self.view.mas_right);
             make.width.equalTo(@0);
-            make.bottom.equalTo(self.view);
+            if (@available(iOS 11.0, *)) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            } else {
+                make.bottom.equalTo(self.view.mas_bottom);
+            }
         }];
        
         [_saveEditBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_marketCategoryTableView.mas_bottom);
             make.right.equalTo(self.view);
             make.bottom.equalTo(self.view);
-            make.left.equalTo(self.view);
+            if (@available(iOS 11.0, *)) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            } else {
+                make.bottom.equalTo(self.view.mas_bottom);
+            }
         }];
         
         [_addBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -392,4 +431,25 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - SWSystemHeaderViewDelegate
+- (void)systemHeaderViewdidSelectedSystemConfigBtn:(SWSystemHeaderView *)systemHeaderView {
+    WeakObj(self);
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC closeDrawerAnimated:YES completion:^(BOOL finished){
+        StrongObj(self);
+        if (self) {
+            SWSystemConfigViewController *vc = [[SWSystemConfigViewController alloc] init];
+            vc.delegate = self;
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            
+            [self presentViewController:nav animated:YES completion:^{
+                
+            }];
+        }
+    }];
+   
+}
+#pragma mark - SWSystemConfigViewControllerDelegate
+- (void)dismissVC {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

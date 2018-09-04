@@ -27,4 +27,10 @@
 
 // default
 #define SW_DEFAULT_UNIT @"块"
+
+// iOS User Default KEY
+#define SW_BUDGET_KEY @"SW_BUDGET_KEY"
+#define SW_SYNC_CONTACT_TO_SYS_KEY @"SW_SYNC_CONTACT_TO_SYS_KEY"
+
+
 #endif /* SWDef_h */

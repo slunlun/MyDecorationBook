@@ -135,6 +135,11 @@
 		B0E2535F2138DFBA00DE0B5F /* SWOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E2535E2138DFBA00DE0B5F /* SWOrderSummaryViewController.m */; };
 		B0E253612138E0C900DE0B5F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */; };
 		B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E253622138E5C000DE0B5F /* Contacts.framework */; };
+		B0E253662139146E00DE0B5F /* SWSystemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E253652139146E00DE0B5F /* SWSystemHeaderView.m */; };
+		B0E25369213D125300DE0B5F /* SWSystemConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E25368213D125300DE0B5F /* SWSystemConfigViewController.m */; };
+		B0E2536D213D17F800DE0B5F /* SWContactConfigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E2536C213D17F800DE0B5F /* SWContactConfigCell.m */; };
+		B0E25370213D181D00DE0B5F /* SWBudgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E2536F213D181D00DE0B5F /* SWBudgetCell.m */; };
+		B0E25373213D188500DE0B5F /* SWProductUnitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E25372213D188500DE0B5F /* SWProductUnitCell.m */; };
 		B0F64284211A839900F3F38E /* SWOrderListinCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */; };
 		B0F6428A211A896400F3F38E /* NSDate+SWDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F64289211A896400F3F38E /* NSDate+SWDateExt.m */; };
 /* End PBXBuildFile section */
@@ -429,6 +434,16 @@
 		B0E2535E2138DFBA00DE0B5F /* SWOrderSummaryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderSummaryViewController.m; sourceTree = "<group>"; };
 		B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B0E253622138E5C000DE0B5F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		B0E253642139146E00DE0B5F /* SWSystemHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWSystemHeaderView.h; sourceTree = "<group>"; };
+		B0E253652139146E00DE0B5F /* SWSystemHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWSystemHeaderView.m; sourceTree = "<group>"; };
+		B0E25367213D125300DE0B5F /* SWSystemConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWSystemConfigViewController.h; sourceTree = "<group>"; };
+		B0E25368213D125300DE0B5F /* SWSystemConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWSystemConfigViewController.m; sourceTree = "<group>"; };
+		B0E2536B213D17F800DE0B5F /* SWContactConfigCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWContactConfigCell.h; sourceTree = "<group>"; };
+		B0E2536C213D17F800DE0B5F /* SWContactConfigCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWContactConfigCell.m; sourceTree = "<group>"; };
+		B0E2536E213D181D00DE0B5F /* SWBudgetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWBudgetCell.h; sourceTree = "<group>"; };
+		B0E2536F213D181D00DE0B5F /* SWBudgetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWBudgetCell.m; sourceTree = "<group>"; };
+		B0E25371213D188500DE0B5F /* SWProductUnitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWProductUnitCell.h; sourceTree = "<group>"; };
+		B0E25372213D188500DE0B5F /* SWProductUnitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWProductUnitCell.m; sourceTree = "<group>"; };
 		B0F64282211A839900F3F38E /* SWOrderListinCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderListinCategoryViewController.h; sourceTree = "<group>"; };
 		B0F64283211A839900F3F38E /* SWOrderListinCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderListinCategoryViewController.m; sourceTree = "<group>"; };
 		B0F64288211A896400F3F38E /* NSDate+SWDateExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SWDateExt.h"; sourceTree = "<group>"; };
@@ -741,8 +756,8 @@
 				B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */,
 				B01CB23B2099535000F716C4 /* SWNotebookHomeViewController.h */,
 				B01CB23C2099535000F716C4 /* SWNotebookHomeViewController.m */,
-				B0C34A622114060E003B253A /* SWNotebookPieChartView.h */,
 				B0C34A632114060E003B253A /* SWNotebookPieChartView.m */,
+				B0C34A622114060E003B253A /* SWNotebookPieChartView.h */,
 				B0C34A6521140621003B253A /* SWNotebookBarChartView.h */,
 				B0C34A6621140621003B253A /* SWNotebookBarChartView.m */,
 				B0F64282211A839900F3F38E /* SWOrderListinCategoryViewController.h */,
@@ -755,6 +770,8 @@
 				B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */,
 				B0E2535D2138DFBA00DE0B5F /* SWOrderSummaryViewController.h */,
 				B0E2535E2138DFBA00DE0B5F /* SWOrderSummaryViewController.m */,
+				B0E25367213D125300DE0B5F /* SWSystemConfigViewController.h */,
+				B0E25368213D125300DE0B5F /* SWSystemConfigViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -815,6 +832,7 @@
 		5EB9D77D1F7F43AA00034E09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B0E2536A213D17D700DE0B5F /* SystemConfig */,
 				B00CDEAF212D624700533EF6 /* TutorialView */,
 				B0C34A592113FD5A003B253A /* ChartView */,
 				5E9C77CE200F30F6000355D2 /* MarketListHomePage */,
@@ -849,6 +867,8 @@
 				B00CDEB7212FFFF200533EF6 /* SWEmptyMarketView.m */,
 				B00CDEB9213402A200533EF6 /* SWMarketCategoryRemovedView.h */,
 				B00CDEBA213402A200533EF6 /* SWMarketCategoryRemovedView.m */,
+				B0E253642139146E00DE0B5F /* SWSystemHeaderView.h */,
+				B0E253652139146E00DE0B5F /* SWSystemHeaderView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -993,6 +1013,19 @@
 			path = xlsxWriter;
 			sourceTree = "<group>";
 		};
+		B0E2536A213D17D700DE0B5F /* SystemConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B0E2536B213D17F800DE0B5F /* SWContactConfigCell.h */,
+				B0E2536C213D17F800DE0B5F /* SWContactConfigCell.m */,
+				B0E2536E213D181D00DE0B5F /* SWBudgetCell.h */,
+				B0E2536F213D181D00DE0B5F /* SWBudgetCell.m */,
+				B0E25371213D188500DE0B5F /* SWProductUnitCell.h */,
+				B0E25372213D188500DE0B5F /* SWProductUnitCell.m */,
+			);
+			name = SystemConfig;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1070,6 +1103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE7E2D21F99ACCC007CAB27 /* MASCompositeConstraint.m in Sources */,
+				B0E25373213D188500DE0B5F /* SWProductUnitCell.m in Sources */,
 				B085CF6F2126AB0C00B45C4B /* UITextView+OKToolBar.m in Sources */,
 				5EDE94E31FFB5B6400A24C21 /* SWMarketHeaderView.m in Sources */,
 				5E17562020109FD0009F100B /* SWDecortionBookModel.xcdatamodeld in Sources */,
@@ -1102,7 +1136,9 @@
 				B077F73621182A4F00E15ECC /* SWBarChartTableViewCell.m in Sources */,
 				5EE7E2D91F99ACCC007CAB27 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				B057D24E208F263800539824 /* SWOrderProductInfoView.m in Sources */,
+				B0E25369213D125300DE0B5F /* SWSystemConfigViewController.m in Sources */,
 				B0F6428A211A896400F3F38E /* NSDate+SWDateExt.m in Sources */,
+				B0E253662139146E00DE0B5F /* SWSystemHeaderView.m in Sources */,
 				5E9C2CE92004AF310052A05E /* SWShoppingItemInfoViewController.m in Sources */,
 				80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */,
 				B0A73FAA2089C6BA00BCAB2F /* SWAddSubView.m in Sources */,
@@ -1119,12 +1155,14 @@
 				5E17560620109E8F009F100B /* NSObject+MagicalDataImport.m in Sources */,
 				5E17561220109E8F009F100B /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				5E17561120109E8F009F100B /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				B0E2536D213D17F800DE0B5F /* SWContactConfigCell.m in Sources */,
 				B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */,
 				B0A73FAD2089D28A00BCAB2F /* SWOrderCountTableViewCell.m in Sources */,
 				5E17561820109E8F009F100B /* MagicalRecord+iCloud.m in Sources */,
 				5E9C2CF02004B0690052A05E /* SWShoppingItemPriceCell.m in Sources */,
 				5E17561620109E8F009F100B /* MagicalRecord+Actions.m in Sources */,
 				B00CDEC4213642A000533EF6 /* SWCommonUtils.m in Sources */,
+				B0E25370213D181D00DE0B5F /* SWBudgetCell.m in Sources */,
 				5E17561920109E8F009F100B /* MagicalRecord+Options.m in Sources */,
 				5EACC4EF1F723B5400C4E796 /* UIViewController+SWDrawerViewController.m in Sources */,
 				5EB9D7841F7F72F600034E09 /* SWProductItem.m in Sources */,

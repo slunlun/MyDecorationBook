@@ -50,6 +50,15 @@ static SWShoppingOrderManager *sharedObj = nil;
     return sharedObj;
 }
 
+- (CGFloat)totalCost {
+    NSArray *allOrders = [SWProductOrderStorage allProductOrders];
+    CGFloat totalCost = 0;
+    for (SWOrder *order in allOrders) {
+        totalCost += order.orderTotalPrice;
+    }
+    return totalCost;
+}
+
 - (NSArray *)loadData {
     NSArray *allOrders = [SWProductOrderStorage allProductOrders];
     NSMutableArray *ordersInCategoryArray = [[NSMutableArray alloc] init];

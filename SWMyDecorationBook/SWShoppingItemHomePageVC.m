@@ -433,7 +433,12 @@
 
 #pragma mark - Navigation Bar items
 - (void)configureNavigationBar {
-    //    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Gear"] style:UIBarButtonItemStylePlain target:self action:@selector(sysConfig:)];
+//    UIImageView *configImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gear"]];
+//    UITapGestureRecognizer *configTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sysConfig:)];
+//    [configImgView addGestureRecognizer:configTapped];
+//    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithCustomView:configImgView];
+    
+    
     UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
     UITapGestureRecognizer *imageTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noteBookClicked:)];
     [noteBookImgView addGestureRecognizer:imageTaped];

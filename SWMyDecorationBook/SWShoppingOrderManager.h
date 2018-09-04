@@ -21,6 +21,7 @@
 + (instancetype)sharedInstance;
 
 - (NSArray *)loadData; // 初始化订单汇总信息, 在调用其他方法前，请务必调用该函数
+- (CGFloat)totalCost;
 - (NSArray *)loadOrdersInCategory:(SWShoppingOrderCategoryModle *)categoryModel;
 - (void)insertNewOrder:(SWOrder *)shoppingOrder;
 - (void)removeShoppingOrder:(SWOrder *)shoppingOrder;

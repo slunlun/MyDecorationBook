@@ -74,7 +74,7 @@
     SWMarketCategoryViewController *leftSlideVC = [[SWMarketCategoryViewController alloc] init];
 //    SWLeftSlideCollectionViewController *leftSlideVC = [[SWLeftSlideCollectionViewController alloc] init];
     _drawerVC = [[SWDrawerViewController alloc] initWithCenterViewController:centerNav leftDrawerViewController:leftSlideVC];
-    CGFloat leftSideWidth = self.window.frame.size.width * 0.75;
+    CGFloat leftSideWidth = self.window.frame.size.width * 0.8;
     _drawerVC.maximumLeftDrawerWidth = leftSideWidth; // 左侧栏的width
     leftSlideVC.delegate = _drawerVC;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

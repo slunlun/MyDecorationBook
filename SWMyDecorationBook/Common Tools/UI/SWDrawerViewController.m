@@ -14,7 +14,7 @@
 #import "HexColor.h"
 #import "SWMarketCategoryViewController.h"
 
-CGFloat const SWDrawerDefaultWidth = 400.0f;   // 左侧栏的大小
+CGFloat const SWDrawerDefaultWidth = 450.0f;   // 左侧栏的大小
 CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
 CGFloat const SWDrawerDefaultShadowOpacity = 0.8f;
 CGFloat const SWDrawerDefaultShadowRadius = 10.0f;

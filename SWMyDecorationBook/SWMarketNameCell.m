@@ -30,6 +30,12 @@
     _titleLab.textAlignment = NSTextAlignmentLeft;
     _titleLab.textColor = SW_TAOBAO_BLACK;
     [self.contentView addSubview:_titleLab];
+    [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.width.equalTo(@60);
+    }];
+    
     
     _marketNameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _marketNameTextField.font= SW_DEFAULT_FONT;
@@ -39,13 +45,6 @@
     _marketNameTextField.textColor = SW_TAOBAO_BLACK;
     [_marketNameTextField addOKToolBar];
     [self.contentView addSubview:_marketNameTextField];
-    
-    [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.centerY.equalTo(self.contentView.mas_centerY);
-        make.width.equalTo(@60);
-    }];
-    
     [_marketNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
         make.left.equalTo(self.titleLab.mas_right).offset(SW_MARGIN * 0.5);

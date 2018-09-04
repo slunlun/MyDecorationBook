@@ -39,7 +39,7 @@
         case SWButtonLayoutTypeImageTop:
         {
             imageEdgeInsets = UIEdgeInsetsMake(-titleSize.height * 0.5, (titleSize.width * 0.5), titleSize.height*0.5, -(titleSize.width * 0.5));
-            titleEdgeInsets = UIEdgeInsetsMake(titleSize.height * 0.5, -imageSize.width *0.5, -titleSize.height * 0.5, imageSize.width *0.5);
+            titleEdgeInsets = UIEdgeInsetsMake(titleSize.height * 0.5 + 15, -imageSize.width *0.5, -titleSize.height * 0.5, imageSize.width *0.5);
         }
             break;
         case SWButtonLayoutTypeImageBottom:

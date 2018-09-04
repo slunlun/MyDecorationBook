@@ -93,20 +93,6 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _marketCategoryTableView.allowsSelection = YES;
     [_marketCategoryTableView registerClass:[SWMarketCategoryTableViewCell class] forCellReuseIdentifier:CATEGORY_CELL_IDENTIFY];
     
-#define SCREEN_WIDTH              [UIScreen mainScreen].bounds.size.width
-    
-#define SCREEN_HEIGHT             [UIScreen mainScreen].bounds.size.height
-    
-    //iPhone_X layout
-    
-#define iPhone_X                 (SCREEN_HEIGHT == 812.0)
-    
-#define Status_H                 (iPhone_X ? 44 : 20)
-    
-#define NavBar_H                  44
-    
-#define Nav_Height                (Status_H + NavBar_H)
-    
     [self.view addSubview:_marketCategoryTableView];
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);

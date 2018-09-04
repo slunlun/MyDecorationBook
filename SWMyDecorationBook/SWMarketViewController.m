@@ -510,10 +510,20 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         CNContactStore * store = [[CNContactStore alloc]init];
         NSError *error = nil;
         [store executeSaveRequest:saveRequest error:&error];
+        
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人已自动同步到系统通信录，您可在系统通讯录中通过姓名或商家名称查找到联系人。同步功能可在系统设置中关闭" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertView addAction:okAction];
+        [self presentViewController:alertView animated:YES completion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-   
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cancelBtnClicked:(UIButton *)button {

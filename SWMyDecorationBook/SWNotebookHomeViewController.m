@@ -19,7 +19,8 @@
 #import "SWMarketContact.h"
 #import "SWOrderSummaryViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
-
+#import "SWCommonUtils.h"
+#import "SWUserTutorialManager.h"
 @interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
@@ -50,6 +51,15 @@
     [super viewDidAppear:animated];
      [_pieChartView updateSummarizingData];
     self.navigationController.delegate = self; // 在这里设置navigationController.delegate，确保第一次push到本vc时，delegate方法不被调用
+    
+    // 测试，添加用户引导view
+    UIView *rootView = [UIApplication sharedApplication].delegate.window;
+    SWTutorialNode *node = nil;
+    CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+    CGPoint p = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
+    node = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里可以自动生成家装清单，并分享给朋友"];
+    NSArray *nodes = @[node];
+    [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
 }
 
 #pragma mark - Common init

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SWItemUnit.h"
 @interface SWPriceUnitStorage : NSObject
-+ (void)insertPriceUnit:(NSString *)priceUnit;
-+ (void)removePriceUnit:(NSString *)priceUnit;
++ (void)insertPriceUnit:(SWItemUnit *)priceUnit;
++ (void)removePriceUnit:(SWItemUnit *)priceUnit;
++ (void)updatePriceUnit:(SWItemUnit *)priceUnit;
 + (NSArray *)allPriceUnit;
 @end

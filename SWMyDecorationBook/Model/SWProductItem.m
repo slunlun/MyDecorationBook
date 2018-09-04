@@ -8,6 +8,7 @@
 
 #import "SWProductItem.h"
 #import "SWDef.h"
+#import "SWPriceUnitStorage.h"
 
 @implementation SWProductItem
 //@property(nonatomic, strong) NSString *itemID;
@@ -24,10 +25,9 @@
         _itemID = [[NSUUID UUID] UUIDString];
         _price = -1.0f;
         _createTime = [NSDate date];
-        SWItemUnit *itemUnit = [[SWItemUnit alloc] init];
-        itemUnit.unitTitle = SW_DEFAULT_UNIT;
+       
         _productPhotos = [[NSMutableArray alloc] init];
-        _itemUnit = itemUnit;
+        _itemUnit = [SWPriceUnitStorage allPriceUnit].firstObject;
     }
     return self;
 }

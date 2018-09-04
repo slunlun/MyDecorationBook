@@ -16,6 +16,7 @@
 @property(nonatomic, strong) UILabel *shoppingItemPrice;
 @property(nonatomic, strong) UILabel *orderCountLab;
 @property(nonatomic, strong) UILabel *orderTotalPriceLab;
+@property(nonatomic, strong) UILabel *orderRemarkLab;
 @end
 
 @implementation SWOrderDetailTableViewCell
@@ -37,6 +38,9 @@
     //NSDate转NSString
     NSString *orderDateStr = [dateFormatter stringFromDate:orderInfo.orderDate];
     self.orderDateLab.text = orderDateStr;
+    if (self.shouldDispalyRemark) {
+        self.orderRemarkLab.text = orderInfo.orderRemark?orderInfo.orderRemark:@"";
+    }
 }
 
 #pragma mark - CommonInit
@@ -68,6 +72,16 @@
     [self.contentView addSubview:_shoppingItemPrice];
     [_shoppingItemPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_shoppingItemNameLab.mas_bottom).offset(2);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+    }];
+    
+    _orderRemarkLab = [[UILabel alloc] init];
+    _orderRemarkLab.textAlignment = NSTextAlignmentRight;
+    _orderRemarkLab.textColor = SW_DISABLE_GRAY;
+    _orderRemarkLab.font = SW_DEFAULT_MIN_FONT;
+    [self.contentView addSubview:_orderRemarkLab];
+    [_orderRemarkLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_shoppingItemPrice.mas_bottom).offset(2);
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
     }];
     

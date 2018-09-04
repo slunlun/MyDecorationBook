@@ -32,7 +32,7 @@
         shopItem.remark = productItem.productRemark;
         
         // 价格单位
-        predicate = [NSPredicate predicateWithFormat:@"unit==%@", productItem.itemUnit.unitTitle];
+        predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemUnit.itemID];
         SWPriceUnit *priceUnit = [SWPriceUnit MR_findFirstWithPredicate:predicate inContext:localContext];
         shopItem.itemUnit = priceUnit;
         [priceUnit addShopItemsObject:shopItem];

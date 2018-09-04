@@ -111,14 +111,6 @@
     _orderInfoTableView.tableFooterView = [[UIView alloc] init];
     
     
-//    _okBtn = [[UIButton alloc] init];
-//    _okBtn.titleLabel.font = SW_DEFAULT_FONT;
-//    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [_okBtn setTitle:@"确定" forState:UIControlStateNormal];
-//    [_okBtn setBackgroundColor:SW_RMC_GREEN];
-//    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
-//    _okBtn.clipsToBounds = YES;
-//    [self.view addSubview:_okBtn];
     
     _saveBtn = [[UIButton alloc] init];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -305,7 +297,7 @@
 
 - (void)delBtnClicked:(UIButton *)btn {
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定删除该条目吗?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [SWProductOrderStorage removeProductOrder:self.orderInfo];
         [self.navigationController popViewControllerAnimated:YES];
     }];

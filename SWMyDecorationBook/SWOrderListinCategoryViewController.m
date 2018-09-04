@@ -122,7 +122,7 @@
     if (indexPath.section == 0) {
         return 70;
     }else {
-        return 60;
+        return 92;
     }
 }
 
@@ -174,6 +174,7 @@
         NSArray *orderArray = [orderInfo objectForKey:key];
         SWOrder *order = orderArray[indexPath.row];
         cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_DETAIL_CELL_IDENTITY" forIndexPath:indexPath];
+        ((SWOrderDetailTableViewCell *)cell).shouldDispalyRemark = YES;
         [((SWOrderDetailTableViewCell *)cell) updateOrderInfo:order];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

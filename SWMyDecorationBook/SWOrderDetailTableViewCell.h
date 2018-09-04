@@ -10,4 +10,5 @@
 #import "SWOrder.h"
 @interface SWOrderDetailTableViewCell : UITableViewCell
 - (void)updateOrderInfo:(SWOrder *)orderInfo;
+@property(nonatomic, assign) BOOL shouldDispalyRemark;
 @end

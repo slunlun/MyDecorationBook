@@ -122,7 +122,6 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [_marketCategoryTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     _editBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
     _editBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
     _editBtn.layer.shadowOpacity = 1.0f;
@@ -242,7 +241,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [SWMarketCategoryStorage removeMarkeetCategory:marketCategory];
         [self updateData];
         if ([self.delegate respondsToSelector:@selector(marketCategoryVC:didDeleteMarketCategory:)]) {

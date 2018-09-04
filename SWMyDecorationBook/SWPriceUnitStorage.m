@@ -12,17 +12,28 @@
 #import "SWItemUnit.h"
 
 @implementation SWPriceUnitStorage
-+ (void)insertPriceUnit:(NSString *)unit {
++ (void)insertPriceUnit:(SWItemUnit *)unit {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         SWPriceUnit *priceUnit = [SWPriceUnit MR_createEntityInContext:localContext];
-        priceUnit.unit = unit;
+        priceUnit.unit = unit.unitTitle;
+        priceUnit.itemID = unit.itemID;
         
     }];
 }
 
-+ (void)removePriceUnit:(NSString *)unit {
++ (void)updatePriceUnit:(SWItemUnit *)unit {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"unit==%@", unit];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", unit.itemID];
+        SWPriceUnit *priceUnit = [SWPriceUnit MR_findFirstWithPredicate:predicate inContext:localContext];
+        if (priceUnit) {
+            priceUnit.unit = unit.unitTitle;
+        }
+    }];
+}
+
++ (void)removePriceUnit:(SWItemUnit *)unit {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", unit.itemID];
         [SWPriceUnit MR_deleteAllMatchingPredicate:predicate inContext:localContext];
     }];
 }

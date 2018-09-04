@@ -136,21 +136,6 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     }];
     _marketInfoTableView.sectionHeaderHeight = 10;
     
-    _okBtn = [[UIButton alloc] init];
-    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
-    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
-    [_okBtn setBackgroundColor:SW_RMC_GREEN];
-    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
-    _okBtn.clipsToBounds = YES;
-    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [bkView addSubview:_okBtn];
-    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
-    }];
     
     _cancelBtn = [[UIButton alloc] init];
     _cancelBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
@@ -161,12 +146,30 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
     _cancelBtn.clipsToBounds = YES;
     [bkView addSubview:_cancelBtn];
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.okBtn.mas_right).offset(SW_MARGIN);
+        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
+    }];
+    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _okBtn = [[UIButton alloc] init];
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
+    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_okBtn setTitle:@"保 存" forState:UIControlStateNormal];
+    [_okBtn setBackgroundColor:SW_RMC_GREEN];
+    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
+    _okBtn.clipsToBounds = YES;
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bkView addSubview:_okBtn];
+    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.cancelBtn.mas_right).offset(SW_MARGIN);
         make.topMargin.equalTo(self.marketInfoTableView.mas_bottom).offset(SW_MARGIN);
         make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
         make.rightMargin.equalTo(bkView.mas_right).offset(-SW_CELL_LEFT_MARGIN);
     }];
-    [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
 
 #pragma mark - SETTER/GETTER
@@ -339,7 +342,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                 ((SWNewMarketTelNumCell *)cell).contactDelBlock = ^{
                     StrongObj(self);
                     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除联系人?" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                         [self.marketItem.telNums removeObjectAtIndex:indexPath.row - 1];
                         [self.marketInfoTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
                         [self.marketInfoTableView reloadData];
@@ -389,7 +392,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
 - (void)delMarketItemClicked:(UIBarButtonItem *)barItem {
     NSString *msg = [NSString stringWithFormat:@"确实要删除%@吗？该商家所有的商品以及账单信息都会删除!", self.marketItem.marketName];
     UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [SWMarketStorage removeMarket:self.marketItem];
         [self.navigationController popViewControllerAnimated:YES];
     }];

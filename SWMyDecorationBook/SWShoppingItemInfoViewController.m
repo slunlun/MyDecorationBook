@@ -64,8 +64,11 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     // 默认初始化当前的shoppingItem
     if (_shoppingItem == nil) {
         _shoppingItem = [[SWProductItem alloc] init];
+        _shoppingItem.itemUnit = self.curItemUnit;
+    }else {
+        self.curItemUnit = _shoppingItem.itemUnit;
     }
-    self.curItemUnit = _shoppingItem.itemUnit;
+    
     [self commonInit];
     
 }
@@ -145,22 +148,6 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
         make.bottom.equalTo(bkView.mas_bottom).offset(-75);
     }];
     
-    _okBtn = [[UIButton alloc] init];
-    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
-    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_okBtn setTitle:@"确 定" forState:UIControlStateNormal];
-    [_okBtn setBackgroundColor:SW_RMC_GREEN];
-    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
-    _okBtn.clipsToBounds = YES;
-    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_okBtn];
-    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
-        make.topMargin.equalTo(self.shoppingItemTableView.mas_bottom).offset(SW_MARGIN);
-        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
-        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
-    }];
-    
     _cancelBtn = [[UIButton alloc] init];
     _cancelBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
     [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -171,11 +158,29 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_cancelBtn];
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(self.okBtn.mas_right).offset(SW_MARGIN);
+        make.leftMargin.equalTo(bkView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.topMargin.equalTo(self.shoppingItemTableView.mas_bottom).offset(SW_MARGIN);
+        make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
+        make.width.equalTo(bkView.mas_width).multipliedBy(0.5).offset(-SW_MARGIN);
+    }];
+    
+    _okBtn = [[UIButton alloc] init];
+    _okBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE_BOLD;
+    [_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_okBtn setTitle:@"保 存" forState:UIControlStateNormal];
+    [_okBtn setBackgroundColor:SW_RMC_GREEN];
+    _okBtn.layer.cornerRadius = SW_DEFAULT_CORNER_RADIOUS;
+    _okBtn.clipsToBounds = YES;
+    [_okBtn addTarget:self action:@selector(okBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_okBtn];
+    [_okBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leftMargin.equalTo(self.cancelBtn.mas_right).offset(SW_MARGIN);
         make.topMargin.equalTo(self.shoppingItemTableView.mas_bottom).offset(SW_MARGIN);
         make.bottomMargin.equalTo(bkView.mas_bottom).offset(-SW_MARGIN);
         make.rightMargin.equalTo(bkView.mas_right).offset(-SW_CELL_LEFT_MARGIN);
     }];
+    
+   
 }
 
 
@@ -201,7 +206,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             };
         }
             break;
-        case 1:{
+        case 1:{ // 商品单价
             cell = [tableView dequeueReusableCellWithIdentifier:PRICE_CELL_IDENTIFY];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             ((SWShoppingItemPriceCell *)cell).productItem = self.shoppingItem;
@@ -211,7 +216,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             };
         }
             break;
-        case 2: {
+        case 2: { // 商品备注
             cell = [tableView dequeueReusableCellWithIdentifier:REMARK_CELL_IDENTIFY];
             ((SWShoppingItemRemarkCell *)cell).productItem = self.shoppingItem;
             ((SWShoppingItemRemarkCell *)cell).shoppingItemRemarkChange = ^(NSString *remark) {
@@ -220,7 +225,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             };
         }
             break;
-        case 3: {
+        case 3: { // 商品照片
             cell = [tableView dequeueReusableCellWithIdentifier:PHOTO_CELL_IDENTIFY];
             if (self.shoppingItem.productPhotos) {
                 NSMutableArray *photos = [[NSMutableArray alloc] init];
@@ -284,72 +289,17 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
 
 #pragma mark - SWPickerViewDelegate
 - (NSInteger)SWPickerView:(SWPickerView *_Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.itemUnits.count + 1;
+    return self.itemUnits.count;
 }
 - (NSString *_Nonnull)SWPickerView:(SWPickerView *_Nonnull)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (row < self.itemUnits.count) {
-        SWItemUnit *itemUnit = self.itemUnits[row];
-        return itemUnit.unitTitle;
-    }else {
-        return @"新建...";
-    }
-   
+    SWItemUnit *itemUnit = self.itemUnits[row];
+    return itemUnit.unitTitle;
 }
 
 - (void)SWPickerView:(SWPickerView *_Nonnull)pickerView didClickOKForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (row < self.itemUnits.count) {
-        self.curItemUnit = self.itemUnits[row];
-        self.shoppingItem.itemUnit = self.curItemUnit;
-        [self.shoppingItemTableView reloadData];
-    }else { // 添加新的单位
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"新建单位" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-            textField.placeholder = @"商品单位";
-        }];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UITextField *textField = alertController.textFields[0];
-            if (![textField.text isEqualToString:@""]) {
-                NSString *unitStr = textField.text;
-                BOOL unitExisted = NO;
-                SWItemUnit *selectUnit = nil;
-                for (SWItemUnit *itemUnit in self.itemUnits) {
-                    if ([itemUnit.unitTitle isEqualToString:unitStr]) {
-                        unitExisted = YES;
-                        selectUnit = itemUnit;
-                        break;
-                    }
-                }
-                if (!unitExisted) {
-                    [SWPriceUnitStorage insertPriceUnit:unitStr];
-                    _itemUnits = [SWPriceUnitStorage allPriceUnit];
-                    _curItemUnit = [_itemUnits lastObject];
-                    self.shoppingItem.itemUnit = self.curItemUnit;
-                    [self.shoppingItemTableView reloadData];
-                }else {
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"商品单位已存在!" preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        
-                    }];
-                    [alertController addAction:okAction];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                    
-                    _curItemUnit = [_itemUnits lastObject];
-                    self.shoppingItem.itemUnit = self.curItemUnit;
-                    [self.shoppingItemTableView reloadData];
-                }
-            }
-        }];
-        [alertController addAction:cancelAction];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-   
+    self.curItemUnit = self.itemUnits[row];
+    self.shoppingItem.itemUnit = self.curItemUnit;
+    [self.shoppingItemTableView reloadData];
 }
 
 #pragma mark - UI Response
@@ -380,7 +330,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
         return;
     }
     
-    
+    self.shoppingItem.itemUnit = self.curItemUnit;
     [SWProductItemStorage insertProductItem:self.shoppingItem toMarket:self.marketItem];
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -14,6 +14,7 @@
 @property(nonatomic, strong) UILabel *titleLab;
 @property(nonatomic, strong) UIButton *modifyBtn;
 @property(nonatomic, strong) UIButton *delBtn;
+@property(nonatomic, strong) SWItemUnit *itemUnit;
 @end
 
 @implementation SWProductUnitCell
@@ -22,6 +23,11 @@
         [self commonInit];
     }
     return self;
+}
+
+- (void)setModel:(SWItemUnit *)itemUnit {
+    _itemUnit = itemUnit;
+    _titleLab.text = itemUnit.unitTitle;
 }
 
 #pragma mark - CommonInit
@@ -38,6 +44,7 @@
     }];
     
     _delBtn = [[UIButton alloc] init];
+    [_delBtn addTarget:self action:@selector(deleteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _delBtn.titleLabel.font = SW_DEFAULT_FONT;
     [_delBtn setTitleColor:SW_WARN_RED forState:UIControlStateNormal];
     [_delBtn setTitle:@"删除" forState:UIControlStateNormal];
@@ -49,6 +56,7 @@
     }];
     
     _modifyBtn = [[UIButton alloc] init];
+    [_modifyBtn addTarget:self action:@selector(updateBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _modifyBtn.titleLabel.font = SW_DEFAULT_FONT;
     [_modifyBtn setTitleColor:SW_MAIN_BLUE_COLOR forState:UIControlStateNormal];
     [_modifyBtn setTitle:@"编辑" forState:UIControlStateNormal];
@@ -58,5 +66,18 @@
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.height.equalTo(@60);
     }];
+}
+
+#pragma mark - UI response
+- (void)updateBtnClicked:(UIButton *)btn {
+    if (_unitUpdateBlock) {
+        _unitUpdateBlock(self.itemUnit);
+    }
+}
+
+- (void)deleteBtnClicked:(UIButton *)btn {
+    if (_unitDeleteBlock) {
+        _unitDeleteBlock(self.itemUnit);
+    }
 }
 @end

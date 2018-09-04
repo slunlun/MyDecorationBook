@@ -43,16 +43,24 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
-        // 添加测试数据 商品的单位
-        [SWPriceUnitStorage insertPriceUnit:@"块"];
-        [SWPriceUnitStorage insertPriceUnit:@"张"];
-        [SWPriceUnitStorage insertPriceUnit:@"个"];
-        [SWPriceUnitStorage insertPriceUnit:@"平"];
-        [SWPriceUnitStorage insertPriceUnit:@"米"];
+        // 添加初始数据 商品的单位
+        SWItemUnit *gUnit = [[SWItemUnit alloc] initWithUnit:@"个"];
+        SWItemUnit *kUnit = [[SWItemUnit alloc] initWithUnit:@"块"];
+        SWItemUnit *pUnit = [[SWItemUnit alloc] initWithUnit:@"平"];
+        SWItemUnit *mUnit = [[SWItemUnit alloc] initWithUnit:@"米"];
+        SWItemUnit *zUnit = [[SWItemUnit alloc] initWithUnit:@"张"];
+        SWItemUnit *bUnit = [[SWItemUnit alloc] initWithUnit:@"把"];
+        
+        [SWPriceUnitStorage insertPriceUnit:gUnit];
+        [SWPriceUnitStorage insertPriceUnit:kUnit];
+        [SWPriceUnitStorage insertPriceUnit:pUnit];
+        [SWPriceUnitStorage insertPriceUnit:mUnit];
+        [SWPriceUnitStorage insertPriceUnit:zUnit];
+        [SWPriceUnitStorage insertPriceUnit:bUnit];
     
-        // 添加测试数据 MarketCategory
+        // 添加初始数据 MarketCategory
         SWMarketCategory *cat1 = [[SWMarketCategory alloc] initWithCategoryName:@"瓷砖"];
-        SWMarketCategory *cat2 = [[SWMarketCategory alloc] initWithCategoryName:@"柜门"];
+        SWMarketCategory *cat2 = [[SWMarketCategory alloc] initWithCategoryName:@"橱柜"];
         SWMarketCategory *cat3 = [[SWMarketCategory alloc] initWithCategoryName:@"家具"];
         SWMarketCategory *cat4 = [[SWMarketCategory alloc] initWithCategoryName:@"石材"];
         SWMarketCategory *cat5 = [[SWMarketCategory alloc] initWithCategoryName:@"五金"];

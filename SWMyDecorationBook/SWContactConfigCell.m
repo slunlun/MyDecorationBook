@@ -33,7 +33,7 @@
     _titleLab = [[UILabel alloc] init];
     _titleLab.font = SW_DEFAULT_FONT_LARGE;
     _titleLab.textColor = SW_TAOBAO_BLACK;
-    _titleLab.text = @"同步到系统通信录";
+    _titleLab.text = @"创建时同步到系统通信录";
     [self.contentView addSubview:_titleLab];
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);

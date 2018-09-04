@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SWPriceUnit+CoreDataClass.h"
 
-@interface SWItemUnit : NSObject
+@interface SWItemUnit : NSObject<NSCopying>
 - (instancetype)initWithMO:(SWPriceUnit *)priceUnit;
+- (instancetype)initWithUnit:(NSString *)unit;
 @property(nonatomic, strong) NSString *unitTitle;
+@property(nonatomic, readonly, strong) NSString *itemID;
+@property(nonatomic, assign) BOOL shopItemAssociated;
 @end

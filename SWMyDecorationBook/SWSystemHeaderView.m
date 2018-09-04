@@ -57,7 +57,7 @@
     
     _totalCostLab = [[UILabel alloc] init];
     _totalCostLab.font = SW_DEFAULT_FONT_LARGE_BOLD;
-    _totalCostLab.text = @"总支出:￥9999";
+    _totalCostLab.text = @"总支出: ￥9999";
     _totalCostLab.textColor = SW_DISABLE_GRAY;
     [self addSubview:_totalCostLab];
     [_totalCostLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,7 +67,7 @@
     
     _budgetLab = [[UILabel alloc] init];
     _budgetLab.font = SW_DEFAULT_FONT_LARGE_BOLD;
-    _budgetLab.text = @"预   算:￥9999999";
+    _budgetLab.text = @"预   算: ￥9999999";
     _budgetLab.textColor = SW_DISABLE_GRAY;
     [self addSubview:_budgetLab];
     [_budgetLab mas_makeConstraints:^(MASConstraintMaker *make) {

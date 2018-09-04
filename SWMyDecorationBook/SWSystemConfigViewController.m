@@ -39,7 +39,9 @@
     
     self.syncContactOn = [[NSUserDefaults standardUserDefaults] boolForKey:SW_SYNC_CONTACT_TO_SYS_KEY];
     self.totalBudget = [[NSUserDefaults standardUserDefaults] objectForKey:SW_BUDGET_KEY];
-    
+    if (self.totalBudget == nil) {
+        self.totalBudget = @"0.00";
+    }
     self.storedItemUnitArray = [NSMutableArray arrayWithArray:[SWPriceUnitStorage allPriceUnit]];
     [self commonInit];
 }

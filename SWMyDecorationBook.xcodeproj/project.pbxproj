@@ -107,6 +107,7 @@
 		B00CDEBB213402A200533EF6 /* SWMarketCategoryRemovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEBA213402A200533EF6 /* SWMarketCategoryRemovedView.m */; };
 		B00CDEC1213545A900533EF6 /* SWUnreadOrderInfoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEC0213545A900533EF6 /* SWUnreadOrderInfoStorage.m */; };
 		B00CDEC4213642A000533EF6 /* SWCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEC3213642A000533EF6 /* SWCommonUtils.m */; };
+		B00E6C10213FD37000C23CF7 /* liblibxlsxwriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B00E6C0F213FD37000C23CF7 /* liblibxlsxwriter.a */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
 		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
@@ -131,7 +132,6 @@
 		B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A632114060E003B253A /* SWNotebookPieChartView.m */; };
 		B0C34A6721140621003B253A /* SWNotebookBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C34A6621140621003B253A /* SWNotebookBarChartView.m */; };
 		B0D5B56A211BE19300B92123 /* SWOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D5B569211BE19300B92123 /* SWOrderDetailTableViewCell.m */; };
-		B0E2535C2136A97E00DE0B5F /* liblibxlsxwriter_merge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */; };
 		B0E2535F2138DFBA00DE0B5F /* SWOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E2535E2138DFBA00DE0B5F /* SWOrderSummaryViewController.m */; };
 		B0E253612138E0C900DE0B5F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */; };
 		B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E253622138E5C000DE0B5F /* Contacts.framework */; };
@@ -356,6 +356,7 @@
 		B00CDEC0213545A900533EF6 /* SWUnreadOrderInfoStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWUnreadOrderInfoStorage.m; sourceTree = "<group>"; };
 		B00CDEC2213642A000533EF6 /* SWCommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCommonUtils.h; sourceTree = "<group>"; };
 		B00CDEC3213642A000533EF6 /* SWCommonUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCommonUtils.m; sourceTree = "<group>"; };
+		B00E6C0F213FD37000C23CF7 /* liblibxlsxwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblibxlsxwriter.a; sourceTree = "<group>"; };
 		B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailViewController.h; sourceTree = "<group>"; };
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
@@ -429,7 +430,6 @@
 		B0E253582136A96600DE0B5F /* workbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workbook.h; sourceTree = "<group>"; };
 		B0E253592136A96700DE0B5F /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		B0E2535A2136A96700DE0B5F /* relationships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = relationships.h; sourceTree = "<group>"; };
-		B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblibxlsxwriter_merge.a; sourceTree = "<group>"; };
 		B0E2535D2138DFBA00DE0B5F /* SWOrderSummaryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderSummaryViewController.h; sourceTree = "<group>"; };
 		B0E2535E2138DFBA00DE0B5F /* SWOrderSummaryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderSummaryViewController.m; sourceTree = "<group>"; };
 		B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -457,8 +457,8 @@
 			files = (
 				B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */,
 				B0E253612138E0C900DE0B5F /* MobileCoreServices.framework in Frameworks */,
-				B0E2535C2136A97E00DE0B5F /* liblibxlsxwriter_merge.a in Frameworks */,
 				5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */,
+				B00E6C10213FD37000C23CF7 /* liblibxlsxwriter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,9 +619,9 @@
 		5E6A9F1E2011E151009B2038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B00E6C0F213FD37000C23CF7 /* liblibxlsxwriter.a */,
 				B0E253622138E5C000DE0B5F /* Contacts.framework */,
 				B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */,
-				B0E2535B2136A97E00DE0B5F /* liblibxlsxwriter_merge.a */,
 				5E6A9F1F2011E152009B2038 /* CoreData.framework */,
 			);
 			name = Frameworks;

@@ -368,7 +368,9 @@ CGFloat const SWDrawerOvershootLinearRangePercentage = 0.75f;
 
 - (void)closeDrawerAnimated:(BOOL)animated velocity:(CGFloat)velocity animationOperations:(UIViewAnimationOptions) operations completion:(void(^)(BOOL finished)) completion {
     if (self.isAnimatingDrawer) {
-        completion(NO);
+        if (completion) {
+            completion(NO);
+        }
         return;
     }
     

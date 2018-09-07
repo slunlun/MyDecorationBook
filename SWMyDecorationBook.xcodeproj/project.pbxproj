@@ -108,6 +108,7 @@
 		B00CDEC1213545A900533EF6 /* SWUnreadOrderInfoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEC0213545A900533EF6 /* SWUnreadOrderInfoStorage.m */; };
 		B00CDEC4213642A000533EF6 /* SWCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEC3213642A000533EF6 /* SWCommonUtils.m */; };
 		B00E6C14213FD8F400C23CF7 /* liblibxlsxwriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B00E6C13213FD8F400C23CF7 /* liblibxlsxwriter.a */; };
+		B00E6C4C21420FC400C23CF7 /* UIImage+SWImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B00E6C4B21420FC400C23CF7 /* UIImage+SWImageExt.m */; };
 		B0181E77211D2FB2009071CC /* SWOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */; };
 		B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E79211D3543009071CC /* SWOrderTotalPriceTableViewCell.m */; };
 		B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0181E82211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m */; };
@@ -357,6 +358,8 @@
 		B00CDEC2213642A000533EF6 /* SWCommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCommonUtils.h; sourceTree = "<group>"; };
 		B00CDEC3213642A000533EF6 /* SWCommonUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWCommonUtils.m; sourceTree = "<group>"; };
 		B00E6C13213FD8F400C23CF7 /* liblibxlsxwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblibxlsxwriter.a; sourceTree = "<group>"; };
+		B00E6C4A21420FC400C23CF7 /* UIImage+SWImageExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+SWImageExt.h"; path = "Category/UIImage+SWImageExt.h"; sourceTree = "<group>"; };
+		B00E6C4B21420FC400C23CF7 /* UIImage+SWImageExt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+SWImageExt.m"; path = "Category/UIImage+SWImageExt.m"; sourceTree = "<group>"; };
 		B0181E75211D2FB2009071CC /* SWOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderDetailViewController.h; sourceTree = "<group>"; };
 		B0181E76211D2FB2009071CC /* SWOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderDetailViewController.m; sourceTree = "<group>"; };
 		B0181E78211D3543009071CC /* SWOrderTotalPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrderTotalPriceTableViewCell.h; sourceTree = "<group>"; };
@@ -612,6 +615,8 @@
 				5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */,
 				B0F64288211A896400F3F38E /* NSDate+SWDateExt.h */,
 				B0F64289211A896400F3F38E /* NSDate+SWDateExt.m */,
+				B00E6C4A21420FC400C23CF7 /* UIImage+SWImageExt.h */,
+				B00E6C4B21420FC400C23CF7 /* UIImage+SWImageExt.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1144,6 +1149,7 @@
 				B0A73FAA2089C6BA00BCAB2F /* SWAddSubView.m in Sources */,
 				B0F64284211A839900F3F38E /* SWOrderListinCategoryViewController.m in Sources */,
 				5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */,
+				B00E6C4C21420FC400C23CF7 /* UIImage+SWImageExt.m in Sources */,
 				5E9C2CE12004AB210052A05E /* TZPhotoPreviewCell.m in Sources */,
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
 				5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */,

@@ -13,6 +13,7 @@
 #import "SWMarketCategoryStorage.h"
 #import "MagicalRecord.h"
 #import "SWMarketCategoryViewController.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
 
 @interface AppDelegate ()
 
@@ -88,9 +89,18 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window setRootViewController:_drawerVC];
     [self.window makeKeyAndVisible];
+    
+    // 监听数据库的变换
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(rootContextDidSave:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:[NSManagedObjectContext MR_rootSavingContext]];
     return YES;
 }
 
+- (void)rootContextDidSave:(NSNotification *)notification {
+    NSLog(@"Update");
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -9,6 +9,7 @@
 #import "SWProductItem.h"
 #import "SWDef.h"
 #import "SWPriceUnitStorage.h"
+#import "SWShoppingItemOrder+CoreDataClass.h"
 
 @implementation SWProductItem
 //@property(nonatomic, strong) NSString *itemID;
@@ -49,6 +50,11 @@
         }
         _createTime = shoppingItem.createTime;
         _itemUnit = [[SWItemUnit alloc] initWithMO:shoppingItem.itemUnit];
+        
+        // 订单信息
+        if (shoppingItem.ownnerOrder) {
+            _ownnerOrderID = shoppingItem.ownnerOrder.itemID;
+        }
     }
     return self;
 }

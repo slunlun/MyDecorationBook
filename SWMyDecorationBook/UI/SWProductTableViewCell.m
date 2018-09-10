@@ -14,6 +14,7 @@
 #import "SWUIDef.h"
 #import "HexColor.h"
 #import "SWDef.h"
+#import "SWCommonUtils.h"
 
 @interface SWProductTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource, CAAnimationDelegate>
 @property(nonatomic, strong) UILabel *productNameLabel;
@@ -198,13 +199,14 @@
         NSString *cellIdentity = @"SWProductCollectionViewCell";
         SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
         SWProductPhoto *productPhoto = self.productItem.productPhotos[indexPath.row];
-        cell.model = productPhoto.photo;
+        cell.model = productPhoto;
         cell.productImage.contentMode = UIViewContentModeScaleToFill;
         return cell;
     }else {
         NSString *cellIdentity = @"SWProductCollectionViewCell";
         SWProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentity forIndexPath:indexPath];
-        cell.model = [UIImage imageNamed:@"Scan"];
+        SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:[UIImage imageNamed:@"Scan"]];
+        cell.model = productPhoto;
         cell.productImage.contentMode = UIViewContentModeCenter;
         return cell;
     }
@@ -237,14 +239,8 @@
 }
 
 - (void)buyBtnClickCallBack:(UIButton *)button {
-    if (self.productItem.isChoosed) {
-        if ([self.delegate respondsToSelector:@selector(productTableViewCell:didUnBuyProduct:)]) {
-            [self.delegate productTableViewCell:self didUnBuyProduct:self.productItem];
-        }
-    }else {
-        if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickBuyProduct:)]) {
-            [self.delegate productTableViewCell:self didClickBuyProduct:self.productItem];
-        }
+    if ([self.delegate respondsToSelector:@selector(productTableViewCell:didClickBuyProduct:)]) {
+        [self.delegate productTableViewCell:self didClickBuyProduct:self.productItem];
     }
 }
 
@@ -255,7 +251,8 @@
 }
 
 - (void)enlargeCell:(SWProductCollectionViewCell *)cell {
-    UIImageView *animationView = [[UIImageView alloc] initWithImage:cell.productImage.image];
+    UIImage *productImage = [UIImage imageWithData:[SWCommonUtils getFileFromDocument:cell.model.itemID]];
+    UIImageView *animationView = [[UIImageView alloc] initWithImage:productImage];
     cell.productImage.image = nil;
     self.selectedCell = cell;
     animationView.userInteractionEnabled = YES;
@@ -308,7 +305,7 @@
                 animationView.frame = self.originalFrame;
             } completion:^(BOOL finished) {
                 [animationView removeFromSuperview];
-                self.selectedCell.productImage.image = animationView.image;
+                self.selectedCell.productImage.image = self.selectedCell.model.photo;
                 [self.coverView removeFromSuperview];
                 self.selectedCell = nil;
                 self.coverView = nil;

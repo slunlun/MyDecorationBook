@@ -223,7 +223,7 @@
             }else {
                 photoArray = [[NSMutableArray alloc] init];
                 for (SWProductPhoto *photo in self.orderInfo.productItem.productPhotos) {
-                    [photoArray addObject:photo.photo];
+                    [photoArray addObject:photo];
                 }
             }
             ((SWOrderInfoPhotoTableViewCell *)cell).photos = photoArray;

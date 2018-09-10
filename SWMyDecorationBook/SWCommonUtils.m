@@ -66,4 +66,26 @@
     return [[fullpath pathExtension] lowercaseString];
     
 }
+
++ (void)saveFile:(NSData *)fileData toDocumentFolder:(NSString *)fileName {
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
+    [[NSFileManager defaultManager] createFileAtPath:filePath contents:fileData attributes:nil];
+}
+
++ (NSData *)getFileFromDocument:(NSString *)fileName {
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    return data;
+}
+
++ (void)removeFileFromDocument:(NSString *)fileName {
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+    
+    NSAssert(error == nil, @"WTK");
+}
 @end

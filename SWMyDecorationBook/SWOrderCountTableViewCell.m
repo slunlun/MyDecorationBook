@@ -58,6 +58,10 @@
     [self.addSubView updateCountNum:self.orderInfo.itemCount];
 }
 
+- (void)updateOrderCount:(CGFloat)orderCount {
+    [self.addSubView updateCountNum:orderCount];
+}
+
 #pragma mark - SWAddSubViewDelegate
 - (void)SWAddSubView:(SWAddSubView *)addSubView didUpdateCount:(CGFloat)count {
     if (self.orderCountUpdateBlock) {

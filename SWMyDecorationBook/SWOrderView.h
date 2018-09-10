@@ -13,6 +13,8 @@
 @protocol SWOrderViewDelegate<NSObject>
 - (void)SWOrderView:(SWOrderView *)orderView didOrderItem:(SWOrder *)productOrder;
 - (void)SWOrderView:(SWOrderView *)orderView cancelOrderItem:(SWProductItem *)product;
+- (void)SWOrderView:(SWOrderView *)orderView didDelOrder:(SWProductItem *)product;
+- (void)SWOrderView:(SWOrderView *)orderView didUpdateOrder:(SWOrder *)product;
 @end
 
 @interface SWOrderView : UIView

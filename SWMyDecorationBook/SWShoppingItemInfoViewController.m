@@ -20,6 +20,8 @@
 #import "TZImagePickerController.h"
 #import "SWPriceUnitStorage.h"
 #import "SWPickerView.h"
+#import "UIImage+SWImageExt.h"
+#import "SWCommonUtils.h"
 
 static NSString *PHOTO_CELL_IDENTIFY = @"PHOTO_CELL_IDENTIFY";
 static NSString *PRICE_CELL_IDENTIFY = @"PRICE_CELL_IDENTIFY";
@@ -230,7 +232,7 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
             if (self.shoppingItem.productPhotos) {
                 NSMutableArray *photos = [[NSMutableArray alloc] init];
                 for (SWProductPhoto *productPhtot in self.shoppingItem.productPhotos) {
-                    [photos addObject:productPhtot.photo];
+                    [photos addObject:productPhtot];
                 }
                 ((SWShoppingItemPhotoCell *)cell).photos = photos;
             }
@@ -345,8 +347,14 @@ static NSString *NAME_CELL_IDENTIFY = @"NAME_CELL_IDENTIFY";
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         StrongObj(self);
         for (UIImage *photo in photos) {
-            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:photo];
+            UIImage *compressImg = [photo scaleImagetoSize:CGSizeMake(140, 140)];
+            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:compressImg];
             [self.shoppingItem.productPhotos addObject:productPhoto];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 将原始图片存储在本地
+                NSData *imageData = UIImagePNGRepresentation(photo);
+                [SWCommonUtils saveFile:imageData toDocumentFolder:productPhoto.itemID];
+            });
         }
         
         [self.shoppingItemTableView reloadData];

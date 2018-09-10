@@ -12,7 +12,9 @@
 @interface SWProductOrderStorage : NSObject
 + (void)insertNewProductOrder:(SWOrder *)newOrder;
 + (void)removeProductOrder:(SWOrder *)order;
++ (void)removeProductOrderByOrderItemID:(NSString *)itemID;
 + (void)removeProductOrderByProduct:(SWProductItem *)productItem;
 + (void)updateProductOrder:(SWOrder *)order;
++ (SWOrder *)productOrderByOrderID:(NSString *)orderID;
 + (NSArray<SWOrder *>*)allProductOrders;
 @end

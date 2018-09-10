@@ -15,6 +15,7 @@
 #import "SWShoppingItemRemarkCell.h"
 #import "SWOrderRemarkTableViewCell.h"
 #import "UITextField+OKToolBar.h"
+#import "SWProductOrderStorage.h"
 
 static NSString *SW_ORDER_COUNT_CELL_IDENTITY = @"SW_ORDER_COUNT_CELL_IDENTITY";
 static NSString *SW_PRODUCT_INFO_CELL_IDENTITY = @"SW_PRODUCT_INFO_CELL_IDENTITY";
@@ -24,19 +25,30 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
 @interface SWOrderView()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property(nonatomic, strong) UIButton *cancelBtn;
 @property(nonatomic, strong) UIButton *okBtn;
+@property(nonatomic, strong) UIButton *delOrderBtn;
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, strong) UITableView *orderInfoTableView;
 @property(nonatomic, assign) CGFloat orderCount;
 @property(nonatomic, strong) NSString *orderRemark;
 @property(nonatomic, strong) UITextField *txtFTotalPrice;
 @property(nonatomic, strong) UIView *bottomView;
+
+@property(nonatomic, strong) SWOrder *productOrder;
 @end
 
 @implementation SWOrderView
 - (instancetype)initWithProductItem:(SWProductItem *)productItem {
     if (self = [super init]) {
         _model = productItem;
-        _orderCount = 1;
+        if (_model.ownnerOrderID) { // 该商品已经被订购，则初始化订单信息
+            _productOrder = [SWProductOrderStorage productOrderByOrderID:_model.ownnerOrderID];
+        }
+        if (_productOrder) {
+            _orderCount = _productOrder.itemCount;
+        }else {
+            _orderCount = 1;
+        }
+        
         [self registerNotification];
         [self commonInit];
     }
@@ -99,6 +111,25 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     self.layer.masksToBounds = YES;
     self.backgroundColor = [UIColor whiteColor];
     
+    
+    _delOrderBtn = [[UIButton alloc] init];
+    [_delOrderBtn setTitleColor:SW_WARN_RED forState:UIControlStateNormal];
+    [_delOrderBtn setTitle:@"删 除" forState:UIControlStateNormal];
+    _delOrderBtn.titleLabel.font = SW_DEFAULT_FONT;
+    [_delOrderBtn addTarget:self action:@selector(delOrderBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_delOrderBtn];
+    [_delOrderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0.2 * SW_MARGIN);
+        make.right.equalTo(self).offset(-0.2 * SW_MARGIN);
+        make.height.width.equalTo(@50);
+    }];
+    
+    if (!self.productOrder) {
+        _delOrderBtn.hidden = YES;
+    }else {
+        _delOrderBtn.hidden = NO;
+    }
+    
     _cancelBtn = [[UIButton alloc] init];
     _cancelBtn.imageView.contentMode = UIViewContentModeCenter;
     [_cancelBtn setImage:[UIImage imageNamed:@"RoundCancel"] forState:UIControlStateNormal];
@@ -106,7 +137,7 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     [self addSubview:_cancelBtn];
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0.2 * SW_MARGIN);
-        make.right.equalTo(self).offset(-0.2 * SW_MARGIN);
+        make.left.equalTo(self).offset(0.2 * SW_MARGIN);
         make.height.width.equalTo(@50);
     }];
     
@@ -155,7 +186,12 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     _txtFTotalPrice.backgroundColor = SW_DISABLIE_THIN_WHITE;
     _txtFTotalPrice.keyboardType = UIKeyboardTypeDecimalPad;
     _txtFTotalPrice.delegate = self;
-    _txtFTotalPrice.text = [NSString stringWithFormat:@"%.2lf", self.model.price];
+    if (self.productOrder) {
+        _txtFTotalPrice.text = [NSString stringWithFormat:@"%.2lf", self.productOrder.orderTotalPrice];
+    }else {
+        _txtFTotalPrice.text = [NSString stringWithFormat:@"%.2lf", self.model.price];
+    }
+    
     [_txtFTotalPrice addOKToolBar];
     [_bottomView addSubview:_txtFTotalPrice];
     [_txtFTotalPrice mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -194,22 +230,62 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     [self dismissOrderView];
 }
 
+- (void)delOrderBtnClicked:(UIButton *)delOrderBtn {
+    [self dismissOrderView];
+    if ([self.delegate respondsToSelector:@selector(SWOrderView:didDelOrder:)]) {
+        [self.delegate SWOrderView:self didDelOrder:self.model];
+    }
+}
+
 - (void)okBtnClicked:(UIButton *)okBtn {
     if (self.orderCount > 0) {
-        // 产生一份新的订单
-        SWOrder *newOrder = [[SWOrder alloc] init];
-        newOrder.productItem = self.model;
-        newOrder.itemCount = self.orderCount;
-        newOrder.orderTotalPrice = self.txtFTotalPrice.text.floatValue;
-        newOrder.orderRemark = self.orderRemark;
+        if (self.productOrder) {
+            // 更新订单信息
+            BOOL anyChange = NO;
+            if (![self.productOrder.orderRemark isEqualToString:self.orderRemark]) {
+                anyChange = YES;
+                self.productOrder.orderRemark = self.orderRemark;
+            }
+            
+            if (self.productOrder.orderTotalPrice != self.txtFTotalPrice.text.floatValue) {
+                anyChange = YES;
+                self.productOrder.orderTotalPrice = self.txtFTotalPrice.text.floatValue;
+            }
+            
+            if (self.productOrder.itemCount != self.orderCount) {
+                anyChange = YES;
+                self.productOrder.itemCount = self.orderCount;
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(SWOrderView:didUpdateOrder:)]) {
+                [self.delegate SWOrderView:self didUpdateOrder:self.productOrder];
+            }
+            
+            
+        }else {
+            // 产生一份新的订单
+            SWOrder *newOrder = [[SWOrder alloc] init];
+            newOrder.productItem = self.model;
+            newOrder.itemCount = self.orderCount;
+            newOrder.orderTotalPrice = self.txtFTotalPrice.text.floatValue;
+            newOrder.orderRemark = self.orderRemark;
+            
+            if ([self.delegate respondsToSelector:@selector(SWOrderView:didOrderItem:)]) {
+                [self.delegate SWOrderView:self didOrderItem:newOrder];
+            }
+        }
         
-        if ([self.delegate respondsToSelector:@selector(SWOrderView:didOrderItem:)]) {
-            [self.delegate SWOrderView:self didOrderItem:newOrder];
-        }
     }else {
-        if ([self.delegate respondsToSelector:@selector(SWOrderView:cancelOrderItem:)]) {
-            [self.delegate SWOrderView:self cancelOrderItem:self.model];
+        if (self.productOrder) { // 当前已经有订单，但是订单数量修改为了0， 默认为删除操作
+            if ([self.delegate respondsToSelector:@selector(SWOrderView:didDelOrder:)]) {
+                [self.delegate SWOrderView:self didDelOrder:self.model];
+            }
+        }else {
+            if ([self.delegate respondsToSelector:@selector(SWOrderView:cancelOrderItem:)]) {
+                [self.delegate SWOrderView:self cancelOrderItem:self.model];
+            }
         }
+       
     }
     [self dismissOrderView];
 }
@@ -236,6 +312,9 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     if (indexPath.row == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_COUNT_CELL_IDENTITY];
         WeakObj(self);
+        
+        [((SWOrderCountTableViewCell *)cell) updateOrderCount:self.orderCount];
+        
         ((SWOrderCountTableViewCell *)cell).orderCountUpdateBlock = ^(CGFloat orderCount) {
             StrongObj(self);
             if (self) {
@@ -256,6 +335,9 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     }else if(indexPath.row == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:SW_ORDER_REMARK_CELL_IDENTITY];
         WeakObj(self);
+        if (self.productOrder) {
+            [((SWOrderRemarkTableViewCell *)cell) setOrderRemark:self.productOrder.orderRemark];
+        }
         ((SWOrderRemarkTableViewCell *)cell).remarkChangeBlock = ^(NSString *remark) {
             StrongObj(self);
             if (self) {

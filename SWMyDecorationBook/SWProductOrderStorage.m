@@ -53,6 +53,17 @@
     }];
 }
 
++ (void)removeProductOrderByOrderItemID:(NSString *)itemID {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", itemID];
+        [SWShoppingItemOrder MR_deleteAllMatchingPredicate:predicate inContext:localContext];
+        // 发个消息，通知order信息有变
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];
+        });
+    }];
+}
+
 + (void)removeProductOrderByProduct:(SWProductItem *)productItem {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", productItem.itemID];
@@ -66,6 +77,8 @@
     }];
 }
 
+
+
 + (void)updateProductOrder:(SWOrder *)order {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", order.orderID];
@@ -77,6 +90,18 @@
             shoppingItemOrder.remark = order.orderRemark;
         }
     }];
+}
+
++ (SWOrder *)productOrderByOrderID:(NSString *)orderID {
+    __block SWOrder *order = nil;
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID==%@", orderID];
+        SWShoppingItemOrder *shoppingItemOrder = [SWShoppingItemOrder MR_findFirstWithPredicate:predicate inContext:localContext];
+        if (shoppingItemOrder) {
+            order = [[SWOrder alloc] initWithMO:shoppingItemOrder];
+        }
+    }];
+    return order;
 }
 
 + (NSArray<SWOrder *>*)allProductOrders {

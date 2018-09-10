@@ -52,9 +52,9 @@
 }
 
 #pragma mark - Set/Get/Init
-- (void)setModel:(UIImage *)model {
+- (void)setModel:(SWProductPhoto *)model {
     _model = model;
-    self.productImage.image = _model;
+    self.productImage.image = _model.photo;
 }
 
 - (void)setSupportEdit:(BOOL)supportEdit {

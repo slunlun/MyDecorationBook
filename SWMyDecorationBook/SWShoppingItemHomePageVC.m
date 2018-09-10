@@ -30,6 +30,7 @@
 #import "SWMarketCategoryRemovedView.h"
 #import "SWUnreadOrderInfoStorage.h"
 #import "SWCommonUtils.h"
+#import "UIImage+SWImageExt.h"
 
 @interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
@@ -651,8 +652,14 @@
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         StrongObj(self);
         for (UIImage *photo in photos) {
-            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:photo];
+            UIImage *compressImg = [photo scaleImagetoSize:CGSizeMake(140, 140)];
+            SWProductPhoto *productPhoto = [[SWProductPhoto alloc] initWithImage:compressImg];
             [productItem.productPhotos addObject:productPhoto];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 将原始图片存储在本地
+                NSData *imageData = UIImagePNGRepresentation(photo);
+                [SWCommonUtils saveFile:imageData toDocumentFolder:productPhoto.itemID];
+            });
         }
         [SWProductItemStorage updateProductItem:productItem];
         [self updateDataForMarketCategory:self.curMarketCategory];
@@ -709,6 +716,30 @@
         [self updateDataForMarketCategory:self.curMarketCategory];
         [self performSelector:@selector(postBuyProductNotification:) withObject:productOrder.productItem afterDelay:0.6];
     }
+}
+
+- (void)SWOrderView:(SWOrderView *)orderView didDelOrder:(SWProductItem *)product {
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定将该商品从账单中删除吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [SWProductOrderStorage removeProductOrderByOrderItemID:product.ownnerOrderID];
+        [self updateDataForMarketCategory:self.curMarketCategory];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SW_UNBUY_NOTIFICATION object:nil userInfo:@{SW_NOTIFICATION_PRODUCT_KEY:product}];
+        
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertView addAction:cancleAction];
+    [alertView addAction:okAction];
+    
+    [self presentViewController:alertView animated:YES completion:^{
+        
+    }];
+}
+
+- (void)SWOrderView:(SWOrderView *)orderView didUpdateOrder:(SWOrder *)order {
+    [SWProductOrderStorage updateProductOrder:order];
+    [self updateDataForMarketCategory:self.curMarketCategory];
 }
 
 - (void)postBuyProductNotification:(SWProductItem *)productItem {

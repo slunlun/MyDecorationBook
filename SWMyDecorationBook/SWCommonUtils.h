@@ -14,6 +14,6 @@
 + (NSString *)getExtension:(NSString *)fullpath error:(NSError **)error;
 + (NSString*) getMiMeType:(NSString*)filepath;
 + (void)saveFile:(NSData *)fileData toDocumentFolder:(NSString *)fileName;
-+ (NSData *)getFileFromDocument:(NSString *)fileName;
-+ (void)removeFileFromDocument:(NSString *)fileName;
++ (NSData *)getFileFromDocumentFolder:(NSString *)fileName;
++ (void)removeFileFromDocumentFolder:(NSString *)fileName;
 @end

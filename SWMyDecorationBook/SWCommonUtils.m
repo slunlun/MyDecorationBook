@@ -73,14 +73,14 @@
     [[NSFileManager defaultManager] createFileAtPath:filePath contents:fileData attributes:nil];
 }
 
-+ (NSData *)getFileFromDocument:(NSString *)fileName {
++ (NSData *)getFileFromDocumentFolder:(NSString *)fileName {
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     return data;
 }
 
-+ (void)removeFileFromDocument:(NSString *)fileName {
++ (void)removeFileFromDocumentFolder:(NSString *)fileName {
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
     NSError *error = nil;

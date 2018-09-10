@@ -251,7 +251,7 @@
 }
 
 - (void)enlargeCell:(SWProductCollectionViewCell *)cell {
-    UIImage *productImage = [UIImage imageWithData:[SWCommonUtils getFileFromDocument:cell.model.itemID]];
+    UIImage *productImage = [UIImage imageWithData:[SWCommonUtils getFileFromDocumentFolder:cell.model.itemID]];
     UIImageView *animationView = [[UIImageView alloc] initWithImage:productImage];
     cell.productImage.image = nil;
     self.selectedCell = cell;

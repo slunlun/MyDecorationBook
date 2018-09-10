@@ -14,6 +14,8 @@
 #import "MagicalRecord.h"
 #import "SWMarketCategoryViewController.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "SWShoppingPhoto+CoreDataClass.h"
+#import "SWCommonUtils.h"
 
 @interface AppDelegate ()
 
@@ -99,7 +101,13 @@
 }
 
 - (void)rootContextDidSave:(NSNotification *)notification {
-    NSLog(@"Update");
+    NSSet *delSet = notification.userInfo[@"deleted"];
+    for (NSManagedObject *delObj in delSet) {
+        if ([delObj isKindOfClass:[SWShoppingPhoto class]]) {
+            NSString *itemID = ((SWShoppingPhoto *)delObj).itemID;
+            [SWCommonUtils removeFileFromDocumentFolder:itemID];
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

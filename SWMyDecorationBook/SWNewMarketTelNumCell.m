@@ -54,6 +54,19 @@
         make.width.equalTo(@140);
     }];
     
+    _delBtn = [[UIButton alloc] init];
+    [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_delBtn setTitle:@"删 除" forState:UIControlStateNormal];
+    _delBtn.titleLabel.font = SW_DEFAULT_FONT_BOLD;
+    [_delBtn setTitleColor:SW_WARN_RED forState:UIControlStateNormal];
+    [self.contentView addSubview:_delBtn];
+    [self.delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.rightMargin.equalTo(self.contentView.mas_right).offset(-SW_MARGIN);
+        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
+        make.width.equalTo(@40);
+        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
+    }];
+    
     _defaultTelBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [_defaultTelBtn addTarget:self action:@selector(defaultTelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_defaultTelBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
@@ -68,19 +81,10 @@
         make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
         make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
         make.width.equalTo(@60);
-        make.left.equalTo(_telNumTextField.mas_right);
+        make.rightMargin.equalTo(_delBtn.mas_left).offset(-SW_MARGIN);
     }];
     
-    _delBtn = [[UIButton alloc] init];
-    [_delBtn addTarget:self action:@selector(delBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_delBtn setImage:[UIImage imageNamed:@"DelContact"] forState:UIControlStateNormal];
-    [self.contentView addSubview:_delBtn];
-    [self.delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_defaultTelBtn.mas_right);
-        make.topMargin.equalTo(self.contentView.mas_top).offset(SW_MARGIN);
-        make.width.equalTo(@40);
-        make.bottomMargin.equalTo(self.contentView.mas_bottom).offset(-SW_MARGIN);
-    }];
+   
 }
 
 

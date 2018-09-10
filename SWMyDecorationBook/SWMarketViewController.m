@@ -486,14 +486,37 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         return;
     }
     
-    [SWMarketStorage insertMarket:self.marketItem];
+    
     
 #pragma mark - 将联系人插入到通讯录
     if ([[NSUserDefaults standardUserDefaults] boolForKey:SW_SYNC_CONTACT_TO_SYS_KEY]) {
-        // 将联系人插入到通讯录
-        //初始化通讯录请求
+        CNContactStore * store = [[CNContactStore alloc]init];
         CNSaveRequest * saveRequest = [[CNSaveRequest alloc]init];
+        
+        // 先检查联系人是否已经存在，存在，则更新，防止重复插入
+        NSMutableArray *addedContact = [[NSMutableArray alloc] initWithArray:self.marketItem.telNums];
         for (SWMarketContact *contactPeople in self.marketItem.telNums) {
+            if (contactPeople.contactIdentify) {
+                CNContact *sysContact = [store unifiedContactWithIdentifier:contactPeople.contactIdentify keysToFetch:@[CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactOrganizationNameKey] error:nil];
+                if (sysContact) {
+                    CNMutableContact *updateContact = [sysContact mutableCopy];
+                    //更新名字
+                    updateContact.givenName = contactPeople.name.length > 1?[contactPeople.name substringWithRange:NSMakeRange(1, contactPeople.name.length - 1)]:@"";
+                    //更新姓氏
+                    updateContact.familyName = [contactPeople.name substringWithRange:NSMakeRange(0, 1)];
+                    // 更新号码
+                    updateContact.phoneNumbers = @[[CNLabeledValue labeledValueWithLabel:CNLabelPhoneNumberiPhone value:[CNPhoneNumber phoneNumberWithStringValue:contactPeople.telNum]]];
+                    // 更新公司名称
+                    updateContact.organizationName = self.marketItem.marketName;
+                    [saveRequest updateContact:updateContact];
+                    [addedContact removeObject:contactPeople];
+                }
+            }
+        }
+        
+        // 将新的联系人添加到系统通讯录
+        NSMutableArray *sysContactArray = [[NSMutableArray alloc] init];
+        for (SWMarketContact *contactPeople in addedContact) {
             CNMutableContact * contact = [[CNMutableContact alloc]init];
             //设置名字
             contact.givenName = contactPeople.name.length > 1?[contactPeople.name substringWithRange:NSMakeRange(1, contactPeople.name.length - 1)]:@"";
@@ -503,25 +526,52 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
             contact.phoneNumbers = @[[CNLabeledValue labeledValueWithLabel:CNLabelPhoneNumberiPhone value:[CNPhoneNumber phoneNumberWithStringValue:contactPeople.telNum]]];
             // 公司名称
             contact.organizationName = self.marketItem.marketName;
+            [sysContactArray addObject:contact];
             // 添加请求
             [saveRequest addContact:contact toContainerWithIdentifier:nil];
         }
-        //    写入
-        CNContactStore * store = [[CNContactStore alloc]init];
+        
+        //    写入通讯录
         NSError *error = nil;
         [store executeSaveRequest:saveRequest error:&error];
-        
-        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人已自动同步到系统通信录，您可在系统通讯录中通过姓名或商家名称查找到联系人。同步功能可在系统设置中关闭" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        [alertView addAction:okAction];
-        [self presentViewController:alertView animated:YES completion:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        }];
+        if (error) {
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"同步联系人到系统通信录失败，请在手机“设置”中允许本程序访问通讯录" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+            }];
+            [alertView addAction:okAction];
+            [self presentViewController:alertView animated:YES completion:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // 写数据库
+                    [SWMarketStorage insertMarket:self.marketItem];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }];
+        }else {
+            // 仅当人员真正加入到将系统通讯录后，才将identify添加的telNum中，以备之后查询
+            for (CNContact *contact in sysContactArray) {
+                for (SWMarketContact *marketContact in addedContact) {
+                    marketContact.contactIdentify = contact.identifier;
+                }
+            }
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人已自动同步到系统通信录，您可在系统通讯录中通过姓名或商家名称查找到联系人。同步功能可在系统设置中关闭" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertView addAction:okAction];
+            [self presentViewController:alertView animated:YES completion:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // 写数据库
+                    [SWMarketStorage insertMarket:self.marketItem];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }];
+        }
+       
     }else {
+        
+        // 写数据库
+        [SWMarketStorage insertMarket:self.marketItem];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

@@ -28,11 +28,12 @@
     _priceTotalLab= [[UILabel alloc] init];
     _priceTotalLab.font = SW_DEFAULT_FONT;
     _priceTotalLab.textColor = SW_TAOBAO_BLACK;
-    _priceTotalLab.textAlignment = NSTextAlignmentRight;
+    _priceTotalLab.textAlignment = NSTextAlignmentLeft;
     _priceTotalLab.text = @"合计金额: ￥";
     [self.contentView addSubview:_priceTotalLab];
     [_priceTotalLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.contentView);
+        make.leftMargin.equalTo(self.contentView.mas_left).offset(SW_CELL_LEFT_MARGIN);
+        make.top.bottom.equalTo(self.contentView);
         make.width.equalTo(self.contentView).multipliedBy(0.33);
     }];
     

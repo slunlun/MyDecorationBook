@@ -68,6 +68,7 @@
             newShopContact.name = marketContact.name;
             newShopContact.telNum = marketContact.telNum;
             newShopContact.shop = newShop;
+            newShopContact.contactIdentify = marketContact.contactIdentify;
             [newShop addShopContactsObject:newShopContact];
             
         }

@@ -14,6 +14,7 @@
         <relationship name="shopItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SWShoppingItem" inverseName="shop" inverseEntity="SWShoppingItem" syncable="YES"/>
     </entity>
     <entity name="SWShopContact" representedClassName="SWShopContact" syncable="YES" codeGenerationType="class">
+        <attribute name="contactIdentify" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isDefaultContact" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemID" attributeType="String" syncable="YES"/>
@@ -61,7 +62,7 @@
     <elements>
         <element name="SWPriceUnit" positionX="-531" positionY="-18" width="128" height="90"/>
         <element name="SWShop" positionX="-126" positionY="-171" width="128" height="133"/>
-        <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="135"/>
+        <element name="SWShopContact" positionX="45" positionY="-270" width="128" height="150"/>
         <element name="SWShoppingCategory" positionX="160" positionY="-81" width="128" height="120"/>
         <element name="SWShoppingItem" positionX="-308" positionY="-144" width="128" height="178"/>
         <element name="SWShoppingItemOrder" positionX="-342" positionY="128" width="128" height="148"/>

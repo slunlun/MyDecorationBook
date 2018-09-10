@@ -11,6 +11,7 @@
 
 @interface SWMarketContact : NSObject
 - (instancetype)initWithMO:(SWShopContact *)contact;
+@property(nonatomic, strong) NSString *contactIdentify; // 系统通信录的identify
 @property(nonatomic, strong) NSString *itemID;
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *telNum;

@@ -42,7 +42,7 @@
 @property(nonatomic, strong) SWMarketCategory *curMarketCategory;
 @property(nonatomic, strong) SWEmptyMarketView *emptyMarketView;
 @property(nonatomic, strong) SWMarketCategoryRemovedView *marketCategoryEmptyView;
-@property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入账本的动画
+@property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入清单的动画
 @property(nonatomic, strong) UISearchController *searchVC;
 @end
 
@@ -586,7 +586,7 @@
 }
 
 - (void)productTableViewCell:(SWProductTableViewCell *)cell didClickDelProduct:(SWProductItem *)productItem {
-    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗? 该商品同样会在账本中删除!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"确定要删除该商品吗? 该商品同样会在清单中删除!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [SWProductItemStorage removeProductItem:productItem];
         [self updateDataForMarketCategory:self.curMarketCategory];

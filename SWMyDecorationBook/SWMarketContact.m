@@ -27,7 +27,21 @@
         _defaultContact = contact.isDefaultContact;
         _createTime = contact.createTime;
         _itemID = contact.itemID;
+        _contactIdentify = contact.contactIdentify;
     }
     return self;
+}
+
+- (NSUInteger)hash {
+    return [self.itemID hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[SWMarketContact class]]) {
+        if ([((SWMarketContact *)object).itemID isEqualToString:self.itemID]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 @end

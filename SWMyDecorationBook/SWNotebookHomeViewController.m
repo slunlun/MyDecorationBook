@@ -71,7 +71,7 @@
     self.navigationItem.leftBarButtonItem = shoppingItemHomePage;
     //self.navigationItem.rightBarButtonItems = @[shareBtn, orderSummayBtn];
     self.navigationItem.rightBarButtonItem = shareBtn;
-    self.navigationItem.title = @"账本";
+    self.navigationItem.title = @"清单";
     
     // 初始化汇总视图的导航栏
     UIView *guideBarView = [[UIView alloc] init];

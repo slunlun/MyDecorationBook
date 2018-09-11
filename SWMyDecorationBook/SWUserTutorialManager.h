@@ -11,9 +11,11 @@
 
 @interface SWTutorialNode : NSObject
 - (instancetype)initWithPoint:(CGPoint)point radius:(CGFloat)radius text:(NSString *)text;
+- (instancetype)initWithPoint:(CGPoint)point radius:(CGFloat)radius view:(UIView *)view;
 @property(nonatomic, assign) CGPoint spotlightPoint;
 @property(nonatomic, assign) CGFloat spotlightRadius;
 @property(nonatomic, strong) NSString *tutorialText;
+@property(nonatomic, strong) UIView *tutorialView;
 @end
 
 

@@ -17,6 +17,7 @@
 @property(nonatomic, assign) CGPoint spolightPoint;
 @property(nonatomic, assign) CGFloat spolightRadius;
 @property(nonatomic, strong) NSString *spotlightText;
+@property(nonatomic, strong) UIView *spotlingtView;
 @property(nonatomic, weak) id<SWSpotlightViewDelegate> delegate;
 
 - (void)updateSpotlightView;

@@ -92,7 +92,7 @@
     [self.window setRootViewController:_drawerVC];
     [self.window makeKeyAndVisible];
     
-    // 监听数据库的变换
+    // 监听数据库的变化
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(rootContextDidSave:)
                                                  name:NSManagedObjectContextDidSaveNotification

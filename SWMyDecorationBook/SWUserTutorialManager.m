@@ -18,6 +18,15 @@
     }
     return self;
 }
+
+- (instancetype)initWithPoint:(CGPoint)point radius:(CGFloat)radius view:(UIView *)view {
+    if (self = [super init]) {
+        _tutorialView = view;
+        _spotlightPoint = point;
+        _spotlightRadius = radius;
+    }
+    return self;
+}
 @end
 
 @interface SWUserTutorialManager()<SWSpotlightViewDelegate>
@@ -51,6 +60,7 @@
     _spotlightView.spolightPoint = node.spotlightPoint;
     _spotlightView.spolightRadius = node.spotlightRadius;
     _spotlightView.spotlightText = node.tutorialText;
+    _spotlightView.spotlingtView = node.tutorialView;
     [view addSubview:_spotlightView];
     [_spotlightView updateSpotlightView];
 }
@@ -69,6 +79,7 @@
         _spotlightView.spolightPoint = node.spotlightPoint;
         _spotlightView.spolightRadius = node.spotlightRadius;
         _spotlightView.spotlightText = node.tutorialText;
+        _spotlightView.spotlingtView = node.tutorialView;
         [_spotlightView updateSpotlightView];
     }
 }

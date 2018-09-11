@@ -58,22 +58,27 @@
     
     // 测试，添加用户引导view
     UIView *rootView = [UIApplication sharedApplication].delegate.window;
-    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 text:@"使用侧拉菜单可以添加，编辑，删除商品分类"];
+    UIImageView *tV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSideMenu"]];
+    tV.contentMode = UIViewContentModeScaleAspectFit;
+    UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideAddMarket"]];
+    img1.contentMode = UIViewContentModeScaleAspectFit;
+    UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSummary"]];
+    img2.contentMode = UIViewContentModeScaleAspectFit;
+    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 view:tV];
     UIBarButtonItem *addShopBtn = self.navigationItem.rightBarButtonItem;
     
     CGPoint p = CGPointMake(addShopBtn.customView.center.x, addShopBtn.customView.center.y + 20);
     SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil;
     if (@available(iOS 11.0, *)) { // iOS 11 由于引入了navigation bar的autolayout, 在通过center获取位置会不准, 先手动搞一下把
-
         CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
         CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
-        node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 text:@"点击这里在当前分类下添加商家"];
+        node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img1];
         CGPoint p3 = CGPointMake(30, navHegiht - 20);
-        node3 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
+        node3 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 view:img2];
     }else {
-        node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里在当前分类下添加商家"];
+        node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 view:img1];
         p = CGPointMake(_notebookItemBtn.customView.center.x, _notebookItemBtn.customView.center.y + 20);
-        node3 = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"所有选购的商品可以在这里查看账单统计"];
+        node3 = [[SWTutorialNode alloc] initWithPoint:p radius:80 view:img2];
     }
    
     NSArray *nodes = @[node1, node2, node3];

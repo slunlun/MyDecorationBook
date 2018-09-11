@@ -10,7 +10,7 @@
 #define VIEW_ALPHA 0.7
 @interface SWSpotlightView()
 @property(nonatomic, assign) CGFloat radius;
-@property(nonatomic, strong) UILabel *spolightLab;
+@property(nonatomic, strong) UIView *spolightContentView;
 @end
 
 @implementation SWSpotlightView
@@ -18,6 +18,8 @@
     if (self = [super initWithFrame:frame]) {
          [self setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:VIEW_ALPHA]];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundSwipped:)];
+        [self addGestureRecognizer:swipe];
         [self addGestureRecognizer:tap];
     }
     return self;
@@ -29,34 +31,52 @@
     }
 }
 
+- (void)backgroundSwipped:(UISwipeGestureRecognizer *)swipe {
+    if ([self.delegate respondsToSelector:@selector(spotlightViewDidTapped:)]) {
+        [self.delegate spotlightViewDidTapped:self];
+    }
+}
+
 
 - (void)updateSpotlightView {
-    //label
-    UIFont *ft = [UIFont fontWithName:@"Helvetica" size:17.0];
-    CGSize sz =[self.spotlightText boundingRectWithSize:CGSizeMake(250, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:ft} context:nil].size;
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(floorf(self.frame.size.width / 2 - sz.width/2),
-                                                               floorf(self.frame.size.height / 2 - sz.height/2),
-                                                               floorf(sz.width),
-                                                               floorf(sz.height +10
-                                                                      ))];
-    [label setTextColor:[UIColor whiteColor]];
-    
-    
-    
-    [label setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin
-                                | UIViewAutoresizingFlexibleRightMargin
-                                | UIViewAutoresizingFlexibleLeftMargin
-                                | UIViewAutoresizingFlexibleBottomMargin
-                                )];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [label setFont:ft];
-    [label setAdjustsFontSizeToFitWidth:true];
-    [label setText:self.spotlightText];
-    [label setNumberOfLines:0];
-    [_spolightLab removeFromSuperview];
-    _spolightLab = label;
-    [self addSubview:_spolightLab];
+    UIView *contentView = nil;
+    if (self.spotlightText) {
+        UIFont *ft = [UIFont fontWithName:@"Helvetica" size:17.0];
+        CGSize sz =[self.spotlightText boundingRectWithSize:CGSizeMake(250, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:ft} context:nil].size;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(floorf(self.frame.size.width / 2 - sz.width/2),
+                                                                   floorf(self.frame.size.height / 2 - sz.height/2),
+                                                                   floorf(sz.width),
+                                                                   floorf(sz.height +10
+                                                                          ))];
+        [label setTextColor:[UIColor whiteColor]];
+        
+        
+        
+        [label setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin
+                                    | UIViewAutoresizingFlexibleRightMargin
+                                    | UIViewAutoresizingFlexibleLeftMargin
+                                    | UIViewAutoresizingFlexibleBottomMargin
+                                    )];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setFont:ft];
+        [label setAdjustsFontSizeToFitWidth:true];
+        [label setText:self.spotlightText];
+        [label setNumberOfLines:0];
+        contentView = label;
+    }else if(self.spotlingtView){
+        contentView = self.spotlingtView;
+        contentView.frame = self.frame;
+        [contentView setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin
+                                    | UIViewAutoresizingFlexibleRightMargin
+                                    | UIViewAutoresizingFlexibleLeftMargin
+                                    | UIViewAutoresizingFlexibleBottomMargin
+                                    )];
+    }
+   
+    [_spolightContentView removeFromSuperview];
+    _spolightContentView = contentView;
+    [self addSubview:_spolightContentView];
     if(!CGPointEqualToPoint(self.spolightPoint, CGPointZero)) {
         [self setNeedsDisplay];
     }

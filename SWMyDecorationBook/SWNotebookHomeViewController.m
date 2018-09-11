@@ -54,11 +54,17 @@
     
     // 测试，添加用户引导view
     UIView *rootView = [UIApplication sharedApplication].delegate.window;
-    SWTutorialNode *node = nil;
+    UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideBackMarket"]];
+    img1.contentMode = UIViewContentModeScaleAspectFit;
+    UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideShare"]];
+    img2.contentMode = UIViewContentModeScaleAspectFit;
+    
     CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
-    CGPoint p = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
-    node = [[SWTutorialNode alloc] initWithPoint:p radius:80 text:@"点击这里可以自动生成家装清单，并分享给朋友"];
-    NSArray *nodes = @[node];
+    CGPoint p1 = CGPointMake(30, navHegiht - 20);
+    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
+    CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
+    SWTutorialNode *node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img2];
+    NSArray *nodes = @[node1, node2];
     [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
 }
 

@@ -31,6 +31,7 @@
     [marketBtn setImage:[UIImage imageNamed:@"Market"] forState:UIControlStateNormal];
     marketBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     marketBtn.titleLabel.font = SW_DEFAULT_FONT_LARGE;
+    marketBtn.titleLabel.lineBreakMode = NSLineBreakByClipping;
     [marketBtn setTitleColor:SW_TAOBAO_BLACK forState:UIControlStateNormal];
     [marketBtn addTarget:self action:@selector(marketBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     

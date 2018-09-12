@@ -64,24 +64,23 @@
     img1.contentMode = UIViewContentModeScaleAspectFit;
     UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSummary"]];
     img2.contentMode = UIViewContentModeScaleAspectFit;
-    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 view:tV];
-    UIBarButtonItem *addShopBtn = self.navigationItem.rightBarButtonItem;
+    UIImageView *img3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSearch"]];
+    img3.contentMode = UIViewContentModeScaleAspectFit;
     
-    CGPoint p = CGPointMake(addShopBtn.customView.center.x, addShopBtn.customView.center.y + 20);
-    SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil;
-    if (@available(iOS 11.0, *)) { // iOS 11 由于引入了navigation bar的autolayout, 在通过center获取位置会不准, 先手动搞一下把
-        CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
-        CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
-        node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img1];
-        CGPoint p3 = CGPointMake(30, navHegiht - 20);
-        node3 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 view:img2];
-    }else {
-        node2 = [[SWTutorialNode alloc] initWithPoint:p radius:80 view:img1];
-        p = CGPointMake(_notebookItemBtn.customView.center.x, _notebookItemBtn.customView.center.y + 20);
-        node3 = [[SWTutorialNode alloc] initWithPoint:p radius:80 view:img2];
-    }
+    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 view:tV];
+    SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil; SWTutorialNode *node4 = nil;
+    CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+    CGPoint p1 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
+    node2 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
+    
+    CGPoint p2 = CGPointMake(rootView.frame.size.width - 70, navHegiht - 20);
+    node3 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img3];
+    
+    CGPoint p3 = CGPointMake(30, navHegiht - 20);
+    node4 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 view:img2];
+
    
-    NSArray *nodes = @[node1, node2, node3];
+    NSArray *nodes = @[node1, node2, node3, node4];
     [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
     
     // 注册通知

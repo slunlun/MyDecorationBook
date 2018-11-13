@@ -21,6 +21,8 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SWCommonUtils.h"
 #import "SWUserTutorialManager.h"
+#import "SWDef.h"
+
 @interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
 @property(nonatomic, strong) UIView *focusView;
@@ -53,20 +55,24 @@
      [_pieChartView updateSummarizingData];
     self.navigationController.delegate = self; // 在这里设置navigationController.delegate，确保第一次push到本vc时，delegate方法不被调用
     
-    // 测试，添加用户引导view
-    UIView *rootView = [UIApplication sharedApplication].delegate.window;
-    UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideBackMarket"]];
-    img1.contentMode = UIViewContentModeScaleAspectFit;
-    UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideShare"]];
-    img2.contentMode = UIViewContentModeScaleAspectFit;
-    
-    CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
-    CGPoint p1 = CGPointMake(30, navHegiht - 20);
-    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
-    CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
-    SWTutorialNode *node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img2];
-    NSArray *nodes = @[node1, node2];
-    [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:SW_ORDER_INFO_VC_EVER_LOADED_KEY]) {
+        // 测试，添加用户引导view
+        UIView *rootView = [UIApplication sharedApplication].delegate.window;
+        UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideBackMarket"]];
+        img1.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideShare"]];
+        img2.contentMode = UIViewContentModeScaleAspectFit;
+        
+        CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+        CGPoint p1 = CGPointMake(30, navHegiht - 20);
+        SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
+        CGPoint p2 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
+        SWTutorialNode *node2 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img2];
+        NSArray *nodes = @[node1, node2];
+        [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_ORDER_INFO_VC_EVER_LOADED_KEY];
+    }
+   
 }
 
 #pragma mark - Common init

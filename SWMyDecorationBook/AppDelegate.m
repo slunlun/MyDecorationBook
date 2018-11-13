@@ -52,7 +52,7 @@
         SWItemUnit *pUnit = [[SWItemUnit alloc] initWithUnit:@"平"];
         SWItemUnit *mUnit = [[SWItemUnit alloc] initWithUnit:@"米"];
         SWItemUnit *zUnit = [[SWItemUnit alloc] initWithUnit:@"张"];
-        SWItemUnit *bUnit = [[SWItemUnit alloc] initWithUnit:@"把"];
+        SWItemUnit *bUnit = [[SWItemUnit alloc] initWithUnit:@"对"];
         
         [SWPriceUnitStorage insertPriceUnit:gUnit];
         [SWPriceUnitStorage insertPriceUnit:kUnit];

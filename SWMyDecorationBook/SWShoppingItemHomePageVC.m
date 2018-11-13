@@ -56,32 +56,33 @@
     _orderOriginalPoint = CGPointZero;
     
     
-    // 测试，添加用户引导view
-    UIView *rootView = [UIApplication sharedApplication].delegate.window;
-    UIImageView *tV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSideMenu"]];
-    tV.contentMode = UIViewContentModeScaleAspectFit;
-    UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideAddMarket"]];
-    img1.contentMode = UIViewContentModeScaleAspectFit;
-    UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSummary"]];
-    img2.contentMode = UIViewContentModeScaleAspectFit;
-    UIImageView *img3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSearch"]];
-    img3.contentMode = UIViewContentModeScaleAspectFit;
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:SW_MARKET_HOMEPAGE_LOADED_KEY]) {
+        
+        // 测试，添加用户引导view
+        UIView *rootView = [UIApplication sharedApplication].delegate.window;
+        UIImageView *tV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSideMenu"]];
+        tV.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideAddMarket"]];
+        img1.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSummary"]];
+        img2.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView *img3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guideSearch"]];
+        img3.contentMode = UIViewContentModeScaleAspectFit;
+        SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 view:tV];
+        SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil; SWTutorialNode *node4 = nil;
+        CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
+        CGPoint p1 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
+        node2 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
+        CGPoint p2 = CGPointMake(rootView.frame.size.width - 70, navHegiht - 20);
+        node3 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img3];
+        CGPoint p3 = CGPointMake(30, navHegiht - 20);
+        node4 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 view:img2];
+        NSArray *nodes = @[node1, node2, node3, node4];
+        [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_MARKET_HOMEPAGE_LOADED_KEY];
+        
+    }
     
-    SWTutorialNode *node1 = [[SWTutorialNode alloc] initWithPoint:CGPointMake(0, rootView.center.y) radius:80 view:tV];
-    SWTutorialNode *node2 = nil;  SWTutorialNode *node3  = nil; SWTutorialNode *node4 = nil;
-    CGFloat navHegiht = [SWCommonUtils systemNavBarHeight];
-    CGPoint p1 = CGPointMake(rootView.frame.size.width - 30, navHegiht - 20);
-    node2 = [[SWTutorialNode alloc] initWithPoint:p1 radius:80 view:img1];
-    
-    CGPoint p2 = CGPointMake(rootView.frame.size.width - 70, navHegiht - 20);
-    node3 = [[SWTutorialNode alloc] initWithPoint:p2 radius:80 view:img3];
-    
-    CGPoint p3 = CGPointMake(30, navHegiht - 20);
-    node4 = [[SWTutorialNode alloc] initWithPoint:p3 radius:80 view:img2];
-
-   
-    NSArray *nodes = @[node1, node2, node3, node4];
-    [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderInfoUpdated:) name:SW_ORDER_INFO_UPDATE_NOTIFICATION object:nil];

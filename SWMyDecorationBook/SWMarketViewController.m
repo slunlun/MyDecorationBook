@@ -535,7 +535,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
         NSError *error = nil;
         [store executeSaveRequest:saveRequest error:&error];
         if (error) {
-            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"同步联系人到系统通信录失败，请在手机“设置”中允许本程序访问通讯录" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"同步联系人到手机通讯录失败，请在手机“设置”中允许本程序访问通讯录" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
             }];
@@ -554,7 +554,7 @@ static NSString *MARKET_CATEGORY_CELL_IDENTIFIER = @"MARKET_CATEGORY_CELL_IDENTI
                     marketContact.contactIdentify = contact.identifier;
                 }
             }
-            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人已自动同步到系统通信录，您可在系统通讯录中通过姓名或商家名称查找到联系人。同步功能可在系统设置中关闭" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"联系人已自动同步到手机通讯录，您可在系统通讯录中通过姓名或商家名称查找到联系人。同步功能可在系统设置中关闭" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
             }];

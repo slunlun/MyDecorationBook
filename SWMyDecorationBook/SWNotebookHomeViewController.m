@@ -27,6 +27,7 @@
 @property(nonatomic, strong) UIView *guideBarView;
 @property(nonatomic, strong) SWNotebookPieChartView *pieChartView;
 @property(nonatomic, strong) SWNotebookBarChartView *barChartView;
+@property(nonatomic, strong) UIDocumentInteractionController *docmentInterfaceController;
 @end
 
 @implementation SWNotebookHomeViewController
@@ -177,9 +178,9 @@
     
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"其他程序" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSURL *url = [self generateSharedExcel];
-        UIDocumentInteractionController *vc = [UIDocumentInteractionController
+        _docmentInterfaceController = [UIDocumentInteractionController
                                                interactionControllerWithURL:url];
-        [vc presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+        [_docmentInterfaceController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
     }];
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"取消");

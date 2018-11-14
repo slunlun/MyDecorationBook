@@ -37,5 +37,6 @@
 
 // for AD
 #define SW_AD_FIRST_INIT_KEY @"SW_AD_FIRST_INIT_KEY"
+#define SW_AD_FIRST_ELAPSE 1*60
 #define SW_AD_ELAPSE 5*60
 #endif /* SWDef_h */

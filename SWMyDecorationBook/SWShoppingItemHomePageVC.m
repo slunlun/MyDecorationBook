@@ -32,7 +32,9 @@
 #import "SWCommonUtils.h"
 #import "UIImage+SWImageExt.h"
 
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
+#import <MTGSDKInterstitialVideo/MTGInterstitialVideoAdManager.h>
+
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate, MTGInterstitialVideoDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
@@ -44,13 +46,63 @@
 @property(nonatomic, strong) SWMarketCategoryRemovedView *marketCategoryEmptyView;
 @property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入清单的动画
 @property(nonatomic, strong) UISearchController *searchVC;
+
+@property (nonatomic,strong)  MTGInterstitialVideoAdManager *ivAdManager;
+@property(nonatomic, strong) NSTimer *adTimer;
+@property(nonatomic, assign) BOOL isADInit;
 @end
 
 @implementation SWShoppingItemHomePageVC
+#pragma mark - 广告
+- (void)initAdManager
+{
+    if (!_ivAdManager) {
+        _ivAdManager = [[MTGInterstitialVideoAdManager alloc] initWithUnitID:@"61655" delegate:self];
+        _ivAdManager.delegate = self;
+    }
+}
 
+
+#pragma mark - Interstitial Delegate Methods
+
+- (void) onInterstitialAdLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void) onInterstitialVideoLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+   NSLog(@"%@", NSStringFromSelector(_cmd));
+    
+}
+- (void) onInterstitialVideoLoadFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager;{
+    
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void) onInterstitialVideoShowSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+   
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void) onInterstitialVideoShowFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+   NSLog(@"%@", NSStringFromSelector(_cmd));
+    
+}
+
+- (void) onInterstitialVideoAdClick:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+    
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)onInterstitialVideoAdDismissedWithConverted:(BOOL)converted adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+   NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+
+#pragma mark -
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = SW_TAOBAO_WHITE;
+    [self initAdManager];
     [self commitInit];
     self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
     _orderOriginalPoint = CGPointZero;
@@ -90,6 +142,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_adTimer invalidate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -107,8 +160,31 @@
     [self updateDataForMarketCategory:self.curMarketCategory];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if(!self.isADInit) { // 广告逻辑
+        self.isADInit = YES;
+        UIViewController *rootVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC;
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:SW_AD_FIRST_INIT_KEY]) {  // 如果是APP第一次启动，则SW_AD_ELAPSE后再显示广告
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_AD_FIRST_INIT_KEY];
+            [NSTimer scheduledTimerWithTimeInterval:SW_AD_ELAPSE repeats:YES block:^(NSTimer * _Nonnull timer) {
+                [_ivAdManager loadAd];
+                [_ivAdManager showFromViewController:rootVC];
+            }];
+        }else { // 不是第一次启动，则先显示一个广告，在等SW_AD_ELAPSE后显示广告
+            [_ivAdManager loadAd];
+            [_ivAdManager showFromViewController:rootVC];
+            [NSTimer scheduledTimerWithTimeInterval:SW_AD_ELAPSE repeats:YES block:^(NSTimer * _Nonnull timer) {
+                [_ivAdManager loadAd];
+                [_ivAdManager showFromViewController:rootVC];
+            }];
+        }
+    }
 }
 
 - (void)commitInit{

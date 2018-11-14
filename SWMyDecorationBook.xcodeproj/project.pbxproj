@@ -100,6 +100,21 @@
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
+		B005A545219AD34A00277910 /* MTGSDKInterstitialVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A544219AD34A00277910 /* MTGSDKInterstitialVideo.framework */; };
+		B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A546219AD3AF00277910 /* CoreGraphics.framework */; };
+		B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A548219AD3C800277910 /* libsqlite3.tbd */; };
+		B005A54B219AD3D100277910 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54A219AD3D100277910 /* libz.tbd */; };
+		B005A54D219AD3DA00277910 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54C219AD3DA00277910 /* AdSupport.framework */; };
+		B005A54F219AD3E000277910 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54E219AD3E000277910 /* StoreKit.framework */; };
+		B005A551219AD3EA00277910 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A550219AD3EA00277910 /* QuartzCore.framework */; };
+		B005A553219AD3F300277910 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A552219AD3F300277910 /* CoreLocation.framework */; };
+		B005A555219AD3FB00277910 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A554219AD3FB00277910 /* CoreTelephony.framework */; };
+		B005A557219AD40B00277910 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A556219AD40B00277910 /* Accelerate.framework */; };
+		B005A559219AD41300277910 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A558219AD41300277910 /* AVFoundation.framework */; };
+		B005A55B219AD41900277910 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55A219AD41900277910 /* WebKit.framework */; };
+		B005A55D219AD42400277910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55C219AD42400277910 /* Foundation.framework */; };
+		B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55E219AD42A00277910 /* UIKit.framework */; };
+		B005A561219AD5F200277910 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A560219AD5F200277910 /* MTGSDK.framework */; };
 		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
 		B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */; };
 		B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */; };
@@ -343,6 +358,21 @@
 		80504151202945930003A95A /* SWMarketCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryViewController.m; sourceTree = "<group>"; };
 		805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketCategoryStorage.h; sourceTree = "<group>"; };
 		805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketCategoryStorage.m; sourceTree = "<group>"; };
+		B005A544219AD34A00277910 /* MTGSDKInterstitialVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDKInterstitialVideo.framework; sourceTree = "<group>"; };
+		B005A546219AD3AF00277910 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B005A548219AD3C800277910 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		B005A54A219AD3D100277910 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B005A54C219AD3DA00277910 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B005A54E219AD3E000277910 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B005A550219AD3EA00277910 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B005A552219AD3F300277910 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B005A554219AD3FB00277910 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B005A556219AD40B00277910 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B005A558219AD41300277910 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B005A55A219AD41900277910 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		B005A55C219AD42400277910 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B005A55E219AD42A00277910 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B005A560219AD5F200277910 /* MTGSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDK.framework; sourceTree = "<group>"; };
 		B00CDEA9212AC6A200533EF6 /* SWMarketContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactViewController.h; sourceTree = "<group>"; };
 		B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactViewController.m; sourceTree = "<group>"; };
 		B00CDEB0212D62AE00533EF6 /* SWSpotlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSpotlightView.h; sourceTree = "<group>"; };
@@ -458,8 +488,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */,
+				B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */,
+				B005A55D219AD42400277910 /* Foundation.framework in Frameworks */,
+				B005A55B219AD41900277910 /* WebKit.framework in Frameworks */,
+				B005A559219AD41300277910 /* AVFoundation.framework in Frameworks */,
+				B005A557219AD40B00277910 /* Accelerate.framework in Frameworks */,
 				B0E253612138E0C900DE0B5F /* MobileCoreServices.framework in Frameworks */,
+				B005A555219AD3FB00277910 /* CoreTelephony.framework in Frameworks */,
+				B005A553219AD3F300277910 /* CoreLocation.framework in Frameworks */,
+				B005A551219AD3EA00277910 /* QuartzCore.framework in Frameworks */,
+				B005A54F219AD3E000277910 /* StoreKit.framework in Frameworks */,
+				B005A54D219AD3DA00277910 /* AdSupport.framework in Frameworks */,
+				B005A54B219AD3D100277910 /* libz.tbd in Frameworks */,
+				B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */,
+				B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */,
+				B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */,
+				B005A561219AD5F200277910 /* MTGSDK.framework in Frameworks */,
+				B005A545219AD34A00277910 /* MTGSDKInterstitialVideo.framework in Frameworks */,
 				5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */,
 				B00E6C14213FD8F400C23CF7 /* liblibxlsxwriter.a in Frameworks */,
 			);
@@ -624,6 +669,21 @@
 		5E6A9F1E2011E151009B2038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B005A560219AD5F200277910 /* MTGSDK.framework */,
+				B005A55E219AD42A00277910 /* UIKit.framework */,
+				B005A55C219AD42400277910 /* Foundation.framework */,
+				B005A55A219AD41900277910 /* WebKit.framework */,
+				B005A558219AD41300277910 /* AVFoundation.framework */,
+				B005A556219AD40B00277910 /* Accelerate.framework */,
+				B005A554219AD3FB00277910 /* CoreTelephony.framework */,
+				B005A552219AD3F300277910 /* CoreLocation.framework */,
+				B005A550219AD3EA00277910 /* QuartzCore.framework */,
+				B005A54E219AD3E000277910 /* StoreKit.framework */,
+				B005A54C219AD3DA00277910 /* AdSupport.framework */,
+				B005A54A219AD3D100277910 /* libz.tbd */,
+				B005A548219AD3C800277910 /* libsqlite3.tbd */,
+				B005A546219AD3AF00277910 /* CoreGraphics.framework */,
+				B005A544219AD34A00277910 /* MTGSDKInterstitialVideo.framework */,
 				B00E6C13213FD8F400C23CF7 /* liblibxlsxwriter.a */,
 				B0E253622138E5C000DE0B5F /* Contacts.framework */,
 				B0E253602138E0C900DE0B5F /* MobileCoreServices.framework */,
@@ -1373,6 +1433,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 987Y5M3S28;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1380,6 +1444,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1395,6 +1460,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 987Y5M3S28;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1402,6 +1471,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -16,13 +16,19 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "SWShoppingPhoto+CoreDataClass.h"
 #import "SWCommonUtils.h"
-
+#import <MTGSDKInterstitialVideo/MTGInterstitialVideoAdManager.h>
+#import <MTGSDK/MTGSDK.h>
+#import "SWDef.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //广告
+    [[MTGSDK sharedInstance] setAppID:@"107487" ApiKey:@"4fe73b91abbade4e868a5c591cf3ebbf"];
+    
     // 设置UINavigationBar的背景图片
    // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];
     

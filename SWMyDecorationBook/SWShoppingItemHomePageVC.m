@@ -169,23 +169,10 @@
     if(!self.isADInit) { // 广告逻辑
         self.isADInit = YES;
         UIViewController *rootVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC;
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:SW_AD_FIRST_INIT_KEY]) {  // 如果是APP第一次启动，则SW_AD_ELAPSE后再显示广告. 当APP退出时，会重新设置SW_AD_FIRST_INIT_KEY = NO
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_AD_FIRST_INIT_KEY];
-            [NSTimer scheduledTimerWithTimeInterval:SW_AD_ELAPSE repeats:YES block:^(NSTimer * _Nonnull timer) {
-                [_ivAdManager loadAd];
-                [_ivAdManager showFromViewController:rootVC];
-            }];
-        }else { // 不是第一次启动，则先显示一个广告，在等SW_AD_ELAPSE后显示广告
-            [NSTimer scheduledTimerWithTimeInterval:SW_AD_FIRST_ELAPSE repeats:NO block:^(NSTimer * _Nonnull timer) {
-                [_ivAdManager loadAd];
-                [_ivAdManager showFromViewController:rootVC];
-                [NSTimer scheduledTimerWithTimeInterval:SW_AD_ELAPSE repeats:YES block:^(NSTimer * _Nonnull timer) {
-                    [_ivAdManager loadAd];
-                    [_ivAdManager showFromViewController:rootVC];
-                }];
-            }];
-        }
+        [NSTimer scheduledTimerWithTimeInterval:SW_AD_ELAPSE repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [_ivAdManager loadAd];
+            [_ivAdManager showFromViewController:rootVC];
+        }];
     }
 }
 
@@ -545,12 +532,13 @@
     self.navigationItem.titleView = nil;
     self.navigationItem.title = self.curMarketCategory.categoryName;
     
-    NSArray *array = [SWUnreadOrderInfoStorage allUnreadOrderInfos];
-    if (array.count) {
-        [self.notebookItemBtn.customView showNotificationBubble];
-    }else {
-        [self.notebookItemBtn.customView dismissNotificationBubble];
-    }
+  
+//    NSArray *array = [SWUnreadOrderInfoStorage allUnreadOrderInfos];
+//    if (array.count) {
+//        [self.notebookItemBtn.customView showNotificationBubble];
+//    }else {
+//        [self.notebookItemBtn.customView dismissNotificationBubble];
+//    }
 }
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {

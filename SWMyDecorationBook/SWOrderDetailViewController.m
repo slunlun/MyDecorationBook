@@ -219,7 +219,8 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_PHOTO_CELL_IDENTIFY" forIndexPath:indexPath];
             NSMutableArray *photoArray = nil;
             if (self.orderInfo.productItem.productPhotos.count == 0) {
-                photoArray = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"ProductThumb"]];
+                SWProductPhoto *model = [[SWProductPhoto alloc] initWithImage:[UIImage imageNamed:@"ProductThumb"]];
+                photoArray = [NSMutableArray arrayWithObject:model];
             }else {
                 photoArray = [[NSMutableArray alloc] init];
                 for (SWProductPhoto *photo in self.orderInfo.productItem.productPhotos) {

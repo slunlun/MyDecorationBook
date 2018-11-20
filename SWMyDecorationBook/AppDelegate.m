@@ -135,11 +135,20 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SW_AD_FIRST_INIT_KEY]) { // 每次启动后，如果已经显示过第一次广告，则每隔SW_AD_ELAPSE再显示移除
+        NSTimeInterval lastDisplayADTime = [[NSUserDefaults standardUserDefaults] doubleForKey:SW_AD_LAST_DISPLAY_TIME_KEY];
+        NSTimeInterval nowTime = [NSDate date].timeIntervalSince1970;
+        if (nowTime - lastDisplayADTime >= SW_AD_ELAPSE) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_SHOW_AD_NOTIFICATION object:nil];
+        }
+    }
+    
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [MagicalRecord cleanUp];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SW_AD_FIRST_INIT_KEY];
 }
 
 - (NSURL*) applicationDocumentsDirectory

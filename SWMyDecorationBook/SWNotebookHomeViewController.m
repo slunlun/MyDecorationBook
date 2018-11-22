@@ -22,6 +22,7 @@
 #import "SWCommonUtils.h"
 #import "SWUserTutorialManager.h"
 #import "SWDef.h"
+#import <StoreKit/StoreKit.h>
 
 @interface SWNotebookHomeViewController ()<SWNotebookPieChartViewDelegate, SWNotebookBarChartViewDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) NSArray *orderInfoArray;
@@ -71,6 +72,22 @@
         NSArray *nodes = @[node1, node2];
         [[SWUserTutorialManager sharedInstance] setUpTutorialViewWithNodes:nodes inView:rootView];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_ORDER_INFO_VC_EVER_LOADED_KEY];
+    }else {
+        if (@available(iOS 10.3, *)) {
+            NSInteger commentTime = [[NSUserDefaults standardUserDefaults] integerForKey:SW_USER_COMMENT_INTERVAL_KEY];
+            NSTimeInterval timeShouldDisplay = commentTime * SW_USER_COMMENT_TIME_UNIT;
+            NSTimeInterval lastDisplayTime = [[NSUserDefaults standardUserDefaults] doubleForKey:SW_USER_LAST_COMMENT_TIME_KEY];
+            NSTimeInterval nowTime = [NSDate date].timeIntervalSince1970;
+            if ((nowTime - lastDisplayTime) >= timeShouldDisplay) {
+                if([SKStoreReviewController respondsToSelector:@selector(requestReview)]) {
+                    // iOS 10.3 以后
+                    [SKStoreReviewController requestReview];
+                    [[NSUserDefaults standardUserDefaults] setDouble:nowTime forKey:SW_USER_LAST_COMMENT_TIME_KEY];
+                    [[NSUserDefaults standardUserDefaults] setInteger:commentTime * 2 forKey:SW_USER_COMMENT_INTERVAL_KEY];
+                }
+            }
+           
+        }
     }
    
 }

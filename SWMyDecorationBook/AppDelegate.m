@@ -79,6 +79,8 @@
         [SWMarketCategoryStorage insertMarketCategory:cat4];
         [SWMarketCategoryStorage insertMarketCategory:cat5];
         
+        [[NSUserDefaults standardUserDefaults] setDouble:[NSDate date].timeIntervalSince1970 forKey:SW_USER_LAST_COMMENT_TIME_KEY]; // 第一次启动，记时间
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:SW_USER_COMMENT_INTERVAL_KEY];
     }else {
         NSLog(@"second launch");
         

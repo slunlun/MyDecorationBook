@@ -134,15 +134,22 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    // 广告逻辑
     if ([[NSUserDefaults standardUserDefaults] boolForKey:SW_AD_FIRST_INIT_KEY]) { // 每次启动后，如果已经显示过第一次广告，则每隔SW_AD_ELAPSE再显示移除
         NSTimeInterval lastDisplayADTime = [[NSUserDefaults standardUserDefaults] doubleForKey:SW_AD_LAST_DISPLAY_TIME_KEY];
         NSTimeInterval nowTime = [NSDate date].timeIntervalSince1970;
         if (nowTime - lastDisplayADTime >= SW_AD_ELAPSE) {
             [[NSNotificationCenter defaultCenter] postNotificationName:SW_SHOW_AD_NOTIFICATION object:nil];
         }
+    }else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_AD_FIRST_INIT_KEY];
+        NSTimeInterval nowDate = [NSDate date].timeIntervalSince1970;
+        nowDate += SW_AD_FIRST_ELAPSE;
+        [[NSUserDefaults standardUserDefaults] setDouble:nowDate forKey:SW_AD_LAST_DISPLAY_TIME_KEY];
+        [NSTimer scheduledTimerWithTimeInterval:SW_AD_FIRST_ELAPSE repeats:NO block:^(NSTimer * _Nonnull timer) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:SW_SHOW_AD_NOTIFICATION object:nil];
+        }];
     }
-    
 }
 
 

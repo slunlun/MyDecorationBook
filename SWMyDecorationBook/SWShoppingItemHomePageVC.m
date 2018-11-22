@@ -49,7 +49,6 @@
 
 @property (nonatomic,strong)  MTGInterstitialVideoAdManager *ivAdManager;
 @property(nonatomic, strong) NSTimer *adTimer;
-@property(nonatomic, assign) BOOL isADInit;
 @end
 
 @implementation SWShoppingItemHomePageVC
@@ -84,8 +83,10 @@
 }
 
 - (void) onInterstitialVideoShowFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
+    if (error) {
+        NSLog(@"error msg %@", error.localizedDescription);
+    }
    NSLog(@"%@", NSStringFromSelector(_cmd));
-    
 }
 
 - (void) onInterstitialVideoAdClick:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
@@ -167,17 +168,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if(!self.isADInit) { // 广告逻辑
-        self.isADInit = YES;
-        UIViewController *rootVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC;
-        [NSTimer scheduledTimerWithTimeInterval:SW_AD_FIRST_ELAPSE repeats:NO block:^(NSTimer * _Nonnull timer) {
-            [_ivAdManager loadAd];
-            [_ivAdManager showFromViewController:rootVC];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SW_AD_FIRST_INIT_KEY];
-            NSTimeInterval nowDate = [NSDate date].timeIntervalSince1970;
-            [[NSUserDefaults standardUserDefaults] setDouble:nowDate forKey:SW_AD_LAST_DISPLAY_TIME_KEY];
-        }];
-    }
 }
 
 - (void)displayAD:(NSNotification *)notification {

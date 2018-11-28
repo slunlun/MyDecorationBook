@@ -39,7 +39,7 @@
 
 
 - (void)updateSpotlightView {
-    UIView *contentView = nil;
+    UIView *contentView = [UIView new];
     if (self.spotlightText) {
         UIFont *ft = [UIFont fontWithName:@"Helvetica" size:17.0];
         CGSize sz =[self.spotlightText boundingRectWithSize:CGSizeMake(250, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:ft} context:nil].size;
@@ -119,6 +119,8 @@
     CGContextDrawRadialGradient(context, gradientRef, self.spolightPoint, 0.0f, self.spolightPoint, self.spolightRadius, 0);
     //释放渐变对象
     CGGradientRelease(gradientRef);
+    // 释放色彩空间
+    CGColorSpaceRelease(colorspace);
     
     //恢复到之前的context
     CGContextRestoreGState(context);

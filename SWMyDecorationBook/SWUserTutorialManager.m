@@ -37,7 +37,7 @@
 
 @implementation SWUserTutorialManager
 + (instancetype)sharedInstance {
-    dispatch_once_t onceToken = 0;
+    static dispatch_once_t onceToken = 0;
     static SWUserTutorialManager *singleInstance = nil;
     dispatch_once(&onceToken, ^{
         singleInstance = [[SWUserTutorialManager alloc] init];

@@ -75,16 +75,16 @@
         make.leftMargin.equalTo(_sysConfigBtn.mas_right).offset(0.5 * SW_MARGIN);
     }];
     
-    _splashView = [[UIView alloc] init];
-    _splashView.backgroundColor = [UIColor grayColor];
-    _splashView.alpha = 0.6;
-    [self addSubview:_splashView];
-    [_splashView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_sysConfigBtn.mas_right).offset(2);
-        make.right.equalTo(self).offset(-15);
-        make.centerY.equalTo(self.mas_centerY);
-        make.height.equalTo(@1);
-    }];
+//    _splashView = [[UIView alloc] init];
+//    _splashView.backgroundColor = [UIColor grayColor];
+//    _splashView.alpha = 0.6;
+//    [self addSubview:_splashView];
+//    [_splashView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(_sysConfigBtn.mas_right).offset(2);
+//        make.right.equalTo(self).offset(-15);
+//        make.centerY.equalTo(self.mas_centerY);
+//        make.height.equalTo(@1);
+//    }];
 }
 
 - (void)updateCostSummary:(CGFloat)totalCost budget:(CGFloat)budget {

@@ -241,19 +241,15 @@ static NSString *SW_ORDER_REMARK_CELL_IDENTITY = @"SW_ORDER_REMARK_CELL_IDENTITY
     if (self.orderCount > 0) {
         if (self.productOrder) {
             // 更新订单信息
-            BOOL anyChange = NO;
             if (![self.productOrder.orderRemark isEqualToString:self.orderRemark]) {
-                anyChange = YES;
                 self.productOrder.orderRemark = self.orderRemark;
             }
             
             if (self.productOrder.orderTotalPrice != self.txtFTotalPrice.text.floatValue) {
-                anyChange = YES;
                 self.productOrder.orderTotalPrice = self.txtFTotalPrice.text.floatValue;
             }
             
             if (self.productOrder.itemCount != self.orderCount) {
-                anyChange = YES;
                 self.productOrder.itemCount = self.orderCount;
             }
             

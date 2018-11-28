@@ -39,7 +39,6 @@
 		5E1756272010A1A0009F100B /* SWProductItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756262010A1A0009F100B /* SWProductItemStorage.m */; };
 		5E17562A2010A1AE009F100B /* SWMarketStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756292010A1AE009F100B /* SWMarketStorage.m */; };
 		5E17562D2010A1EA009F100B /* SWDecorationAccountBookStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */; };
-		5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */; };
 		5E1756332010A216009F100B /* SWPriceUnitStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E1756322010A216009F100B /* SWPriceUnitStorage.m */; };
 		5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A3F251F7E3CBA00F052B5 /* UIView+UIExt.m */; };
 		5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6A9F1F2011E152009B2038 /* CoreData.framework */; };
@@ -115,6 +114,8 @@
 		B005A55D219AD42400277910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55C219AD42400277910 /* Foundation.framework */; };
 		B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55E219AD42A00277910 /* UIKit.framework */; };
 		B005A561219AD5F200277910 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A560219AD5F200277910 /* MTGSDK.framework */; };
+		B00B045521AE388100CAD312 /* SWExceptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045421AE388100CAD312 /* SWExceptionViewController.m */; };
+		B00B045821AE3C9200CAD312 /* SWExceptionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045721AE3C9200CAD312 /* SWExceptionDetailViewController.m */; };
 		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
 		B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */; };
 		B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */; };
@@ -229,8 +230,6 @@
 		5E1756292010A1AE009F100B /* SWMarketStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketStorage.m; sourceTree = "<group>"; };
 		5E17562B2010A1EA009F100B /* SWDecorationAccountBookStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWDecorationAccountBookStorage.h; sourceTree = "<group>"; };
 		5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDecorationAccountBookStorage.m; sourceTree = "<group>"; };
-		5E17562E2010A1FD009F100B /* SWMarketContactStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactStorage.h; sourceTree = "<group>"; };
-		5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactStorage.m; sourceTree = "<group>"; };
 		5E1756312010A216009F100B /* SWPriceUnitStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPriceUnitStorage.h; sourceTree = "<group>"; };
 		5E1756322010A216009F100B /* SWPriceUnitStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWPriceUnitStorage.m; sourceTree = "<group>"; };
 		5E4A3F241F7E3CBA00F052B5 /* UIView+UIExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+UIExt.h"; path = "Category/UIView+UIExt.h"; sourceTree = "<group>"; };
@@ -373,6 +372,10 @@
 		B005A55C219AD42400277910 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B005A55E219AD42A00277910 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B005A560219AD5F200277910 /* MTGSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDK.framework; sourceTree = "<group>"; };
+		B00B045321AE388100CAD312 /* SWExceptionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWExceptionViewController.h; sourceTree = "<group>"; };
+		B00B045421AE388100CAD312 /* SWExceptionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWExceptionViewController.m; sourceTree = "<group>"; };
+		B00B045621AE3C9200CAD312 /* SWExceptionDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWExceptionDetailViewController.h; sourceTree = "<group>"; };
+		B00B045721AE3C9200CAD312 /* SWExceptionDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWExceptionDetailViewController.m; sourceTree = "<group>"; };
 		B00CDEA9212AC6A200533EF6 /* SWMarketContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMarketContactViewController.h; sourceTree = "<group>"; };
 		B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMarketContactViewController.m; sourceTree = "<group>"; };
 		B00CDEB0212D62AE00533EF6 /* SWSpotlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSpotlightView.h; sourceTree = "<group>"; };
@@ -639,8 +642,6 @@
 				5E1756292010A1AE009F100B /* SWMarketStorage.m */,
 				5E17562B2010A1EA009F100B /* SWDecorationAccountBookStorage.h */,
 				5E17562C2010A1EA009F100B /* SWDecorationAccountBookStorage.m */,
-				5E17562E2010A1FD009F100B /* SWMarketContactStorage.h */,
-				5E17562F2010A1FD009F100B /* SWMarketContactStorage.m */,
 				5E1756312010A216009F100B /* SWPriceUnitStorage.h */,
 				5E1756322010A216009F100B /* SWPriceUnitStorage.m */,
 				805BBF112027F37F0077BEAA /* SWMarketCategoryStorage.h */,
@@ -863,6 +864,7 @@
 		5EACC4D01F72060100C4E796 /* SWMyDecorationBook */ = {
 			isa = PBXGroup;
 			children = (
+				B00B045221AE383C00CAD312 /* ExceptionHandle */,
 				5E17561D20109F8C009F100B /* DB */,
 				5E9C2CB520030B540052A05E /* SWDef.h */,
 				5EDE94E71FFB5EED00A24C21 /* SWUIDef.h */,
@@ -991,6 +993,17 @@
 				5EE7E2CD1F99ABBE007CAB27 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		B00B045221AE383C00CAD312 /* ExceptionHandle */ = {
+			isa = PBXGroup;
+			children = (
+				B00B045321AE388100CAD312 /* SWExceptionViewController.h */,
+				B00B045421AE388100CAD312 /* SWExceptionViewController.m */,
+				B00B045621AE3C9200CAD312 /* SWExceptionDetailViewController.h */,
+				B00B045721AE3C9200CAD312 /* SWExceptionDetailViewController.m */,
+			);
+			name = ExceptionHandle;
 			sourceTree = "<group>";
 		};
 		B00CDEAF212D624700533EF6 /* TutorialView */ = {
@@ -1214,7 +1227,6 @@
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
 				5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */,
 				5E17560220109E8F009F100B /* MagicalImportFunctions.m in Sources */,
-				5E1756302010A1FD009F100B /* SWMarketContactStorage.m in Sources */,
 				5E9C2CD82004AB210052A05E /* TZAssetCell.m in Sources */,
 				5E9C2CDE2004AB210052A05E /* TZImagePickerController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
@@ -1245,6 +1257,7 @@
 				5E86CA0E1FFE04B600A8F0CC /* SWMarketViewController.m in Sources */,
 				B00CDEBB213402A200533EF6 /* SWMarketCategoryRemovedView.m in Sources */,
 				5E17560A20109E8F009F100B /* NSManagedObject+MagicalDataImport.m in Sources */,
+				B00B045521AE388100CAD312 /* SWExceptionViewController.m in Sources */,
 				B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */,
 				5E9C2CDA2004AB210052A05E /* TZGifPhotoPreviewController.m in Sources */,
 				5E17560E20109E8F009F100B /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
@@ -1258,6 +1271,7 @@
 				B065BFCA20887CE400F57731 /* SWOrder.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
 				5E9C2CDB2004AB210052A05E /* TZImageCropManager.m in Sources */,
+				B00B045821AE3C9200CAD312 /* SWExceptionDetailViewController.m in Sources */,
 				5E9C2CD72004AB210052A05E /* NSBundle+TZImagePicker.m in Sources */,
 				5E17561C20109E8F009F100B /* MagicalRecordInternal.m in Sources */,
 				5EDE94EA1FFB82F400A24C21 /* HexColor.m in Sources */,

@@ -31,6 +31,8 @@
 #import "SWUnreadOrderInfoStorage.h"
 #import "SWCommonUtils.h"
 #import "UIImage+SWImageExt.h"
+#import "SWExceptionViewController.h"
+
 
 #import <MTGSDKInterstitialVideo/MTGInterstitialVideoAdManager.h>
 
@@ -507,10 +509,7 @@
 
 #pragma mark - Navigation Bar items
 - (void)configureNavigationBar {
-//    UIImageView *configImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gear"]];
-//    UITapGestureRecognizer *configTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sysConfig:)];
-//    [configImgView addGestureRecognizer:configTapped];
-//    UIBarButtonItem *configItemBtn = [[UIBarButtonItem alloc] initWithCustomView:configImgView];
+
     
     
     UIImageView *noteBookImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Notebook"]];
@@ -529,19 +528,47 @@
     [searchView addGestureRecognizer:searchTaped];
     UIBarButtonItem *searchItemBtn = [[UIBarButtonItem alloc] initWithCustomView:searchView];
     self.navigationItem.rightBarButtonItems = @[addMarketItemBtn, searchItemBtn];
-    self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+    if (DEBUG) {
+        UIBarButtonItem *exceptButton = [[UIBarButtonItem alloc]initWithTitle:@"Except" style:UIBarButtonItemStylePlain target:self action:@selector(checkException)];
+        self.navigationItem.leftBarButtonItems = @[notebookItemBtn, exceptButton];
+        if ([self showCrashExceptInfo]) {
+            UIBarButtonItem *exceptButton = [[UIBarButtonItem alloc]initWithTitle:@"Except" style:UIBarButtonItemStylePlain target:self action:@selector(checkException)];
+            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, exceptButton];
+        }else {
+            self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+        }
+    }else {
+        self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+    }
+    
     
     self.navigationItem.titleView = nil;
     self.navigationItem.title = self.curMarketCategory.categoryName;
-    
-  
-//    NSArray *array = [SWUnreadOrderInfoStorage allUnreadOrderInfos];
-//    if (array.count) {
-//        [self.notebookItemBtn.customView showNotificationBubble];
-//    }else {
-//        [self.notebookItemBtn.customView dismissNotificationBubble];
-//    }
+
 }
+
+#pragma mark - Exception
+- (BOOL)showCrashExceptInfo {
+    NSString *exceptPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Exception"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *exceptFileList = [fileManager contentsOfDirectoryAtPath:exceptPath error:nil];
+    if (exceptFileList.count > 0) {
+        return YES;
+    }else {
+        return NO;
+    }
+    
+}
+- (void)checkException {
+    NSString *exceptPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Exception"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *exceptFileList = [fileManager subpathsOfDirectoryAtPath:exceptPath error:nil];
+    SWExceptionViewController *exceptVC = [[SWExceptionViewController alloc]init];
+    exceptVC.exceptLists = [NSMutableArray arrayWithArray:exceptFileList];
+    [self.navigationController pushViewController:exceptVC animated:YES];
+}
+
+#pragma mark -
 
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
     SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:self.curMarketCategory];

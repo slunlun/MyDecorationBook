@@ -105,6 +105,11 @@
                                              selector:@selector(rootContextDidSave:)
                                                  name:NSManagedObjectContextDidSaveNotification
                                                object:[NSManagedObjectContext MR_rootSavingContext]];
+    
+#ifdef DEBUG
+    //  get crash exception info
+    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+#endif
     return YES;
 }
 
@@ -158,6 +163,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     [MagicalRecord cleanUp];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SW_AD_FIRST_INIT_KEY];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (NSURL*) applicationDocumentsDirectory
@@ -165,5 +171,28 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - Exception
+void UncaughtExceptionHandler(NSException *exception) {
+    
+    NSArray *symbols = [exception callStackSymbols];
+    NSString *reason = [exception reason];
+    NSString *name = [exception name];
+    NSString *exceptPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Exception"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:exceptPath]) {
+        
+    } else {
+        [fileManager createDirectoryAtPath:exceptPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *url = [NSString stringWithFormat:@"========exceptError info========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[symbols componentsJoinedByString:@"\n"]];
+    NSDate *nowDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    NSString *dateTime = [formatter stringFromDate:nowDate];
+    NSString *fileName = [NSString stringWithFormat:@"%@.txt",dateTime];
+    NSString *path = [exceptPath stringByAppendingPathComponent:fileName];
+    [url writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+}
 
 @end

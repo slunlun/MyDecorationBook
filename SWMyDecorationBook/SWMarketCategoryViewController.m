@@ -92,7 +92,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     _marketCategoryTableView.allowsMultipleSelection = NO;
     _marketCategoryTableView.allowsSelection = YES;
     [_marketCategoryTableView registerClass:[SWMarketCategoryTableViewCell class] forCellReuseIdentifier:CATEGORY_CELL_IDENTIFY];
-    
+
     [self.view addSubview:_marketCategoryTableView];
     [_marketCategoryTableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -106,7 +106,7 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_selectedMarkCategoryIndex inSection:0];
     [_marketCategoryTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    
+
     _editBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     _editBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
     _editBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
@@ -123,20 +123,20 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
     [self.view addSubview:_editBtn];
     [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_marketCategoryTableView.mas_bottom);
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view).multipliedBy(0.5);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right).multipliedBy(0.5);
         if (@available(iOS 11.0, *)) {
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         } else {
             make.bottom.equalTo(self.view.mas_bottom);
         }
     }];
-    
+
     _addBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     _addBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
     _addBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
     _addBtn.layer.shadowOpacity = 1.0f;
-    
+
     _addBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [_addBtn addTarget:self action:@selector(addCategoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_addBtn setImage:[UIImage imageNamed:@"Add-Cross"] forState:UIControlStateNormal];
@@ -157,12 +157,12 @@ static NSString *CATEGORY_CELL_IDENTIFY = @"CATEGORY_CELL_IDENTIFY";
             make.bottom.equalTo(self.view.mas_bottom);
         }
     }];
-    
+
     _saveEditBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveEditBtn.layer.shadowColor  = SW_TAOBAO_BLACK.CGColor;
     _saveEditBtn.layer.shadowOffset = CGSizeMake(0, -10.0);
     _saveEditBtn.layer.shadowOpacity = 1.0f;
-    
+
     [_saveEditBtn addTarget:self action:@selector(saveEditBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_saveEditBtn setImage:[UIImage imageNamed:@"Check"] forState:UIControlStateNormal];
     [_saveEditBtn setTitle:@"完成" forState:UIControlStateNormal];

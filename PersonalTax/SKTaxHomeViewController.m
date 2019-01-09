@@ -54,7 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个税计算器";
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickBackground:)];
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];

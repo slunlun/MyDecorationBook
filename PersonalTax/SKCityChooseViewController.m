@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self loadTableData];
     [self commonInit];
     // Do any additional setup after loading the view.

@@ -33,6 +33,8 @@
 #import "UIImage+SWImageExt.h"
 #import "SWExceptionViewController.h"
 
+#import "SKTaxHomeViewController.h"
+
 
 
 
@@ -475,6 +477,12 @@
     UIBarButtonItem *notebookItemBtn = [[UIBarButtonItem alloc] initWithCustomView:noteBookImgView];
     _notebookItemBtn = notebookItemBtn;
     
+    UIImageView *toolsView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Tools"]];
+    UITapGestureRecognizer *toolsTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toolsClicked:)];
+    [toolsView addGestureRecognizer:toolsTaped];
+    UIBarButtonItem *toolsItemBtn = [[UIBarButtonItem alloc] initWithCustomView:toolsView];
+    
+    
     UIImageView *addMarketView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddMarket"]];
     UITapGestureRecognizer *addTaped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewMarketItem:)];
     [addMarketView addGestureRecognizer:addTaped];
@@ -490,12 +498,12 @@
         self.navigationItem.leftBarButtonItems = @[notebookItemBtn, exceptButton];
         if ([self showCrashExceptInfo]) {
             UIBarButtonItem *exceptButton = [[UIBarButtonItem alloc]initWithTitle:@"Except" style:UIBarButtonItemStylePlain target:self action:@selector(checkException)];
-            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, exceptButton];
+            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn, exceptButton];
         }else {
-            self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn];
         }
     }else {
-        self.navigationItem.leftBarButtonItems = @[notebookItemBtn];
+        self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn];
     }
     
     
@@ -530,6 +538,11 @@
 - (void)addNewMarketItem:(UIBarButtonItem *)addItem {
     SWMarketItem *newMarketItem = [[SWMarketItem alloc] initWithMarketCategory:self.curMarketCategory];
     SWMarketViewController *vc = [[SWMarketViewController alloc] initWithMarketItem:newMarketItem];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toolsClicked:(UITapGestureRecognizer *)tapGesture {
+    SKTaxHomeViewController *vc = [[SKTaxHomeViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -612,7 +612,7 @@ typedef NS_ENUM(NSInteger, textFieldType) {
         self.saveButtonClickedBlock(_strategyModel.SS_TITLE);
     }
     
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:NO];
 }
 
 #pragma -mark UITextfield Delagate
@@ -809,7 +809,7 @@ typedef NS_ENUM(NSInteger, textFieldType) {
         self.saveButtonClickedBlock(_strategyModel.SS_TITLE);
     }
     
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:NO];
 }
 
 #pragma -mark Dealloc Method

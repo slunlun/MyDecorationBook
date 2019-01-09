@@ -99,7 +99,6 @@
 		802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802C9CA31FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m */; };
 		80504152202945930003A95A /* SWMarketCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80504151202945930003A95A /* SWMarketCategoryViewController.m */; };
 		805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 805BBF122027F37F0077BEAA /* SWMarketCategoryStorage.m */; };
-		B005A545219AD34A00277910 /* MTGSDKInterstitialVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A544219AD34A00277910 /* MTGSDKInterstitialVideo.framework */; };
 		B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A546219AD3AF00277910 /* CoreGraphics.framework */; };
 		B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A548219AD3C800277910 /* libsqlite3.tbd */; };
 		B005A54B219AD3D100277910 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54A219AD3D100277910 /* libz.tbd */; };
@@ -113,7 +112,6 @@
 		B005A55B219AD41900277910 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55A219AD41900277910 /* WebKit.framework */; };
 		B005A55D219AD42400277910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55C219AD42400277910 /* Foundation.framework */; };
 		B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55E219AD42A00277910 /* UIKit.framework */; };
-		B005A561219AD5F200277910 /* MTGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A560219AD5F200277910 /* MTGSDK.framework */; };
 		B00B045521AE388100CAD312 /* SWExceptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045421AE388100CAD312 /* SWExceptionViewController.m */; };
 		B00B045821AE3C9200CAD312 /* SWExceptionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045721AE3C9200CAD312 /* SWExceptionDetailViewController.m */; };
 		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
@@ -510,8 +508,6 @@
 				B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */,
 				B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */,
 				B0E253632138E5C000DE0B5F /* Contacts.framework in Frameworks */,
-				B005A561219AD5F200277910 /* MTGSDK.framework in Frameworks */,
-				B005A545219AD34A00277910 /* MTGSDKInterstitialVideo.framework in Frameworks */,
 				5E6A9F202011E152009B2038 /* CoreData.framework in Frameworks */,
 				B00E6C14213FD8F400C23CF7 /* liblibxlsxwriter.a in Frameworks */,
 				B02A7B0F3DDFF3FEFDD53DF3 /* libPods-SWMyDecorationBook.a in Frameworks */,

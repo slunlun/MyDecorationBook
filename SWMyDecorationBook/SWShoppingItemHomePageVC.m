@@ -34,9 +34,9 @@
 #import "SWExceptionViewController.h"
 
 
-#import <MTGSDKInterstitialVideo/MTGInterstitialVideoAdManager.h>
 
-@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate, MTGInterstitialVideoDelegate>
+
+@interface SWShoppingItemHomePageVC () <UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, SWProductTableViewCellDelegate, SWOrderViewDelegate, SWEmptyMarketViewDelegate>
 @property(nonatomic, strong) UIView *dragMoveView;
 @property(nonatomic, assign) CGPoint preTranslation;
 @property(nonatomic, strong) UITableView *shoppingItemListTableView;
@@ -49,63 +49,22 @@
 @property(nonatomic, assign) CGPoint orderOriginalPoint; // 记录下当前购物车图标的位置，用于购买商品后，商品飞入清单的动画
 @property(nonatomic, strong) UISearchController *searchVC;
 
-@property (nonatomic,strong)  MTGInterstitialVideoAdManager *ivAdManager;
+
 @property(nonatomic, strong) NSTimer *adTimer;
 @end
 
 @implementation SWShoppingItemHomePageVC
 #pragma mark - 广告
-- (void)initAdManager
-{
-    if (!_ivAdManager) {
-        _ivAdManager = [[MTGInterstitialVideoAdManager alloc] initWithUnitID:@"61655" delegate:self];
-        _ivAdManager.delegate = self;
-    }
-}
 
 
-#pragma mark - Interstitial Delegate Methods
 
-- (void) onInterstitialAdLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
 
-- (void) onInterstitialVideoLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-   NSLog(@"%@", NSStringFromSelector(_cmd));
-    
-}
-- (void) onInterstitialVideoLoadFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager;{
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void) onInterstitialVideoShowSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-   
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void) onInterstitialVideoShowFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-    if (error) {
-        NSLog(@"error msg %@", error.localizedDescription);
-    }
-   NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void) onInterstitialVideoAdClick:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void)onInterstitialVideoAdDismissedWithConverted:(BOOL)converted adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
-   NSLog(@"%@", NSStringFromSelector(_cmd));
-}
 
 
 #pragma mark -
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = SW_TAOBAO_WHITE;
-    [self initAdManager];
     [self commitInit];
     self.curMarketCategory = [[SWMarketCategoryStorage allMarketCategory] firstObject]; // 默认选中第一个market category
     _orderOriginalPoint = CGPointZero;
@@ -174,8 +133,6 @@
 
 - (void)displayAD:(NSNotification *)notification {
     UIViewController *rootVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).drawerVC;
-    [_ivAdManager loadAd];
-    [_ivAdManager showFromViewController:rootVC];
     NSTimeInterval nowDate = [NSDate date].timeIntervalSince1970;
     [[NSUserDefaults standardUserDefaults] setDouble:nowDate forKey:SW_AD_LAST_DISPLAY_TIME_KEY];
 }

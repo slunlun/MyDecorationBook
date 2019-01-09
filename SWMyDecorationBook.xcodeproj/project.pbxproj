@@ -102,7 +102,6 @@
 		B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A546219AD3AF00277910 /* CoreGraphics.framework */; };
 		B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A548219AD3C800277910 /* libsqlite3.tbd */; };
 		B005A54B219AD3D100277910 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54A219AD3D100277910 /* libz.tbd */; };
-		B005A54D219AD3DA00277910 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54C219AD3DA00277910 /* AdSupport.framework */; };
 		B005A54F219AD3E000277910 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A54E219AD3E000277910 /* StoreKit.framework */; };
 		B005A551219AD3EA00277910 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A550219AD3EA00277910 /* QuartzCore.framework */; };
 		B005A553219AD3F300277910 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A552219AD3F300277910 /* CoreLocation.framework */; };
@@ -136,8 +135,33 @@
 		B065BE9F2085D6B400F57731 /* SWMarketCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BE9E2085D6B400F57731 /* SWMarketCategoryTableViewCell.m */; };
 		B065BFC6208874E800F57731 /* SWOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC5208874E800F57731 /* SWOrderView.m */; };
 		B065BFCA20887CE400F57731 /* SWOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = B065BFC920887CE400F57731 /* SWOrder.m */; };
+		B0700E0221E5F49300D0EFF4 /* SKBasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700DF921E5F49300D0EFF4 /* SKBasePickerView.m */; };
+		B0700E0321E5F49300D0EFF4 /* SKPickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700DFB21E5F49300D0EFF4 /* SKPickerToolBarView.m */; };
+		B0700E0421E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700DFD21E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.m */; };
+		B0700E0521E5F49300D0EFF4 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700DFF21E5F49300D0EFF4 /* UIColor+Hex.m */; };
+		B0700E0621E5F49300D0EFF4 /* UIView+YMFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E0121E5F49300D0EFF4 /* UIView+YMFrame.m */; };
+		B0700E0E21E5F4AD00D0EFF4 /* SKSocialSecurity.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0700E0921E5F4AD00D0EFF4 /* SKSocialSecurity.plist */; };
+		B0700E0F21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E0B21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.m */; };
+		B0700E1021E5F4AD00D0EFF4 /* SKTaxContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E0D21E5F4AD00D0EFF4 /* SKTaxContext.m */; };
+		B0700E1C21E5F4B600D0EFF4 /* SKAllResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E1321E5F4B600D0EFF4 /* SKAllResultViewController.m */; };
+		B0700E1D21E5F4B600D0EFF4 /* SKBaseFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E1521E5F4B600D0EFF4 /* SKBaseFormView.m */; };
+		B0700E1E21E5F4B600D0EFF4 /* SKResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E1721E5F4B600D0EFF4 /* SKResultTableViewCell.m */; };
+		B0700E1F21E5F4B600D0EFF4 /* SKSocialSecurityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E1921E5F4B600D0EFF4 /* SKSocialSecurityCell.m */; };
+		B0700E2021E5F4B600D0EFF4 /* SKSocialSecurityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E1B21E5F4B600D0EFF4 /* SKSocialSecurityView.m */; };
+		B0700E2421E5F4C900D0EFF4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2321E5F4C900D0EFF4 /* MBProgressHUD.m */; };
+		B0700E3721E5F4E500D0EFF4 /* SKSettingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2521E5F4E300D0EFF4 /* SKSettingPageViewController.m */; };
+		B0700E3821E5F4E500D0EFF4 /* SKTaxHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2721E5F4E300D0EFF4 /* SKTaxHomeViewController.m */; };
+		B0700E3921E5F4E500D0EFF4 /* SKTaxPaymentItemDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2821E5F4E300D0EFF4 /* SKTaxPaymentItemDataModel.m */; };
+		B0700E3A21E5F4E500D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2921E5F4E400D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.m */; };
+		B0700E3B21E5F4E500D0EFF4 /* SKCityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2C21E5F4E400D0EFF4 /* SKCityChooseViewController.m */; };
+		B0700E3C21E5F4E500D0EFF4 /* SKHomeNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2D21E5F4E400D0EFF4 /* SKHomeNavigationViewController.m */; };
+		B0700E3D21E5F4E500D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2E21E5F4E400D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.m */; };
+		B0700E3E21E5F4E500D0EFF4 /* SKDetailInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E2F21E5F4E400D0EFF4 /* SKDetailInfoVC.m */; };
+		B0700E3F21E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E3021E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.m */; };
+		B0700E4321E5F4F400D0EFF4 /* NSObject+SKRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = B0700E4121E5F4F400D0EFF4 /* NSObject+SKRuntime.m */; };
 		B077F73621182A4F00E15ECC /* SWBarChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B077F73521182A4F00E15ECC /* SWBarChartTableViewCell.m */; };
 		B077F73921182A8300E15ECC /* SWTotalCostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B077F73821182A8300E15ECC /* SWTotalCostTableViewCell.m */; };
+		B0820BF721E5FE550060CBCB /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0820BF621E5FE550060CBCB /* GoogleMobileAds.framework */; };
 		B085CF6F2126AB0C00B45C4B /* UITextView+OKToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B085CF6E2126AB0C00B45C4B /* UITextView+OKToolBar.m */; };
 		B0A73FAA2089C6BA00BCAB2F /* SWAddSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FA92089C6BA00BCAB2F /* SWAddSubView.m */; };
 		B0A73FAD2089D28A00BCAB2F /* SWOrderCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A73FAC2089D28A00BCAB2F /* SWOrderCountTableViewCell.m */; };
@@ -419,10 +443,60 @@
 		B065BFC5208874E800F57731 /* SWOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrderView.m; sourceTree = "<group>"; };
 		B065BFC820887CE400F57731 /* SWOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWOrder.h; sourceTree = "<group>"; };
 		B065BFC920887CE400F57731 /* SWOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWOrder.m; sourceTree = "<group>"; };
+		B0700DF821E5F49300D0EFF4 /* SKBasePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBasePickerView.h; sourceTree = "<group>"; };
+		B0700DF921E5F49300D0EFF4 /* SKBasePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBasePickerView.m; sourceTree = "<group>"; };
+		B0700DFA21E5F49300D0EFF4 /* SKPickerToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPickerToolBarView.h; sourceTree = "<group>"; };
+		B0700DFB21E5F49300D0EFF4 /* SKPickerToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPickerToolBarView.m; sourceTree = "<group>"; };
+		B0700DFC21E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUniversalSingleSelectionPickerView.h; sourceTree = "<group>"; };
+		B0700DFD21E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUniversalSingleSelectionPickerView.m; sourceTree = "<group>"; };
+		B0700DFE21E5F49300D0EFF4 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		B0700DFF21E5F49300D0EFF4 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		B0700E0021E5F49300D0EFF4 /* UIView+YMFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YMFrame.h"; sourceTree = "<group>"; };
+		B0700E0121E5F49300D0EFF4 /* UIView+YMFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YMFrame.m"; sourceTree = "<group>"; };
+		B0700E0921E5F4AD00D0EFF4 /* SKSocialSecurity.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SKSocialSecurity.plist; sourceTree = "<group>"; };
+		B0700E0A21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSocialSecurityStrategy.h; sourceTree = "<group>"; };
+		B0700E0B21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSocialSecurityStrategy.m; sourceTree = "<group>"; };
+		B0700E0C21E5F4AD00D0EFF4 /* SKTaxContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTaxContext.h; sourceTree = "<group>"; };
+		B0700E0D21E5F4AD00D0EFF4 /* SKTaxContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTaxContext.m; sourceTree = "<group>"; };
+		B0700E1221E5F4B600D0EFF4 /* SKAllResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAllResultViewController.h; sourceTree = "<group>"; };
+		B0700E1321E5F4B600D0EFF4 /* SKAllResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAllResultViewController.m; sourceTree = "<group>"; };
+		B0700E1421E5F4B600D0EFF4 /* SKBaseFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBaseFormView.h; sourceTree = "<group>"; };
+		B0700E1521E5F4B600D0EFF4 /* SKBaseFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBaseFormView.m; sourceTree = "<group>"; };
+		B0700E1621E5F4B600D0EFF4 /* SKResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKResultTableViewCell.h; sourceTree = "<group>"; };
+		B0700E1721E5F4B600D0EFF4 /* SKResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKResultTableViewCell.m; sourceTree = "<group>"; };
+		B0700E1821E5F4B600D0EFF4 /* SKSocialSecurityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSocialSecurityCell.h; sourceTree = "<group>"; };
+		B0700E1921E5F4B600D0EFF4 /* SKSocialSecurityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSocialSecurityCell.m; sourceTree = "<group>"; };
+		B0700E1A21E5F4B600D0EFF4 /* SKSocialSecurityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSocialSecurityView.h; sourceTree = "<group>"; };
+		B0700E1B21E5F4B600D0EFF4 /* SKSocialSecurityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSocialSecurityView.m; sourceTree = "<group>"; };
+		B0700E2221E5F4C900D0EFF4 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		B0700E2321E5F4C900D0EFF4 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		B0700E2521E5F4E300D0EFF4 /* SKSettingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingPageViewController.m; sourceTree = "<group>"; };
+		B0700E2621E5F4E300D0EFF4 /* SKDetailInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailInfoVC.h; sourceTree = "<group>"; };
+		B0700E2721E5F4E300D0EFF4 /* SKTaxHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTaxHomeViewController.m; sourceTree = "<group>"; };
+		B0700E2821E5F4E300D0EFF4 /* SKTaxPaymentItemDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTaxPaymentItemDataModel.m; sourceTree = "<group>"; };
+		B0700E2921E5F4E400D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSpecialAdditionalDeductionDetailVC.m; sourceTree = "<group>"; };
+		B0700E2A21E5F4E400D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSpecialAdditionalDeductionDetailVC.h; sourceTree = "<group>"; };
+		B0700E2B21E5F4E400D0EFF4 /* SKSettingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSettingPageViewController.h; sourceTree = "<group>"; };
+		B0700E2C21E5F4E400D0EFF4 /* SKCityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCityChooseViewController.m; sourceTree = "<group>"; };
+		B0700E2D21E5F4E400D0EFF4 /* SKHomeNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKHomeNavigationViewController.m; sourceTree = "<group>"; };
+		B0700E2E21E5F4E400D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCityTaxPaymentRatioDetailViewController.m; sourceTree = "<group>"; };
+		B0700E2F21E5F4E400D0EFF4 /* SKDetailInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailInfoVC.m; sourceTree = "<group>"; };
+		B0700E3021E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTaxHomeTableViewCell.m; sourceTree = "<group>"; };
+		B0700E3121E5F4E500D0EFF4 /* SKTaxHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTaxHomeViewController.h; sourceTree = "<group>"; };
+		B0700E3221E5F4E500D0EFF4 /* SKTaxPaymentItemDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTaxPaymentItemDataModel.h; sourceTree = "<group>"; };
+		B0700E3321E5F4E500D0EFF4 /* SKHomeNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKHomeNavigationViewController.h; sourceTree = "<group>"; };
+		B0700E3421E5F4E500D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCityTaxPaymentRatioDetailViewController.h; sourceTree = "<group>"; };
+		B0700E3521E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTaxHomeTableViewCell.h; sourceTree = "<group>"; };
+		B0700E3621E5F4E500D0EFF4 /* SKCityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCityChooseViewController.h; sourceTree = "<group>"; };
+		B0700E4021E5F4F400D0EFF4 /* SKDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDef.h; sourceTree = "<group>"; };
+		B0700E4121E5F4F400D0EFF4 /* NSObject+SKRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SKRuntime.m"; sourceTree = "<group>"; };
+		B0700E4221E5F4F400D0EFF4 /* NSObject+SKRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SKRuntime.h"; sourceTree = "<group>"; };
 		B077F73421182A4F00E15ECC /* SWBarChartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWBarChartTableViewCell.h; sourceTree = "<group>"; };
 		B077F73521182A4F00E15ECC /* SWBarChartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWBarChartTableViewCell.m; sourceTree = "<group>"; };
 		B077F73721182A8300E15ECC /* SWTotalCostTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWTotalCostTableViewCell.h; sourceTree = "<group>"; };
 		B077F73821182A8300E15ECC /* SWTotalCostTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWTotalCostTableViewCell.m; sourceTree = "<group>"; };
+		B0820BF421E5FE3D0060CBCB /* libGoogleMobileAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleMobileAds.a; path = "Pods/Google-Mobile-Ads-SDK/Libraries/libGoogleMobileAds.a"; sourceTree = "<group>"; };
+		B0820BF621E5FE550060CBCB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		B085CF6D2126AB0C00B45C4B /* UITextView+OKToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+OKToolBar.h"; sourceTree = "<group>"; };
 		B085CF6E2126AB0C00B45C4B /* UITextView+OKToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+OKToolBar.m"; sourceTree = "<group>"; };
 		B0A73FA82089C6BA00BCAB2F /* SWAddSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWAddSubView.h; sourceTree = "<group>"; };
@@ -493,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0820BF721E5FE550060CBCB /* GoogleMobileAds.framework in Frameworks */,
 				B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */,
 				B005A55D219AD42400277910 /* Foundation.framework in Frameworks */,
 				B005A55B219AD41900277910 /* WebKit.framework in Frameworks */,
@@ -503,7 +578,6 @@
 				B005A553219AD3F300277910 /* CoreLocation.framework in Frameworks */,
 				B005A551219AD3EA00277910 /* QuartzCore.framework in Frameworks */,
 				B005A54F219AD3E000277910 /* StoreKit.framework in Frameworks */,
-				B005A54D219AD3DA00277910 /* AdSupport.framework in Frameworks */,
 				B005A54B219AD3D100277910 /* libz.tbd in Frameworks */,
 				B005A549219AD3C800277910 /* libsqlite3.tbd in Frameworks */,
 				B005A547219AD3B000277910 /* CoreGraphics.framework in Frameworks */,
@@ -671,6 +745,8 @@
 		5E6A9F1E2011E151009B2038 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B0820BF621E5FE550060CBCB /* GoogleMobileAds.framework */,
+				B0820BF421E5FE3D0060CBCB /* libGoogleMobileAds.a */,
 				B005A560219AD5F200277910 /* MTGSDK.framework */,
 				B005A55E219AD42A00277910 /* UIKit.framework */,
 				B005A55C219AD42400277910 /* Foundation.framework */,
@@ -847,6 +923,7 @@
 		5EACC4C51F72060100C4E796 = {
 			isa = PBXGroup;
 			children = (
+				B0700DF621E5F30A00D0EFF4 /* PersonalTax */,
 				5E86CA121FFF286600A8F0CC /* PrefixHeader.pch */,
 				5EB9D78F1F7F7FE900034E09 /* Localizable.strings */,
 				5EACC4D01F72060100C4E796 /* SWMyDecorationBook */,
@@ -956,6 +1033,7 @@
 		5EB9D7851F7F789700034E09 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				B0700E2121E5F4C900D0EFF4 /* MBProgressHUD */,
 				B0E253412136A93700DE0B5F /* xlsxWriter */,
 				5E1755C120109E8F009F100B /* MagicalRecord */,
 				5E9C2CB92004AB210052A05E /* TZImagePickerController */,
@@ -1036,6 +1114,100 @@
 				B065BFC920887CE400F57731 /* SWOrder.m */,
 			);
 			name = ShoppingOrder;
+			sourceTree = "<group>";
+		};
+		B0700DF621E5F30A00D0EFF4 /* PersonalTax */ = {
+			isa = PBXGroup;
+			children = (
+				B0700E3621E5F4E500D0EFF4 /* SKCityChooseViewController.h */,
+				B0700E2C21E5F4E400D0EFF4 /* SKCityChooseViewController.m */,
+				B0700E3421E5F4E500D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.h */,
+				B0700E2E21E5F4E400D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.m */,
+				B0700E2621E5F4E300D0EFF4 /* SKDetailInfoVC.h */,
+				B0700E2F21E5F4E400D0EFF4 /* SKDetailInfoVC.m */,
+				B0700E3321E5F4E500D0EFF4 /* SKHomeNavigationViewController.h */,
+				B0700E2D21E5F4E400D0EFF4 /* SKHomeNavigationViewController.m */,
+				B0700E2B21E5F4E400D0EFF4 /* SKSettingPageViewController.h */,
+				B0700E2521E5F4E300D0EFF4 /* SKSettingPageViewController.m */,
+				B0700E2A21E5F4E400D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.h */,
+				B0700E2921E5F4E400D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.m */,
+				B0700E3521E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.h */,
+				B0700E3021E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.m */,
+				B0700E3121E5F4E500D0EFF4 /* SKTaxHomeViewController.h */,
+				B0700E2721E5F4E300D0EFF4 /* SKTaxHomeViewController.m */,
+				B0700E3221E5F4E500D0EFF4 /* SKTaxPaymentItemDataModel.h */,
+				B0700E2821E5F4E300D0EFF4 /* SKTaxPaymentItemDataModel.m */,
+				B0700E4221E5F4F400D0EFF4 /* NSObject+SKRuntime.h */,
+				B0700E4121E5F4F400D0EFF4 /* NSObject+SKRuntime.m */,
+				B0700E4021E5F4F400D0EFF4 /* SKDef.h */,
+				B0700E1121E5F4B600D0EFF4 /* SKDetailInfoViews */,
+				B0700E0721E5F4AD00D0EFF4 /* SKTaxLogic */,
+				B0700DF721E5F49300D0EFF4 /* pickview */,
+			);
+			path = PersonalTax;
+			sourceTree = "<group>";
+		};
+		B0700DF721E5F49300D0EFF4 /* pickview */ = {
+			isa = PBXGroup;
+			children = (
+				B0700DF821E5F49300D0EFF4 /* SKBasePickerView.h */,
+				B0700DF921E5F49300D0EFF4 /* SKBasePickerView.m */,
+				B0700DFA21E5F49300D0EFF4 /* SKPickerToolBarView.h */,
+				B0700DFB21E5F49300D0EFF4 /* SKPickerToolBarView.m */,
+				B0700DFC21E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.h */,
+				B0700DFD21E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.m */,
+				B0700DFE21E5F49300D0EFF4 /* UIColor+Hex.h */,
+				B0700DFF21E5F49300D0EFF4 /* UIColor+Hex.m */,
+				B0700E0021E5F49300D0EFF4 /* UIView+YMFrame.h */,
+				B0700E0121E5F49300D0EFF4 /* UIView+YMFrame.m */,
+			);
+			path = pickview;
+			sourceTree = "<group>";
+		};
+		B0700E0721E5F4AD00D0EFF4 /* SKTaxLogic */ = {
+			isa = PBXGroup;
+			children = (
+				B0700E0821E5F4AD00D0EFF4 /* SKSocialSecurityStrategy */,
+				B0700E0C21E5F4AD00D0EFF4 /* SKTaxContext.h */,
+				B0700E0D21E5F4AD00D0EFF4 /* SKTaxContext.m */,
+			);
+			path = SKTaxLogic;
+			sourceTree = "<group>";
+		};
+		B0700E0821E5F4AD00D0EFF4 /* SKSocialSecurityStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				B0700E0921E5F4AD00D0EFF4 /* SKSocialSecurity.plist */,
+				B0700E0A21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.h */,
+				B0700E0B21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.m */,
+			);
+			path = SKSocialSecurityStrategy;
+			sourceTree = "<group>";
+		};
+		B0700E1121E5F4B600D0EFF4 /* SKDetailInfoViews */ = {
+			isa = PBXGroup;
+			children = (
+				B0700E1221E5F4B600D0EFF4 /* SKAllResultViewController.h */,
+				B0700E1321E5F4B600D0EFF4 /* SKAllResultViewController.m */,
+				B0700E1421E5F4B600D0EFF4 /* SKBaseFormView.h */,
+				B0700E1521E5F4B600D0EFF4 /* SKBaseFormView.m */,
+				B0700E1621E5F4B600D0EFF4 /* SKResultTableViewCell.h */,
+				B0700E1721E5F4B600D0EFF4 /* SKResultTableViewCell.m */,
+				B0700E1821E5F4B600D0EFF4 /* SKSocialSecurityCell.h */,
+				B0700E1921E5F4B600D0EFF4 /* SKSocialSecurityCell.m */,
+				B0700E1A21E5F4B600D0EFF4 /* SKSocialSecurityView.h */,
+				B0700E1B21E5F4B600D0EFF4 /* SKSocialSecurityView.m */,
+			);
+			path = SKDetailInfoViews;
+			sourceTree = "<group>";
+		};
+		B0700E2121E5F4C900D0EFF4 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				B0700E2221E5F4C900D0EFF4 /* MBProgressHUD.h */,
+				B0700E2321E5F4C900D0EFF4 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		B0C34A592113FD5A003B253A /* ChartView */ = {
@@ -1182,6 +1354,7 @@
 				5EB9D78D1F7F7FE900034E09 /* Localizable.strings in Resources */,
 				5EACC4E11F72060100C4E796 /* LaunchScreen.storyboard in Resources */,
 				5E9C2CDD2004AB210052A05E /* TZImagePickerController.bundle in Resources */,
+				B0700E0E21E5F4AD00D0EFF4 /* SKSocialSecurity.plist in Resources */,
 				5EACC4DE1F72060100C4E796 /* Assets.xcassets in Resources */,
 				5EACC4DC1F72060100C4E796 /* Main.storyboard in Resources */,
 			);
@@ -1245,8 +1418,10 @@
 				B0E25373213D188500DE0B5F /* SWProductUnitCell.m in Sources */,
 				B085CF6F2126AB0C00B45C4B /* UITextView+OKToolBar.m in Sources */,
 				5EDE94E31FFB5B6400A24C21 /* SWMarketHeaderView.m in Sources */,
+				B0700E0321E5F49300D0EFF4 /* SKPickerToolBarView.m in Sources */,
 				5E17562020109FD0009F100B /* SWDecortionBookModel.xcdatamodeld in Sources */,
 				5E17560D20109E8F009F100B /* NSManagedObject+MagicalRequests.m in Sources */,
+				B0700E2421E5F4C900D0EFF4 /* MBProgressHUD.m in Sources */,
 				5E9C2CDF2004AB210052A05E /* TZLocationManager.m in Sources */,
 				5EE7E2D31F99ACCC007CAB27 /* MASConstraint.m in Sources */,
 				5EE7E2E21F99F155007CAB27 /* SWProductCollectionViewCell.m in Sources */,
@@ -1284,14 +1459,17 @@
 				B0F64284211A839900F3F38E /* SWOrderListinCategoryViewController.m in Sources */,
 				5EE7E2DA1F99ACCC007CAB27 /* View+MASAdditions.m in Sources */,
 				B00E6C4C21420FC400C23CF7 /* UIImage+SWImageExt.m in Sources */,
+				B0700E3D21E5F4E500D0EFF4 /* SKCityTaxPaymentRatioDetailViewController.m in Sources */,
 				5E9C2CE12004AB210052A05E /* TZPhotoPreviewCell.m in Sources */,
 				5EE7E2DB1F99ACCC007CAB27 /* ViewController+MASAdditions.m in Sources */,
+				B0700E1D21E5F4B600D0EFF4 /* SKBaseFormView.m in Sources */,
 				5E9C2CF62004B1E10052A05E /* SWShoppingItemPhotoCell.m in Sources */,
 				5E17560220109E8F009F100B /* MagicalImportFunctions.m in Sources */,
 				5E9C2CD82004AB210052A05E /* TZAssetCell.m in Sources */,
 				5E9C2CDE2004AB210052A05E /* TZImagePickerController.m in Sources */,
 				5EACC4EC1F7206E500C4E796 /* SWDrawerViewController.m in Sources */,
 				5E17560620109E8F009F100B /* NSObject+MagicalDataImport.m in Sources */,
+				B0700E2021E5F4B600D0EFF4 /* SKSocialSecurityView.m in Sources */,
 				5E17561220109E8F009F100B /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				5E17561120109E8F009F100B /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				B0E2536D213D17F800DE0B5F /* SWContactConfigCell.m in Sources */,
@@ -1309,8 +1487,11 @@
 				5E17562D2010A1EA009F100B /* SWDecorationAccountBookStorage.m in Sources */,
 				5E9C2CD92004AB210052A05E /* TZAssetModel.m in Sources */,
 				5E17561720109E8F009F100B /* MagicalRecord+ErrorHandling.m in Sources */,
+				B0700E1E21E5F4B600D0EFF4 /* SKResultTableViewCell.m in Sources */,
+				B0700E0621E5F49300D0EFF4 /* UIView+YMFrame.m in Sources */,
 				5E1756242010A13C009F100B /* SWProductPhotoStorage.m in Sources */,
 				B065BFC6208874E800F57731 /* SWOrderView.m in Sources */,
+				B0700E3721E5F4E500D0EFF4 /* SKSettingPageViewController.m in Sources */,
 				5E9C2CE42004AB210052A05E /* TZVideoPlayerController.m in Sources */,
 				5E86CA0B1FFE00EF00A8F0CC /* SWMarketContact.m in Sources */,
 				5E9C77D9200F4037000355D2 /* SWProductPhoto.m in Sources */,
@@ -1321,16 +1502,25 @@
 				B00B045521AE388100CAD312 /* SWExceptionViewController.m in Sources */,
 				B0181E7A211D3543009071CC /* SWOrderTotalPriceTableViewCell.m in Sources */,
 				5E9C2CDA2004AB210052A05E /* TZGifPhotoPreviewController.m in Sources */,
+				B0700E3821E5F4E500D0EFF4 /* SKTaxHomeViewController.m in Sources */,
 				5E17560E20109E8F009F100B /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
+				B0700E0F21E5F4AD00D0EFF4 /* SKSocialSecurityStrategy.m in Sources */,
+				B0700E0421E5F49300D0EFF4 /* SKUniversalSingleSelectionPickerView.m in Sources */,
 				5E9C2CDC2004AB210052A05E /* TZImageManager.m in Sources */,
+				B0700E0221E5F49300D0EFF4 /* SKBasePickerView.m in Sources */,
+				B0700E0521E5F49300D0EFF4 /* UIColor+Hex.m in Sources */,
+				B0700E3E21E5F4E500D0EFF4 /* SKDetailInfoVC.m in Sources */,
 				5EACC4D61F72060100C4E796 /* AppDelegate.m in Sources */,
 				B0C34A552111B2C1003B253A /* SWBarChartView.m in Sources */,
+				B0700E1021E5F4AD00D0EFF4 /* SKTaxContext.m in Sources */,
 				B0C34A582111B584003B253A /* SWShoppingOrderManager.m in Sources */,
 				5E4A3F261F7E3CBA00F052B5 /* UIView+UIExt.m in Sources */,
 				5E9C77D6200F3E8B000355D2 /* SWItemUnit.m in Sources */,
 				5E9C2CF32004B1C80052A05E /* SWShoppingItemRemarkCell.m in Sources */,
 				B065BFCA20887CE400F57731 /* SWOrder.m in Sources */,
+				B0700E3F21E5F4E500D0EFF4 /* SKTaxHomeTableViewCell.m in Sources */,
 				5EF75C5A1F78AE9D007F5A9E /* SWShoppingItemHomePageVC.m in Sources */,
+				B0700E3C21E5F4E500D0EFF4 /* SKHomeNavigationViewController.m in Sources */,
 				5E9C2CDB2004AB210052A05E /* TZImageCropManager.m in Sources */,
 				B00B045821AE3C9200CAD312 /* SWExceptionDetailViewController.m in Sources */,
 				5E9C2CD72004AB210052A05E /* NSBundle+TZImagePicker.m in Sources */,
@@ -1341,7 +1531,9 @@
 				B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */,
 				B0C34A642114060E003B253A /* SWNotebookPieChartView.m in Sources */,
 				B01CB23D2099535000F716C4 /* SWNotebookHomeViewController.m in Sources */,
+				B0700E1C21E5F4B600D0EFF4 /* SKAllResultViewController.m in Sources */,
 				5EDE94E61FFB5E4C00A24C21 /* SWMarketItem.m in Sources */,
+				B0700E1F21E5F4B600D0EFF4 /* SKSocialSecurityCell.m in Sources */,
 				5E17561420109E8F009F100B /* NSPersistentStore+MagicalRecord.m in Sources */,
 				B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */,
 				5EACC4D31F72060100C4E796 /* main.m in Sources */,
@@ -1363,10 +1555,14 @@
 				5E9C2CE52004AB210052A05E /* UIView+Layout.m in Sources */,
 				B077F73921182A8300E15ECC /* SWTotalCostTableViewCell.m in Sources */,
 				B0181E83211D7219009071CC /* SWOrderInfoPhotoTableViewCell.m in Sources */,
+				B0700E3921E5F4E500D0EFF4 /* SKTaxPaymentItemDataModel.m in Sources */,
 				802C9CA41FF09E4F00A96C7B /* SWLeftSlideCollectionViewController.m in Sources */,
 				5E17561320109E8F009F100B /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				B0700E3B21E5F4E500D0EFF4 /* SKCityChooseViewController.m in Sources */,
+				B0700E3A21E5F4E500D0EFF4 /* SKSpecialAdditionalDeductionDetailVC.m in Sources */,
 				5E17560420109E8F009F100B /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				805BBF132027F37F0077BEAA /* SWMarketCategoryStorage.m in Sources */,
+				B0700E4321E5F4F400D0EFF4 /* NSObject+SKRuntime.m in Sources */,
 				5E9C2CE22004AB210052A05E /* TZPhotoPreviewController.m in Sources */,
 				5E9C2CE02004AB210052A05E /* TZPhotoPickerController.m in Sources */,
 			);
@@ -1513,6 +1709,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1520,6 +1717,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Libraries",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;
@@ -1542,6 +1740,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = SWMyDecorationBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1549,6 +1748,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Libraries",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eren.SWMyDecorationBook;

@@ -17,6 +17,8 @@
 #import "SWShoppingPhoto+CoreDataClass.h"
 #import "SWCommonUtils.h"
 #import "SWDef.h"
+#import "SKDef.h"
+@import GoogleMobileAds;
 @interface AppDelegate ()
 
 @end
@@ -25,7 +27,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //广告
-    
+    // Initialize Google Mobile Ads SDK
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-3940256099942544~1458002511"];
     
     // 设置UINavigationBar的背景图片
    // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];

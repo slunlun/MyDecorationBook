@@ -28,7 +28,7 @@
     
     //广告
     // Initialize Google Mobile Ads SDK
-    [GADMobileAds configureWithApplicationID:@"ca-app-pub-3940256099942544~1458002511"];
+    [GADMobileAds configureWithApplicationID:GAD_APPID];
     
     // 设置UINavigationBar的背景图片
    // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Pi"] forBarMetrics:UIBarMetricsDefault];

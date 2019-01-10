@@ -493,18 +493,9 @@
     [searchView addGestureRecognizer:searchTaped];
     UIBarButtonItem *searchItemBtn = [[UIBarButtonItem alloc] initWithCustomView:searchView];
     self.navigationItem.rightBarButtonItems = @[addMarketItemBtn, searchItemBtn];
-    if (DEBUG) {
-        UIBarButtonItem *exceptButton = [[UIBarButtonItem alloc]initWithTitle:@"Except" style:UIBarButtonItemStylePlain target:self action:@selector(checkException)];
-        self.navigationItem.leftBarButtonItems = @[notebookItemBtn, exceptButton];
-        if ([self showCrashExceptInfo]) {
-            UIBarButtonItem *exceptButton = [[UIBarButtonItem alloc]initWithTitle:@"Except" style:UIBarButtonItemStylePlain target:self action:@selector(checkException)];
-            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn, exceptButton];
-        }else {
-            self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn];
-        }
-    }else {
-        self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn];
-    }
+
+    self.navigationItem.leftBarButtonItems = @[notebookItemBtn, toolsItemBtn];
+    
     
     
     self.navigationItem.titleView = nil;

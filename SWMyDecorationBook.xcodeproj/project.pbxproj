@@ -113,6 +113,7 @@
 		B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B005A55E219AD42A00277910 /* UIKit.framework */; };
 		B00B045521AE388100CAD312 /* SWExceptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045421AE388100CAD312 /* SWExceptionViewController.m */; };
 		B00B045821AE3C9200CAD312 /* SWExceptionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00B045721AE3C9200CAD312 /* SWExceptionDetailViewController.m */; };
+		B00B384A21E60ACC00A82690 /* libGoogleMobileAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0820BF421E5FE3D0060CBCB /* libGoogleMobileAds.a */; };
 		B00CDEAB212AC6A200533EF6 /* SWMarketContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEAA212AC6A200533EF6 /* SWMarketContactViewController.m */; };
 		B00CDEB4212D62AF00533EF6 /* SWSpotlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB2212D62AF00533EF6 /* SWSpotlightView.m */; };
 		B00CDEB5212D62AF00533EF6 /* SWUserTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00CDEB3212D62AF00533EF6 /* SWUserTutorialManager.m */; };
@@ -567,6 +568,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00B384A21E60ACC00A82690 /* libGoogleMobileAds.a in Frameworks */,
 				B0820BF721E5FE550060CBCB /* GoogleMobileAds.framework in Frameworks */,
 				B005A55F219AD42A00277910 /* UIKit.framework in Frameworks */,
 				B005A55D219AD42400277910 /* Foundation.framework in Frameworks */,
@@ -1299,7 +1301,6 @@
 				5EACC4CA1F72060100C4E796 /* Sources */,
 				5EACC4CB1F72060100C4E796 /* Frameworks */,
 				5EACC4CC1F72060100C4E796 /* Resources */,
-				9967E37C973C00BE46AB955D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1363,28 +1364,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9967E37C973C00BE46AB955D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SWMyDecorationBook/Pods-SWMyDecorationBook-resources.sh",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWMyDecorationBook/Pods-SWMyDecorationBook-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EFC5B5EC7807FD82AADE3695 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
